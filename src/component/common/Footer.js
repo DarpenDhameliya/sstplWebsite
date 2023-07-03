@@ -4,8 +4,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ContactusSlice, Contactusstate, Contactusstatus } from "../Contackus";
+import { ContactusSlice, Contactusstate, Contactusstatus } from "../website/slice/Contackus";
 import ReCAPTCHA from "react-google-recaptcha";
+import '../../assets/css/custom-animated.css';
+import 'aos/dist/aos.css';
+import '../../assets/css/default.css';
 
 export default function Footer(className) {
   const [fname, setFname] = useState("");
@@ -85,7 +88,7 @@ export default function Footer(className) {
       email_verify = true;
     }
 
-    if (!fname || !lname || !email || !phone  || !isVerified || number_verify === false || email_verify === false) {
+    if (!fname || !lname || !email || !phone  || !isVerified || number_verify === false || email_verify === false || !textarea) {
       if (!fname) {
         error.fname = "Required !";
       } else {
@@ -116,11 +119,11 @@ export default function Footer(className) {
           error.num_verify = "";
         }
       }
-      // if (!textarea) {
-      //   error.textarea = "Required !";
-      // } else {
-      //   error.textarea = "";
-      // }
+      if (!textarea) {
+        error.textarea = "Required !";
+      } else {
+        error.textarea = "";
+      }
       if (!isVerified) {
         error.captcha = "Required !";
       } else {
@@ -502,6 +505,8 @@ export default function Footer(className) {
           </div>
         </div>
       </section>
+      
+
     </>
   );
 }

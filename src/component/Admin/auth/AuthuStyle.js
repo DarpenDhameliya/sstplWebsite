@@ -114,21 +114,7 @@ const useStyleAuth = makeStyles((theme) => ({
     marginTop: "20px !important",
     backgroundColor: "#367fa9 !important",
   },
-  setProductpaper: {
-    textAlign: "left",
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(3),
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    margin: "auto",
-    width: "100% !important",
-    borderRadius: "10px",
-    marginTop: "20px",
-    [theme.breakpoints.only('sm')]:{
-      minWidth:'340px'
-    }
-  },
+
   setProductpaperdisplay: {
     textAlign: "left",
     backgroundColor: theme.palette.background.paper,

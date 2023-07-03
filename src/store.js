@@ -1,12 +1,16 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import mailReducer from './component/MailSlice'
-import contactusReducer from './component/Contackus'
-import hireusReducer from './component/HireusSlice'
+import careerReducer from './component/website/slice/MailSlice'
+import contactusReducer from './component/website/slice/Contackus'
+import hireusReducer from './component/website/slice/HireusSlice'
+import metaResucer from './component/website/slice/Mets'
+import aboutvalueReducer from './component/website/slice/AboutValue'
 export const store = configureStore({
   reducer: {
-    mail:mailReducer,
+    career:careerReducer,
     contactus:contactusReducer,
     hireus:hireusReducer,
+    meta:metaResucer,
+    aboutvalue:aboutvalueReducer,
   },
 
   middleware: getDefaultMiddleware({

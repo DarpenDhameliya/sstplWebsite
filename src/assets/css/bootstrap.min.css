@@ -3603,7 +3603,7 @@ input[type=submit].btn-block {
   position: relative;
   height: 0;
   overflow: hidden;
-  transition: height .5s ease
+  transition: height .35s ease
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -7777,7 +7777,7 @@ button.bg-dark:hover {
   }
 }
 
-@media print {
+/* @media print {
   .d-print-none {
     display: none !important
   }
@@ -7815,7 +7815,7 @@ button.bg-dark:hover {
     display: -ms-inline-flexbox !important;
     display: inline-flex !important
   }
-}
+} */
 
 .embed-responsive {
   position: relative;

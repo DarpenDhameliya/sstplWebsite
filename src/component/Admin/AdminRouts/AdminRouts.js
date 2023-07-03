@@ -1,34 +1,26 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, {useEffect} from "react";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Login from "../auth/Login";
-import { ThemeProvider } from '@mui/material/styles';
-import { theme } from "../CommonComponent/Theme";
+import {ThemeProvider} from "@mui/styles";
+import {theme} from "../CommonComponent/Theme";
 import AdminMainrous from "./AdminMainrous";
-import Hireus from "../pages/Hireus";
-// import useStyleMainDisplay from "../sidebar/MainDisplayStyle";
-import Sidebar from "../sidebar/Sidebar";
-import useStyleAuth from "../auth/AuthuStyle";
-import { CssBaseline } from "@mui/material";
-// import Index from "../Index";
+import {useHistory} from "react-router-dom";
 const AdminRouts = () => {
   // const classes = useStyleAuth();
 
-  return <>
-  <ThemeProvider theme={theme}> 
-   <CssBaseline />
-   <Switch>
-        <Route exact path="/admin">
-          <AdminMainrous />
-        </Route>
-          {/* <Route  path="/admin/dashbord" component={AdminMainrous} /> */}
-      
-      </Switch>
-  
-  </ThemeProvider>
-  </>;
+
+  return (
+    <>
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route exact path="/admin" component={Login} />
+          <Route path="/admin/dashboard">
+            <AdminMainrous />
+          </Route>
+        </Switch>
+      </ThemeProvider>
+    </>
+  );
 };
 
 export default AdminRouts;
-        // <Route path="/admin">
-        //   <AdminMainrous />
-        // </Route>

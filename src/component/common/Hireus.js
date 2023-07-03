@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch ,useSelector} from "react-redux";
 import Select from 'react-select'
-import {HireusSlice , Hireusslicestate , Hireusslicestatus} from "../HireusSlice";
+import {HireusSlice , Hireusslicestate , Hireusslicestatus} from "../website/slice/HireusSlice";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReCAPTCHA from "react-google-recaptcha";
-const customStyles = {
-  control: (provided) => ({
-    ...provided,
-    height: '40px', // Set the desired height here
-  }),
-};
+
 
 const Hireus = ({ value, action }) => {
   const [name, setName] = useState('');
@@ -71,7 +66,7 @@ const Hireus = ({ value, action }) => {
     } else {
       number_verify = true;
     }
-        if ( !name || !email || !phone || !selectval  || !work || number_verify === false || !isVerified) {
+        if ( !name || !email || !phone || selectval.length === 0  || !work || number_verify === false || !isVerified) {
       if (!name) {
         error.name = "Name Required !"
       }
@@ -88,8 +83,10 @@ const Hireus = ({ value, action }) => {
           error.num_verify = "";
         }
       }
-      if (!selectval) {
+      if (selectval.length === 0) {
         error.selectval = 'Apply For Required !'
+      }else {
+        error.selectval = ''
       }
       if (!work) {
         error.work = "Work Details"
@@ -136,11 +133,10 @@ const Hireus = ({ value, action }) => {
 
               <Select
                 isMulti
-                styles={customStyles}
                 maxMenuHeight={'200px'}
                 classNamePrefix="select"
                 name="color"
-                className={` ${error.phone ? "handleinput_error" : ''} ${dberr.hiredev ? 'mb-0' : ''}`}
+                className={` ${error.selectval ? "handleinput_error" : ''} ${dberr.hiredev ? 'mb-0' : ''}`}
                 value={colourOptions.filter((obj) =>
                   selectval.includes(obj.value)
                 )}

@@ -10,6 +10,12 @@ a {
 .fs-16 {
 	font-size: 16px;
 }
+.fs-20 {
+	font-size: 20px;
+}
+.fs-25 {
+	font-size: 25px;
+}
 .fw-600 {
 	font-weight: 600 !important;
 }
@@ -916,7 +922,7 @@ a {
 	color: #222;
 }
 .grey {
-	background-color: #f8f9fab5;
+	background-color: #f8f9fab5 !important;
 }
 
 /* black overlay */

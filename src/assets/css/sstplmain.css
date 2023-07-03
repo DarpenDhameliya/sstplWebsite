@@ -5246,6 +5246,22 @@ p {
   -moz-box-shadow: 0px 14px 16px 0px rgba(11, 2, 55, 0.1);
   box-shadow: 0px 14px 16px 0px rgba(11, 2, 55, 0.1);
 }
+.career-footer {
+  display: flex;
+  justify-content: end;
+  padding: 10px;
+  border-top: 1px solid #dee2e6;
+}
+.css-46bh2p-MuiCardContent-root:last-child {
+  padding-bottom: 0px !important;
+}
+.css-46bh2p-MuiCardContent-root {
+  padding:0 !important
+}
+.Mui-focused,
+.Mui-focusVisible {
+  outline: none !important;
+}
 .blog-sidebar {
   position: sticky;
   top: 85px;
@@ -5552,7 +5568,14 @@ p {
 }
 
 /* ----------------------------------------------------------------------------------------------------------- portfolio */
-
+.handle_portfolio_modal_mui {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  background-color: #fff ;
+}
 .hoverLi_ourwork {
   border: 2px solid #fff;
   padding: 2px 20px;
@@ -5612,11 +5635,17 @@ p {
     max-height: 420px !important;
     min-height: 410px !important;
   }
+  .handle_portfolio_modal_mui {
+    width: 700px !important;
+  }
 }
 @media only screen and (min-width: 1200px) and (max-width: 1400px) {
   .handlemodalsize_portfolio {
     min-width: 1050px !important;
     max-width: 1220px !important;
+  }
+  .handle_portfolio_modal_mui {
+    width: 1100px !important;
   }
 }
 @media (min-width: 1400px) {
@@ -5657,6 +5686,9 @@ p {
     min-width: 960px !important;
     max-width: 980px !important;
   }
+  .handle_portfolio_modal_mui {
+    width: 900px !important;
+  }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .softstormweb-ourwork-main-teb .thumb img {
@@ -5676,6 +5708,9 @@ p {
   .handle_portfolio_modal_icons {
     width: 60px !important;
   }
+  .handle_portfolio_modal_mui {
+    width: 500px !important;
+  }
 }
 @media (max-width: 576px) {
   .handle_portfolio_modal_img {
@@ -5694,6 +5729,9 @@ p {
   .mob_portfolio_part2 {
     margin-top: 10px;
   }
+  .handle_portfolio_modal_mui {
+    width: 400px !important;
+  }
 }
 .softstormweb-ourwork-main-teb .thumb {
   position: relative;
@@ -5703,6 +5741,9 @@ p {
 @media (max-width: 450px) {
   .softstormweb-ourwork-main-teb .thumb img {
     height: 180px !important;
+  }
+  .handle_portfolio_modal_mui {
+    width: 300px !important;
   }
 }
 .softstormweb-ourwork-main-teb .thumb::before {
@@ -5763,7 +5804,7 @@ p {
 .handle_portfolio_modal_img {
   max-height: 500px;
   width: 100%;
-  min-height: 465px;
+  min-height: 400px;
 }
 .handle_portfolio_modal_icons {
   width: 70px;

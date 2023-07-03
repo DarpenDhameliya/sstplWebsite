@@ -1,20 +1,62 @@
-import React from "react";
-import useStyleMainDisplay from "../sidebar/MainDisplayStyle";
-import Sidebar from "../sidebar/Sidebar";
-import {Route, Switch} from "react-router-dom";
-import Hireus from "../pages/Hireus";
+import React, { useEffect } from "react";
+import useStyleMainDisplay from "../CommonComponent/sidebar/MainDisplayStyle";
+import Sidebar from "../CommonComponent/sidebar/Sidebar";
+import {Route, Switch, useHistory} from "react-router-dom";
+import Hireus from "../pages/hireus/Hireus";
+import Contact_us from "../pages/contactus/Contact_us";
+import Career from "../pages/career/Careerinq";
+import MetaList from "../pages/meta/MetaList";
+import Profile_forggetpas from "../pages/profile/Profile_forggetpas";
+import CareerDataList from "../pages/career/CareerDataList";
+import CareerDetailsAdd from "../pages/career/CareerDetailsAdd";
+import CareerEdit from "../pages/career/CareerEdit";
+import PortfolioList from "../pages/portfolio/PortfolioList";
+import PortfolioAdd from "../pages/portfolio/PortfolioAdd";
+import PortfolioEdit from "../pages/portfolio/PortfolioEdit";
+import AboutList from "../pages/about/AboutList";
+// import AboutAdd from "../pages/about/AboutAdd";
+// import AboutEdit from "../pages/about/AboutEdit";
+import AboutValueAdd from "../pages/about/AboutValueAdd";
+import AboutValueEdit from "../pages/about/AboutValueEdit";
+import AboutValueList from "../pages/about/AboutValueList";
+import ServiceList from "../pages/services/ServiceList";
+import Serviceadd from "../pages/services/Serviceadd";
+import ServiceEdit from "../pages/services/ServiceEdit";
 
 const AdminMainrous = () => {
 
   const classes = useStyleMainDisplay();
+  const history = useHistory();
+  var token = localStorage.getItem("ssAdmin");
+  useEffect(() => {
+    if (!token) {
+      history.push("/admin");
+    }
+  }, []);
   return (
     <>
-
     <div className={classes.setdisplay}>
       <Sidebar />
-
       <Switch>
-        <Route  path="/admin/dashbord" component={Hireus} />
+        <Route  path="/admin/dashboard/hire" component={Hireus} />
+        <Route  path="/admin/dashboard/contact" component={Contact_us} />
+        <Route  path="/admin/dashboard/career" component={Career} />
+        <Route  path="/admin/dashboard/meta" component={MetaList} />
+        <Route  path="/admin/dashboard/careerdetails" component={CareerDataList} />
+        <Route  path="/admin/dashboard/careerdetailsadd" component={CareerDetailsAdd} />
+        <Route  path="/admin/dashboard/careerdetailedit/:id" component={CareerEdit} />
+        <Route  path="/admin/dashboard/meta" component={MetaList} />
+        <Route  path="/admin/dashboard/portfolio" component={PortfolioList} />
+        <Route  path="/admin/dashboard/portfolioadd" component={PortfolioAdd} />
+        <Route  path="/admin/dashboard/portfolioedit/:id" component={PortfolioEdit} />
+        <Route  path="/admin/dashboard/profile" component={Profile_forggetpas} />
+        <Route  path="/admin/dashboard/about" component={AboutList} />
+        <Route  path="/admin/dashboard/aboutvalue" component={AboutValueList} />
+        <Route  path="/admin/dashboard/aboutvalueadd" component={AboutValueAdd} />
+        <Route  path="/admin/dashboard/aboutvalueedit/:id" component={AboutValueEdit} />
+        <Route  path="/admin/dashboard/service" component={ServiceList} />
+        <Route  path="/admin/dashboard/serviceadd" component={Serviceadd} />
+        <Route  path="/admin/dashboard/serviceedit/:id" component={ServiceEdit} />
       </Switch>
     </div>
     </>

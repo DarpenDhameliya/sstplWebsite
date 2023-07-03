@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import './assets/css/bootstrap.min.css';
-import './assets/css/custom-animated.css';
-import './assets/css/default.css';
+// import './assets/css/default.css';
 import './assets/css/sstplmain.css'
-import 'aos/dist/aos.css';
-import './assets/css/Fonts.css'
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

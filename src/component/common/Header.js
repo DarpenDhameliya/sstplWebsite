@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import StickyMenu from "./lib/StickyMenu";
 import logo from "../../assets/images/logo.png";
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import aboutheader1 from "../../assets/images/aboutus_header/appfutura.webp";
 import aboutheader2 from "../../assets/images/aboutus_header/clutch.webp";
 import aboutheader3 from "../../assets/images/aboutus_header/glassdoor.webp";
 import aboutheader4 from "../../assets/images/aboutus_header/goodfirms.webp";
 import aboutheader5 from "../../assets/images/aboutus_header/upwork.webp";
 import bullet1 from "../../assets/images/point100.webp";
-
+import '../../assets/css/Fonts.css'
 import counterIconOne from "../../assets/images/icon/counter-icon-1.svg";
 import counterIconTwo from "../../assets/images/icon/counter-icon-2.svg";
 import counterIconFour from "../../assets/images/icon/counter-icon-4.svg";
@@ -329,7 +329,7 @@ const Header = ({action, cartToggle}) => {
                                         <img src={bullet1} alt="symbol"  className='header_icno' />
                                       </div>{" "}
                                       <span className="header_service_span " >
-                                        Codegniter
+                                        Codeigniter
                                       </span>{" "}
                                     </HashLink>
                                   </li>
@@ -632,6 +632,7 @@ const Header = ({action, cartToggle}) => {
           </div>
         </div>
       </header>
+      
     </>
   );
 };
