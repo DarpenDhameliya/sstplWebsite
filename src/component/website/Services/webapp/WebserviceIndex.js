@@ -5,7 +5,7 @@ import useToggle from '../../../common/Hooks/useToggle';
 import Headers from "../../../common/PageHeader";
 import Footer from "../../../common/Footer";
 import WebService from "./WebService";
-import SidePortion from "../SidePortion";
+// import SidePortion from "../SidePortion";
 import BackToTop from "../../../common/BackToTop";
 import Hireus from "../../../common/Hireus";
 

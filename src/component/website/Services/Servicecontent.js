@@ -1,13 +1,15 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable no-unused-vars */
 import React ,{useState, useEffect} from "react";
 // import { useHistory } from "react-router-dom";
-import {Link, useHistory} from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import {HashLink} from "react-router-hash-link";
-import webimg from "../../../assets/images/services/web-app-development.webp";
-import mobimg from "../../../assets/images/services/mobile-app-development.webp";
-import deskimg from "../../../assets/images/services/desktop-software-development.webp";
-import digimg from "../../../assets/images/services/digital-marketing.webp";
-import graimg from "../../../assets/images/services/web-graphic-designing.webp";
-import entimg from "../../../assets/images/services/enterprise-services.webp";
+// import webimg from "../../../assets/images/services/web-app-development.webp";
+// import mobimg from "../../../assets/images/services/mobile-app-development.webp";
+// import deskimg from "../../../assets/images/services/desktop-software-development.webp";
+// import digimg from "../../../assets/images/services/digital-marketing.webp";
+// import graimg from "../../../assets/images/services/web-graphic-designing.webp";
+// import entimg from "../../../assets/images/services/enterprise-services.webp";
 import axios from "../../common/Axios";
 const Servicecontent = ({className}) => {
   const [dbFetcherr, setDbFetcherr] = useState("");
