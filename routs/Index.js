@@ -13,5 +13,7 @@ router.use("/portfolio"  , require("./Portfolio"));
 router.use("/about"  , require("./about/About"));
 router.use("/aboutvalue"  , require("./about/AboutValue"));
 router.use("/service"  , require("./Service"));
+router.use("/testimonial"  , require("./Testimonial"));
+
 
 module.exports = router;

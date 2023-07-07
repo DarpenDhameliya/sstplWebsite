@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const nodemailer = require("nodemailer");
 const JWT_SECRET = "darpendHameliya";
 const bcrypt = require("bcrypt");
 const user = require("../Model/User");
 const jwt = require("jsonwebtoken");
 const {successmessage, errormessage} = require("../response/Response");
 router.post("/signup", async (req, res) => {
-  // console.log('==========>',req.body);
   const {email, password} = req.body;
   try {
     const salt = await bcrypt.genSalt(10);
@@ -26,10 +24,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const {email, password} = req.body;
 
-  console.log("===========>", req.body);
-
   let finduser = await user.findOne({email});
-  console.log(finduser);
   let error = [];
   if (!email || !password || (!finduser && email)) {
     if (!email) {
@@ -45,7 +40,6 @@ router.post("/login", async (req, res) => {
   } else {
     try {
       const passwordCompare = await bcrypt.compare(req.body.password, finduser.password);
-      console.log(passwordCompare);
       if (passwordCompare === true) {
         const data = {
           password: finduser.password,

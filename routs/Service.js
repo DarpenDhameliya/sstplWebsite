@@ -100,8 +100,6 @@ router.put("/service_update/:id", upload.array("image", 2), Authenticate, async 
   let {heading, content} = req.body;
   var newfile = req.files;
 
-
-  
   let id = req.params.id;
   let error = [];
   if (!heading || !content) {
@@ -121,22 +119,32 @@ router.put("/service_update/:id", upload.array("image", 2), Authenticate, async 
     var keyword = "service";
     var sameid;
     var singlefileUpload;
+
     if (typeof req.body.image === "string") {
+      // (' 2 mathi ek image ma chnage thai')
       var startIndex = req.body.image.indexOf(keyword) + keyword.length + 1;
       singlefileUpload = req.body.image.substring(startIndex);
 
       if (find_party.frontpageimg === singlefileUpload) {
-
         new_data.frontpageimg = singlefileUpload;
       } else {
         new_data.frontpageimg = newfile[0].filename;
+        let filepath = "files/service";
+        let fileName = find_party.frontpageimg;
+        let filemainPath = path.join(filepath, fileName);
+        fs.unlink(filemainPath);
       }
       if (find_party.servicepageimg === singlefileUpload) {
         new_data.servicepageimg = singlefileUpload;
       } else {
         new_data.servicepageimg = newfile[0].filename;
+        let filepath = "files/service";
+        let fileName = find_party.servicepageimg;
+        let filemainPath = path.join(filepath, fileName);
+        fs.unlink(filemainPath);
       }
-    } else if(typeof req.body.image === 'object') {
+    } else if (typeof req.body.image === "object") {
+      // (' both image not change , send as it is')
       if (req.body.image[0]) {
         const startIndex = req.body.image[0].indexOf(keyword) + keyword.length + 1;
         var modifiedUrl = req.body.image[0].substring(startIndex);
@@ -148,8 +156,16 @@ router.put("/service_update/:id", upload.array("image", 2), Authenticate, async 
         new_data.servicepageimg = modifiedUrl;
       }
     } else {
-      new_data.frontpageimg = req.files[0].filename
-      new_data.servicepageimg = req.files[1].filename
+      // ('both image ma chnage thai')
+      new_data.frontpageimg = req.files[0].filename;
+      new_data.servicepageimg = req.files[1].filename;
+      let fileName = find_party.frontpageimg;
+      let fileName1 = find_party.servicepageimg;
+      var filepath = "files/service";
+      let filemainPath = path.join(filepath, fileName);
+      let filemainPath1 = path.join(filepath, fileName1);
+      fs.unlink(filemainPath);
+      fs.unlink(filemainPath1);
     }
 
     if (heading) {
@@ -159,14 +175,14 @@ router.put("/service_update/:id", upload.array("image", 2), Authenticate, async 
       new_data.content = content;
     }
 
-      service
-        .findByIdAndUpdate(id, {$set: new_data}, {new: true})
-        .then((result) => {
-          return res.status(200).send(successmessage(result));
-        })
-        .catch((err) => {
-          return res.status(402).send(errormessage(error));
-        });
+    service
+      .findByIdAndUpdate(id, {$set: new_data}, {new: true})
+      .then((result) => {
+        return res.status(200).send(successmessage(result));
+      })
+      .catch((err) => {
+        return res.status(402).send(errormessage(error));
+      });
   }
 });
 
@@ -176,8 +192,8 @@ router.delete("/service_delete/:id", Authenticate, async (req, res) => {
     return res.status(402).send(errormessage("Required"));
   } else {
     let data = await service.findById(id);
-    fileName = data.frontpageimg;
-    fileName1 = data.servicepageimg;
+    let fileName = data.frontpageimg;
+    let fileName1 = data.servicepageimg;
     var filepath = "files/service";
     let filemainPath = path.join(filepath, fileName);
     let filemainPath1 = path.join(filepath, fileName1);
@@ -204,5 +220,3 @@ router.delete("/service_delete/:id", Authenticate, async (req, res) => {
 });
 
 module.exports = router;
-
-

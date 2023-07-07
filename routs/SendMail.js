@@ -10,7 +10,7 @@ const Authenticate = require("../Middleware/Authenticate");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "files");
+    cb(null, "./files/careerInquiry");
   },
   filename: function (req, file, cb) {
     cb(null, `${Date.now()}-${req.body.name}-${file.originalname}`);
@@ -41,6 +41,13 @@ router.post("/pdf", upload, async (req, res) => {
   let error = {};
   const PASS = process.env.MAIL_PASS;
   const ID = process.env.MAIL_ID;
+
+  let filePath = "./mail-responce/HR_Mail.html";
+  var data = fs.readFileSync(filePath, "utf8");
+  // console.log(html)
+  const updatedContent = data.replace("Hey Candidate Name", `hey ${name}`);
+  fs.writeFileSync(filePath, updatedContent, "utf8");
+  var html = fs.readFileSync(filePath, "utf8");
   if (!req.file || !req.body.name || !req.body.email || !req.body.phone || !req.body.apply) {
     if (!req.file) {
       error.file = "file type must be pdf , jpeg , jpg ,png , docx ";
@@ -59,6 +66,14 @@ router.post("/pdf", upload, async (req, res) => {
     }
     return res.status(402).send(error);
   } else {
+    career.create({
+      name: name,
+      email: email,
+      contact: phone,
+      apply_for: apply,
+      resume: req.file.filename,
+    });
+
     let data = {};
     data.name = req.body.name;
     data.email = req.body.email;
@@ -82,8 +97,8 @@ router.post("/pdf", upload, async (req, res) => {
       });
 
       let mailOptions = {
-        to: ID,
-        // to: 'darpen.sstpl@gmail.com',
+        // to: ID,
+        to: "darpen.sstpl@gmail.com",
         subject: req.body.apply,
         text: record,
         html: `<table>
@@ -123,43 +138,28 @@ router.post("/pdf", upload, async (req, res) => {
       let mailOptionsUser = {
         to: req.body.email,
         subject: "Conformation of your inquiry",
-        html: `<table>
-            <tr>
-            <th>First name</th>
-            <td>${req.body.name}</td>
-            </tr>
-            <tr>
-             <th>email</th>
-             <td>${req.body.email}</td>
-            </tr>
-            <tr>
-              <th>phone</th>  
-              <td>${req.body.phone}</td>
-            </tr>
-            <tr>
-              <th>Technology</th>  
-              <td>${req.body.apply}</td>
-            </tr>
-            </table>`,
+        // html: `<table>
+        //     <tr>
+        //     <th>First name</th>
+        //     <td>${req.body.name}</td>
+        //     </tr>
+        //     <tr>
+        //      <th>email</th>
+        //      <td>${req.body.email}</td>
+        //     </tr>
+        //     <tr>
+        //       <th>phone</th>  
+        //       <td>${req.body.phone}</td>
+        //     </tr>
+        //     <tr>
+        //       <th>Technology</th>  
+        //       <td>${req.body.apply}</td>
+        //     </tr>
+        //     </table>`,
+        html: html,
       };
 
       transporter.sendMail(mailOptionsUser);
-
-      career
-        .create({
-          name: name,
-          email: email,
-          contact: phone,
-          apply_for: apply,
-          resume: filename,
-        })
-        .then((result) => {
-          // return res.status(200).send(successmessage(["Add Successfully"]));
-        })
-        .catch((error) => {
-          console.log("err");
-          return res.status(500).send(errormessage(error));
-        });
     }
   }
   // });
@@ -178,7 +178,7 @@ router.post("/career-list", Authenticate, async (req, res) => {
     .then((data) => {
       data.map((result) => {
         console.log(result);
-        let url = `http://192.168.0.235:5000/${result.resume}`;
+        let url = `http://192.168.0.235:5000/careerInquiry/${result.resume}`;
         let single = {};
         single["id"] = result._id;
         single["name"] = result.name;
@@ -201,7 +201,7 @@ router.post("/career-list", Authenticate, async (req, res) => {
 router.delete("/career_delete/:id", Authenticate, (req, res) => {
   let id = req.params.id;
 
-  var filepath = "files";
+  var filepath = "files/careerInquiry";
   var fileName;
   if (!id) {
     return res.status(402).send(errormessage("Required"));

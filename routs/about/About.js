@@ -17,10 +17,7 @@ router.get("/about_list", (req, res) => {
     });
 });
 router.post("/about_add", Authenticate, (req, res) => {
-  // let {page_size, pageNumber} = req.body;
-  console.log(req.body);
   let {abouthead, aboutcontent, visionheading, visioncontent, missionheading, missioncontent, valheading, valuecontent} = req.body;
-
   let error = [];
 
   if (!abouthead || !aboutcontent || !visionheading || !visioncontent || !missionheading || !missioncontent || !valheading) {
@@ -68,19 +65,7 @@ router.post("/about_add", Authenticate, (req, res) => {
       });
   }
 });
-// router.get("/about_update_detail/:id", Authenticate, async (req, res) => {
-//   let id = req.params.id;
-//   console.log(id);
-//   commoncomponent
-//     .findById(id, {__v: 0})
-//     .then((result) => {
-//       return res.status(200).send(successmessage(result));
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       return res.status(500).send(errormessage(error));
-//     });
-// });
+
 router.put("/about_update/:id", Authenticate, async (req, res) => {
   let {abouthead, aboutcontent, visionheading, visioncontent, missionheading, missioncontent, valheading, valuecontent} = req.body;
   let id = req.params.id;
@@ -107,7 +92,6 @@ router.put("/about_update/:id", Authenticate, async (req, res) => {
     if (!valheading) {
       error.push("Required");
     }
-
     return res.status(402).send(errormessage(error));
   } else {
     let find_party = await commoncomponent.findById(id);

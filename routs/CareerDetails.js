@@ -6,10 +6,11 @@ const {errormessage, successmessage} = require("../response/Response");
 const Authenticate = require("../Middleware/Authenticate");
 
 router.get("/careerdetails_list", async (req, res) => {
+  let senddata = []
   careerdetails
     .find({}, {__v: 0})
-    .then((result) => {
-      return res.status(200).json(successmessage(result));
+    .then((data) => {
+      return res.status(200).json(successmessage(data));
     })
     .catch((error) => {
       return res.status(500).send(errormessage(error));
@@ -47,13 +48,14 @@ router.post("/careerdetails_add", Authenticate, async (req, res) => {
     }
     return res.status(402).send(errormessage(error));
   } else {
+    var data = JSON.parse(responsibility)
     careerdetails
       .create({
         title,
         location,
         description,
         experience,
-        responsibility,
+        responsibility:data,
         qualification,
         contentview,
         contentpositionview,

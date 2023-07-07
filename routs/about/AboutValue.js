@@ -112,11 +112,9 @@ router.put("/aboutvalue_update/:id", upload, Authenticate, async (req, res) => {
 
     return res.status(402).send(errormessage(error));
   } else {
-    let find_party = await aboutValue.findById(id);
-    console.log("00000000000", find_party.file);
+    var find_party = await aboutValue.findById(id);
 
     let new_data = {};
-    // if
     if (heading) {
       new_data.heading = heading;
     }
@@ -130,7 +128,10 @@ router.put("/aboutvalue_update/:id", upload, Authenticate, async (req, res) => {
       new_data.file = modifiedUrl;
     } else {
       new_data.file = req.file.filename;
-     
+      let fileName = find_party.file;
+      let  filepath = "files/about";
+      let filemainPath = path.join(filepath, fileName);
+      fs.unlink(filemainPath)
     }
     aboutValue
       .findByIdAndUpdate(id, {$set: new_data}, {new: true})
@@ -151,9 +152,7 @@ router.delete("/aboutvalue_delete/:id", Authenticate, async (req, res) => {
     let data = await aboutValue.findById(id);
     fileName = data.file;
     var filepath = "files/about";
-    console.log(filepath);
     let filemainPath = path.join(filepath, fileName);
-    console.log(filemainPath);
     fs.unlink(filemainPath, (err) => {
       if (err) {
         console.error("Error deleting file:", err);
