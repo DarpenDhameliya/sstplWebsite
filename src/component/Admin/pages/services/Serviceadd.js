@@ -7,9 +7,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import JoditEditor from "jodit-react";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
-import {useHistory, useParams} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import axios from "../../../common/Axios";
 const Serviceadd = () => {
@@ -68,14 +67,19 @@ const Serviceadd = () => {
     formData.append("content", content);
     formData.append("image", image);
     formData.append("image", image1);
-console.log(image);
-console.log(image1);
-    if (!titleheading || !content ) {
+
+    if (!titleheading || !content || !image || !image1) {
       if (!titleheading) {
         error.head = "Require !";
       }
       if (!content) {
         error.value = "Require !";
+      }
+      if(!image){
+        error.image = "Require !"
+      }
+      if(!image1){
+        error.image1 = "Require !"
       }
      
 
@@ -98,13 +102,11 @@ console.log(image1);
           setContent("");
           setImage("");
 
-          history.push("/admin/dashboard/service");
+          history.push("/online-admin/dashboard/service");
         })
         .catch((err) => {
-          console.log(err);
           setDbAdderr(err.response.data.error);
         });
-      // dispatch(AboutValueSlice({heading: titleheading, value: content, file: image}));
     }
   };
   return (
@@ -117,7 +119,7 @@ console.log(image1);
         </div>
 
         <Paper className={classes.setProductpaper} elevation={5}>
-          {/* {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>} */}
+          {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
           <Typography className={classes.setlabel}>heading :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "100%"}} className={classes.settextfield} placeholder="heading" InputLabelProps={{shrink: false}} value={titleheading} onChange={(e) => setTitleheading(e.target.value)} />
               {error.head && <Typography className={classes.seterrorlabel}>{error.head} </Typography>}
@@ -125,7 +127,7 @@ console.log(image1);
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
               <Typography className={classes.setlabel}>Home page image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage} />
-              {error.file && <Typography className={classes.seterrorlabel}>{error.filw} </Typography>}
+              {error.image && <Typography className={classes.seterrorlabel}>{error.image} </Typography>}
               {imgpre && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay} className={classes.setdisimage} />
@@ -142,12 +144,11 @@ console.log(image1);
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
               <Typography className={classes.setlabel}>service page image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle1} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage1} />
-              {error.file && <Typography className={classes.seterrorlabel}>{error.filw} </Typography>}
+              {error.image1 && <Typography className={classes.seterrorlabel}>{error.image1} </Typography>}
               {imgpre1 && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay1} className={classes.setdisimage} />
                   <Button
-                    // endIcon={<DeleteIcon />}
                     className={classes.setdelbtn}
                     onClick={handlemodel1}
                   >

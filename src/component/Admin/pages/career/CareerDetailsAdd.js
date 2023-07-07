@@ -32,14 +32,20 @@ const CareerDetailsAdd = () => {
   const [responsibilitys10, setResponsibilitys10] = useState("");
   const [selectedValue, setSelectedValue] = useState("true");
   const [error, setError] = useState([]);
+  const [inputs, setInputs] = useState([]);
+
   const [dbAdderr, setDbAdderr] = useState("");
   const classes = useMuiStyle();
   const history = useHistory();
   var token = localStorage.getItem("ssAdmin");
 
   const handlesenddata = (e) => {
-    const filledStates = [responsibilitys1, responsibilitys2, responsibilitys3, responsibilitys4, responsibilitys5, responsibilitys6, responsibilitys7, responsibilitys8, responsibilitys9, responsibilitys10].filter((value) => !!value);
-    var jsonRepresentation = JSON.stringify(filledStates);
+    // const filledStates = [responsibilitys1, responsibilitys2, responsibilitys3, responsibilitys4, responsibilitys5, responsibilitys6, responsibilitys7, responsibilitys8, responsibilitys9, responsibilitys10].filter((value) => !!value);
+
+    // var jsonRepresentation = JSON.stringify(filledStates);
+    // console.log(jsonRepresentation);
+    let emptyrecord = inputs.filter((value) => value.trim() !== "");
+    let responsibilityfordb = JSON.stringify(emptyrecord);
 
     let formData = new FormData();
     formData.append("title", title);
@@ -50,7 +56,7 @@ const CareerDetailsAdd = () => {
     formData.append("qualification", qualifaction);
     formData.append("contentview", selectedValue);
     formData.append("contentpositionview", containPositionView);
-    formData.append("responsibility", jsonRepresentation);
+    formData.append("responsibility", responsibilityfordb);
 
     if (!title || !location || !experience || !description || !position || !qualifaction || !containPositionView) {
       if (!title) {
@@ -106,16 +112,33 @@ const CareerDetailsAdd = () => {
           setResponsibilitys8("");
           setResponsibilitys9("");
           setResponsibilitys10("");
-          jsonRepresentation = "";
-          history.push("/admin/dashboard/careerdetails");
+          setInputs([]);
+          // jsonRepresentation = "";
+          history.push("/online-admin/dashboard/careerdetails");
         })
         .catch((err) => {
-          console.log(err);
           setDbAdderr(err.response.data.error);
         });
     }
   };
-  console.log(selectedValue);
+  const handleInputChange = (index, event) => {
+    const newInputs = [...inputs];
+    newInputs[index] = event.target.value;
+    setInputs(newInputs);
+  };
+
+  // Function to add new input field
+  const addInputField = () => {
+    setInputs([...inputs, ""]);
+  };
+
+  // Function to remove input field
+  const removeInputField = (index) => {
+    const newInputs = [...inputs];
+    newInputs.splice(index, 1);
+    setInputs(newInputs);
+  };
+
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
@@ -163,7 +186,7 @@ const CareerDetailsAdd = () => {
           <Grid item xs={12} sm={8} className={classes.setinputlayout}>
             <Paper className={classes.setProductpaper} elevation={5}>
               <Typography className={classes.setlabel}>Responsibilitys :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys1} onChange={(e) => setResponsibilitys1(e.target.value)} />
+              {/*<TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys1} onChange={(e) => setResponsibilitys1(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys2} onChange={(e) => setResponsibilitys2(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys3} onChange={(e) => setResponsibilitys3(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys4} onChange={(e) => setResponsibilitys4(e.target.value)} />
@@ -172,7 +195,16 @@ const CareerDetailsAdd = () => {
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys7} onChange={(e) => setResponsibilitys7(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys8} onChange={(e) => setResponsibilitys8(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys9} onChange={(e) => setResponsibilitys9(e.target.value)} />
-              <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys10} onChange={(e) => setResponsibilitys10(e.target.value)} />
+              <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys10} onChange={(e) => setResponsibilitys10(e.target.value)} /> */}
+              {inputs.map((value, index) => (
+                <div key={index} style={{width: "100%"}} className="d-flex justify-content-between align-items-center">
+                  <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "95%"}} placeholder="responsibilitys" className={`${classes.settextfield} mt-1 mb-1`} multiline InputLabelProps={{shrink: false}} value={value} onChange={(event) => handleInputChange(index, event)} />
+                  <i aria-hidden="true" className={` fa fa-trash ml-1 fs-17`} onClick={() => removeInputField(index)} />
+                </div>
+              ))}
+              <Button variant="outlined" color="primary" onClick={addInputField}>
+                Add Input Field
+              </Button>
             </Paper>
           </Grid>
         </Grid>

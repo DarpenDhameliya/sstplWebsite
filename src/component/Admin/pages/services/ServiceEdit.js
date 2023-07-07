@@ -45,8 +45,6 @@ const ServiceEdit = () => {
         },
       })
       .then((result) => {
-        console.log(result.data.result);
-        // setCareerList(result.data.result);
         setTitleheading(result.data.result[0].heading);
         setContent(result.data.result[0].content);
         setImage(result.data.result[0].frontpageimg);
@@ -56,7 +54,6 @@ const ServiceEdit = () => {
       })
       .catch((err) => {
         setDbFetcherr(err.response.data.error);
-        console.log(err);
       });
   };
 
@@ -101,10 +98,7 @@ const ServiceEdit = () => {
     formData.append("content", content);
     formData.append("image", imgdisplay.length > 0 ? updated : image);
     formData.append("image", imgdisplay1.length > 0 ? updated1 : image1);
-    console.log('updt',updated);
-    console.log('updt1',updated1);
-    console.log('img',image);
-    console.log('img1',image1);
+
     if (!titleheading || !content ) {
       if (!titleheading) {
         error.head = "Require !";
@@ -131,13 +125,11 @@ const ServiceEdit = () => {
           setContent("");
           setImage("");
 
-          history.push("/admin/dashboard/service");
+          history.push("/online-admin/dashboard/service");
         })
         .catch((err) => {
-          console.log(err);
           setDbAdderr(err.response.data.error);
         });
-        // dispatch(AboutValueSlice({heading: titleheading, value: content, file: image , "id":idparam.id}))
     }
   };
   return (
@@ -150,18 +142,18 @@ const ServiceEdit = () => {
         </div>
 
         <Paper className={classes.setProductpaper} elevation={5}>
-          {/* {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>} */}
+          {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
+          {dbFetcherr && <Typography className={classes.seterrorlabel}>{dbFetcherr} </Typography>}
+
           <h4 className="mb-3">{titleheading}</h4>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
               <Typography className={classes.setlabel}>image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage} />
-              {error.file && <Typography className={classes.seterrorlabel}>{error.filw} </Typography>}
               {imgpre && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay.length > 0 ? imgdisplay : image} className={classes.setdisimage} />
                   <Button
-                    // endIcon={<DeleteIcon />}
                     className={classes.setdelbtn}
                     onClick={handlemodel}
                   >
@@ -173,12 +165,10 @@ const ServiceEdit = () => {
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
               <Typography className={classes.setlabel}>image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle1} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage1} />
-              {error.file && <Typography className={classes.seterrorlabel}>{error.filw} </Typography>}
               {imgpre1 && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay1.length > 0 ? imgdisplay1 : image1} className={classes.setdisimage} />
                   <Button
-                    // endIcon={<DeleteIcon />}
                     className={classes.setdelbtn}
                     onClick={handlemodel1}
                   >

@@ -55,6 +55,7 @@ const MetaList = () => {
   const [dberr, setDberr] = useState("");
   const [dbAdderr, setDbAdderr] = useState("");
   const [dbDeleteerr, setDbDeleteerr] = useState("");
+  const [fetcherr, setFetcherr] = useState('')
   const classes = useMuiStyle();
 
   var token = localStorage.getItem("ssAdmin");
@@ -70,7 +71,7 @@ const MetaList = () => {
         seMetaList(result.data.result);
       })
       .catch((err) => {
-        console.log(err);
+        setFetcherr(err.response.data.error)
       });
   };
 
@@ -108,7 +109,6 @@ const MetaList = () => {
     setUpSchema(e.target.value);
   };
   const handleedit = (e) => {
-    console.log(e);
     setUpid(e._id);
     setUpUrl(e.url);
     setUpTitle(e.title);
@@ -174,7 +174,6 @@ const MetaList = () => {
             fetchHiredata();
           })
           .catch((err) => {
-            console.log(err);
             setDberr(err.response.data.error);
             setTimeout(() => {
               setDberr([]);
@@ -226,11 +225,9 @@ const MetaList = () => {
             },
           })
           .then((result) => {
-            console.log(result.data);
             fetchHiredata();
           })
           .catch((err) => {
-            console.log(err);
             setDbAdderr(err.response.data.error);
           });
       }
@@ -246,11 +243,9 @@ const MetaList = () => {
         },
       })
       .then((result) => {
-        console.log(result.data);
         fetchHiredata();
       })
       .catch((err) => {
-        console.log(err);
         setDbDeleteerr(err.response.data.error);
       });
   };
@@ -266,6 +261,7 @@ const MetaList = () => {
           <Grid item xs={12} sm={4} className={classes.setinputlayout}>
             <Paper className={classes.setProductpaper} elevation={5}>
               {dberr && <Typography className={classes.seterrorlabel}>{dberr} </Typography>}
+              {fetcherr && <Typography className={classes.seterrorlabel}>{fetcherr} </Typography>}
               {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
               {dbDeleteerr && <Typography className={classes.seterrorlabel}>{dbDeleteerr} </Typography>}
               <Typography className={classes.setlabel}>URL :</Typography>

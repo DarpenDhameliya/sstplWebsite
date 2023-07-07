@@ -4,7 +4,7 @@ import bulletIcon from "../../../assets/images/icon/bullet1_list.webp";
 
 const Temsandconsition = ({className}) => {
   useEffect(() => {
-    document.title = "SoftStorm - Tems & Condition";
+    document.title = "Tems & Condition | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, [])
   
   return (

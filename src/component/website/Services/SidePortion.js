@@ -26,7 +26,6 @@ const SidePortion = () => {
     if (serviceside === true) {
       if (states.status === "loading") {
       } else if (states.status === "succeeded") {
-        console.log('SidePortion')
         setName('')
         setEmail("");
         setPhone("");

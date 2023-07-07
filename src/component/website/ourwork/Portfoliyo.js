@@ -32,12 +32,11 @@ const style = {
   // boxShadow: 24,
 };
 
-const Portfoliyo = () => {
+const Portfoliyo = ({loding}) => {
   const [tab, setTab] = useState("all");
   const [workdata, setWorkdata] = useState([]);
   const [portfolioList, setportfolioList] = useState([]);
   const [sendMsg, setSendMsg] = useState({id: "", title: "", image: "", team: "", country: "", duration: "", industry: "", technology: []});
-  // const [btnclick, setBtnclick] = useState(0);
   const [technoLen, setTechnoLen] = useState("");
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
@@ -62,7 +61,7 @@ const Portfoliyo = () => {
     ];
     setWorkdata(data);
 
-    document.title = "SoftStorm - Our-Work";
+    document.title = "Our-Work | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
   const fetchHiredata = () => {
@@ -75,6 +74,7 @@ const Portfoliyo = () => {
       .then((result) => {
         let shortdata = result.data.result.sort((a, b) => a.contentpositionview - b.contentpositionview);
         setportfolioList(shortdata);
+        loding();
       })
       .catch((err) => {
         setFetchErr(err.response.data.error)

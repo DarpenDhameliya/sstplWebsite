@@ -3,15 +3,18 @@ import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../../common/lib/ServiceSticky";
 import entimg from "../../../../assets/images/services/enterprise-services.webp";
 import axios from "../../../common/Axios";
-const Enterpriseservice = () => {
+import {Servicestate, Servicestatus} from "../../slice/Service";
+import {useDispatch, useSelector} from "react-redux";
+const Enterpriseservice = ({images , serviceContents}) => {
   const [tab, setTab] = useState("");
   const [dbFetcherr, setDbFetcherr] = useState('')
   const [serviceContent, setServiceContent] = useState('')
-
+  const dispatch = useDispatch();
+  const states = useSelector(Servicestate);
   const [image, setImage] = useState('')
 
   useEffect(() => {
-    document.title = "SoftStorm - Enterprice Services";
+    document.title = "Enterprice Services | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2;
@@ -46,29 +49,49 @@ const Enterpriseservice = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          result.data.result.map((e) => {
-            if(e.heading === 'Enterprice Services'){
-              setImage(e.servicepageimg)
-              setServiceContent(e.content);
-            }
-          })
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
+  // useEffect(() => {
+  //   if (states.response.result === undefined) {
+  //   const fetchServiceata = () => {
+  //     axios
+  //       .get("service/service_list", {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       })
+  //       .then((result) => {
+  //         result.data.result.map((e) => {
+  //           if(e.heading === 'Enterprice Services'){
+  //             setImage(e.servicepageimg)
+  //             setServiceContent(e.content);
+  //           }
+  //         })
+  //       })
+  //       .catch((err) => {
+  //         setDbFetcherr(err.response.data.error);
+  //       });
+  //   };
 
-    fetchServiceata();
-  }, [])
+  //   fetchServiceata();
+  // }
+  // }, [])
+
+  useEffect(() => {
+    if (states.response.result !== undefined) {
+      states.response.result.map((e) => {
+        if(e.heading === 'Enterprice Services'){
+          setImage(e.servicepageimg)
+          setServiceContent(e.content);
+        }
+      })
+    } else {
+      if (images) {
+        setImage(images);
+      }
+      if (serviceContents) {
+        setServiceContent(serviceContents);
+      }
+    }
+  });
 
   useEffect(() => {
     if (window.innerWidth < 1200 && window.innerWidth > 992) {

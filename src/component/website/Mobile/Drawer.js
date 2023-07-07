@@ -209,7 +209,7 @@ function Drawer({ drawer, action, cartToggle }) {
                     <li>
                       <a href="tel:+91261-3560756" className="pl-0">
                         <i
-                          className="fa fa-phone-alt mr-2 drawer_locat"
+                          className="fa fa-phone mr-2 drawer_locat"
                         />
                         <div className="ml-30">+91261-3560756</div>
                       </a>
@@ -217,7 +217,7 @@ function Drawer({ drawer, action, cartToggle }) {
                     <li>
                       <a href="tel:+919099919947" className="pl-0">
                         <i
-                          className="fa fa-phone-alt mr-2 drawer_locat"
+                          className="fa fa-phone mr-2 drawer_locat"
                         />
                         <div className="ml-30">+91 90999 19947</div>
                       </a>

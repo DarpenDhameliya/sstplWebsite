@@ -1,24 +1,19 @@
 import React, {useState, useEffect} from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
-import TextField from "@mui/material/TextField";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
-// import Textarea from '@mui/joy/Textarea';
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -34,7 +29,6 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
@@ -48,7 +42,7 @@ const AboutValueList = () => {
 
   var token = localStorage.getItem("ssAdmin");
   const handlesenddata = () => {
-    history.push("/admin/dashboard/aboutvalueadd");
+    history.push("/online-admin/dashboard/aboutvalueadd");
   };
 
   const fetchHiredata = () => {
@@ -56,16 +50,13 @@ const AboutValueList = () => {
       .get("aboutvalue/aboutvalue_list", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
         },
       })
       .then((result) => {
-        console.log(result.data.result)
         setCareerList(result.data.result);
       })
       .catch((err) => {
         setDbFetcherr(err.response.data.error);
-        console.log(err);
       });
   };
 
@@ -74,7 +65,7 @@ const AboutValueList = () => {
   }, []);
 
   const handleedit = (e) => {
-    history.push(`/admin/dashboard/aboutvalueedit/${e}`);
+    history.push(`/online-admin/dashboard/aboutvalueedit/${e}`);
   };
 
   const handledelete = (e) => {
@@ -89,7 +80,6 @@ const AboutValueList = () => {
         fetchHiredata();
       })
       .catch((err) => {
-        console.log(err);
         setDeleterr(err.response.data.error);
       });
   };
@@ -118,10 +108,6 @@ const AboutValueList = () => {
                   <TableCell align="center" className={classes.tableth}>
                     Title
                   </TableCell>
-                  {/* <TableCell align="center" className={classes.tableth}>
-                    content
-                  </TableCell> */}
-
                   <TableCell align="center" className={classes.tableth}>
                     Action
                   </TableCell>
@@ -137,11 +123,6 @@ const AboutValueList = () => {
                       <StyledTableCell className={classes.tabletd} align="center">
                         {e.heading}
                       </StyledTableCell>
-                      {/* <StyledTableCell className={classes.tabletd} align="center">
-                        {e.content}
-                      </StyledTableCell> */}
-                      
-
                       <StyledTableCell className={classes.tabletdicon} align="center">
                         <div className={classes.seticondiv}>
                           <div>
@@ -171,7 +152,6 @@ const AboutValueList = () => {
             </Table>
           </TableContainer>
         </Paper>
-        {/* )} */}
       </Container>
     </>
   );

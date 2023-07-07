@@ -1,14 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import {Link, useLocation} from "react-router-dom";
-import Collapse from "@mui/material/Collapse";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import {useDispatch, useSelector} from "react-redux";
 import {Divider, Tooltip} from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
+
 import useStyleMainDisplay from "./MainDisplayStyle";
 
 export default function Sidebardata() {
@@ -17,66 +14,66 @@ export default function Sidebardata() {
   return (
     <>
       <List className={classes.selectedindex}>
-        <Tooltip title={"Career"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/career" selected={"/admin/dashboard/career" === location.pathname} className={classes.effectlist}>
+        <Tooltip title={"Career Inquiry"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/career" selected={"/online-admin/dashboard/career" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white" ></i>
             </ListItemIcon>
-            <ListItemText primary="Career" className={classes.setsidebaricon} />
+            <ListItemText primary="Career Inquiry" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
 
-        <Tooltip title={"Hire"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/hire" selected={"/admin/dashboard/hire" === location.pathname} className={classes.effectlist}>
+        <Tooltip title={"Hire Inquiry"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/hire" selected={"/online-admin/dashboard/hire" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
-            <ListItemText primary="Hire" className={classes.setsidebaricon} />
+            <ListItemText primary="Hire Inquiry" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
 
-        <Tooltip title={"Contact"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/contact" selected={"/admin/dashboard/contact" === location.pathname} className={classes.effectlist}>
+        <Tooltip title={"Contact Inquiry"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/contact" selected={"/online-admin/dashboard/contact" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
-            <ListItemText primary="Contact" className={classes.setsidebaricon} />
+            <ListItemText primary="Contact Inquiry" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
         <Tooltip title={"Meta"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/Meta" selected={"/admin/dashboard/Meta" === location.pathname} className={classes.effectlist}>
+          <ListItemButton button component={Link} to="/online-admin/dashboard/Meta" selected={"/online-admin/dashboard/Meta" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
             <ListItemText primary="Meta" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
-        <Tooltip title={"Career Details"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/careerdetails" selected={"/admin/dashboard/careerdetails" === location.pathname} className={classes.effectlist}>
+        <Tooltip title={"Career"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/careerdetails" selected={"/online-admin/dashboard/careerdetails" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
             <ListItemText primary="Career Details" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
-        <Tooltip title={"Portfolio Details"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/portfolio" selected={"/admin/dashboard/portfolio" === location.pathname} className={classes.effectlist}>
+        <Tooltip title={"Portfolio"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/portfolio" selected={"/online-admin/dashboard/portfolio" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
             <ListItemText primary="Portfolio" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
-        <Tooltip title={"About Details"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/about" selected={"/admin/dashboard/about" === location.pathname} className={classes.effectlist}>
+        <Tooltip title={"About"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/about" selected={"/online-admin/dashboard/about" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
             <ListItemText primary="About" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
-        <Tooltip title={"Aboutvalues Details"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/aboutvalue" selected={"/admin/dashboard/aboutvalue" === location.pathname} className={classes.effectlist}>
+        <Tooltip title={"Aboutvalues"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/aboutvalue" selected={"/online-admin/dashboard/aboutvalue" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
@@ -84,11 +81,19 @@ export default function Sidebardata() {
           </ListItemButton>
         </Tooltip>
         <Tooltip title={"Service"} placement="right">
-          <ListItemButton button component={Link} to="/admin/dashboard/service" selected={"/admin/dashboard/service" === location.pathname} className={classes.effectlist}>
+          <ListItemButton button component={Link} to="/online-admin/dashboard/service" selected={"/online-admin/dashboard/service" === location.pathname} className={classes.effectlist}>
             <ListItemIcon style={{minWidth: "45px"}}>
               <i className="fa fa-circle-user fs-25 white"></i>
             </ListItemIcon>
             <ListItemText primary="Service" className={classes.setsidebaricon} />
+          </ListItemButton>
+        </Tooltip>
+        <Tooltip title={"Testimonial"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/testimonial" selected={"/online-admin/dashboard/testimonial" === location.pathname} className={classes.effectlist}>
+            <ListItemIcon style={{minWidth: "45px"}}>
+              <i className="fa fa-circle-user fs-25 white"></i>
+            </ListItemIcon>
+            <ListItemText primary="Testimonial" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
       </List>

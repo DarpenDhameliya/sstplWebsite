@@ -61,7 +61,7 @@ const Header = ({action, cartToggle}) => {
               <span style={{marginLeft: "20px", color: "#fff"}}> | </span>
 
               <a href="tel:+91261-3560756" className="pl-0  d-flex align-items-center ml-20">
-                <i className="fa fa-phone-alt mr-2 " style={{fontSize: "18px", color: "#f1f1f1"}} />
+                <i className="fa fa-phone mr-2 " style={{fontSize: "18px", color: "#f1f1f1"}} />
                 <div className="ml-1 fs-16 fw-600" style={{color: "#f1f1f1"}}>
                   +91261-3560756
                 </div>
@@ -89,7 +89,7 @@ const Header = ({action, cartToggle}) => {
                   </Link>
                 </li>
                 <li className="megamenu">
-                  <Link to="#" className={`menu-links `}>
+                  <Link to="/about-us" className={`menu-links `}>
                     About Us
                   </Link>
                   <div className="menu-dropdown">
@@ -147,7 +147,7 @@ const Header = ({action, cartToggle}) => {
                                       <div className="col-lg-12 mt-2">
                                         <a href="tel:+91261-3560756" className="pl-0 pb-1 d-flex align-items-center">
                                           <i
-                                            className="fa fa-phone-alt mr-2"
+                                            className="fa fa-phone mr-2"
                                             style={{
                                               fontSize: "18px",
                                               color: "#505056",
@@ -161,7 +161,7 @@ const Header = ({action, cartToggle}) => {
                                       <div className="col-lg-12 mt-1">
                                         <a href="tel:+919099919947" className="pl-0 pb-1 d-flex align-items-center">
                                           <i
-                                            className="fa fa-phone-alt mr-2"
+                                            className="fa fa-phone mr-2"
                                             style={{
                                               fontSize: "18px",
                                               color: "#505056",

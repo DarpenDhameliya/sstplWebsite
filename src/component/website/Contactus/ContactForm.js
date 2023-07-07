@@ -28,7 +28,7 @@ const ContactForm = () => {
     let year = d.getFullYear();
     setRecentYear(year);
 
-    document.title = "SoftStorm - Contact-US";
+    document.title = "Contact-US | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
   }, []);
 
@@ -56,7 +56,7 @@ const ContactForm = () => {
       email_verify = true;
     }
 
-    if (!fname || !lname || !email || !phone || number_verify === false || email_verify === false  || !textarea) {
+    if (!fname || !lname || !email || !phone || number_verify === false || email_verify === false  || !textarea || !isVerified) {
       if (!fname) {
         error.fname = "Required !!";
       } else {
@@ -153,7 +153,7 @@ const ContactForm = () => {
                       {/* <img src={e.image} alt="services" />{" "} */}
                       <i className="fa fa-location-dot contectus_icon" style={{fontSize: "40px", color: "#4f4f4f"}} aria-hidden="true"></i>
                     </div>
-                    <div className="ree-card-content mt40">
+                    <div className="ree-card-content mt40 d-flex align-items-center flex-column">
                       <h4 className=" mb-2" style={{color: "#005889"}}>
                         Address
                       </h4>
@@ -170,9 +170,9 @@ const ContactForm = () => {
                   <div className="sstpl_contact-card1 r-bg-c mt-40 ">
                     <div className="sstpl_contact-card-img shadows" style={{border: "2px solid #006308"}}>
                       {/* <img src={e.image} alt="services" />{" "} */}
-                      <i className="fa fa-phone-alt contectus_icon" style={{fontSize: "40px", color: "#4f4f4f"}} aria-hidden="true"></i>
+                      <i className="fa fa-phone contectus_icon" style={{fontSize: "40px", color: "#4f4f4f"}} aria-hidden="true"></i>
                     </div>
-                    <div className="ree-card-content mt40">
+                    <div className="ree-card-content mt40 d-flex align-items-center flex-column">
                       <h4 className="mb-2" style={{color: "#006308"}}>
                         Phone Number
                       </h4>
@@ -195,7 +195,7 @@ const ContactForm = () => {
                       {/* <img src={e.image} alt="services" />{" "} */}
                       <i className="fa fa-envelope contectus_icon" style={{fontSize: "40px", color: "#4f4f4f"}} aria-hidden="true"></i>
                     </div>
-                    <div className="ree-card-content mt40">
+                    <div className="ree-card-content mt40 d-flex align-items-center flex-column">
                       <h4 className=" mb-2" style={{color: "#a10404"}}>
                         Email Address
                       </h4>
@@ -204,6 +204,9 @@ const ContactForm = () => {
                           contact@softstorm.in
                         </div>
                       </a>
+                        <div className="ml-1" style={{color: "#a10404"}}>
+                        hr.softstorm@gmail.com
+                        </div>
                       {/* <p style={{color: "#a10404"}}>contact@softstorm.in</p> */}
                     </div>
                   </div>
@@ -382,15 +385,15 @@ const ContactForm = () => {
           <div className="row footer-copyright mt-2 pt-3  pb-2">
             <div className="col-lg-6 col-md-12 col-sm-12">
               <div>
-                <Link className="login-btn mr-2 ml-2" to="/terms" style={{marginLeft: "15px", color: "#0e1133"}}>
+                <Link className="login-btn mr-2 ml-2" to="/terms-and-conditions" style={{marginLeft: "15px", color: "#0e1133"}}>
                   Terms and Condition
                 </Link>
                 <span> | </span>
-                <Link className="login-btn mr-2 ml-2" to="/privacy" style={{color: "#0e1133"}}>
+                <Link className="login-btn mr-2 ml-2" to="/privacy-policy" style={{color: "#0e1133"}}>
                   Privacy Policy
                 </Link>
                 <span> | </span>
-                <Link className="login-btn mr-2 ml-2" to="/returnpolicy" style={{marginLeft: "15px", color: "#0e1133"}}>
+                <Link className="login-btn mr-2 ml-2" to="/return-policy" style={{marginLeft: "15px", color: "#0e1133"}}>
                   Return Policy
                 </Link>
               </div>

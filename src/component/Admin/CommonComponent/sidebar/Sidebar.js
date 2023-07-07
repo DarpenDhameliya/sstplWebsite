@@ -160,13 +160,13 @@ export default function Sidebar() {
   };
 
   const handleuserprofile = () => {
-    history.push("/admin/dashboard/profile");
+    history.push("/online-admin/dashboard/profile");
   };
   
 
 const handlelogout = () => {
   localStorage.removeItem("ssAdmin");
-  history.push("/admin");
+  history.push("/online-admin");
 }
  
   return (

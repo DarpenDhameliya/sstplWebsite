@@ -109,7 +109,6 @@ function Routes() {
         },
       })
       .then((result) => {
-        // console.log(result)
         dispatch(Metastatus(result.data.result));
         // setMetaList(result.data.result);
       })
@@ -125,7 +124,7 @@ function Routes() {
     <>
       <Router>
         <Switch>
-          <Route path="/admin" component={AdminRouts} />
+          <Route path="/online-admin" component={AdminRouts} />
           <Route path="/" component={Webrouts} />
           <Route component={ErrorPage} />
         </Switch>

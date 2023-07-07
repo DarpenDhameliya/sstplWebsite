@@ -9,7 +9,7 @@ import about3 from "../../../assets/images/icon/about1.svg";
 // import about8 from "../../assets/images/icon/about1.svg";
 // import about9 from "../../assets/images/icon/about1.svg";
 import axios from "../../common/Axios";
-const AboutPart2 = ({list}) => {
+const AboutPart2 = ({list , loding}) => {
   const [workdata, setWorkdata] = useState([]);
   const [missionHead, setmissionHead] = useState("");
   const [missionContent, setMissionContent] = useState("");
@@ -24,9 +24,7 @@ const AboutPart2 = ({list}) => {
   useEffect(() => {
     if (list.length > 0) {
       setmissionHead(list[0].ouremission);
-      console.log(list[0].corevalueconten);
       if (list[0].corevalueconten === "<p><br></p>") {
-        console.log("match");
         setContentValurMatch(false);
       } else {
         setContentValurMatch(true);
@@ -49,15 +47,28 @@ const AboutPart2 = ({list}) => {
         })
         .then((result) => {
           setAboutValueList(result.data.result);
+          loding();
         })
         .catch((err) => {
-          console.log(err);
           setDberr(err.response.data.error);
         });
     };
 
     fetchHiredata();
   }, []);
+
+  useEffect(() => {
+    let carddetails = document.querySelectorAll(".sstpl_about-card");
+    console.log(carddetails);
+
+    const colors = ["#ffb6eb", "#92bcff", "#ffbc8e", "#98e7d3"];
+    carddetails.forEach((card) => {
+      card.addEventListener("mouseover", () => {
+        const hoverColor = colors[Math.floor(Math.random() * colors.length)];
+        card.style.setProperty("--hover-color", hoverColor);
+      });
+    });
+  });
 
   // useEffect(() => {
   //   let data = [

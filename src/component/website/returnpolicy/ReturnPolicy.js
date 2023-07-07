@@ -4,7 +4,7 @@ import bulletIcon from "../../../assets/images/icon/bullet1_list.webp";
 
 const ReturnPolicy = () => {
   useEffect(() => {
-    document.title = "SoftStorm - Return Policy";
+    document.title = "Return Policy | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
   return (

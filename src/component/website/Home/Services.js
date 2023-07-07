@@ -7,6 +7,9 @@ import graimg from "../../../assets/images/services/web-graphic-designing.webp";
 import entimg from "../../../assets/images/services/enterprise-services.webp";
 import {HashLink} from "react-router-hash-link";
 import axios from "../../common/Axios";
+import { Servicestate ,Servicestatus ,ServiceSlice} from "../slice/Service";
+import { useSelector , useDispatch} from "react-redux";
+
 export default function Services(className) {
   const [serviceList, setServiceList] = useState([]);
   const [dbFetcherr, setDbFetcherr] = useState("");
@@ -22,37 +25,71 @@ export default function Services(className) {
   const [digitalapptitle, setDigitalapptitle] = useState("");
   const [webgraapptitle, setWebgraapptitle] = useState("");
   const [erpapptitle, setErpapptitle] = useState("");
+  const states = useSelector(Servicestate);
+const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (states.response.result === undefined) {
+  //   const fetchServiceata = () => {
+  //     axios
+  //       .get("service/service_list", {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       })
+  //       .then((result) => {
+  //         setWebappimg(result.data.result[0].frontpageimg);
+  //         setWebapptitle(result.data.result[0].heading);
+  //         setMobppimg(result.data.result[1].frontpageimg);
+  //         setMobpptitle(result.data.result[1].heading);
+  //         setDeskappimg(result.data.result[2].frontpageimg);
+  //         setDeskapptitle(result.data.result[2].heading);
+  //         setDigitalappimg(result.data.result[3].frontpageimg);
+  //         setDigitalapptitle(result.data.result[3].heading);
+  //         setWebgraappimg(result.data.result[4].frontpageimg);
+  //         setWebgraapptitle(result.data.result[4].heading);
+  //         setErpappimg(result.data.result[5].frontpageimg);
+  //         setErpapptitle(result.data.result[5].heading);
+  //       })
+  //       .catch((err) => {
+  //         setDbFetcherr(err.response.data.error);
+  //       });
+  //   };
+
+  //   fetchServiceata();
+  // }
+  // }, []);
 
   useEffect(() => {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          console.log(result.data.result);
-          setWebappimg(result.data.result[0].frontpageimg);
-          setWebapptitle(result.data.result[0].heading);
-          setMobppimg(result.data.result[1].frontpageimg);
-          setMobpptitle(result.data.result[1].heading);
-          setDeskappimg(result.data.result[2].frontpageimg);
-          setDeskapptitle(result.data.result[2].heading);
-          setDigitalappimg(result.data.result[3].frontpageimg);
-          setDigitalapptitle(result.data.result[3].heading);
-          setWebgraappimg(result.data.result[4].frontpageimg);
-          setWebgraapptitle(result.data.result[4].heading);
-          setErpappimg(result.data.result[5].frontpageimg);
-          setErpapptitle(result.data.result[5].heading);
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
-
-    fetchServiceata();
+    dispatch(ServiceSlice());
   }, []);
+
+  useEffect(() => {
+      console.log(states.response.result)
+      if (states.status === "loading") {
+      } else if (states.status === "succeeded") {
+        setWebappimg(states.response.result[0].frontpageimg);
+        setWebapptitle(states.response.result[0].heading);
+        setMobppimg(states.response.result[1].frontpageimg);
+        setMobpptitle(states.response.result[1].heading);
+        setDeskappimg(states.response.result[2].frontpageimg);
+        setDeskapptitle(states.response.result[2].heading);
+        setDigitalappimg(states.response.result[3].frontpageimg);
+        setDigitalapptitle(states.response.result[3].heading);
+        setWebgraappimg(states.response.result[4].frontpageimg);
+        setWebgraapptitle(states.response.result[4].heading);
+        setErpappimg(states.response.result[5].frontpageimg);
+        setErpapptitle(states.response.result[5].heading);
+        dispatch(Servicestatus());
+      } else if (states.status === "failed") {
+        setDbFetcherr(states.error);
+        setTimeout(() => {
+          setDbFetcherr([]);
+        }, 3000);
+        dispatch(Servicestatus());
+      } else {
+      }
+  })
+  
   return (
     <>
       <section className={`softstormweb-service handleservice pt-70 pb-80 ${className}`} id="service">

@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
 import axios from "../../../common/Axios";
-import {useHistory} from "react-router-dom";
 import JoditEditor from "jodit-react";
 
 const AboutList = () => {
@@ -23,18 +22,18 @@ const AboutList = () => {
   const [id, setId] = useState("");
   const [error, setError] = useState([]);
 
-  const [deleterr, setDeleterr] = useState([]);
-  const [about, setAbout] = useState("");
-  const [vision, setVision] = useState("");
-  const [mission, setMission] = useState("");
-  const [aboutList, setAboutList] = useState([]);
+  // const [deleterr, setDeleterr] = useState([]);
+  // const [about, setAbout] = useState("");
+  // const [vision, setVision] = useState("");
+  // const [mission, setMission] = useState("");
+  // const [aboutList, setAboutList] = useState([]);
   // const [id, setId] = useState("");
   const [dberr, setDberr] = useState([]);
-  const [content, setContent] = useState("");
+  // const [content, setContent] = useState("");
   const [dbAdderr, setDbAdderr] = useState("");
-  const [cardView, setCardView] = useState(false);
+  // const [cardView, setCardView] = useState(false);
   const classes = useMuiStyle();
-  const history = useHistory();
+  // const history = useHistory();
 
   //firstfetchdata
   const fetchHiredata = () => {
@@ -45,7 +44,6 @@ const AboutList = () => {
         },
       })
       .then((result) => {
-        // console.log(result.data.result[0]._id)
         setId(result.data.result[0]._id);
         setAbouthead(result.data.result[0].about);
         setAboutcontent(result.data.result[0].aboutcontent);
@@ -55,14 +53,8 @@ const AboutList = () => {
         setMissioncontent(result.data.result[0].missionconten);
         setValheading(result.data.result[0].ourecorevalue);
         setvaluecontent(result.data.result[0].corevalueconten);
-        // if (result.data.result.length > 0) {
-        //   setCardView(true);
-        // } else {
-        //   setCardView(false);
-        // }
       })
       .catch((err) => {
-        console.log(err);
         setDberr(err.response.data.error);
       });
   };
@@ -141,7 +133,6 @@ const AboutList = () => {
           }, 3000);
         })
         .catch((err) => {
-          console.log(err);
           setDbAdderr(err.response.data.error);
         });
     }
@@ -155,14 +146,12 @@ const AboutList = () => {
             About List
           </Typography>
         </div>
-        {/* {cardView && ( */}
-        {/* <> */}
         <Paper className={classes.setProductpaper} elevation={5}>
           {doneResponce && <Typography className={classes.seterrorlabel}>{doneResponce} </Typography>}
 
           {dberr && <Typography className={classes.seterrorlabel}>{dberr} </Typography>}
+          {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
           {/* <Grid container className={classes.setGridcard}>
-              {dberr && <Typography className={classes.seterrorlabel}>{dberr} </Typography>}
               {aboutList.map((e) => {
                 return (
                   <Grid item xs={12} sm={6} md={4} lg={4} className={classes.setonegried}>

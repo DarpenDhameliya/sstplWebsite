@@ -2,58 +2,58 @@ import React, {useState, useEffect, useRef} from "react";
 import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../../common/lib/ServiceSticky";
 import graimg from "../../../../assets/images/services/web-graphic-designing.webp";
-import axios  from "../../../common/Axios";
-const Web_graphicservice = () => {
+import axios from "../../../common/Axios";
+import {Servicestate, Servicestatus} from "../../slice/Service";
+import {useDispatch, useSelector} from "react-redux";
+const Web_graphicservice = ({images, serviceContents}) => {
   const [tab, setTab] = useState("");
-  const [serviceContent, setServiceContent] = useState('')
-  const [image, setImage] = useState('')
-  const [dbFetcherr, setDbFetcherr] = useState('')
+  const [serviceContent, setServiceContent] = useState("");
+  const [image, setImage] = useState("");
+  const [dbFetcherr, setDbFetcherr] = useState("");
+  const states = useSelector(Servicestate);
 
-
-
+  // logic fro redux handle
   useEffect(() => {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          result.data.result.map((e) => {
-            if(e.heading === 'Web & Graphic Designing'){
-              setImage(e.servicepageimg)
-              setServiceContent(e.content);
-            }
-          })
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
+    if (states.response.result !== undefined) {
+      states.response.result.map((e) => {
+        if (e.heading === "Web & Graphic Designing") {
+          setImage(e.servicepageimg);
+          setServiceContent(e.content);
+        }
+      });
+    } else {
+      if (images) {
+        setImage(images);
+      }
+      if (serviceContents) {
+        setServiceContent(serviceContents);
+      }
+    }
+  });
 
-    fetchServiceata();
-  }, [])
+  // logic for fetch api calling
+
+  // logic for active technology
   useEffect(() => {
-    document.title = "SoftStorm - Web & Graphic Designing";
-  
+    document.title = "Web & Graphic Designing | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
+
     const handleScroll = () => {
-      const middle = window.innerHeight / 2; 
-  
+      const middle = window.innerHeight / 2;
+
       const div1 = document.getElementById("div1");
       const div2 = document.getElementById("div2");
       const div3 = document.getElementById("div3");
       const div4 = document.getElementById("div4");
       const div5 = document.getElementById("div5");
       const div6 = document.getElementById("div6");
-  
+
       const div1IsMiddle = isElementInMiddle(div1, middle);
       const div2IsMiddle = isElementInMiddle(div2, middle);
       const div3IsMiddle = isElementInMiddle(div3, middle);
       const div4IsMiddle = isElementInMiddle(div4, middle);
       const div5IsMiddle = isElementInMiddle(div5, middle);
       const div6IsMiddle = isElementInMiddle(div6, middle);
-  
+
       if (div1IsMiddle) {
         setTab("webdesign");
       } else if (div2IsMiddle) {
@@ -70,18 +70,19 @@ const Web_graphicservice = () => {
         setTab("");
       }
     };
-  
+
     const isElementInMiddle = (element, middle) => {
       const rect = element.getBoundingClientRect();
       return rect.top <= middle && rect.bottom >= middle;
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  // logic for long header and short header
   useEffect(() => {
     if (window.innerWidth < 1200 && window.innerWidth > 992) {
       servicesticky3();
@@ -154,7 +155,7 @@ const Web_graphicservice = () => {
                 <div className="post-thumb">
                   <img src={image} alt="" />
                 </div>
-                <span id="webdesign" style={{paddingTop: "15px"}}/>
+                <span id="webdesign" style={{paddingTop: "15px"}} />
                 <h4 className="article-title">Web & Graphic</h4>
 
                 <header className="service-header_small haderhide" id="service-header_id">

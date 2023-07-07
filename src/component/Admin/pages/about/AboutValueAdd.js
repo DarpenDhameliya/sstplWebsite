@@ -63,6 +63,7 @@ const AboutValueAdd = () => {
       setTimeout(() => {
         setError([]);
       }, 3000);
+      console.log(error)
     } else {
       axios
         .post("aboutvalue/aboutvalue_add", formData, {
@@ -77,12 +78,11 @@ const AboutValueAdd = () => {
           setContent("");
           setImage("");
 
-          history.push("/admin/dashboard/aboutvalue");
+          history.push("/online-admin/dashboard/aboutvalue");
         })
         .catch((err) => {
           setDbAdderr(err.response.data.error);
         });
-      // dispatch(AboutValueSlice({heading: titleheading, value: content, file: image}));
     }
   };
   return (
@@ -102,12 +102,11 @@ const AboutValueAdd = () => {
               {error.head && <Typography className={classes.seterrorlabel}>{error.head} </Typography>}
               <Typography className={classes.setlabel}>image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage} />
-              {error.file && <Typography className={classes.seterrorlabel}>{error.filw} </Typography>}
+              {error.file && <Typography className={classes.seterrorlabel}>{error.file} </Typography>}
               {imgpre && (
                 <Card sx={{maxWidth: "250px"}} className="mt-3">
                   <CardMedia component="img" src={imgdisplay} className={classes.setdisimage} />
                   <Button
-                    // endIcon={<DeleteIcon />}
                     className={classes.setdelbtn}
                     onClick={handlemodel}
                   >

@@ -28,7 +28,7 @@ const style = {
   boxShadow: 24,
 };
 
-const Careerdata = () => {
+const Careerdata = ({loding}) => {
   // const [show, setShow] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +47,6 @@ const Careerdata = () => {
   const [careerBtnClick, setCareerBtnClick] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
-  // const [modelOpennet, setModelOpennet] = useState(0);
   const [file, setFile] = useState("");
   const notify = useCallback(() => {
     toast.success("Email Sent Successfully..", {
@@ -55,7 +54,6 @@ const Careerdata = () => {
     });
   }, []);
   const notifyerr = () => toast("error");
-  const modalRef = useRef(null);
 
   useEffect(() => {
     if (careerBtnClick) {
@@ -67,6 +65,7 @@ const Careerdata = () => {
         setApply("");
         setFile("");
         setFilename("Upload Resume");
+        setOpen(false);
         notify();
         dispatch(Careerstatus());
       } else if (mailstate.status === "failed") {
@@ -88,6 +87,7 @@ const Careerdata = () => {
       .then((result) => {
         let shortdata = result.data.result.sort((a, b) => a.contentpositionview - b.contentpositionview);
         setCareerList(shortdata);
+        loding();
       })
 
       .catch((err) => {
@@ -97,7 +97,7 @@ const Careerdata = () => {
 
   useEffect(() => {
     fetchHiredata();
-    document.title = "SoftStorm - Career";
+    document.title = "Career | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
   const dispatch = useDispatch();
@@ -147,7 +147,6 @@ const Careerdata = () => {
       if (!apply) {
         error.apply = "Apply For Required !";
       }
-
       if (!isVerified) {
         error.captcha = "Required !!";
       } else {
@@ -194,6 +193,143 @@ const Careerdata = () => {
   return (
     <>
       <ToastContainer position="top-right" style={{marginTop: "55px"}} />
+
+      {dbFetcherr && <p className="handledberror ">{dbFetcherr}</p>}
+      {careerList.map((res) => {
+        console.log(res);
+        if (res.contentview === true) {
+          return (
+            <div className="card mt-3 mb-3 grey">
+              <div className="card-body grey">
+                <h4 className="handlecareerhireinghead">{res.title}</h4>
+                <div className="d-flex justify-content-between mt-1">
+                  <div className="d-flex justify-content-center align-items-center">
+                    <img src={career1} alt="car1" className="handlecareermain_img" />
+                    <div className="ml-1">
+                      <p className="handelmobilep"> Location</p>
+                      <h6 className="handelmobileh6">{res.location}</h6>
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-center align-items-center ">
+                    <img src={career2} alt="car1" className="handlecareermain_img" />
+
+                    <div className="ml-2">
+                      <p className="handelmobilep"> Experience</p>
+                      <h6 className="handelmobileh6">{res.experience}</h6>
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-center align-items-center tabrequirement">
+                    <img src={career3} alt="car1" className="handlecareermain_img" />
+                    <div className="ml-2">
+                      <p className="handelmobilep"> Position</p>
+                      <h6 className="handelmobileh6">{res.position}</h6>
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <div className="card-body_collpas">
+                    <p style={{color: "#000000"}}>{res.description}</p>
+                    <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
+                    <ul className="skill">
+                      {res.responsibility.map((e) => {
+                        return (
+                          <div className="handlediv">
+                            <img src={bullet} alt="symbol" className="handlecarrericon " />
+                            <li className="handlecareerli">{e}</li>
+                          </div>
+                        );
+                      })}
+                    </ul>
+                    <h6 className="handlecareerrespon mt-2">Qualification :</h6>
+                    <div className="handlediv">
+                      <img src={bullet} alt="symbol" className="handlecarrericon " />
+                      <p className="handlecareerli" style={{lineHeight: "20px"}}>
+                        {res.qualification}
+                      </p>
+                    </div>
+                    <div className="d-flex justify-content-end pt-3">
+                      <button className="main-btn_carrer_apply" type="button" onClick={handlemodalOpen}>
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Collapse>
+            </div>
+          );
+        }
+      })}
+
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box sx={style}>
+          <div className="modal-header">
+            <h5 className="modal-title" id="staticBackdropLabel">
+              {formapplyview}
+            </h5>
+            <div onClick={handleClose} style={{cursor: "pointer"}}>
+              <img src={closeimg} alt="car1" />
+            </div>
+          </div>{" "}
+          <div className="modal-body" style={{border: "none", boxShadow: "none"}}>
+            <form className="row">
+              <div className="col-md-12">
+                <input type="text" className={`${error.name ? "handleinput_error" : ""}`} name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+              </div>
+              {dberr.name && <p className="handledberror ">{dberr.name}</p>}
+              <div className="col-md-12">
+                <input type="email" name="email" className={`${error.email ? "handleinput_error" : ""} ${error.em_verify ? "handleinput_error" : ""}`} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" />
+              </div>
+              {dberr.email && <p className="handledberror ">{dberr.email}</p>}
+
+              <div className="col-md-12">
+                <input
+                  type="text"
+                  name="phone"
+                  className={`${error.phone ? "handleinput_error" : ""} mt-15   ${error.num_verify ? "error_padding" : ""}
+                    `}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="Phone Number"
+                />
+                {dberr.phone && <p className="handledberror ">{dberr.phone}</p>}
+                {error.num_verify && <p className={`handledberror mb-0  ${error.num_verify ? "error_padding_add" : ""}`}>{error.num_verify}</p>}
+              </div>
+
+              <div className="col-md-12 ">
+                <div
+                  className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
+                    `}
+                  style={{background: "#f5f5f7"}}
+                >
+                  <span className="filename">{filename}</span>
+                  <input type="file" className="inputfile form-control" name="file" onChange={hgandlefile} />
+                </div>
+              </div>
+              {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
+
+              <div className="col-lg-6 col-md-12 col-sm-12 ">
+                <div className="recaptcha-container">
+                  <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={handleVerify} theme="light" size="normal" />
+                </div>
+                {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
+              </div>
+            </form>
+          </div>
+          <div className="career-footer">
+            <button className="main-btn_carrer_apply" type="button" onClick={handlesubmit}>
+              APPLY NOW
+            </button>
+          </div>
+        </Box>
+      </Modal>
       {/* <div className="card mb-3 grey">
         <div className="card-body grey" id="headingOne">
           <h4 className="handlecareerhireinghead">PHP MVC Developer</h4>
@@ -494,78 +630,6 @@ const Careerdata = () => {
           </div>
         </div>
       </div> */}
-      {dbFetcherr && <p className="handledberror ">{dbFetcherr}</p>}
-      {careerList.map((res) => {
-        if (res.contentview === true) {
-          return (
-            <div className="card mt-3 mb-3 grey">
-              <div className="card-body grey">
-                <h4 className="handlecareerhireinghead">{res.title}</h4>
-                <div className="d-flex justify-content-between mt-1">
-                  <div className="d-flex justify-content-center align-items-center">
-                    <img src={career1} alt="car1" className="handlecareermain_img" />
-                    <div className="ml-1">
-                      <p className="handelmobilep"> Location</p>
-                      <h6 className="handelmobileh6">{res.location}</h6>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center ">
-                    <img src={career2} alt="car1" className="handlecareermain_img" />
-
-                    <div className="ml-2">
-                      <p className="handelmobilep"> Experience</p>
-                      <h6 className="handelmobileh6">{res.experience}</h6>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center tabrequirement">
-                    <img src={career3} alt="car1" className="handlecareermain_img" />
-                    <div className="ml-2">
-                      <p className="handelmobilep"> Position</p>
-                      <h6 className="handelmobileh6">{res.position}</h6>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center">
-                    <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <div className="card-body_collpas">
-                    <p style={{color: "#000000"}}>{res.description}</p>
-                    <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
-                    <ul className="skill">
-                      {res.responsibility.map((e) => {
-                        return (
-                          <div className="handlediv">
-                            <img src={bullet} alt="symbol" className="handlecarrericon " />
-                            <li className="handlecareerli">{e}</li>
-                          </div>
-                        );
-                      })}
-                    </ul>
-                    <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-                    <div className="handlediv">
-                      <img src={bullet} alt="symbol" className="handlecarrericon " />
-                      <p className="handlecareerli" style={{lineHeight: "20px"}}>
-                        {res.qualification}
-                      </p>
-                    </div>
-                    <div className="d-flex justify-content-end pt-3">
-                      <button className="main-btn_carrer_apply" type="button" onClick={handlemodalOpen}>
-                        Apply
-                      </button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Collapse>
-            </div>
-          );
-        }
-      })}
 
       {/* <div className="modal fade" id="staticBackdrop" role="dialog" ref={modalRef}>
         <div className="modal-dialog modal-dialog-centered ">
@@ -629,69 +693,6 @@ const Careerdata = () => {
           </div>
         </div>
       </div> */}
-
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box sx={style}>
-          <div className="modal-header">
-            <h5 className="modal-title" id="staticBackdropLabel">
-              {formapplyview}
-            </h5>
-            <div onClick={handleClose} style={{cursor: "pointer"}}>
-              <img src={closeimg} alt="car1" />
-            </div>
-          </div>{" "}
-          <div className="modal-body" style={{border: "none", boxShadow: "none"}}>
-            <form className="row">
-              <div className="col-md-12">
-                <input type="text" className={`${error.name ? "handleinput_error" : ""}`} name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-              </div>
-              {dberr.name && <p className="handledberror ">{dberr.name}</p>}
-              <div className="col-md-12">
-                <input type="email" name="email" className={`${error.email ? "handleinput_error" : ""} ${error.em_verify ? "handleinput_error" : ""}`} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" />
-              </div>
-              {dberr.email && <p className="handledberror ">{dberr.email}</p>}
-
-              <div className="col-md-12">
-                <input
-                  type="text"
-                  name="phone"
-                  className={`${error.phone ? "handleinput_error" : ""} mt-15   ${error.num_verify ? "error_padding" : ""}
-                    `}
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Phone Number"
-                />
-                {dberr.phone && <p className="handledberror ">{dberr.phone}</p>}
-                {error.num_verify && <p className={`handledberror mb-0  ${error.num_verify ? "error_padding_add" : ""}`}>{error.num_verify}</p>}
-              </div>
-
-              <div className="col-md-12 ">
-                <div
-                  className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
-                    `}
-                  style={{background: "#f5f5f7"}}
-                >
-                  <span className="filename">{filename}</span>
-                  <input type="file" className="inputfile form-control" name="file" onChange={hgandlefile} />
-                </div>
-              </div>
-              {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
-
-              <div className="col-lg-6 col-md-12 col-sm-12 ">
-                <div className="recaptcha-container">
-                  <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={handleVerify} theme="light" size="normal" />
-                </div>
-                {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
-              </div>
-            </form>
-          </div>
-          <div className="career-footer">
-            <button className="main-btn_carrer_apply" type="button" onClick={handlesubmit}>
-              APPLY NOW
-            </button>
-          </div>
-        </Box>
-      </Modal>
     </>
   );
 };

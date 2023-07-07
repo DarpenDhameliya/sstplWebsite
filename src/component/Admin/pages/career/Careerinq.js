@@ -1,26 +1,19 @@
 import React, {useState, useEffect} from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
-import TextField from "@mui/material/TextField";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
-// import EditIcon from "@mui/icons-material/Edit";
-// import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
-// import ClearIcon from "@mui/icons-material/Clear";
 import axios from "../../../common/Axios";
-import Pagination from '@mui/material/Pagination';
+import Pagination from "@mui/material/Pagination";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,7 +29,6 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
@@ -45,69 +37,64 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 const Career = () => {
   const classes = useMuiStyle();
   const [careerList, setCareerList] = useState([]);
-  const [perpage, setPerPage] = useState('10')
-  const [page, setPage] = useState('1')
-  const [count, setCount] = useState('')
-  const [dbDeleteerr, setDbDeleteerr] = useState([]);
-const [dberror, setDberror] = useState('')
+  const [perpage, setPerPage] = useState("10");
+  const [page, setPage] = useState("1");
+  const [count, setCount] = useState("");
+  const [dbDeleteerr, setDbDeleteerr] = useState("");
+  const [dberror, setDberror] = useState("");
 
   var token = localStorage.getItem("ssAdmin");
-  const fetchHiredata = (pagenumber , pagesize) => {
+  const fetchHiredata = (pagenumber, pagesize) => {
     const formData = new FormData();
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", pagesize);
     axios
-      .post("authers/career-list",formData, {
+      .post("authers/career-list", formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: token,
         },
       })
       .then((result) => {
-        setCount(result.data.totalPages)
-                setCareerList(result.data.result);
+        setCount(result.data.totalPages);
+        setCareerList(result.data.result);
       })
       .catch((err) => {
-        setDberror(err.response.data.error)
+        setDberror(err.response.data.error);
       });
   };
 
   useEffect(() => {
-    fetchHiredata(1,perpage);
+    fetchHiredata(1, perpage);
   }, []);
 
-  const handleChange = (e,value) => {
-    console.log('page', value)
-    setPage(value)
-    fetchHiredata(value,perpage);
-  
-  }
+  const handleChange = (e, value) => {
+    setPage(value);
+    fetchHiredata(value, perpage);
+  };
   const downloadPdf = (e) => {
-    const pdfPath = e; 
+    const pdfPath = e;
 
     const link = document.createElement("a");
     link.href = pdfPath;
-    window.open(pdfPath, '_blank');
-    link.download = ".pdf"; 
-    // link.click();
+    window.open(pdfPath, "_blank");
+    link.download = ".pdf";
   };
 
   const handledelete = (e) => {
     const formData = new FormData();
     formData.append("filename", e.resume);
     axios
-      .delete(`authers/career_delete/${e.id}`,{
+      .delete(`authers/career_delete/${e.id}`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           Authorization: token,
         },
       })
       .then((result) => {
-        console.log(result.data);
         fetchHiredata(page, perpage);
       })
       .catch((err) => {
-        console.log(err);
         setDbDeleteerr(err.response.data.error);
       });
   };
@@ -120,8 +107,8 @@ const [dberror, setDberror] = useState('')
           </Typography>
         </div>
         <Paper className={classes.setProductpaper} elevation={5}>
-        {dbDeleteerr && <Typography className={classes.seterrorlabel}>{dbDeleteerr} </Typography>}
-        {dberror && <Typography className={classes.seterrorlabel}>{dberror} </Typography>}
+          {dbDeleteerr && <Typography className={classes.seterrorlabel}>{dbDeleteerr} </Typography>}
+          {dberror && <Typography className={classes.seterrorlabel}>{dberror} </Typography>}
           <TableContainer>
             <Table className={classes.settable} aria-label="simple table">
               <TableHead>
@@ -173,15 +160,10 @@ const [dberror, setDberror] = useState('')
                           Resume
                         </Button>
                       </StyledTableCell>
-                      
+
                       <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
-                      <Tooltip title="Remove">
-                          <i
-                            className="fa fa-trash"
-                            aria-hidden="true"
-                            //  className={classes.setdeleteincon}
-                            onClick={() => handledelete(e)}
-                          />
+                        <Tooltip title="Remove">
+                          <i className="fa fa-trash" aria-hidden="true" onClick={() => handledelete(e)} />
                         </Tooltip>
                       </StyledTableCell>
                     </StyledTableRow>
@@ -190,7 +172,7 @@ const [dberror, setDberror] = useState('')
               </TableBody>
             </Table>
             <div className="d-flex justify-content-end mt-3">
-            <Pagination count={count} page={page}  onChange={handleChange} variant="outlined" shape="rounded" color="primary"/>
+              <Pagination count={count} page={page} onChange={handleChange} variant="outlined" shape="rounded" color="primary" />
             </div>
           </TableContainer>
         </Paper>

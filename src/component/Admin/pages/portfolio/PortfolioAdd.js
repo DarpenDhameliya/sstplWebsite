@@ -25,15 +25,12 @@ const PortfolioAdd = () => {
   const [technology, setTechnology] = useState([]); //select
   const [category, setCategory] = useState([]); //select
   const [image, setImage] = useState("");
-  const [containViewHome, setContainViewHome] = useState("");
   const [contentpositionview, setContentpositionview] = useState("");
-  const [careerOption, setCareerOption] = useState([]);
-  const [selectedValue, setSelectedValue] = useState('true');
+  const [selectedValue, setSelectedValue] = useState("true");
 
-  const [sendImage, setSendImage] = useState('')
+  const [sendImage, setSendImage] = useState("");
   const [imgpre, setImgpre] = useState(false);
   const [imgdisplay, setImgdisplay] = useState([]);
-  const [disImage, setDisImage] = useState("");
   const [error, setError] = useState([]);
   const [dbAdderr, setDbAdderr] = useState("");
   const classes = useMuiStyle();
@@ -67,7 +64,6 @@ const PortfolioAdd = () => {
   ];
 
   const handlesenddata = (e) => {
-
     let formData = new FormData();
     formData.append("name", name);
     formData.append("industry", industry);
@@ -79,8 +75,7 @@ const PortfolioAdd = () => {
     formData.append("contentview", selectedValue);
     formData.append("uploadimg", sendImage);
     formData.append("contentpositionview", contentpositionview);
-console.log(formData)
-    if (!name || !industry || !team || !duration || !country || !technology || !category || !sendImage  || !contentpositionview) {
+    if (!name || !industry || !team || !duration || !country || !technology || !category || !sendImage || !contentpositionview) {
       if (!name) {
         error.name = "required !!";
       }
@@ -113,12 +108,11 @@ console.log(formData)
       setTimeout(() => {
         setError([]);
       }, 3000);
-      console.log(error)
     } else {
       axios
         .post("portfolio/portfolio_add", formData, {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
             "Access-Control-Allow-Origin": "*",
             Authorization: token,
           },
@@ -131,18 +125,16 @@ console.log(formData)
           setCountry("");
           setTechnology("");
           setCategory("");
-          setSelectedValue("true");  
+          setSelectedValue("true");
           setContentpositionview("");
           handlemodel();
-          history.push("/admin/dashboard/portfolio");
+          history.push("/online-admin/dashboard/portfolio");
         })
         .catch((err) => {
-          console.log(err);
           setDbAdderr(err.response.data.error);
         });
     }
   };
-  console.log(category);
 
   const handleChange = (e) => {
     setCategory(Array.isArray(e) ? e.map((x) => x.value) : []);
@@ -150,18 +142,15 @@ console.log(formData)
   var addImage, displayImg;
   const imagehandle = (e) => {
     addImage = e.target.files[0];
-    setSendImage(addImage)
+    setSendImage(addImage);
     displayImg = URL.createObjectURL(e.target.files[0]);
     setImgdisplay(displayImg);
     setImgpre(true);
   };
-  console.log(imgdisplay);
   const handlemodel = () => {
     setSendImage("");
     setImgdisplay("");
-    setDisImage("");
     setImgpre(false);
-    // document.getElementById("handleimagetext").value = null;
   };
   return (
     <>
@@ -173,14 +162,13 @@ console.log(formData)
         </div>
 
         <Paper className={classes.setProductpaper} elevation={5}>
-          {/* {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>} */}
+          {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
               {/* <div className=""> */}
               <Typography className={classes.setlabel}>Name :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} style={{width: "100%"}} placeholder="name" InputLabelProps={{shrink: false}} value={name} onChange={(e) => setName(e.target.value)} />
               {error.title && <Typography className={classes.seterrorlabel}>{error.title} </Typography>}
-              {/* </div> */}
               <Typography className={classes.setlabel}>Industry :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} style={{width: "100%"}} placeholder="industry" InputLabelProps={{shrink: false}} value={industry} onChange={(e) => setIndustry(e.target.value)} />
               {error.location && <Typography className={classes.seterrorlabel}>{error.location} </Typography>}
@@ -197,26 +185,11 @@ console.log(formData)
               <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} style={{width: "100%"}} multiline placeholder="Technology" InputLabelProps={{shrink: false}} value={technology} onChange={(e) => setTechnology(e.target.value)} />
               {error.technology && <Typography className={classes.seterrorlabel}>{error.technology} </Typography>}
               <Typography className={classes.setlabel}>Category :</Typography>
-              <Select
-                isMulti
-                maxMenuHeight={"200px"}
-                classNamePrefix="select"
-                name="category"
-                styles={{background: "white", color: "#000", border: "1px solid #000", borderRadius: "5px", padding: "5px"}}
-                // className={` ${error.selectval ? "handleinput_error" : ''} ${dberr.hiredev ? 'mb-0' : ''}`}
-                value={options.filter((obj) => category.includes(obj.value))}
-                onChange={handleChange}
-                options={options}
-              />
+              <Select isMulti maxMenuHeight={"200px"} classNamePrefix="select" name="category" styles={{background: "white", color: "#000", border: "1px solid #000", borderRadius: "5px", padding: "5px"}} value={options.filter((obj) => category.includes(obj.value))} onChange={handleChange} options={options} />
               {error.category && <Typography className={classes.seterrorlabel}>{error.category} </Typography>}
-
-              {/* <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} style={{width:'100%'}} placeholder="position in front" InputLabelProps={{shrink: false}} value={category} onChange={(e) => setCategory(e.target.value)} /> */}
             </Grid>
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
-              {/* <Typography className={classes.setlabel}>View in Homepage :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} style={{width: "100%"}} placeholder="view in front" InputLabelProps={{shrink: false}} value={containViewHome} onChange={(e) => setContainViewHome(e.target.value)} />
-              {error.containView && <Typography className={classes.seterrorlabel}>{error.containView} </Typography>} */}
-              <RadioGroup aria-labelledby="demo-radio-buttons-group-label"   row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
+              <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
                 <FormControlLabel value="true" control={<Radio />} label="true" />
                 <FormControlLabel value="false" control={<Radio />} label="false" />
               </RadioGroup>
@@ -229,15 +202,10 @@ console.log(formData)
               {imgpre && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay} className={classes.setdisimage} />
-                  <Button
-                    // endIcon={<DeleteIcon />}
-                    className={classes.setdelbtn}
-                    onClick={handlemodel}
-                  >
+                  <Button className={classes.setdelbtn} onClick={handlemodel}>
                     Delete
                   </Button>
                 </Card>
-                
               )}
             </Grid>
           </Grid>

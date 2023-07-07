@@ -1,4 +1,4 @@
-import React, {useState , useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import Drawer from "../Mobile/Drawer";
 import Header from "../../common/Header";
 import useToggle from "../../common/Hooks/useToggle";
@@ -8,15 +8,16 @@ import BackToTop from "../../common/BackToTop";
 import Headers from "../../common/PageHeader";
 import Hireus from "../../common/Hireus";
 import AboutPart2 from "./AboutPart2";
-import Lottie from "lottie-react";
-import homedata from "./Aboutpath.json";
+// import Lottie from "lottie-react";
+// import homedata from "./Aboutpath.json";
 import axios from "../../common/Axios";
-
+import logo from '../../../assets/images/logo-removebg-preview.png'
 const IndexAbout = () => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);
   const [aboutList, setAboutList] = useState([]);
   const [dberr, setDberr] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchHiredata = () => {
     axios
@@ -27,6 +28,7 @@ const IndexAbout = () => {
       })
       .then((result) => {
         setAboutList(result.data.result);
+        cleartimeout();
       })
       .catch((err) => {
         setDberr(err.response.data.error);
@@ -37,9 +39,21 @@ const IndexAbout = () => {
     fetchHiredata();
   }, []);
 
-
+  const cleartimeout = () => {
+    setLoading(false)
+  }
   return (
-    <>
+    <>{loading && (
+      <div className="onloadpage" id="page-load">
+        <div className="loader-div d-flex justify-content-center ">
+          <div className="on-img">
+            <img src={logo} alt="loader" style={{width: "100px"}} />
+            <div class="loader">Loading ...</div>
+          </div>
+        </div>
+      </div>
+    )}
+    <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
       <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
       <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
       <Hireus value={cart} action={cartAction.toggle} />
@@ -51,13 +65,14 @@ const IndexAbout = () => {
         ]}
         className={"handlebredcrumb"}
       />
-      <About list={aboutList} error={dberr}/>
-      <AboutPart2 list={aboutList}/>
+      <About list={aboutList} error={dberr} />
+      <AboutPart2 list={aboutList} loding={cleartimeout}/>
       {/* <div className="container mt-3 mb-3">
         <Lottie animationData={homedata} />
       </div> */}
       <Footer />
       <BackToTop />
+      </div>
     </>
   );
 };

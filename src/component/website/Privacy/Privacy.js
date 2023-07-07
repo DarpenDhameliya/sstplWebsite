@@ -5,7 +5,7 @@ import bulletIcon from "../../../assets/images/icon/bullet1_list.webp";
 
 const Privacy = ({className}) => {
   useEffect(() => {
-    document.title = "SoftStorm - Privacy Policy";
+    document.title = "Privacy Policy | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, [])
   
   return (

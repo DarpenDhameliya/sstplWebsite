@@ -5,23 +5,18 @@ const initialState = {
   status: "idle",
   error:[]
 };
-
-export const CareerSlice = createAsyncThunk(
-    "CareerSlice",
+export const ServiceSlice = createAsyncThunk(
+    "ServiceSlice",
     async (payload, thunkAPI) => {
       try {
         const response = await axios({
-          method: "post",
-          url: 'authers/pdf',
-          data:payload,
+          method: "get",
+          url: `service/service_list`,
           headers:{
-            'Access-Control-Allow-Origin': '*' ,
-            'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data',
-
+            'Access-Control-Allow-Origin': '*'
           },
         });
-        let data = await response.data;  
+        let data = await response.data;
           return data;
 
       } catch (e) {
@@ -30,26 +25,26 @@ export const CareerSlice = createAsyncThunk(
     }
   );
 
-export const Careerslice = createSlice({
-  name: "Careerslice",
+export const Serviceslice = createSlice({
+  name: "Serviceslice",
   initialState,
 
   reducers: {
-    Careerstatus:(state) => {
+    Servicestatus:(state) => {
       state.status = 'idle'
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(CareerSlice.pending, (state) => {
+      .addCase(ServiceSlice.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(CareerSlice.fulfilled, (state, action) => {
+      .addCase(ServiceSlice.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.response = action.payload
         state.error = ''
       })
-      .addCase(CareerSlice.rejected, (state, action) => {
+      .addCase(ServiceSlice.rejected, (state, action) => {
         state.status = "failed";
         state.response = ''
         state.error = action.payload.response.data;
@@ -57,10 +52,9 @@ export const Careerslice = createSlice({
   },
 });
 
-export const { Careerstatus } = Careerslice.actions;
+export const { Servicestatus } = Serviceslice.actions;
 
-export const Careerstate = (state) => state.career;
+export const Servicestate = (state) => state.service;
 
-export default Careerslice.reducer;
-
+export default Serviceslice.reducer;
 

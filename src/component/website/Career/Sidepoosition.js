@@ -26,12 +26,10 @@ const Sidepoosition = () => {
     setFilename(file.name);
   };
 
-  console.log(mailstate.status)
   useEffect(() => {
     if (btnclick === true) {
       if (mailstate.status === "loading") {
       } else if (mailstate.status === "succeeded") {
-        console.log(mailstate)
         setName("");
         setEmail("");
         setPhone("");
@@ -66,7 +64,7 @@ const Sidepoosition = () => {
     }
 
     setBtnclick(true);
-    if (!file || !name || !email || !phone || !apply  || number_verify === false || email_verify === false) {
+    if (!file || !name || !email || !phone || !apply  || number_verify === false || email_verify === false || !isVerified) {
       if (!file) {
         error.file = "File Required !";
       }

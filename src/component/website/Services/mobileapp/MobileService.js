@@ -3,15 +3,17 @@ import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, services
 import SidePortion from "../SidePortion";
 import mobimg from "../../../../assets/images/services/mobile-app-development.webp";
 import axios from "../../../common/Axios";
-const MobileService = () => {
+import {Servicestate, Servicestatus} from "../../slice/Service";
+import { useSelector} from "react-redux";
+const MobileService = ({images , serviceContents}) => {
   const [tab, setTab] = useState("");
-  const [serviceContent, setServiceContent] = useState('')
-  const [image, setImage] = useState('')
-  const [dbFetcherr, setDbFetcherr] = useState('')
-
+  const [serviceContent, setServiceContent] = useState("");
+  const [image, setImage] = useState("");
+  const [dbFetcherr, setDbFetcherr] = useState("");
+  const states = useSelector(Servicestate);
 
   useEffect(() => {
-    document.title = "SoftStorm - Mobile Application Developer";
+    document.title = "Mobile Application Developer | SoftStorm - Custom Software Development Service Provider Company in Surat, India" ;
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2;
@@ -46,29 +48,51 @@ const MobileService = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          result.data.result.map((e) => {
-            if(e.heading === 'Mobile Application Developer'){
-              setImage(e.servicepageimg)
-              setServiceContent(e.content);
-            }
-          })
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
+  // useEffect(() => {
+  //   if (states.response.result === undefined) {
 
-    fetchServiceata();
-  }, [])
+  //   const fetchServiceata = () => {
+  //     axios
+  //       .get("service/service_list", {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       })
+  //       .then((result) => {
+  //         result.data.result.map((e) => {
+  //           if (e.heading === "Mobile Application Developer") {
+  //             setImage(e.servicepageimg);
+  //             setServiceContent(e.content);
+  //           }
+  //         });
+  //       })
+  //       .catch((err) => {
+  //         setDbFetcherr(err.response.data.error);
+  //       });
+  //   };
+
+  //   fetchServiceata();
+  // }
+  // }, []);
+
+  useEffect(() => {
+    if (states.response.result !== undefined) {
+      states.response.result.map((e) => {
+        if (e.heading === "Mobile Application Developer") {
+          setImage(e.servicepageimg);
+          setServiceContent(e.content);
+        }
+      });
+    } else {
+      if (images) {
+        setImage(images);
+      }
+      if (serviceContents) {
+        setServiceContent(serviceContents);
+      }
+    }
+   
+  });
 
   useEffect(() => {
     if (window.innerWidth < 1200 && window.innerWidth > 992) {

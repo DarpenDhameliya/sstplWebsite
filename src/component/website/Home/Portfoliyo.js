@@ -46,8 +46,6 @@ export default function Portfoliyo() {
       })
       .catch((err) => {
         setFetchErr(err.response.data.error);
-
-        // console.log(err);
       });
   };
 

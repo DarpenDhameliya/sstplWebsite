@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -9,17 +10,12 @@ import TextField from "@mui/material/TextField";
 import axios from "../../../common/Axios";
 import {useHistory, useParams} from "react-router-dom";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Collapse from "@mui/material/Collapse";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
 import Select from "react-select";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+
 const PortfolioEdit = () => {
   const [name, setName] = useState("");
   const [industry, setIndustry] = useState("");
@@ -33,15 +29,12 @@ const PortfolioEdit = () => {
   const [imgdisplay, setImgdisplay] = useState([]);
   const [slectImage, setSlectImage] = useState(null);
   const [imgpre, setImgpre] = useState(false);
-  const [containViewHome, setContainViewHome] = useState("");
   const [contentpositionview, setContentpositionview] = useState("");
   const [error, setError] = useState([]);
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState("");
 
   const [dbAdderr, setDbAdderr] = useState("");
-  const [finalsendImg, setFinalsendImg] = useState('')
-  const [dbeditfetch, setDbeditfetch] = useState([]);
-  const [getImage, setGetImage] = useState([])
+  const [dbeditfetch, setDbeditfetch] = useState("");
   const classes = useMuiStyle();
   const history = useHistory();
   var token = localStorage.getItem("ssAdmin");
@@ -57,7 +50,6 @@ const PortfolioEdit = () => {
           },
         })
         .then((result) => {
-          console.log(result.data.result)
           setSelectedValue(result.data.result.contentview);
           setContentpositionview(result.data.result.contentpositionview);
           setName(result.data.result.name);
@@ -68,7 +60,7 @@ const PortfolioEdit = () => {
           setTechnology(result.data.result.technology);
           setCategory(result.data.result.category);
           setSendImage(result.data.result.uploadimg);
-          setImgpre(true)
+          setImgpre(true);
         })
         .catch((err) => {
           setDbeditfetch(err.response.data.error);
@@ -76,7 +68,8 @@ const PortfolioEdit = () => {
     };
 
     fetchUpdatedata();
-  }, []);
+  }, [idparam.id , token]);
+
   var options = [
     {value: "web", label: "Web"},
     {value: "mobile", label: "Mobile"},
@@ -84,7 +77,6 @@ const PortfolioEdit = () => {
   ];
 
   const handlesenddata = (e) => {
-  
     let formData = new FormData();
     formData.append("name", name);
     formData.append("industry", industry);
@@ -94,10 +86,9 @@ const PortfolioEdit = () => {
     formData.append("technology", technology);
     formData.append("category", category);
     formData.append("contentview", selectedValue);
-    formData.append("uploadimg", imgdisplay.length > 0 ? image : sendImage );
+    formData.append("uploadimg", imgdisplay.length > 0 ? image : sendImage);
     formData.append("contentpositionview", contentpositionview);
-    console.log(formData)
-    if (!name || !industry || !team || !duration || !country || !technology || !category   || !contentpositionview) {
+    if (!name || !industry || !team || !duration || !country || !technology || !category || !contentpositionview) {
       if (!name) {
         error.name = "required !!";
       }
@@ -128,7 +119,6 @@ const PortfolioEdit = () => {
       setTimeout(() => {
         setError([]);
       }, 3000);
-      console.log(error);
     } else {
       axios
         .post(`portfolio/portfolio_update/${idparam.id}`, formData, {
@@ -149,7 +139,7 @@ const PortfolioEdit = () => {
           setSelectedValue("true");
           setContentpositionview("");
           handlemodel();
-          history.push("/admin/dashboard/portfolio");
+          history.push("/online-admin/dashboard/portfolio");
         })
         .catch((err) => {
           setDbAdderr(err.response.data.error);
@@ -183,7 +173,9 @@ const PortfolioEdit = () => {
         </div>
 
         <Paper className={classes.setProductpaper} elevation={5}>
-          {/* {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>} */}
+          {dbeditfetch && <Typography className={classes.seterrorlabel}>{dbeditfetch} </Typography>}
+          {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
+
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
               {/* <div className=""> */}
@@ -223,8 +215,7 @@ const PortfolioEdit = () => {
               {error.containPositionView && <Typography className={classes.seterrorlabel}>{error.containPositionView} </Typography>}
             </Grid>
             <Grid item xs={12} sm={6} className={classes.setinputlayout}>
-            
-              <RadioGroup aria-labelledby="demo-radio-buttons-group-label"  row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
+              <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
                 <FormControlLabel value="true" control={<Radio />} label="true" />
                 <FormControlLabel value="false" control={<Radio />} label="false" />
               </RadioGroup>

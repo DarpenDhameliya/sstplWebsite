@@ -67,8 +67,11 @@ export default function WhyChoseUs() {
               </div>
             </div>
             <div className="col-lg-6 col-md-11 col-sm-11">
-              <div className="softstormweb-right-chooseus- wow animated fadeInRight" data-aos="zoom-out-up" data-aos-duration="800" style={{minHeight: "530px", maxWidth: "100%"}}>
+              {/* <div className="softstormweb-right-chooseus- wow animated fadeInRight" data-aos="zoom-out-up" data-aos-duration="800" style={{minHeight: "530px", maxWidth: "100%"}}>
                 <img src={image1} alt="" style={{width: "100%", height: "500px", objectFit: "cover"}} />
+              </div> */}
+              <div className="image-container wow animated fadeInRight image-container" data-aos="zoom-out-up" data-aos-duration="800" >
+                <img src={image1} alt=""  />
               </div>
             </div>
           </div>

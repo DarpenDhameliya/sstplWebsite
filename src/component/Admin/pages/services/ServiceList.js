@@ -1,18 +1,14 @@
 import React, {useState, useEffect} from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
-import TextField from "@mui/material/TextField";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
@@ -48,7 +44,7 @@ const ServiceList = () => {
 
   var token = localStorage.getItem("ssAdmin");
   const handlesenddata = () => {
-    history.push("/admin/dashboard/serviceadd");
+    history.push("/online-admin/dashboard/serviceadd");
   };
 
   const fetchHiredata = () => {
@@ -71,7 +67,7 @@ const ServiceList = () => {
   }, []);
 
   const handleedit = (e) => {
-    history.push(`/admin/dashboard/serviceedit/${e}`);
+    history.push(`/online-admin/dashboard/serviceedit/${e}`);
   };
 
   const handledelete = (e) => {
@@ -86,7 +82,6 @@ const ServiceList = () => {
         fetchHiredata();
       })
       .catch((err) => {
-        console.log(err);
         setDeleterr(err.response.data.error);
       });
   };
@@ -151,7 +146,6 @@ const ServiceList = () => {
             </Table>
           </TableContainer>
         </Paper>
-        {/* )} */}
       </Container>
     </>
   );

@@ -34,7 +34,6 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
   },
@@ -42,14 +41,14 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 
 const CareerDataList = () => {
   const [careerList, setCareerList] = useState([]);
-  const [deleterr, setDeleterr] = useState([])
-  const [dbFetcherr, setDbFetcherr] = useState([])
+  const [deleterr, setDeleterr] = useState('');
+  const [dbFetcherr, setDbFetcherr] = useState('');
   const classes = useMuiStyle();
   const history = useHistory();
 
   var token = localStorage.getItem("ssAdmin");
   const handlesenddata = () => {
-    history.push("/admin/dashboard/careerdetailsadd");
+    history.push("/online-admin/dashboard/careerdetailsadd");
   };
 
   const fetchHiredata = () => {
@@ -57,7 +56,6 @@ const CareerDataList = () => {
       .get("career/careerdetails_list", {
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
         },
       })
       .then((result) => {
@@ -65,7 +63,6 @@ const CareerDataList = () => {
       })
       .catch((err) => {
         setDbFetcherr(err.response.data.error);
-        console.log(err);
       });
   };
 
@@ -74,27 +71,24 @@ const CareerDataList = () => {
   }, []);
 
   const handleedit = (e) => {
-console.log(e)
-history.push(`/admin/dashboard/careerdetailedit/${e}`)
-  }
+    history.push(`/online-admin/dashboard/careerdetailedit/${e}`);
+  };
 
   const handledelete = (e) => {
     axios
-    .delete(`career/careerdetails_delete/${e}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    })
-    .then((result) => {
-      fetchHiredata();
-    })
-    .catch((err) => {
-      console.log(err);
-      setDeleterr(err.response.data.error);
-    }
-    );
-  }
+      .delete(`career/careerdetails_delete/${e}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      })
+      .then((result) => {
+        fetchHiredata();
+      })
+      .catch((err) => {
+        setDeleterr(err.response.data.error);
+      });
+  };
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
@@ -108,16 +102,8 @@ history.push(`/admin/dashboard/careerdetailedit/${e}`)
         </div>
 
         <Paper className={classes.setProductpaper} elevation={5}>
-          {deleterr && (
-                  <Typography className={classes.seterrorlabel}>
-                    {deleterr}{" "}
-                  </Typography>
-                )}
-                {dbFetcherr && (
-                  <Typography className={classes.seterrorlabel}>
-                    {dbFetcherr}{" "}
-                  </Typography>
-                )}
+          {deleterr && <Typography className={classes.seterrorlabel}>{deleterr} </Typography>}
+          {dbFetcherr && <Typography className={classes.seterrorlabel}>{dbFetcherr} </Typography>}
           <TableContainer>
             <Table className={classes.settable} aria-label="simple table">
               <TableHead>
@@ -137,14 +123,12 @@ history.push(`/admin/dashboard/careerdetailedit/${e}`)
                   <TableCell align="center" className={classes.tableth}>
                     Position
                   </TableCell>
-
                   <TableCell align="center" className={classes.tableth}>
                     Front View
                   </TableCell>
                   <TableCell align="center" className={classes.tableth}>
                     Front ViewPosition
                   </TableCell>
-
                   <TableCell align="center" className={classes.tableth}>
                     Action
                   </TableCell>
@@ -169,7 +153,6 @@ history.push(`/admin/dashboard/careerdetailedit/${e}`)
                       <StyledTableCell className={classes.tabletd} align="center">
                         {e.position}
                       </StyledTableCell>
-
                       <StyledTableCell className={classes.tabletd} align="center">
                         {e.contentview === true ? "Yes" : "No"}
                       </StyledTableCell>
@@ -181,20 +164,12 @@ history.push(`/admin/dashboard/careerdetailedit/${e}`)
                         <div className={classes.seticondiv}>
                           <div>
                             <Tooltip title="Edit">
-                              <i
-                                aria-hidden="true"
-                                className={`${classes.seteditincon} fa fa-pencil fs-17`}
-                                onClick={() => handleedit(e._id)}
-                              />
+                              <i aria-hidden="true" className={`${classes.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e._id)} />
                             </Tooltip>
                           </div>
                           <div>
                             <Tooltip title="Remove">
-                              <i
-                                aria-hidden="true"
-                                 className={`${classes.setdeleteincon} fa fa-trash ml-1 fs-17`}
-                                onClick={() => handledelete(e._id)}
-                              />
+                              <i aria-hidden="true" className={`${classes.setdeleteincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
                             </Tooltip>
                           </div>
                         </div>
@@ -206,7 +181,6 @@ history.push(`/admin/dashboard/careerdetailedit/${e}`)
             </Table>
           </TableContainer>
         </Paper>
-        {/* )} */}
       </Container>
     </>
   );

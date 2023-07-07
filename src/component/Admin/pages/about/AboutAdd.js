@@ -189,7 +189,7 @@
 //           setSubvalheading11("");
 //           setSubvalheading12("");
 //           jsonRepresentation = "";
-//           history.push("/admin/dashboard/about");
+//           history.push("/online-admin/dashboard/about");
 //         })
 //         .catch((err) => {
 //           console.log(err);

@@ -4,15 +4,19 @@ import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../../common/lib/ServiceSticky";
 import deskimg from "../../../../assets/images/services/desktop-software-development.webp";
 import axios from "../../../common/Axios";
-const Desktipservice = () => {
+import {Servicestate, Servicestatus} from "../../slice/Service";
+import {useDispatch, useSelector} from "react-redux";
+
+const Desktipservice = ({images, serviceContents}) => {
   const [tab, setTab] = useState("");
   const [dbFetcherr, setDbFetcherr] = useState("");
   const [serviceContent, setServiceContent] = useState("");
-
+  const dispatch = useDispatch();
+  const states = useSelector(Servicestate);
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    document.title = "SoftStorm - Desktop Software Developer";
+    document.title = "Desktop Software Developer | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2; // Calculate the middle of the window
@@ -59,29 +63,49 @@ const Desktipservice = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          result.data.result.map((e) => {
-            if (e.heading === "Desktop Software Developement") {
-              setImage(e.servicepageimg);
-              setServiceContent(e.content);
-            }
-          });
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
+  // useEffect(() => {
+  //   if (states.response.result === undefined) {
+  //     const fetchServiceata = () => {
+  //       axios
+  //         .get("service/service_list", {
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //         })
+  //         .then((result) => {
+  //           result.data.result.map((e) => {
+  //             if (e.heading === "Desktop Software Developement") {
+  //               setImage(e.servicepageimg);
+  //               setServiceContent(e.content);
+  //             }
+  //           });
+  //         })
+  //         .catch((err) => {
+  //           setDbFetcherr(err.response.data.error);
+  //         });
+  //     };
 
-    fetchServiceata();
-  }, []);
+  //     fetchServiceata();
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    if (states.response.result !== undefined) {
+      states.response.result.map((e) => {
+        if (e.heading === "Desktop Software Developement") {
+          setImage(e.servicepageimg);
+          setServiceContent(e.content);
+        }
+      });
+    } else {
+      if (images) {
+        setImage(images);
+      }
+      if (serviceContents) {
+        setServiceContent(serviceContents);
+      }
+    }
+  });
 
   var filterdata;
   useEffect(() => {
@@ -89,6 +113,7 @@ const Desktipservice = () => {
     filterdata = data.split("#")[1];
     setTab(filterdata);
   }, []);
+
   useEffect(() => {
     if (window.innerWidth < 1200 && window.innerWidth > 992) {
       servicesticky3();

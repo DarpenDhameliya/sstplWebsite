@@ -9,10 +9,8 @@ import JoditEditor from "jodit-react";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import {useHistory, useParams} from "react-router-dom";
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import axios from "../../../common/Axios";
-import { useDispatch } from "react-redux";
 const AboutValueEdit = () => {
   const [error, setError] = useState([]);
   const [titleheading, setTitleheading] = useState("");
@@ -25,7 +23,6 @@ const AboutValueEdit = () => {
   const [dbFetcherr, setDbFetcherr] = useState('')
   const classes = useMuiStyle();
   const history = useHistory();
-  const dispatch = useDispatch();
   var token = localStorage.getItem("ssAdmin");
   var idparam = useParams();
   const fetchHiredata = () => {
@@ -104,13 +101,11 @@ const AboutValueEdit = () => {
           setContent("");
           setImage("");
 
-          history.push("/admin/dashboard/aboutvalue");
+          history.push("/online-admin/dashboard/aboutvalue");
         })
         .catch((err) => {
-          console.log(err);
           setDbAdderr(err.response.data.error);
         });
-        // dispatch(AboutValueSlice({heading: titleheading, value: content, file: image , "id":idparam.id}))
     }
   };
   return (
@@ -136,7 +131,6 @@ const AboutValueEdit = () => {
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay.length > 0 ? imgdisplay : image} className={classes.setdisimage} />
                   <Button
-                    // endIcon={<DeleteIcon />}
                     className={classes.setdelbtn}
                     onClick={handlemodel}
                   >

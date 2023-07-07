@@ -8,9 +8,9 @@ const About = ({className, list, error}) => {
   const [aboutcontent, setAboutcontent] = useState("");
 
   const videoRef = useRef(null);
-  // console.log(states.response);
   useEffect(() => {
     videoRef.current.play();
+    document.title = "About Us | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
   const handleclick = () => {
@@ -20,39 +20,35 @@ const About = ({className, list, error}) => {
     videoElement.play();
   };
 
-  useEffect(() => {
-    // Create or update the meta
-    document.title = "About Us";
-    const metaTitle = document.querySelector('meta[name="title"]');
-    // console.log(metaTitle)
-    if (metaTitle) {
-      metaTitle.setAttribute("content", "sstpl content");
-    }
-    // else {
-    //   const newMetaTitle = document.createElement('meta');
-    //   newMetaTitle.setAttribute('name', 'title');
-    //   newMetaTitle.setAttribute('content', 'sstpl content');
-    //   document.head.appendChild(newMetaTitle);
-    // }
+  // useEffect(() => {
+  //   // Create or update the meta
+  //   const metaTitle = document.querySelector('meta[name="title"]');
+  //   if (metaTitle) {
+  //     metaTitle.setAttribute("content", "sstpl content");
+  //   }
+  //   // else {
+  //   //   const newMetaTitle = document.createElement('meta');
+  //   //   newMetaTitle.setAttribute('name', 'title');
+  //   //   newMetaTitle.setAttribute('content', 'sstpl content');
+  //   //   document.head.appendChild(newMetaTitle);
+  //   // }
 
-    const metaDescription = document.querySelector('meta[name="description"]');
-    // console.log(metaDescription)
-    if (metaDescription) {
-      metaDescription.setAttribute("content", "Softstorm Techonosys dk");
-    }
-    // else {
-    //   const newMetaDescription = document.createElement('meta');
-    //   console.log(newMetaDescription)
-    //   newMetaDescription.setAttribute('name', 'description');
-    //   newMetaDescription.setAttribute('content', 'Softstorm Techonosys dk');
-    //   document.head.appendChild(newMetaDescription);
-    // }
-  }, []);
+  //   const metaDescription = document.querySelector('meta[name="description"]');
+  //   if (metaDescription) {
+  //     metaDescription.setAttribute("content", "Softstorm Techonosys dk");
+  //   }
+  //   // else {
+  //   //   const newMetaDescription = document.createElement('meta');
+  //   //   console.log(newMetaDescription)
+  //   //   newMetaDescription.setAttribute('name', 'description');
+  //   //   newMetaDescription.setAttribute('content', 'Softstorm Techonosys dk');
+  //   //   document.head.appendChild(newMetaDescription);
+  //   // }
+  // }, []);
   
 
 
   useEffect(() => {
-    console.log(error)
     if(list.length > 0) {
       list[0].aboutcontent.replace(/<\/?p>/g, "")
       setAboutheading(list[0].about);

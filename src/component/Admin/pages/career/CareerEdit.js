@@ -30,18 +30,40 @@ const CareerEdit = () => {
   const [responsibilitys8, setResponsibilitys8] = useState("");
   const [responsibilitys9, setResponsibilitys9] = useState("");
   const [responsibilitys10, setResponsibilitys10] = useState("");
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedValue, setSelectedValue] = useState("");
 
   const [dbeditfetch, setDbeditfetch] = useState("");
   const [error, setError] = useState([]);
   const [dbAdderr, setDbAdderr] = useState("");
   const classes = useMuiStyle();
-const history = useHistory();
+  const history = useHistory();
   var token = localStorage.getItem("ssAdmin");
+
+  const [inputs, setInputs] = useState([]);
+
+  // Function to handle input value changes
+  const handleInputChange = (index, event) => {
+    const newInputs = [...inputs];
+    newInputs[index] = event.target.value;
+    setInputs(newInputs);
+  };
+
+  // Function to add a new input field
+  const addInputField = () => {
+    setInputs([...inputs, ""]);
+  };
+
+  // Function to remove an input field
+  const removeInputField = (index) => {
+    const newInputs = [...inputs];
+    newInputs.splice(index, 1);
+    setInputs(newInputs);
+  };
+
+  // Function to handle form submission
 
   let idparam = useParams();
   useEffect(() => {
-    console.log(idparam.id);
     const fetchUpdatedata = () => {
       axios
         .get(`career/careerdetails_update_detail/${idparam.id}`, {
@@ -51,7 +73,6 @@ const history = useHistory();
           },
         })
         .then((result) => {
-          console.log(result.data.result);
           var parsedata;
           if (typeof result.data.result.responsibility === "string") {
             parsedata = JSON.parse(result.data.result.responsibility);
@@ -67,8 +88,8 @@ const history = useHistory();
           setQualifaction(result.data.result.qualification);
           setSelectedValue(result.data.result.contentview);
           setContainPositionView(result.data.result.contentpositionview);
+          setInputs(parsedata);
           parsedata.forEach((value, index) => {
-            console.log(value);
             if (index === 0) {
               setResponsibilitys1(value);
             } else if (index === 1) {
@@ -99,11 +120,10 @@ const history = useHistory();
 
     fetchUpdatedata();
   }, []);
-console.log(selectedValue)
   const handlesenddata = (e) => {
-    const filledStates = [responsibilitys1, responsibilitys2, responsibilitys3, responsibilitys4, responsibilitys5, responsibilitys6, responsibilitys7, responsibilitys8, responsibilitys9, responsibilitys10].filter((value) => !!value);
-    var jsonRepresentation = JSON.stringify(filledStates);
-
+    // const filledStates = [responsibilitys1, responsibilitys2, responsibilitys3, responsibilitys4, responsibilitys5, responsibilitys6, responsibilitys7, responsibilitys8, responsibilitys9, responsibilitys10].filter((value) => !!value);
+    let emptyrecord = inputs.filter((value) => value.trim() !== "");
+    var jsonRepresentation = JSON.stringify(emptyrecord);
     let formData = new FormData();
     formData.append("title", title);
     formData.append("location", location);
@@ -115,7 +135,7 @@ console.log(selectedValue)
     formData.append("contentpositionview", containPositionView);
     formData.append("responsibility", jsonRepresentation);
 
-    if (!title || !location || !experience || !description || !position || !qualifaction  || !containPositionView) {
+    if (!title || !location || !experience || !description || !position || !qualifaction || !containPositionView) {
       if (!title) {
         error.title = "Require !";
       }
@@ -171,7 +191,7 @@ console.log(selectedValue)
           setResponsibilitys9("");
           setResponsibilitys10("");
           jsonRepresentation = "";
-          history.push('/admin/dashboard/careerdetails')
+          history.push("/online-admin/dashboard/careerdetails");
         })
         .catch((err) => {
           setDbAdderr(err.response.data.error);
@@ -209,10 +229,7 @@ console.log(selectedValue)
               <Typography className={classes.setlabel}>Qualification :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} multiline placeholder="qualification" InputLabelProps={{shrink: false}} value={qualifaction} onChange={(e) => setQualifaction(e.target.value)} />
               {error.qualifaction && <Typography className={classes.seterrorlabel}>{error.qualifaction} </Typography>}
-              {/* <Typography className={classes.setlabel}>View in Front :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="view in front" InputLabelProps={{shrink: false}} value={containView} onChange={(e) => setContainView(e.target.value)} />
-              {error.containView && <Typography className={classes.seterrorlabel}>{error.containView} </Typography>} */}
-              <RadioGroup aria-labelledby="demo-radio-buttons-group-label"  row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
+              <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
                 <FormControlLabel value="true" control={<Radio />} label="true" />
                 <FormControlLabel value="false" control={<Radio />} label="false" />
               </RadioGroup>
@@ -229,7 +246,7 @@ console.log(selectedValue)
           <Grid item xs={12} sm={8} className={classes.setinputlayout}>
             <Paper className={classes.setProductpaper} elevation={5}>
               <Typography className={classes.setlabel}>Responsibilitys :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys1} onChange={(e) => setResponsibilitys1(e.target.value)} />
+              {/* <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys1} onChange={(e) => setResponsibilitys1(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys2} onChange={(e) => setResponsibilitys2(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys3} onChange={(e) => setResponsibilitys3(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys4} onChange={(e) => setResponsibilitys4(e.target.value)} />
@@ -238,7 +255,20 @@ console.log(selectedValue)
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys7} onChange={(e) => setResponsibilitys7(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys8} onChange={(e) => setResponsibilitys8(e.target.value)} />
               <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys9} onChange={(e) => setResponsibilitys9(e.target.value)} />
-              <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys10} onChange={(e) => setResponsibilitys10(e.target.value)} />
+              <TextField id="outlined-basic" size="small" variant="outlined" className={`${classes.settextfield} mt-1 mb-1`} multiline placeholder="responsibilitys" InputLabelProps={{shrink: false}} value={responsibilitys10} onChange={(e) => setResponsibilitys10(e.target.value)} /> */}
+              {inputs.map((value, index) => (
+                <div key={index} style={{width: "100%"}} className="d-flex justify-content-between align-items-center">
+                  <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "95%"}} placeholder="responsibilitys" className={`${classes.settextfield} mt-1 mb-1`} multiline InputLabelProps={{shrink: false}} value={value} onChange={(event) => handleInputChange(index, event)} />
+
+                  <i aria-hidden="true" className={` fa fa-trash ml-1 fs-17`} onClick={() => removeInputField(index)} />
+                </div>
+              ))}
+              <Button variant="outlined" color="primary" onClick={addInputField}>
+                Add Input Field
+              </Button>
+              {/* <Button variant="contained" color="primary" type="submit">
+                Submit
+              </Button> */}
             </Paper>
           </Grid>
         </Grid>

@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import {Link, useHistory} from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import useStyleAuth from "./AuthuStyle";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Typography from "@mui/material/Typography";
@@ -19,9 +19,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [passvisible, setPassvisible] = useState(false);
   const [error, setError] = useState([]);
-  const [dberror, setDberror] = useState([]);
+  const [dberror, setDberror] = useState();
   const classes = useStyleAuth();
   const history = useHistory();
+
+useEffect(() => {
+  let data = localStorage.getItem("ssAdmin");
+  console.log(data)
+  localStorage.removeItem("ssAdmin");
+}, [])
+
+
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       handlesenddata();
@@ -50,12 +58,11 @@ const Login = () => {
           password,
         })
         .then((result) => {
-          console.log(result);
           const secretKey = process.env.REACT_APP_DECRYPT_KEY;
           localStorage.setItem("ssAdmin", result.data.result);
           const ciphertext = CryptoJS.AES.encrypt(result.data.result, secretKey).toString();
           localStorage.setItem("ssAdminen", ciphertext);
-          history.push("/admin/dashboard/career");
+          history.push("/online-admin/dashboard/career");
         })
         .catch((error) => {
           setDberror(error.response.data.error);

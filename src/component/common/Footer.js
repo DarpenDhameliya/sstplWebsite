@@ -26,7 +26,6 @@ export default function Footer(className) {
   const states = useSelector(Contactusstate);
   const captchaRef = useRef(null)
   const notify = useCallback(() => {
-    console.log('footer')
     toast.success("Email Sent Successfully..", {
       autoClose: 2000,
     });
@@ -189,14 +188,14 @@ export default function Footer(className) {
                           href="tel:+91261-3560756"
                           className="pl-0 pb-1 d-flex align-items-center"
                         >
-                          <i className="fa fa-phone-alt mr-2" />
+                          <i className="fa fa-phone mr-2" />
                           <div className="ml-1">+91261-3560756</div>
                         </a>
                         <a
                           href="tel:+919099919947"
                           className="pl-0 d-flex align-items-center"
                         >
-                          <i className="fa fa-phone-alt mr-2" />
+                          <i className="fa fa-phone mr-2" />
                           <div className="ml-1">+91 90999 19947</div>
                         </a>
                       </div>
@@ -474,21 +473,21 @@ export default function Footer(className) {
               <div>
                 <Link
                   className="footer_conditions  mr-2 ml-2"
-                  to="/terms"
+                  to="/terms-and-conditions"
                 >
                   Terms and Condition
                 </Link>
                 <span> | </span>
                 <Link
                   className="footer_conditions mr-2 ml-2"
-                  to="/privacy"
+                  to="/privacy-policy"
                 >
                   Privacy Policy
                 </Link>
                 <span> | </span>
                 <Link
                   className="footer_conditions mr-2 ml-2"
-                  to="/returnpolicy"
+                  to="/return-policy"
                 >
                   Return Policy
                 </Link>

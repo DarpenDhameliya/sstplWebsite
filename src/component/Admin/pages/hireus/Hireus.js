@@ -1,25 +1,17 @@
 import React, {useState, useEffect} from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
-import TextField from "@mui/material/TextField";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
-// import EditIcon from "@mui/icons-material/Edit";
-// import DeleteIcon from "@mui/icons-material/Delete";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
-// import ClearIcon from "@mui/icons-material/Clear";
 import Pagination from "@mui/material/Pagination";
 import { useHistory } from 'react-router-dom';
 const StyledTableCell = styled(TableCell)(({theme}) => ({
@@ -47,9 +39,9 @@ const Hireus = () => {
   const [perpage, setPerPage] = useState("10");
   const [page, setPage] = useState("1");
   const [count, setCount] = useState("");
-  const [dbDeleteerr, setDbDeleteerr] = useState([]);
+  const [dbDeleteerr, setDbDeleteerr] = useState('');
+  const [fetcherr, setFetcherr] = useState('')
   const classes = useMuiStyle();
-const history = useHistory();
   var token = localStorage.getItem("ssAdmin");
 
   const fetchHiredata = (pagenumber, pagesize) => {
@@ -68,7 +60,7 @@ const history = useHistory();
         setCount(result.data.totalPages);
       })
       .catch((err) => {
-        console.log(err);
+        setFetcherr(err.response.data.error)
       });
   };
 
@@ -89,11 +81,9 @@ const history = useHistory();
         },
       })
       .then((result) => {
-        console.log(result.data);
         fetchHiredata(page, perpage);
       })
       .catch((err) => {
-        console.log(err);
         setDbDeleteerr(err.response.data.error);
       });
   };
@@ -107,6 +97,8 @@ const history = useHistory();
         </div>
         <Paper className={classes.setProductpaper} elevation={5}>
           {dbDeleteerr && <Typography className={classes.seterrorlabel}>{dbDeleteerr} </Typography>}
+          {fetcherr && <Typography className={classes.seterrorlabel}>{fetcherr} </Typography>}
+
           <TableContainer>
             <Table className={classes.settable} aria-label="simple table">
               <TableHead>

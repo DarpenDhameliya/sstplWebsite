@@ -4,13 +4,15 @@ import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../../common/lib/ServiceSticky";
 import webimg from "../../../../assets/images/services/web-app-development.webp";
 import axios from "../../../common/Axios";
-
-const WebService = () => {
+import {Servicestate, Servicestatus} from "../../slice/Service";
+import {useDispatch, useSelector} from "react-redux";
+const WebService = ({images, serviceContents}) => {
   const [tab, setTab] = useState("");
-  const [serviceContent, setServiceContent] = useState('')
-  const [dbFetcherr, setDbFetcherr] = useState('')
-  const [image, setImage] = useState('')
-
+  const [serviceContent, setServiceContent] = useState("");
+  const [dbFetcherr, setDbFetcherr] = useState("");
+  const [image, setImage] = useState("");
+  const dispatch = useDispatch();
+  const states = useSelector(Servicestate);
   // const ref1 = useRef(null);
   // const ref2 = useRef(null);
   // const ref3 = useRef(null);
@@ -57,23 +59,43 @@ const WebService = () => {
   // }, []);
 
   useEffect(() => {
-    document.title = "SoftStorm - Web Application Developer";
-  
+    if (states.response.result !== undefined) {
+      states.response.result.map((e) => {
+        if (e.heading === "Web Application Development") {
+          console.log("=======", e);
+          setImage(e.servicepageimg);
+          setServiceContent(e.content);
+        }
+      });
+    } else {
+      if (images) {
+        setImage(images);
+      }
+      if (serviceContents) {
+        setServiceContent(serviceContents);
+      }
+    }
+  });
+
+  // active header code
+  useEffect(() => {
+    document.title = "Web Application Developer | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
+
     const handleScroll = () => {
-      const middle = window.innerHeight / 2; 
-  
+      const middle = window.innerHeight / 2;
+
       const div1 = document.getElementById("div1");
       const div2 = document.getElementById("div2");
       const div3 = document.getElementById("div3");
       const div4 = document.getElementById("div4");
       const div5 = document.getElementById("div5");
-  
+
       const div1IsMiddle = isElementInMiddle(div1, middle);
       const div2IsMiddle = isElementInMiddle(div2, middle);
       const div3IsMiddle = isElementInMiddle(div3, middle);
       const div4IsMiddle = isElementInMiddle(div4, middle);
       const div5IsMiddle = isElementInMiddle(div5, middle);
-  
+
       if (div1IsMiddle) {
         setTab("php");
       } else if (div2IsMiddle) {
@@ -88,43 +110,32 @@ const WebService = () => {
         setTab("");
       }
     };
-  
+
     const isElementInMiddle = (element, middle) => {
       const rect = element.getBoundingClientRect();
       return rect.top <= middle && rect.bottom >= middle;
     };
-  
+
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  useEffect(() => {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          result.data.result.map((e) => {
-            if(e.heading === 'Web Application Development'){
-              setImage(e.servicepageimg)
-              setServiceContent(e.content);
-            }
-          })
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
 
-    fetchServiceata();
-  }, [])
-  
+  // useEffect(() => {
+  //   if (states.response.result === undefined) {
+  //     console.log(images)
+  //     if (images) {
+  //       setImage(images);
+  //     }
+  //     if (serviceContents) {
+  //       setServiceContent(serviceContents);
+  //     }
+  //   }
+  // });
 
+  // header small big code
   useEffect(() => {
     if (window.innerWidth < 1200 && window.innerWidth > 992) {
       servicesticky3();

@@ -6,47 +6,16 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import {TableContainer} from "@mui/material";
-import {styled} from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
-import {current} from "@reduxjs/toolkit";
-// import Textarea from '@mui/joy/Textarea';
 
-const StyledTableCell = styled(TableCell)(({theme}) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({theme}) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
 const Profile_forggetpas = () => {
   const [currentpass, setCurrentpass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [conformPass, setConformPass] = useState("");
   const [dberr, setDberr] = useState("");
-  const [error, setError] = useState([])
-  const [dbresponce, setDbresponce] = useState('')
+  const [error, setError] = useState([]);
+  const [dbresponce, setDbresponce] = useState("");
   const classes = useMuiStyle();
 
   const handlesenddata = (e) => {
@@ -55,25 +24,25 @@ const Profile_forggetpas = () => {
     formData.append("current_password", currentpass);
     formData.append("new_password", newPass);
 
-    if(!currentpass || !newPass || !conformPass || newPass !== conformPass){
-      if(!currentpass) {
-       error.currentpass = "Current Password is Required";
+    if (!currentpass || !newPass || !conformPass || newPass !== conformPass) {
+      if (!currentpass) {
+        error.currentpass = "Current Password is Required";
       }
-      if(!newPass) {
-       error.newPass = "New Password is Required";
+      if (!newPass) {
+        error.newPass = "New Password is Required";
       }
-      if(!conformPass){
-       error.conformPass = "Conform Password is Required";
+      if (!conformPass) {
+        error.conformPass = "Conform Password is Required";
       }
-      if(newPass !== conformPass){
+      if (newPass !== conformPass) {
         error.passmismatch = "new password and conform password is not match";
       }
 
-      setError({...error , [e.target.name]:e.target.value})
+      setError({...error, [e.target.name]: e.target.value});
       setTimeout(() => {
         setError([]);
-      },3000)
-    }else {
+      }, 3000);
+    } else {
       axios
         .post(`forget/forgetpass`, formData, {
           headers: {
@@ -83,16 +52,15 @@ const Profile_forggetpas = () => {
           },
         })
         .then((result) => {
-          setDbresponce('password updated successfully')
-          setCurrentpass('')
-          setNewPass('')
-          setConformPass('')
+          setDbresponce("password updated successfully");
+          setCurrentpass("");
+          setNewPass("");
+          setConformPass("");
           setTimeout(() => {
-            setDbresponce('')
+            setDbresponce("");
           }, 3000);
-       })
+        })
         .catch((err) => {
-          console.log(err);
           setDberr(err.response.data.error);
           setTimeout(() => {
             setDberr([]);
@@ -111,7 +79,7 @@ const Profile_forggetpas = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={5} className={classes.setinputlayout}>
             <Paper className={classes.setProductpaper} elevation={5}>
-            {dbresponce && <Typography className={classes.seterrorlabel}>{dbresponce} </Typography>}
+              {dbresponce && <Typography className={classes.seterrorlabel}>{dbresponce} </Typography>}
               {dberr && <Typography className={classes.seterrorlabel}>{dberr} </Typography>}
               <Typography className={classes.setlabel}>Current Password :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="current password" InputLabelProps={{shrink: false}} value={currentpass} onChange={(e) => setCurrentpass(e.target.value)} />
@@ -124,9 +92,9 @@ const Profile_forggetpas = () => {
               {error.conformPass && <Typography className={classes.seterrorlabel}>{error.conformPass} </Typography>}
               {error.passmismatch && <Typography className={classes.seterrorlabel}>{error.passmismatch} </Typography>}
               <div className="mt-2 d-flex justify-content-end">
-              <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
-                update
-              </Button>
+                <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
+                  update
+                </Button>
               </div>
             </Paper>
           </Grid>
