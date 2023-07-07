@@ -12,11 +12,10 @@ const WorlIndex = () => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  });
+
+  const cleartimeout = () => {
+    setLoading(false)
+  }
   return (
     <>
       {loading && (
@@ -40,7 +39,7 @@ const WorlIndex = () => {
             {link: "/ourwork", title: "Portfolio"},
           ]}
         />
-        <Portfoliyo />
+        <Portfoliyo loding={cleartimeout}/>
         <Footer />
         <BackToTop />
       </div>
