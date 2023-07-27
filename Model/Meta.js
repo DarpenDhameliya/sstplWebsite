@@ -4,22 +4,26 @@ const { Schema } = mongoose
 const MetaSchema = new Schema({
   url:{
     type:String,
-    require:true
+    required:true
   },
   title:{
     type:String,
-    require:true
+    required:true
   },
   description:{
     type:String,
-    require:true
+    required:true
   },
   key:{
     type:String,
-    require:true
+    required:true
   },
   schema:{
     type:Schema.Types.Mixed,
+  },
+  date: {
+    type: Date,
+		default: Date.now
   }
 }) 
 

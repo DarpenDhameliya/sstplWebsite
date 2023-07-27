@@ -29,6 +29,10 @@ const CareerDetailsSchema = new Schema({
   contentpositionview: {
     type: String,
   },
+  date: {
+    type: Date,
+		default: Date.now
+  }
 });
 
 const careerdetails = mongoose.model("careerdetails", CareerDetailsSchema);

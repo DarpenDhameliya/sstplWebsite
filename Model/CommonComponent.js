@@ -26,9 +26,10 @@ const CommonComponentSchema = new Schema({
   corevalueconten:{
     type: Schema.Types.Mixed,
   },
-  // multicorevalueconten:{
-  //   type: Schema.Types.Mixed,
-  // }
+  date: {
+    type: Date,
+		default: Date.now
+  }
 
 })
 

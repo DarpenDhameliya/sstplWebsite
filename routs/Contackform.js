@@ -6,20 +6,43 @@ const {errormessage, successmessage, successmessageValidate} = require("../respo
 const Authenticate = require("../Middleware/Authenticate");
 const path = require("path");
 const fs = require("fs");
+const Captchacheck = require("../Middleware/CaptchCheck");
 
-router.post("/contackusform", async (req, res) => {
+router.post("/contackusform", Captchacheck , async (req, res) => {
   const {fname, lname, email, phone, textarea} = req.body;
-
+  
   var PASS = process.env.MAIL_PASS;
   var ID = process.env.MAIL_ID;
   let error = {};
   let filePath = "./mail-responce/Mail_send_res.html";
-  var html = fs.readFileSync(filePath, "utf8")
+  var html = fs.readFileSync(filePath, "utf8");
+  var userid = req.header("Userdetails");
+  const userAgent = req.headers["user-agent"];
+  var browserName = "Unknown";
+  var browserVersion = "";
+  
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+  if (userAgent.includes("MSIE")) {
+    browserName = "Internet Explorer";
+    browserVersion = userAgent.split("MSIE")[1].split(";")[0].trim();
+  } else if (userAgent.includes("Chrome")) {
+    browserName = "Chrome";
+    browserVersion = userAgent.split("Chrome")[1].split(" ")[0].trim();
+  } else if (userAgent.includes("Firefox")) {
+    browserName = "Firefox";
+    browserVersion = userAgent.split("Firefox")[1].split(" ")[0].trim();
+  } else if (userAgent.includes("Safari")) {
+    browserName = "Safari";
+    browserVersion = userAgent.split("Version")[1].split(" ")[0].trim();
+  }
 
+  var fullBrowserName = browserName + " " + browserVersion;
+
+  var formattedContent = textarea.replace(/\n/g,' ');
   try {
     if (!fname || !email || !phone || !lname) {
-      if (!fname) {
-        error.fname = "Name require";
+      if (!fname) {  
+        error.fname = "Name require";  
       }
       if (!lname) {
         error.sub = "Subject require";
@@ -30,21 +53,31 @@ router.post("/contackusform", async (req, res) => {
       if (!phone) {
         error.phone = "phone no. require";
       }
-      console.log(error);
       return res.status(402).send(error);
     } else {
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: ID,
-        pass: PASS,
-      },
-    });
-    let mailOptions = {
-      // to: ID,
-      to: "darpen.sstpl@gmail.com",
-      subject: lname ? lname : textarea,
-      html: `<table>
+      contact.create({
+        name: fname,
+        email: email,
+        contact: phone,
+        subject: lname,
+        help: formattedContent,
+        ip: userid,
+        browsernm_browsever: fullBrowserName,
+        mobile: isMobile,
+      });
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: ID,
+          pass: PASS,
+        },
+      });
+
+      let mailOptions = {
+        // to: ID,
+        to:'darpen.sstpl@gmail.com',
+        subject: lname ? `Contact Us ${lname}` : `Contact Us ${textarea}`,
+        html: `<pre><table>
           <tr>
           <th>First name</th>
           <td>${fname}</td>
@@ -58,110 +91,81 @@ router.post("/contackusform", async (req, res) => {
            <td>${email}</td>
           </tr>
           <tr>
-            <th>phone</th>  
+            <th>phone</th>
             <td>${phone}</td>
           </tr>
           <tr>
-            <th>Apply for</th>
+            <th>Messager</th>
             <td>${textarea}</td>
           </tr>
-          </table>`,
-    };
+          </table>
+          </pre>`,
+      };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return res.status(402).json({err: error});
-      } else {
-        return res.status(200).send("email send succfully");
-      }
-    });
-
-    let mailOptionsUser = {
-      to: email,
-      subject: "Conformation of your inquiry",
-      // html: `<table>
-      // <tr>
-      // <th>First name</th>
-      // <td>${fname}</td>
-      // </tr>
-      // <tr>
-      //  <th>email</th>
-      //  <td>${email}</td>
-      // </tr>
-      // <tr>
-      //   <th>phone</th>
-      //   <td>${phone}</td>
-      // </tr>
-      // <tr>
-      //   <th>Technology</th>
-      //   <td>${lname}</td>
-      // </tr>
-
-      // <tr>
-      //   <th>work Details</th>
-      //   <td>${textarea}</td>
-      // </tr>
-      // </table>`,
-      html: html,
-    };
-
-    transporter.sendMail(mailOptionsUser);
-
-    contact
-      .create({
-        name: fname,
-        email: email,
-        contact: phone,
-        subject: lname,
-        help: textarea,
-      })
-      .then((result) => {
-        return res.status(200).send(successmessage(["Add Successfully"]));
-      })
-      .catch((error) => {
-        return res.status(500).send(errormessage(error));
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          return res.status(402).json({err: error});
+        } else {
+          return res.status(200).send("email send succfully");
+        }
       });
+
+      let mailOptionsUser = {
+        to: email,
+        subject: "Conformation of your inquiry",
+        html: html,
+      };
+
+      transporter.sendMail(mailOptionsUser);
+
+     
     }
   } catch (error) {
-    console.log(error);
-    return res.status(500).send(error);
+    console.log(error)
+    return res.status(500).json(errormessage(error));
   }
 });
 
 router.post("/contact-list", Authenticate, async (req, res) => {
-  let {page_size, pageNumber} = req.body;
-
-  const skip = (pageNumber - 1) * page_size;
-  const totalRecords = await contact.countDocuments({});
-  const totalPages = Math.ceil(totalRecords / page_size);
-  console.log(totalRecords);
-  let senddata = [];
-  contact
-    .find({}, {__v: 0})
-    .skip(skip)
-    .limit(page_size) // per page_size
-    .then((result) => {
-      return res.status(200).send(successmessageValidate(result, totalPages));
-    })
-    .catch((error) => {
-      console.log(error);
-      return res.status(500).send(errormessage(error));
-    });
+  try {
+    let {page_size, pageNumber} = req.body;
+    const skip = (pageNumber - 1) * page_size;
+    const totalRecords = await contact.countDocuments({});
+    const totalPages = Math.ceil(totalRecords / page_size);
+    let senddata = [];
+    contact
+      .find({}, {__v: 0})
+      .skip(skip)
+      .sort({ date: -1 })
+      .limit(page_size) // per page_size
+      .then((result) => {
+        return res.status(200).send(successmessageValidate(result, totalPages));
+      })
+      .catch((error) => {
+        return res.status(500).json(errormessage(error));
+      });
+  } catch (error) {
+    return res.status(500).json(errormessage(error));
+  }
 });
 
 router.delete("/contact_delete/:id", Authenticate, (req, res) => {
-  let id = req.params.id;
-  if (!id) {
-    return res.status(402).send(errormessage("Required"));
-  } else {
-    contact
-      .findByIdAndDelete(id)
-      .then((result) => {
-        return res.status(200).send(successmessage("Delete Successfully"));
-      })
-      .catch((err) => {
-        return res.status(402).send(errormessage(err));
-      });
+  try {
+    let id = req.params.id;
+    if (!id) {
+      return res.status(402).json(errormessage("Required"));
+    } else {
+      contact
+        .findByIdAndDelete(id)
+        .then((result) => {
+          return res.status(200).send(successmessage("Delete Successfully"));
+        })
+        .catch((err) => {
+          return res.status(402).json(errormessage(err));
+        });
+    }
+  } catch (error) {
+    return res.status(500).json(errormessage(error));
   }
 });
 

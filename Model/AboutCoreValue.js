@@ -4,16 +4,20 @@ const {Schema} = mongoose;
 const AboutCoreValueSchema = new Schema({
   heading: {
     type: String,
-    require: true,
+    required: true,
   },
   content: {
     type: String,
-    require: true,
+    required: true,
   },
   file: {
     type: String,
-    require: true,
+    required: true,
   },
+  date: {
+    type: Date,
+		default: Date.now
+  }
  
 });
 

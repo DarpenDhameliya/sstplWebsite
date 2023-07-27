@@ -31,7 +31,12 @@ const PortfolioSchema = new Schema({
   },
   uploadimg:{
     type: String,
+  },
+  date: {
+    type: Date,
+		default: Date.now
   }
+
 });
 
 const portfolio = mongoose.model("portfolio", PortfolioSchema);

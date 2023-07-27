@@ -4,19 +4,19 @@ const {Schema} = mongoose;
 const TestimonialSchema = new Schema({
   image: {
     type: String,
-    require: true,
+    required: true,
   },
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   position: {
     type: String,
-    require: true,
+    required: true,
   },
   discription: {
     type: String,
-    require: true,
+    required: true,
   },
   contentview: {
     type: Boolean,
@@ -24,6 +24,10 @@ const TestimonialSchema = new Schema({
   contentpositionview: {
     type: String,
   },
+  date: {
+    type: Date,
+		default: Date.now
+  }
 });
 
 const testimonial = mongoose.model("testimonial", TestimonialSchema);

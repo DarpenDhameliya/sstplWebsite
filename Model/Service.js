@@ -4,7 +4,7 @@ const {Schema} = mongoose;
 const ServiceSchema = new Schema({
   heading: {
     type: String,
-    require: true,
+    required: true,
   },
   fontimgid: {
     type: Number,
@@ -21,6 +21,10 @@ const ServiceSchema = new Schema({
   content: {
     type: String,
   },
+  date: {
+    type: Date,
+		default: Date.now
+  }
 });
 
 const service = mongoose.model("service", ServiceSchema);

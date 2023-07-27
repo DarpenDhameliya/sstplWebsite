@@ -4,22 +4,35 @@ const {Schema} = mongoose;
 const ContactSchema = new Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   email: {
     type: String,
-    require: true,
+    required: true,
   },
   contact: {
     type: String,
-    require: true,
+    required: true,
   },
   subject: {
     type: String,
-    require: true,
+    required: true,
   },
   help: {
     type: String,
+  },
+  ip: {
+    type: String,
+  },
+  browsernm_browsever: {
+    type: String,
+  },
+  mobile: {
+    type:Boolean
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 

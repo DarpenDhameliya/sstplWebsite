@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
-const PortfolioCategoryList  = new Schema({
+const PortfolioCategoryList = new Schema({
   category: {
-    type: [String],
-    default: ['Web', 'mobile' , 'desktop']
-  }
+    type: Array,
+    default: [
+      {value: "webapplication", label: "Web"},
+      {value: "mobileapplication", label: "Mobile"},
+      {value: "desktopsoftware", label: "Desktop"},
+    ],
+  },
 });
 
 const portfoliocategorylist = mongoose.model("portfoliocategorylist", PortfolioCategoryList);

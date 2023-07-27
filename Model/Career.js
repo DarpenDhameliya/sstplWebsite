@@ -4,23 +4,36 @@ const {Schema} = mongoose;
 const CareerSchema = new Schema({
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   email: {
     type: String,
-    require: true,
+    required: true,
   },
   contact: {
     type: String,
-    require: true,
+    required: true,
   },
   apply_for: {
     type: String,
-    require: true,
+    required: true,
   },
   resume: {
     type: String,
   },
+  ip: {
+    type: String,
+  },
+  browsernm_browsever: {
+    type: String,
+  },
+  mobile: {
+    type:Boolean
+  },
+  date: {
+    type: Date,
+		default: Date.now
+  }
 });
 
 const Career = mongoose.model("career", CareerSchema);
