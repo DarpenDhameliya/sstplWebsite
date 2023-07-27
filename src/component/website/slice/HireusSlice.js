@@ -15,10 +15,12 @@ export const HireusSlice = createAsyncThunk(
         const response = await axios({
           method: "post",
           url: '/hire/hireus',
-          data:payload,
-          headers:{
+          data:payload.json1,
+          headers:{ 
             'Access-Control-Allow-Origin': '*' ,
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Userdetails':payload.json2.ipAddress,
+            "captchaToken":payload.json2.captchres,
           },
         });
         let data = await response.data;  

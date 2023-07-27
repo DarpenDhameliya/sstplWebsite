@@ -9,8 +9,8 @@ import Enterpriseservice from "./Enterpriseservice";
 import BackToTop from "../../../common/BackToTop";
 import Hireus from "../../../common/Hireus";
 import logo from "../../../../assets/images/logo-removebg-preview.png";
-import { Servicestate } from "../../slice/Service";
-import { useSelector } from "react-redux";
+import {Servicestate} from "../../slice/Service";
+import {useSelector} from "react-redux";
 import axios from "../../../common/Axios";
 const Enterpriseserviceindex = () => {
   const [drawer, drawerAction] = useToggle(false);
@@ -18,11 +18,11 @@ const Enterpriseserviceindex = () => {
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");
   const [image, setImage] = useState("");
-  const [dbFetcherr, setDbFetcherr] = useState('')
+  const [dbFetcherr, setDbFetcherr] = useState("");
   const states = useSelector(Servicestate);
 
   useEffect(() => {
-    if(states.response.result !== undefined){
+    if (states.response.result !== undefined) {
       setTimeout(() => {
         setLoading(false);
       }, 500);
@@ -30,30 +30,30 @@ const Enterpriseserviceindex = () => {
   });
   useEffect(() => {
     if (states.response.result === undefined) {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          result.data.result.map((e) => {
-            if(e.heading === 'Enterprice Services'){
-              setImage(e.servicepageimg)
-              setServiceContent(e.content);
-            }
-            setLoading(false)
+      const fetchServiceata = () => {
+        axios
+          .get("service/service_list", {
+            headers: {
+              "Content-Type": "application/json",
+            },
           })
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
+          .then((result) => {
+            result.data.result.map((e) => {
+              if (e.heading === "Enterprice Services") {
+                setImage(e.servicepageimg);
+                setServiceContent(e.content);
+              }
+            });
+            setLoading(false);
+          })
+          .catch((err) => {
+            setDbFetcherr(err.response.data.error);
+          });
+      };
+      fetchServiceata();
+    }
+  }, []);
 
-    fetchServiceata();
-  }
-  }, [])
   return (
     <>
       {loading && (
@@ -61,15 +61,16 @@ const Enterpriseserviceindex = () => {
           <div className="loader-div d-flex justify-content-center ">
             <div className="on-img">
               <img src={logo} alt="loader" style={{width: "100px"}} />
-              <div class="loader">Loading ...</div>
+              <div className="loader">Loading ...</div>
             </div>
           </div>
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Hireus value={cart} action={cartAction.toggle} />
+        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
+        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
+
         <Headers
           title="ENTERPRISE SERVICES"
           breadcrumb={[
@@ -78,9 +79,10 @@ const Enterpriseserviceindex = () => {
             {link: "/enterprise", title: "Enterprise Servise"},
           ]}
         />
-        <Enterpriseservice images={image} serviceContents={serviceContent}/>
-        <Footer />
-        <BackToTop />
+        <Enterpriseservice images={image} serviceContents={serviceContent} />
+
+        {/* <Footer />
+        <BackToTop /> */}
       </div>
     </>
   );

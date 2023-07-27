@@ -27,7 +27,8 @@ import mob25 from '../../../assets/images/technology/vue_js.webp'
 import mob26 from '../../../assets/images/technology/angular.webp'
 import mob27 from '../../../assets/images/technology/typescript.webp'
 import mob28 from '../../../assets/images/technology/cloudservices.webp'
-
+import shapeTwo from "../../../assets/images/shape/shape-10.webp";
+import shapeThree from "../../../assets/images/shape/shape-3.webp";
 
 // import sponserShape from '../../assets/images/sponser-shape.png';
 // import sponserShape from '../../assets/images/single-post/SSTPL-500.png';
@@ -101,6 +102,12 @@ export default function Technology() {
       {/* <div className="sponser-shape">
         <img src={sponserShape} alt="" />
       </div> */}
+       <div className="technoshap-shape-1">
+          <img src={shapeTwo} alt="" />
+        </div>
+        <div className="technoshap-shape-2">
+          <img src={shapeThree} alt="" />
+        </div>
     </section>
   </>)
 }

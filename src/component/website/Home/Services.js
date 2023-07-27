@@ -6,9 +6,13 @@ import digimg from "../../../assets/images/services/digital-marketing.webp";
 import graimg from "../../../assets/images/services/web-graphic-designing.webp";
 import entimg from "../../../assets/images/services/enterprise-services.webp";
 import {HashLink} from "react-router-hash-link";
+// import shapeTwo from '../../../assets/images/code.png'
+// import shapeThree  from '../../../assets/images/code.png'
+import shapeTwo from "../../../assets/images/shape/shape-10.webp";
+import shapeThree from "../../../assets/images/shape/shape-3.webp";
 import axios from "../../common/Axios";
-import { Servicestate ,Servicestatus ,ServiceSlice} from "../slice/Service";
-import { useSelector , useDispatch} from "react-redux";
+import {Servicestate, Servicestatus, ServiceSlice} from "../slice/Service";
+import {useSelector, useDispatch} from "react-redux";
 
 export default function Services(className) {
   const [serviceList, setServiceList] = useState([]);
@@ -26,7 +30,7 @@ export default function Services(className) {
   const [webgraapptitle, setWebgraapptitle] = useState("");
   const [erpapptitle, setErpapptitle] = useState("");
   const states = useSelector(Servicestate);
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   if (states.response.result === undefined) {
   //   const fetchServiceata = () => {
@@ -64,9 +68,9 @@ const dispatch = useDispatch();
   }, []);
 
   useEffect(() => {
-      console.log(states.response.result)
-      if (states.status === "loading") {
-      } else if (states.status === "succeeded") {
+    if (states.status === "loading") {
+    } else if (states.status === "succeeded") {
+      if (states.response.result.length > 0) {
         setWebappimg(states.response.result[0].frontpageimg);
         setWebapptitle(states.response.result[0].heading);
         setMobppimg(states.response.result[1].frontpageimg);
@@ -79,17 +83,18 @@ const dispatch = useDispatch();
         setWebgraapptitle(states.response.result[4].heading);
         setErpappimg(states.response.result[5].frontpageimg);
         setErpapptitle(states.response.result[5].heading);
-        dispatch(Servicestatus());
-      } else if (states.status === "failed") {
-        setDbFetcherr(states.error);
-        setTimeout(() => {
-          setDbFetcherr([]);
-        }, 3000);
-        dispatch(Servicestatus());
-      } else {
       }
-  })
-  
+      dispatch(Servicestatus());
+    } else if (states.status === "failed") {
+      setDbFetcherr(states.error);
+      setTimeout(() => {
+        setDbFetcherr([]);
+      }, 3000);
+      dispatch(Servicestatus());
+    } else {
+    }
+  });
+
   return (
     <>
       <section className={`softstormweb-service handleservice pt-70 pb-80 ${className}`} id="service">
@@ -108,7 +113,7 @@ const dispatch = useDispatch();
               <div className="row">
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="400">
-                    <div className="imagedisplay" style={{minHeight: "230px", background: "#ddf4fd"}}>
+                    <div className="imagedisplay" style={{minHeight: "240px", background: "#ddf4fd"}}>
                       <img src={webappimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
@@ -135,7 +140,7 @@ const dispatch = useDispatch();
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-2 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="800">
-                    <div className="imagedisplay" style={{minHeight: "230px", background: "#fedaf4"}}>
+                    <div className="imagedisplay" style={{minHeight: "240px", background: "#fedaf4"}}>
                       <img src={mobappimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
@@ -156,7 +161,7 @@ const dispatch = useDispatch();
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-3 mt-30 wow animated fadeInUp " data-aos="fade-right" data-aos-duration="1000">
-                    <div className="imagedisplay" style={{minHeight: "230px", background: "#cadcff"}}>
+                    <div className="imagedisplay" style={{minHeight: "240px", background: "#cadcff"}}>
                       <img src={deskappimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
@@ -186,7 +191,7 @@ const dispatch = useDispatch();
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-4 mt-30 wow animated fadeInUp  " data-aos="fade-right" data-aos-duration="400">
-                    <div className="imagedisplay" style={{minHeight: "230px", background: "#ffbc8d"}}>
+                    <div className="imagedisplay" style={{minHeight: "240px", background: "#ffbc8d"}}>
                       <img src={digitalappimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
@@ -210,7 +215,7 @@ const dispatch = useDispatch();
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-5 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="800">
-                    <div className="imagedisplay" style={{minHeight: "230px", background: "#97adff"}}>
+                    <div className="imagedisplay" style={{minHeight: "240px", background: "#97adff"}}>
                       <img src={webgraappimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
@@ -240,7 +245,7 @@ const dispatch = useDispatch();
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-6 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="1000">
-                    <div className="imagedisplay" style={{minHeight: "230px", background: "#98e7d4"}}>
+                    <div className="imagedisplay" style={{minHeight: "240px", background: "#98e7d4"}}>
                       <img src={erpappimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
@@ -262,6 +267,12 @@ const dispatch = useDispatch();
               </div>
             </div>
           </div>
+        </div>
+        <div className="service-shape-1">
+          <img src={shapeTwo} alt="" />
+        </div>
+        <div className="service-shape-2">
+          <img src={shapeThree} alt="" />
         </div>
       </section>
     </>

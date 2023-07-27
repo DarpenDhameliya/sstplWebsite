@@ -7,20 +7,20 @@ import Footer from "../../common/Footer";
 import Servicecontent from "./Servicecontent";
 import BackToTop from "../../common/BackToTop";
 import Hireus from "../../common/Hireus";
-import { useEffect , useState} from "react";
-import logo from '../../../assets/images/logo-removebg-preview.png'
-import { Servicestate } from "../slice/Service";
-import { useSelector } from "react-redux";
+import {useEffect, useState} from "react";
+import logo from "../../../assets/images/logo-removebg-preview.png";
+import {Servicestate} from "../slice/Service";
+import {useSelector} from "react-redux";
 import axios from "../../common/Axios";
 const Serviceindex = () => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
   const states = useSelector(Servicestate);
-const [dbFetcherr, setDbFetcherr] = useState('')
-const [list, setList] = useState([])
+  const [dbFetcherr, setDbFetcherr] = useState("");
+  const [list, setList] = useState([]);
   useEffect(() => {
-    if(states.response.result !== undefined){
+    if (states.response.result !== undefined) {
       setTimeout(() => {
         setLoading(false);
       }, 500);
@@ -38,9 +38,8 @@ const [list, setList] = useState([])
             },
           })
           .then((result) => {
-            console.log(result)
-            setList(result.data.result)
-            setLoading(false)
+            setList(result.data.result);
+            setLoading(false);
             // setWebappimg(result.data.result[0].frontpageimg);
             // setWebapptitle(result.data.result[0].heading);
             // setMobppimg(result.data.result[1].frontpageimg);
@@ -68,15 +67,16 @@ const [list, setList] = useState([])
           <div className="loader-div d-flex justify-content-center ">
             <div className="on-img">
               <img src={logo} alt="loader" style={{width: "100px"}} />
-              <div class="loader">Loading ...</div>
+              <div className="loader">Loading ...</div>
             </div>
           </div>
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Hireus value={cart} action={cartAction.toggle} />
+        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
+        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
+
         <Headers
           title="Our Service"
           breadcrumb={[
@@ -85,10 +85,10 @@ const [list, setList] = useState([])
           ]}
           className={"handlebredcrumb"}
         />
-        <Servicecontent list={list}/>
-        <Footer />
-        <BackToTop />
-        </div>
+        <Servicecontent list={list} />
+        {/* <Footer />
+        <BackToTop /> */}
+      </div>
     </>
   );
 };

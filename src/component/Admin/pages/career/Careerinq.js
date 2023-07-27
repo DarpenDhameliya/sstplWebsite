@@ -14,7 +14,10 @@ import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
 import Pagination from "@mui/material/Pagination";
-
+import {useHistory} from "react-router-dom";
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+import logo from '../../../../assets/images/logo-removebg-preview.png'
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -37,40 +40,57 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 const Career = () => {
   const classes = useMuiStyle();
   const [careerList, setCareerList] = useState([]);
-  const [perpage, setPerPage] = useState("10");
   const [page, setPage] = useState("1");
+  const [rowperpage, setRowperpage] = useState("10");
   const [count, setCount] = useState("");
+
   const [dbDeleteerr, setDbDeleteerr] = useState("");
   const [dberror, setDberror] = useState("");
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+
 
   var token = localStorage.getItem("ssAdmin");
-  const fetchHiredata = (pagenumber, pagesize) => {
+
+  const fetchHiredata = (pagenumber, rowperpage) => {
+    setLoading(true)
     const formData = new FormData();
     formData.append("pageNumber", pagenumber);
-    formData.append("page_size", pagesize);
+    formData.append("page_size", rowperpage);
     axios
-      .post("authers/career-list", formData, {
+    .get(`authers/career-list/${pagenumber}/${rowperpage}`, {
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+
           Authorization: token,
         },
       })
       .then((result) => {
+        setLoading(false);
         setCount(result.data.totalPages);
         setCareerList(result.data.result);
       })
       .catch((err) => {
+        setLoading(false);
+        if (err.response.status === 402) {
+          localStorage.removeItem("ssAdmin");
+          history.push("/online-admin");
+        }
         setDberror(err.response.data.error);
+        setTimeout(() => {
+          setDberror('')
+        }, 3000);
       });
   };
 
   useEffect(() => {
-    fetchHiredata(1, perpage);
+    fetchHiredata(1, rowperpage);
   }, []);
 
   const handleChange = (e, value) => {
     setPage(value);
-    fetchHiredata(value, perpage);
+    fetchHiredata(value, rowperpage);
   };
   const downloadPdf = (e) => {
     const pdfPath = e;
@@ -82,8 +102,10 @@ const Career = () => {
   };
 
   const handledelete = (e) => {
-    const formData = new FormData();
-    formData.append("filename", e.resume);
+    setLoading(true);
+
+    // const formData = new FormData();
+    // formData.append("filename", e.resume);
     axios
       .delete(`authers/career_delete/${e.id}`, {
         headers: {
@@ -92,15 +114,38 @@ const Career = () => {
         },
       })
       .then((result) => {
-        fetchHiredata(page, perpage);
+        setLoading(false);
+        fetchHiredata(page, rowperpage);
       })
       .catch((err) => {
+        setLoading(false);
         setDbDeleteerr(err.response.data.error);
+        setTimeout(() => {
+          setDbDeleteerr('')
+        }, 3000);
       });
   };
+
+  const handlesetRowperpageChange = (e) => {
+    const onpage = e.target.value;
+    setRowperpage(e.target.value);
+    setPage(1);
+    fetchHiredata('1', onpage);
+};
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+          {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             Career
@@ -127,6 +172,15 @@ const Career = () => {
                   </TableCell>
                   <TableCell align="center" className={classes.tableth}>
                     Apply For
+                  </TableCell>
+                  <TableCell align="center" className={classes.tableth}>
+                    Ip Address
+                  </TableCell>
+                  <TableCell align="center" className={classes.tableth}>
+                    Operater
+                  </TableCell>
+                  <TableCell align="center" className={classes.tableth}>
+                    Browser & version
                   </TableCell>
                   <TableCell align="center" className={classes.tableth}>
                     view Resume
@@ -156,11 +210,20 @@ const Career = () => {
                         {e.apply_for}
                       </StyledTableCell>
                       <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
+                        {e.ip}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
+                      {e.mobile === true ? 'Mobile' : 'Desktop'}
+                      </StyledTableCell>
+                      <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
+                        {e.browsernm_browsever}
+                      </StyledTableCell>
+
+                      <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
                         <Button variant="contained" className={classes.setloginbutton} onClick={() => downloadPdf(e.resumedownload)}>
                           Resume
                         </Button>
                       </StyledTableCell>
-
                       <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
                         <Tooltip title="Remove">
                           <i className="fa fa-trash" aria-hidden="true" onClick={() => handledelete(e)} />
@@ -171,11 +234,32 @@ const Career = () => {
                 })}
               </TableBody>
             </Table>
-            <div className="d-flex justify-content-end mt-3">
+
+            <div className={classes.setpaginationdiv}>
+              <div className={classes.setrowperpage}>
+                <Typography className={classes.setlabelrow}>
+                  Rows per page :
+                </Typography>
+                <TextField
+                  size="small"
+                  select
+                  className={classes.textField}
+                  value={rowperpage}
+                  onChange={handlesetRowperpageChange}
+                  InputLabelProps={{ shrink: false }}
+                  margin="normal"
+                  variant="outlined"
+                >
+                  <MenuItem value="10">10</MenuItem>
+                    <MenuItem value="20">20.</MenuItem>
+                    <MenuItem value="50">50.</MenuItem>
+                </TextField>
+              </div>
               <Pagination count={count} page={page} onChange={handleChange} variant="outlined" shape="rounded" color="primary" />
             </div>
           </TableContainer>
         </Paper>
+      </div>
       </Container>
     </>
   );

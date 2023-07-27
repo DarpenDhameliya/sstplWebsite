@@ -2,10 +2,13 @@ import React from "react";
 import shape13 from "../../../assets/images/shape/shape-13.webp";
 import shape14 from "../../../assets/images/shape/shape-14.webp";
 import shape15 from "../../../assets/images/shape/shape-15.webp";
-import image1 from "../../../assets/images/wcu.webp";
-import mob1 from "../../../assets/images/icon/customer-support.webp";
-import mob2 from "../../../assets/images/icon/customized-solution.webp";
-import mob3 from "../../../assets/images/icon/latest-technologies.webp";
+import image1 from "../../../assets/images/Group 16 (7).png";
+// import mob1 from "../../../assets/images/icon/customer-support.webp";
+// import mob2 from "../../../assets/images/icon/customized-solution.webp";
+// import mob3 from "../../../assets/images/icon/latest-technologies.webp";
+import mob1 from "../../../assets/images/customize solution png.png";
+import mob2 from "../../../assets/images/CUSTOMER SUPPORT.png";
+import mob3 from "../../../assets/images/LATEST TECHNOLOGY.png";
 
 export default function WhyChoseUs() {
   return (
@@ -31,7 +34,7 @@ export default function WhyChoseUs() {
                       className="fa fa-clock fa-regular icon_whychoos"
                       aria-hidden="true"
                     /> */}
-                    <img src={mob2} alt="imagheader" />
+                    <img src={mob1} alt="imagheader" style={{maxWidth:"67px"}}/>
                   </div>
                   <div>
                     <h4 className="handleh4_whycgoos">Customize Solution</h4>
@@ -44,7 +47,7 @@ export default function WhyChoseUs() {
                       className="fa fa-thumbs-up icon_whychoos"
                       aria-hidden="true"
                     ></i> */}
-                    <img src={mob1} alt="imagheader" draggable="false" />
+                    <img src={mob2} alt="imagheader" draggable="false" style={{maxWidth:"67px"}}/>
                   </div>
                   <div>
                     <h4 className="handleh4_whycgoos">Customer Support</h4>
@@ -57,7 +60,7 @@ export default function WhyChoseUs() {
                       className="fa fa-globe icon_whychoos"
                       aria-hidden="true"
                     ></i> */}
-                    <img src={mob3} alt="imagheader" />
+                    <img src={mob3} alt="imagheader" style={{maxWidth:"67px"}}/>
                   </div>
                   <div>
                     <h4 className="handleh4_whycgoos">Latest Technologies</h4>
@@ -70,8 +73,8 @@ export default function WhyChoseUs() {
               {/* <div className="softstormweb-right-chooseus- wow animated fadeInRight" data-aos="zoom-out-up" data-aos-duration="800" style={{minHeight: "530px", maxWidth: "100%"}}>
                 <img src={image1} alt="" style={{width: "100%", height: "500px", objectFit: "cover"}} />
               </div> */}
-              <div className="image-container wow animated fadeInRight image-container" data-aos="zoom-out-up" data-aos-duration="800" >
-                <img src={image1} alt=""  />
+              <div className="image-container wow animated fadeInRight image-container d-flex justify-content-center" data-aos="zoom-out-up" data-aos-duration="800" >
+                <img src={image1} alt=""  className="handlewcu" />
               </div>
             </div>
           </div>
@@ -79,9 +82,9 @@ export default function WhyChoseUs() {
         <div className="features-shape-1">
           <img src={shape13} alt="" />
         </div>
-        <div className="features-shape-2">
+        {/* <div className="features-shape-2">
           <img src={shape14} alt="" />
-        </div>
+        </div> */}
         <div className="features-shape-3">
           <img src={shape15} alt="" />
         </div>

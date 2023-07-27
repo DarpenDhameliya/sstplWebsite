@@ -261,14 +261,14 @@ const Servicecontent = ({className, list}) => {
           </div> */}
           <div className="row">
             <div className="col-md-12 col-sm-12 " style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row">
-                <div className="col-lg-5 col-md-6">
+              <div className="row maintainpd_service">
+                <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
                   <div onClick={() => handlepagechange("web-application-developement")}>
                     <img src={webappimg} alt="webimg" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
-                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service">
+                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
                   <div>
                     <h4 className="mb-3">{webapptitle}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
@@ -306,8 +306,8 @@ const Servicecontent = ({className, list}) => {
               </div>
             </div>
             <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row">
-                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box">
+              <div className="row maintainpd_service">
+                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
                   <div>
                     <h4 className="mb-3">{mobapptitle}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
@@ -332,7 +332,7 @@ const Servicecontent = ({className, list}) => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-5 col-md-6">
+                <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   <div onClick={() => handlepagechange("mobile-application-developement")}>
                     <img src={mobappimg} alt="webimg" className="maintainright_img" />
                   </div>
@@ -340,14 +340,14 @@ const Servicecontent = ({className, list}) => {
               </div>
             </div>
             <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row">
-                <div className="col-lg-5 col-md-6">
+              <div className="row maintainpd_service">
+                <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
                   <div onClick={() => handlepagechange("web-application-developement")}>
                     <img src={deskappimg} alt="Desktop" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
-                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service">
+                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
                   <div>
                     <h4 className="mb-3">{deskapptitle}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
@@ -390,8 +390,8 @@ const Servicecontent = ({className, list}) => {
               </div>
             </div>
             <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row">
-                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box">
+              <div className="row maintainpd_service">
+                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
                   <div>
                     <h4 className="mb-3">{digitalapptitle}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
@@ -421,7 +421,7 @@ const Servicecontent = ({className, list}) => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-5 col-md-6">
+                <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   <div onClick={() => handlepagechange("mobile-application-developement")}>
                     <img src={digitalappimg} alt="webimg" className="maintainright_img" />
                   </div>
@@ -429,14 +429,14 @@ const Servicecontent = ({className, list}) => {
               </div>
             </div>
             <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row">
-                <div className="col-lg-5 col-md-6">
+              <div className="row maintainpd_service">
+                <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
                   <div onClick={() => handlepagechange("web-application-developement")}>
                     <img src={webgraappimg} className="maintainleft_img" alt="graphic poster" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
-                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service">
+                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
                   <div>
                     <h4 className="mb-3">{webgraapptitle}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
@@ -480,8 +480,8 @@ const Servicecontent = ({className, list}) => {
               </div>
             </div>
             <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row">
-                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box">
+              <div className="row maintainpd_service">
+                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
                   <div>
                     <h4 className="mb-3">{erpapptitle}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
@@ -506,7 +506,7 @@ const Servicecontent = ({className, list}) => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-5 col-md-6">
+                <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   <div onClick={() => handlepagechange("mobile-application-developement")}>
                     <img src={erpappimg} alt="webimg" className="maintainright_img" />
                   </div>

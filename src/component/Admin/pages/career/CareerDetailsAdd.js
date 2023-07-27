@@ -11,6 +11,7 @@ import {useHistory} from "react-router-dom";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import logo from '../../../../assets/images/logo-removebg-preview.png'
 
 const CareerDetailsAdd = () => {
   const [title, setTitle] = useState("");
@@ -31,6 +32,12 @@ const CareerDetailsAdd = () => {
   const [responsibilitys9, setResponsibilitys9] = useState("");
   const [responsibilitys10, setResponsibilitys10] = useState("");
   const [selectedValue, setSelectedValue] = useState("true");
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false)
+  }, 500);
+
   const [error, setError] = useState([]);
   const [inputs, setInputs] = useState([]);
 
@@ -85,6 +92,8 @@ const CareerDetailsAdd = () => {
         setError([]);
       }, 3000);
     } else {
+      setLoading(true);
+
       axios
         .post("career/careerdetails_add", formData, {
           headers: {
@@ -112,11 +121,14 @@ const CareerDetailsAdd = () => {
           setResponsibilitys8("");
           setResponsibilitys9("");
           setResponsibilitys10("");
+          setLoading(false);
+
           setInputs([]);
           // jsonRepresentation = "";
           history.push("/online-admin/dashboard/careerdetails");
         })
         .catch((err) => {
+          setLoading(false);
           setDbAdderr(err.response.data.error);
         });
     }
@@ -142,6 +154,17 @@ const CareerDetailsAdd = () => {
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+      {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             Add Career Details
@@ -154,7 +177,7 @@ const CareerDetailsAdd = () => {
               <Typography className={classes.setlabel}>Title :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="title" InputLabelProps={{shrink: false}} value={title} onChange={(e) => setTitle(e.target.value)} />
               {error.title && <Typography className={classes.seterrorlabel}>{error.title} </Typography>}
-              <Typography className={classes.setlabel}>Loction :</Typography>
+              <Typography className={classes.setlabel}>Job Loction :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="location" InputLabelProps={{shrink: false}} value={location} onChange={(e) => setLocation(e.target.value)} />
               {error.location && <Typography className={classes.seterrorlabel}>{error.location} </Typography>}
               <Typography className={classes.setlabel}>Experience :</Typography>
@@ -202,12 +225,13 @@ const CareerDetailsAdd = () => {
                   <i aria-hidden="true" className={` fa fa-trash ml-1 fs-17`} onClick={() => removeInputField(index)} />
                 </div>
               ))}
-              <Button variant="outlined" color="primary" onClick={addInputField}>
-                Add Input Field
+              <Button variant="outlined" color="primary" className="mt-3" onClick={addInputField}>
+                Add  responsibilitys
               </Button>
             </Paper>
           </Grid>
         </Grid>
+        </div>
       </Container>
     </>
   );

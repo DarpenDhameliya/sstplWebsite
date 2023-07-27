@@ -17,6 +17,9 @@ import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
+import {useHistory} from "react-router-dom";
+import logo from "../../../../assets/images/logo-removebg-preview.png";
+
 // import Textarea from '@mui/joy/Textarea';
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
@@ -55,8 +58,11 @@ const MetaList = () => {
   const [dberr, setDberr] = useState("");
   const [dbAdderr, setDbAdderr] = useState("");
   const [dbDeleteerr, setDbDeleteerr] = useState("");
-  const [fetcherr, setFetcherr] = useState('')
+  const [loading, setLoading] = useState(true);
+
+  const [fetcherr, setFetcherr] = useState("");
   const classes = useMuiStyle();
+  const history = useHistory();
 
   var token = localStorage.getItem("ssAdmin");
   const fetchHiredata = () => {
@@ -64,14 +70,22 @@ const MetaList = () => {
       .get("meta/meta_list", {
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+
           Authorization: token,
         },
       })
       .then((result) => {
+        setLoading(false);
         seMetaList(result.data.result);
       })
       .catch((err) => {
-        setFetcherr(err.response.data.error)
+        setLoading(false);
+        if (err.response.status === 402) {
+          localStorage.removeItem("ssAdmin");
+          history.push("/online-admin");
+        }
+        setFetcherr(err.response.data.error);
       });
   };
 
@@ -155,6 +169,8 @@ const MetaList = () => {
         }
         setError({...error, [e.target.name]: e.target.value});
       } else {
+        setLoading(true);
+
         const formData = new FormData();
         formData.append("url", upurl);
         formData.append("title", uptitle);
@@ -172,8 +188,10 @@ const MetaList = () => {
           })
           .then((result) => {
             fetchHiredata();
+            setLoading(false);
           })
           .catch((err) => {
+            setLoading(false);
             setDberr(err.response.data.error);
             setTimeout(() => {
               setDberr([]);
@@ -209,6 +227,8 @@ const MetaList = () => {
         }
         setError({...error, [e.target.name]: e.target.value});
       } else {
+        setLoading(true);
+
         let formData = new FormData();
         formData.append("url", url);
         formData.append("title", title);
@@ -226,8 +246,10 @@ const MetaList = () => {
           })
           .then((result) => {
             fetchHiredata();
+            setLoading(false);
           })
           .catch((err) => {
+            setLoading(false);
             setDbAdderr(err.response.data.error);
           });
       }
@@ -235,6 +257,8 @@ const MetaList = () => {
   };
 
   const handledelete = (e) => {
+    setLoading(true);
+
     axios
       .delete(`meta/meta_delete/${e}`, {
         headers: {
@@ -244,146 +268,160 @@ const MetaList = () => {
       })
       .then((result) => {
         fetchHiredata();
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         setDbDeleteerr(err.response.data.error);
       });
   };
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
-        <div className={classes.setpageheading}>
-          <Typography variant="h4" gutterBottom className={classes.setheading}>
-            Meta
-          </Typography>
-        </div>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4} className={classes.setinputlayout}>
-            <Paper className={classes.setProductpaper} elevation={5}>
-              {dberr && <Typography className={classes.seterrorlabel}>{dberr} </Typography>}
-              {fetcherr && <Typography className={classes.seterrorlabel}>{fetcherr} </Typography>}
-              {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
-              {dbDeleteerr && <Typography className={classes.seterrorlabel}>{dbDeleteerr} </Typography>}
-              <Typography className={classes.setlabel}>URL :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="url" InputLabelProps={{shrink: false}} value={upid ? upurl : url} onChange={upid ? handleupurl : handleurl} />
-              {error.upurl && <Typography className={classes.seterrorlabel}>{error.upurl} </Typography>} {error.url && <Typography className={classes.seterrorlabel}>{error.url} </Typography>} <Typography className={classes.setlabel}>Title :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="title" InputLabelProps={{shrink: false}} value={upid ? uptitle : title} onChange={upid ? handleuptitle : handletitle} />
-              {error.uptitle && <Typography className={classes.seterrorlabel}>{error.upurl} </Typography>} {error.title && <Typography className={classes.seterrorlabel}>{error.url} </Typography>} <Typography className={classes.setlabel}>Description :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="description" InputLabelProps={{shrink: false}} value={upid ? updescription : description} onChange={upid ? handleupdescription : handledescription} />
-              {error.updescription && <Typography className={classes.seterrorlabel}>{error.updescription} </Typography>} {error.description && <Typography className={classes.description}>{error.url} </Typography>} <Typography className={classes.setlabel}>Key :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="key" InputLabelProps={{shrink: false}} value={upid ? upkey : key} onChange={upid ? handleupkey : handlekey} />
-              {error.upkey && <Typography className={classes.seterrorlabel}>{error.upkey} </Typography>} {error.key && <Typography className={classes.seterrorlabel}>{error.key} </Typography>} <Typography className={classes.setlabel}>Schema :</Typography>
-              <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} multiline placeholder="sc" rows={3} rowsMax={5} InputLabelProps={{shrink: false}} value={upid ? upschema : schema} onChange={upid ? handleupschema : handleschema} />
-              {error.upschema && <Typography className={classes.seterrorlabel}>{error.upschema} </Typography>} {error.schema && <Typography className={classes.seterrorlabel}>{error.schema} </Typography>}{" "}
-              <div className={classes.setsendbutton}>
-                {upid && (
-                  <Button className={classes.setstateclear} onClick={handleeditdataremove}>
-                    clear
-                  </Button>
-                )}
-                {upid ? (
-                  <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
-                    update
-                  </Button>
-                ) : (
-                  <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
-                    Add
-                  </Button>
-                )}
+        {loading.toString() === "true" && (
+          <div className="onloadpage" id="page-load">
+            <div className="loader-div d-flex justify-content-center ">
+              <div className="on-img">
+                <img src={logo} alt="loader" style={{width: "100px"}} />
+                <div className="loader">Loading ...</div>
               </div>
-            </Paper>
-          </Grid>
-          {/* {courieLIst.length > 0 && ( */}
-          <Grid item xs={12} sm={8} className={classes.setinputlayout}>
-            <Paper className={classes.setProductpaper} elevation={5}>
-              {/* {deleteCou && (
+            </div>
+          </div>
+        )}
+        <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
+          <div className={classes.setpageheading}>
+            <Typography variant="h4" gutterBottom className={classes.setheading}>
+              Meta
+            </Typography>
+          </div>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4} className={classes.setinputlayout}>
+              <Paper className={classes.setProductpaper} elevation={5}>
+                {dberr && <Typography className={classes.seterrorlabel}>{dberr} </Typography>}
+                {fetcherr && <Typography className={classes.seterrorlabel}>{fetcherr} </Typography>}
+                {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
+                {dbDeleteerr && <Typography className={classes.seterrorlabel}>{dbDeleteerr} </Typography>}
+                <Typography className={classes.setlabel}>URL :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="url" InputLabelProps={{shrink: false}} value={upid ? upurl : url} onChange={upid ? handleupurl : handleurl} />
+                {error.upurl && <Typography className={classes.seterrorlabel}>{error.upurl} </Typography>} {error.url && <Typography className={classes.seterrorlabel}>{error.url} </Typography>} <Typography className={classes.setlabel}>Title :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="title" InputLabelProps={{shrink: false}} value={upid ? uptitle : title} onChange={upid ? handleuptitle : handletitle} />
+                {error.uptitle && <Typography className={classes.seterrorlabel}>{error.upurl} </Typography>} {error.title && <Typography className={classes.seterrorlabel}>{error.url} </Typography>} <Typography className={classes.setlabel}>Description :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="description" InputLabelProps={{shrink: false}} value={upid ? updescription : description} onChange={upid ? handleupdescription : handledescription} />
+                {error.updescription && <Typography className={classes.seterrorlabel}>{error.updescription} </Typography>} {error.description && <Typography className={classes.description}>{error.url} </Typography>} <Typography className={classes.setlabel}>Key :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} placeholder="key" InputLabelProps={{shrink: false}} value={upid ? upkey : key} onChange={upid ? handleupkey : handlekey} />
+                {error.upkey && <Typography className={classes.seterrorlabel}>{error.upkey} </Typography>} {error.key && <Typography className={classes.seterrorlabel}>{error.key} </Typography>} <Typography className={classes.setlabel}>Schema :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} multiline placeholder="sc" rows={3} rowsMax={5} InputLabelProps={{shrink: false}} value={upid ? upschema : schema} onChange={upid ? handleupschema : handleschema} />
+                {error.upschema && <Typography className={classes.seterrorlabel}>{error.upschema} </Typography>} {error.schema && <Typography className={classes.seterrorlabel}>{error.schema} </Typography>}{" "}
+                <div className={classes.setsendbutton}>
+                  {upid && (
+                    <Button className={classes.setstateclear} onClick={handleeditdataremove}>
+                      clear
+                    </Button>
+                  )}
+                  {upid ? (
+                    <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
+                      update
+                    </Button>
+                  ) : (
+                    <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
+                      Add
+                    </Button>
+                  )}
+                </div>
+              </Paper>
+            </Grid>
+            {/* {courieLIst.length > 0 && ( */}
+            <Grid item xs={12} sm={8} className={classes.setinputlayout}>
+              <Paper className={classes.setProductpaper} elevation={5}>
+                {/* {deleteCou && (
                   <Typography className={classes.seterrorlabel}>
                     {deleteCou}{" "}
                   </Typography>
                 )} */}
-              <TableContainer>
-                <Table className={classes.settable} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell align="center" className={classes.tableth}>
-                        No.
-                      </TableCell>
-                      <TableCell align="center" className={classes.tableth}>
-                        URL
-                      </TableCell>
-                      <TableCell align="center" className={classes.tableth}>
-                        Title
-                      </TableCell>
-                      <TableCell align="center" className={classes.tableth}>
-                        Description
-                      </TableCell>
-                      <TableCell align="center" className={classes.tableth}>
-                        Key
-                      </TableCell>
-                      {/* <TableCell align="center" className={classes.tableth}>
+                <TableContainer>
+                  <Table className={classes.settable} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="center" className={classes.tableth}>
+                          No.
+                        </TableCell>
+                        <TableCell align="center" className={classes.tableth}>
+                          URL
+                        </TableCell>
+                        <TableCell align="center" className={classes.tableth}>
+                          Title
+                        </TableCell>
+                        <TableCell align="center" className={classes.tableth}>
+                          Description
+                        </TableCell>
+                        <TableCell align="center" className={classes.tableth}>
+                          Key
+                        </TableCell>
+                        {/* <TableCell align="center" className={classes.tableth}>
                         Schema
                       </TableCell> */}
-                      <TableCell align="center" className={classes.tableth}>
-                        Action
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {metaList.map((e, index) => {
-                      return (
-                        <StyledTableRow>
-                          <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
-                            {index + 1}
-                          </StyledTableCell>
-                          <StyledTableCell className={classes.tabletd} align="center">
-                            {e.url}
-                          </StyledTableCell>
-                          <StyledTableCell className={classes.tabletd} align="center">
-                            {e.title}
-                          </StyledTableCell>
-                          <StyledTableCell className={classes.tabletd} align="center">
-                            {e.description}
-                          </StyledTableCell>
-                          <StyledTableCell className={classes.tabletd} align="center">
-                            {e.key}
-                          </StyledTableCell>
-                          {/* <StyledTableCell className={classes.tabletd} align="center">
+                        <TableCell align="center" className={classes.tableth}>
+                          Action
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {metaList.map((e, index) => {
+                        return (
+                          <StyledTableRow>
+                            <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
+                              {index + 1}
+                            </StyledTableCell>
+                            <StyledTableCell className={classes.tabletd} align="center">
+                              {e.url}
+                            </StyledTableCell>
+                            <StyledTableCell className={classes.tabletd} align="center">
+                              {e.title}
+                            </StyledTableCell>
+                            <StyledTableCell className={classes.tabletd} align="center">
+                              {e.description}
+                            </StyledTableCell>
+                            <StyledTableCell className={classes.tabletd} align="center">
+                              {e.key}
+                            </StyledTableCell>
+                            {/* <StyledTableCell className={classes.tabletd} align="center">
                             {e.schema}
                           </StyledTableCell> */}
-                          <StyledTableCell className={classes.tabletdicon} align="center">
-                            <div className={classes.seticondiv}>
-                              <div>
-                                <Tooltip title="Edit">
-                                  <i
-                                    className="fa fa-pencil"
-                                    aria-hidden="true"
-                                    // className={classes.seteditincon}
-                                    onClick={() => handleedit(e)}
-                                  />
-                                </Tooltip>
+                            <StyledTableCell className={classes.tabletdicon} align="center">
+                              <div className={classes.seticondiv}>
+                                <div>
+                                  <Tooltip title="Edit">
+                                    <i
+                                      className="fa fa-pencil"
+                                      aria-hidden="true"
+                                      // className={classes.seteditincon}
+                                      onClick={() => handleedit(e)}
+                                    />
+                                  </Tooltip>
+                                </div>
+                                <div>
+                                  <Tooltip title="Remove">
+                                    <i
+                                      className="fa fa-trash"
+                                      aria-hidden="true"
+                                      //  className={classes.setdeleteincon}
+                                      onClick={() => handledelete(e._id)}
+                                    />
+                                  </Tooltip>
+                                </div>
                               </div>
-                              <div>
-                                <Tooltip title="Remove">
-                                  <i
-                                    className="fa fa-trash"
-                                    aria-hidden="true"
-                                    //  className={classes.setdeleteincon}
-                                    onClick={() => handledelete(e._id)}
-                                  />
-                                </Tooltip>
-                              </div>
-                            </div>
-                          </StyledTableCell>
-                        </StyledTableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
+                            </StyledTableCell>
+                          </StyledTableRow>
+                        );
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Paper>
+            </Grid>
+            {/* )} */}
           </Grid>
-          {/* )} */}
-        </Grid>
+        </div>
       </Container>
     </>
   );

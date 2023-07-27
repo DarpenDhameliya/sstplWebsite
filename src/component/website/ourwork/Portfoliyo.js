@@ -66,7 +66,7 @@ const Portfoliyo = ({loding}) => {
 
   const fetchHiredata = () => {
     axios
-      .get("portfolio/portfolio_list", {
+      .post("portfolio/portfolio_list", {
         headers: {
           "Content-Type": "application/json",
         },
@@ -147,8 +147,8 @@ const Portfoliyo = ({loding}) => {
                   </a>
                 </li>
                 <li className="nav-item col-md-3 pl-2 pr-2" role="presentation" style={{textAlign: "center"}}>
-                  <a className={`nav-link ${tab === "desktopsoftware" ? "active" : ""}`} onClick={(e) => handleClick(e, "desktopsoftware")} id="pills-home-tab" data-toggle="pill" href="" role="tab" aria-controls="pills-home">
-                    Desktop Software
+                  <a className={`nav-link ${tab === "webapplication" ? "active" : ""}`} onClick={(e) => handleClick(e, "webapplication")} id="pills-home-tab" data-toggle="pill" href="" role="tab" aria-controls="pills-home">
+                    Web Application
                   </a>
                 </li>
                 <li className="nav-item col-md-3 pl-2 pr-2" role="presentation" style={{textAlign: "center"}}>
@@ -157,8 +157,8 @@ const Portfoliyo = ({loding}) => {
                   </a>
                 </li>
                 <li className="nav-item col-md-3 pl-2 pr-2" role="presentation" style={{textAlign: "center"}}>
-                  <a className={`nav-link ${tab === "webapplication" ? "active" : ""}`} onClick={(e) => handleClick(e, "webapplication")} id="pills-home-tab" data-toggle="pill" href="" role="tab" aria-controls="pills-home">
-                    Web Application
+                  <a className={`nav-link ${tab === "desktopsoftware" ? "active" : ""}`} onClick={(e) => handleClick(e, "desktopsoftware")} id="pills-home-tab" data-toggle="pill" href="" role="tab" aria-controls="pills-home">
+                    Desktop Software
                   </a>
                 </li>
               </ul>

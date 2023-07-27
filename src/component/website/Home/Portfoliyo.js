@@ -36,7 +36,7 @@ export default function Portfoliyo() {
 
   const fetchHiredata = () => {
     axios
-      .get("portfolio/portfolio_list", {
+      .post("portfolio/portfolio_list", {
         headers: {
           "Content-Type": "application/json",
         },

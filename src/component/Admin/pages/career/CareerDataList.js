@@ -19,6 +19,7 @@ import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
 // import Textarea from '@mui/joy/Textarea';
+import logo from '../../../../assets/images/logo-removebg-preview.png'
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,8 +42,10 @@ const StyledTableRow = styled(TableRow)(({theme}) => ({
 
 const CareerDataList = () => {
   const [careerList, setCareerList] = useState([]);
-  const [deleterr, setDeleterr] = useState('');
-  const [dbFetcherr, setDbFetcherr] = useState('');
+  const [deleterr, setDeleterr] = useState("");
+  const [dbFetcherr, setDbFetcherr] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const classes = useMuiStyle();
   const history = useHistory();
 
@@ -56,13 +59,24 @@ const CareerDataList = () => {
       .get("career/careerdetails_list", {
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
         },
       })
       .then((result) => {
         setCareerList(result.data.result);
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
+
+        if (err.response.status === 402) {
+          localStorage.removeItem("ssAdmin");
+          history.push("/online-admin");
+        }
         setDbFetcherr(err.response.data.error);
+        setTimeout(() => {
+          setDbFetcherr("");
+        }, 3000);
       });
   };
 
@@ -75,6 +89,8 @@ const CareerDataList = () => {
   };
 
   const handledelete = (e) => {
+    setLoading(true);
+
     axios
       .delete(`career/careerdetails_delete/${e}`, {
         headers: {
@@ -83,6 +99,7 @@ const CareerDataList = () => {
         },
       })
       .then((result) => {
+        setLoading(false);
         fetchHiredata();
       })
       .catch((err) => {
@@ -92,6 +109,17 @@ const CareerDataList = () => {
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+          {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             Career Details List
@@ -181,6 +209,7 @@ const CareerDataList = () => {
             </Table>
           </TableContainer>
         </Paper>
+      </div>
       </Container>
     </>
   );

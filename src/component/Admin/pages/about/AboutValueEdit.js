@@ -11,6 +11,8 @@ import {useHistory, useParams} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import axios from "../../../common/Axios";
+import logo from "../../../../assets/images/logo-removebg-preview.png";
+
 const AboutValueEdit = () => {
   const [error, setError] = useState([]);
   const [titleheading, setTitleheading] = useState("");
@@ -20,7 +22,9 @@ const AboutValueEdit = () => {
   const [imgdisplay, setImgdisplay] = useState([]);
   const [imgpre, setImgpre] = useState(false);
   const [dbAdderr, setDbAdderr] = useState("");
-  const [dbFetcherr, setDbFetcherr] = useState('')
+  const [dbFetcherr, setDbFetcherr] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const classes = useMuiStyle();
   const history = useHistory();
   var token = localStorage.getItem("ssAdmin");
@@ -34,13 +38,17 @@ const AboutValueEdit = () => {
         },
       })
       .then((result) => {
-      // setCareerList(result.data.result);
-        setTitleheading(result.data.result[0].heading)
-        setContent(result.data.result[0].content)
-        setImage(result.data.result[0].file)
-        setImgpre(true)
+        // setCareerList(result.data.result);
+        setTitleheading(result.data.result[0].heading);
+        setContent(result.data.result[0].content);
+        setImage(result.data.result[0].file);
+        setLoading(false);
+
+        setImgpre(true);
       })
       .catch((err) => {
+        setLoading(false);
+
         setDbFetcherr(err.response.data.error);
       });
   };
@@ -67,11 +75,12 @@ const AboutValueEdit = () => {
   };
 
   const handlesenddata = (e) => {
+    
     let formData = new FormData();
     formData.append("heading", titleheading);
     formData.append("value", content);
     formData.append("file", image);
-
+    
     if (!titleheading || !content || !image) {
       if (!titleheading) {
         error.head = "Require !";
@@ -82,12 +91,13 @@ const AboutValueEdit = () => {
       if (!image) {
         error.file = "Require !";
       }
-
+      
       setError({...error, [e.target.name]: e.target.value});
       setTimeout(() => {
         setError([]);
       }, 3000);
     } else {
+      setLoading(true);
       axios
         .put(`aboutvalue/aboutvalue_update/${idparam.id}`, formData, {
           headers: {
@@ -100,10 +110,12 @@ const AboutValueEdit = () => {
           setTitleheading("");
           setContent("");
           setImage("");
+          setLoading(false);
 
           history.push("/online-admin/dashboard/aboutvalue");
         })
         .catch((err) => {
+          setLoading(false);
           setDbAdderr(err.response.data.error);
         });
     }
@@ -117,8 +129,8 @@ const AboutValueEdit = () => {
           </Typography>
         </div>
         <Paper className={classes.setProductpaper} elevation={5}>
-        {dbFetcherr && <Typography className={classes.seterrorlabel}>{dbFetcherr} </Typography>}
-        {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
+          {dbFetcherr && <Typography className={classes.seterrorlabel}>{dbFetcherr} </Typography>}
+          {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4} className={classes.setinputlayout}>
               <Typography className={classes.setlabel}>vision heading :</Typography>
@@ -130,10 +142,7 @@ const AboutValueEdit = () => {
               {imgpre && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay.length > 0 ? imgdisplay : image} className={classes.setdisimage} />
-                  <Button
-                    className={classes.setdelbtn}
-                    onClick={handlemodel}
-                  >
+                  <Button className={classes.setdelbtn} onClick={handlemodel}>
                     Delete
                   </Button>
                 </Card>

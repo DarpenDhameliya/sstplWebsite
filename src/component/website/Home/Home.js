@@ -5,10 +5,12 @@ import Lottie from "lottie-react";
 import homedata from "../../common/fM1Ya2VfEr.json";
 import {Link} from "react-router-dom";
 import fileContent from "../../../sample.txt";
+
 export default function Home() {
   useEffect(() => {
     readFile();
   }, []);
+
 
   const readFile = async () => {
     try {
@@ -43,7 +45,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="website-css-area">
+      <section className="website-css-area">                                   
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="col-lg-6 col-md-11">
@@ -68,8 +70,8 @@ export default function Home() {
               </div>
             </div>
             <div className="col-lg-6 col-md-11">
-              <div className="website-css-thumb">
-                <div className="thumb wow animated fadeInUp" data-wow-duration="2000ms" data-wow-delay="200ms">
+              <div className="website-css-thumb" data-aos-duration="2000" data-aos="fade-up">
+                <div className="thumb wow animated fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
                   <Lottie animationData={homedata} />
                 </div>
               </div>

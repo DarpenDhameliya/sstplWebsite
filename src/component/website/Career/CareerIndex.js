@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Drawer from "../Mobile/Drawer";
 import Header from "../../common/Header";
 import useToggle from "../../common/Hooks/useToggle";
@@ -9,7 +9,8 @@ import Sidepoosition from "./Sidepoosition";
 import BackToTop from "../../common/BackToTop";
 import Hireus from "../../common/Hireus";
 import ApplyNow from "../../common/ApplyNow";
-import logo from '../../../assets/images/logo-removebg-preview.png'
+import logo from "../../../assets/images/logo-removebg-preview.png";
+
 const CareerIndex = () => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);
@@ -17,8 +18,8 @@ const CareerIndex = () => {
   const [loading, setLoading] = useState(true);
 
   const cleartimeout = () => {
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
     <>
@@ -27,15 +28,16 @@ const CareerIndex = () => {
           <div className="loader-div d-flex justify-content-center ">
             <div className="on-img">
               <img src={logo} alt="loader" style={{width: "100px"}} />
-              <div class="loader">Loading ...</div>
+              <div className="loader">Loading ...</div>
             </div>
           </div>
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Hireus value={cart} action={cartAction.toggle} />
+        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
+        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
+
         <ApplyNow open={apply} action={applyAction.toggle} />
         <Headers
           title="Careers"
@@ -50,7 +52,7 @@ const CareerIndex = () => {
               <div className="col-md-12 col-lg-12">
                 <div className="row justify-content-center">
                   <div className="col-lg-8 col-md-12 col-sm-12 ">
-                    <Careerdata   loding={cleartimeout} />
+                    <Careerdata loding={cleartimeout} />
                   </div>
                   <div className="col-lg-4 col-md-12 col-sm-12">
                     <Sidepoosition />
@@ -61,9 +63,9 @@ const CareerIndex = () => {
           </div>
         </section>
 
-        <Footer />
-        <BackToTop />
-        </div>
+        {/* <Footer />
+        <BackToTop /> */}
+      </div>
     </>
   );
 };

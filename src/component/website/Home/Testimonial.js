@@ -16,7 +16,7 @@ import axios from "../../common/Axios";
 export default function Testimonial(className) {
   const sliderRef = useRef();
   const settings = {
-    autoplay: false,
+    autoplay: true,
     arrows: false,
     dots: false,
   };
@@ -32,7 +32,7 @@ export default function Testimonial(className) {
 
   const fetchHiredata = () => {
     axios
-      .get("testimonial/testimonial_list", {
+      .post("testimonial/testimonial_list", {
         headers: {
           "Content-Type": "application/json",
         },

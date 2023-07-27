@@ -23,6 +23,7 @@ import ServiceList from "../pages/services/ServiceList";
 import Serviceadd from "../pages/services/Serviceadd";
 import ServiceEdit from "../pages/services/ServiceEdit";
 import TestimonialList from "../pages/testimonial/TestimonialList";
+import Icons from "../pages/HeaderIcon/Icons";
 
 const AdminMainrous = () => {
 
@@ -59,6 +60,7 @@ const AdminMainrous = () => {
         <Route  path="/online-admin/dashboard/serviceadd" component={Serviceadd} />
         <Route  path="/online-admin/dashboard/serviceedit/:id" component={ServiceEdit} />
         <Route  path="/online-admin/dashboard/testimonial" component={TestimonialList} />
+        <Route  path="/online-admin/dashboard/icon" component={Icons} />
 
       </Switch>
     </div>

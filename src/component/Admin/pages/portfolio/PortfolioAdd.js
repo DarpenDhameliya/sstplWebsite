@@ -15,6 +15,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import logo from '../../../../assets/images/logo-removebg-preview.png'
 
 const PortfolioAdd = () => {
   const [name, setName] = useState("");
@@ -31,6 +32,8 @@ const PortfolioAdd = () => {
   const [sendImage, setSendImage] = useState("");
   const [imgpre, setImgpre] = useState(false);
   const [imgdisplay, setImgdisplay] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const [error, setError] = useState([]);
   const [dbAdderr, setDbAdderr] = useState("");
   const classes = useMuiStyle();
@@ -64,6 +67,7 @@ const PortfolioAdd = () => {
   ];
 
   const handlesenddata = (e) => {
+    
     let formData = new FormData();
     formData.append("name", name);
     formData.append("industry", industry);
@@ -94,7 +98,7 @@ const PortfolioAdd = () => {
       if (!technology) {
         error.technology = "required !!";
       }
-
+      
       if (!contentpositionview) {
         error.contentpositionview = "required !!";
       }
@@ -109,6 +113,7 @@ const PortfolioAdd = () => {
         setError([]);
       }, 3000);
     } else {
+      setLoading(true)
       axios
         .post("portfolio/portfolio_add", formData, {
           headers: {
@@ -128,9 +133,11 @@ const PortfolioAdd = () => {
           setSelectedValue("true");
           setContentpositionview("");
           handlemodel();
+        setLoading(false)
           history.push("/online-admin/dashboard/portfolio");
         })
         .catch((err) => {
+          setLoading(false);
           setDbAdderr(err.response.data.error);
         });
     }
@@ -155,6 +162,17 @@ const PortfolioAdd = () => {
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+      {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             Add Portfolio Details
@@ -215,6 +233,7 @@ const PortfolioAdd = () => {
             </Button>
           </div>
         </Paper>
+        </div>
       </Container>
     </>
   );

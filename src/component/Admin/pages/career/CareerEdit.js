@@ -11,6 +11,7 @@ import {useHistory, useParams} from "react-router-dom";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import logo from '../../../../assets/images/logo-removebg-preview.png'
 
 const CareerEdit = () => {
   const [title, setTitle] = useState("");
@@ -30,6 +31,8 @@ const CareerEdit = () => {
   const [responsibilitys8, setResponsibilitys8] = useState("");
   const [responsibilitys9, setResponsibilitys9] = useState("");
   const [responsibilitys10, setResponsibilitys10] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const [selectedValue, setSelectedValue] = useState("");
 
   const [dbeditfetch, setDbeditfetch] = useState("");
@@ -64,6 +67,7 @@ const CareerEdit = () => {
 
   let idparam = useParams();
   useEffect(() => {
+
     const fetchUpdatedata = () => {
       axios
         .get(`career/careerdetails_update_detail/${idparam.id}`, {
@@ -73,6 +77,8 @@ const CareerEdit = () => {
           },
         })
         .then((result) => {
+          setLoading(false);
+
           var parsedata;
           if (typeof result.data.result.responsibility === "string") {
             parsedata = JSON.parse(result.data.result.responsibility);
@@ -114,6 +120,7 @@ const CareerEdit = () => {
           });
         })
         .catch((err) => {
+          setLoading(false);
           setDbeditfetch(err.response.data.error);
         });
     };
@@ -163,6 +170,8 @@ const CareerEdit = () => {
         setError([]);
       }, 3000);
     } else {
+      setLoading(true);
+
       axios
         .put(`career/careerdetails_update/${idparam.id}`, formData, {
           headers: {
@@ -191,9 +200,11 @@ const CareerEdit = () => {
           setResponsibilitys9("");
           setResponsibilitys10("");
           jsonRepresentation = "";
+          setLoading(false);
           history.push("/online-admin/dashboard/careerdetails");
         })
         .catch((err) => {
+          setLoading(false);
           setDbAdderr(err.response.data.error);
         });
     }
@@ -201,6 +212,17 @@ const CareerEdit = () => {
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+      {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             Edit Career Details
@@ -263,8 +285,8 @@ const CareerEdit = () => {
                   <i aria-hidden="true" className={` fa fa-trash ml-1 fs-17`} onClick={() => removeInputField(index)} />
                 </div>
               ))}
-              <Button variant="outlined" color="primary" onClick={addInputField}>
-                Add Input Field
+              <Button variant="outlined" color="primary" className="mt-3" onClick={addInputField}>
+                Add responsibilitys
               </Button>
               {/* <Button variant="contained" color="primary" type="submit">
                 Submit
@@ -272,6 +294,7 @@ const CareerEdit = () => {
             </Paper>
           </Grid>
         </Grid>
+        </div>
       </Container>
     </>
   );

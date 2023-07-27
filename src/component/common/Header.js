@@ -1,32 +1,46 @@
 import React, {useEffect, useState} from "react";
 import StickyMenu from "./lib/StickyMenu";
 import logo from "../../assets/images/logo.png";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import aboutheader1 from "../../assets/images/aboutus_header/appfutura.webp";
 import aboutheader2 from "../../assets/images/aboutus_header/clutch.webp";
 import aboutheader3 from "../../assets/images/aboutus_header/glassdoor.webp";
 import aboutheader4 from "../../assets/images/aboutus_header/goodfirms.webp";
 import aboutheader5 from "../../assets/images/aboutus_header/upwork.webp";
 import bullet1 from "../../assets/images/point100.webp";
-import '../../assets/css/Fonts.css'
 import counterIconOne from "../../assets/images/icon/counter-icon-1.svg";
 import counterIconTwo from "../../assets/images/icon/counter-icon-2.svg";
 import counterIconFour from "../../assets/images/icon/counter-icon-4.svg";
-import image from "../../assets/images/headerser.webp";
+import image from "../../assets/images/services banner.webp";
 import {HashLink} from "react-router-hash-link";
+import '../../assets/css/Fonts.css'
+import axios from "./Axios";
 
 const Header = ({action, cartToggle}) => {
-  const [clickdata, setClickdata] = useState("home");
-
+  const [fields, setFields] = useState([]);
+const history = useHistory();
   useEffect(() => {
     StickyMenu();
   }, []);
 
-  // var  Clickdata = ''
-  // const Handkeactivehader = (clickdatas) => {
-  //   // Clickdata = clickdatas
-  //   setClickdata(clickdatas)
-  // }
+  const fetchHiredata = () => {
+    axios
+      .get("icon/icon_list", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((result) => {
+        setFields(result.data.result[0].data);
+      })
+      .catch((err) => {
+        // history.push("/");
+      });
+    };
+    
+    useEffect(() => {
+      // fetchHiredata();
+    }, []);
 
   return (
     <>
@@ -34,27 +48,32 @@ const Header = ({action, cartToggle}) => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-6 col-sm-12 col-6">
-              <a rel="noreferrer" className="mr-15 ml-15" href="https://www.facebook.com/softstormtechnosys" target="_blank">
+            {/* {fields.map((e) => {
+              return <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname:e.link}} target="_blank">
+                <i className={`fab ${e.icon}`} />
+              </Link>
+            })} */}
+              <Link rel="noreferrer" className="ml-15" to={{pathname:"https://www.facebook.com/softstormtechnosys"}} target="_blank">
                 <i className="fab fa-facebook-f" />
-              </a>
-              <a rel="noreferrer" className="mr-15" target="_blank" href="https://twitter.com/softstorm_india">
+              </Link>
+              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://twitter.com/softstorm_india"}}>
                 <i className="fab fa-twitter" />
-              </a>
-              <a rel="noreferrer" className="mr-15" target="_blank" href="https://www.linkedin.com/company/softstorm-technosys">
+              </Link>
+              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://www.linkedin.com/company/softstorm-technosys"}}>
                 <i className="fab fa-linkedin-in" />
-              </a>
-              <a rel="noreferrer" className="mr-15" target="_blank" href="https://instagram.com/softstorm.in">
+              </Link>
+              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://instagram.com/softstorm.in"}}>
                 <i className="fab fa-instagram" />
-              </a>
-              <a rel="noreferrer" className="mr-15" target="_blank" href="https://wa.me/912613560756">
+              </Link>
+              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://wa.me/912613560756"}}>
                 <i className="fab fa-whatsapp" />
-              </a>
-              <a rel="noreferrer" className="mr-15" target="_blank" href="skype:softstorminfosys?chat">
+              </Link>
+              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"skype:softstorminfosys?chat"}}>
                 <i className="fab fa-skype" />
-              </a>
+              </Link>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 order-3 order-sm-2 handlerightheader">
-              <a href="mailto:contact@softstorm.in@gmail.com" rel="noopener noreferrer" className="pl-0 d-flex align-items-center" style={{color: "#f1f1f1"}}>
+              <a href="mailto:contact@softstorm.in" rel="noopener noreferrer" className="pl-0 d-flex align-items-center" style={{color: "#f1f1f1"}}>
                 <i className="fa fa-envelope mr-2" style={{fontSize: "18px", color: "#f1f1f1"}} />
                 <div className="ml-1 fw-600">contact@softstorm.in</div>
               </a>
@@ -76,9 +95,9 @@ const Header = ({action, cartToggle}) => {
           <div className="menu-header ">
             {/* <div className="menu-logo"> */}
             <div className="dskt-logo">
-              <a className="nav-brand" href="/">
+              <Link className="nav-brand" to="/">
                 <img src={logo} alt="Logo" style={{padding: "10px"}} />{" "}
-              </a>{" "}
+              </Link>{" "}
             </div>
             {/* </div> */}
             <div className="softstrom_header d-flex align-items-center handlenavigation" role="navigation">
@@ -132,7 +151,7 @@ const Header = ({action, cartToggle}) => {
                                         <a rel="noreferrer" target="_blank" href="https://www.google.com/maps/uv?pb=!1s0x3be04f50264611d1%3A0x76746ef930af1752!5sSoftStorm%20Technosys%20Pvt.%20Ltd.!15sCgIgARICEAE&imagekey=!1e10!2sAF1QipM9setE_GO3u642xJu5mJb6uNQ7a20enuyXAxag" className="handlesub-menu p-2" >
                                           <div className="aboutheadre_left">
                                             <img src={bullet1} alt="symbol"  className='header_icno' />
-                                          </div>{" "}
+                                          </div>
                                           <span className="ml-15 hoverLink">Life@SSTPL</span>{" "}
                                         </a>
                                       </li>
@@ -182,7 +201,7 @@ const Header = ({action, cartToggle}) => {
                                         contact@softstorm.in
                                       </p>
                                     </div> */}
-                                    <a href="mailto:contact@softstorm.in@gmail.com" rel="noopener noreferrer" className="pl-0 d-flex align-items-center mt-1" style={{color: "#505056"}}>
+                                    <a href="mailto:contact@softstorm.in" rel="noopener noreferrer" className="pl-0 d-flex align-items-center mt-1" style={{color: "#505056"}}>
                                       <i
                                         className="fa fa-envelope mr-2"
                                         style={{
@@ -279,7 +298,8 @@ const Header = ({action, cartToggle}) => {
                 </li>
                 <li  className="megamenu">
                   <Link to="/our-service" className={`menu-links `}>Our Service</Link>
-                  <div className="menu-dropdown">
+                  {/* <div className="menu-dropdown" style={{opacity:'1'}}> */}
+                  <div className="menu-dropdown" >
                     <div className="menu-block-set">
                       <div className="container submenuList ">
                         <div className="menu-block-a_service">

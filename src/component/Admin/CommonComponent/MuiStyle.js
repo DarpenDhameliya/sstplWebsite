@@ -27,6 +27,18 @@ const useMuiStyle = makeStyles((theme) => ({
     borderRadius: "10px",
     marginTop: "50px",
   },
+  setlistfiltericon:{
+    display: "flex",
+    justifyContent: "flex-start",
+    
+    // alignItems:'center'
+  },
+  setavtarback: {
+    backgroundColor: "transparent !important",
+    // marginLeft: "5px",
+    marginTop:'16px !important',
+    border: "1px solid #202223",
+  },
   setheading: {
     padding: "5px",
     margin: "0 !important",
@@ -266,6 +278,27 @@ const useMuiStyle = makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "16px !important",
     },
+  },
+  setpaginationdiv:{
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop:'7px !important',
+    alignItems: 'center',
+
+  },
+  setrowperpage:{
+    display: "flex",
+    justifyContent: "start",
+    alignItems: 'center',
+  },
+  setlabelrow: {
+    fontFamily: ["Poppins", "sans-serif", "!important"],
+    fontSize: "15px !important",
+    lineHeight: "21px !important",
+    marginRight: "10px !important",
+    marginBottom: "2px !important",
+    fontWeight: "600 !important",
+    minWidth:"122px !important"
   },
   // setlistdiv: {
   //   display: "flex !important",

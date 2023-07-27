@@ -14,7 +14,7 @@ export default function Discription() {
           <div className="softstormweb-title">
             <p className="softstormweb-title-discription d-flex justify-content-center">We Are SoftStorm.</p>
             <h2 className="d-flex justify-content-center">We Have The Experience</h2>
-            <span className="main-header-line" style={{ }}></span>
+            <span className="main-header-line" ></span>
             <p className="text-center">SoftStorm is your trusted partner for digital transformation, offering tailored services in software development, business intelligence, and mobile/web app development. With a proven track record of 30+ global clients in five years, we deliver over 50 successful projects with 100% client satisfaction. Our team's extensive 100K+ hours of freelancing experience guarantee the expertise to bring your vision to reality. Ranked among the top 1% talent on platforms like Upwork, we keep you ahead in the dynamic business landscape.</p>
 
           </div>

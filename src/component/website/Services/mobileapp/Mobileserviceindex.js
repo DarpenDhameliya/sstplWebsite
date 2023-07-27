@@ -45,6 +45,7 @@ const Mobileserviceindex = () => {
                 setServiceContent(e.content);
               }
             });
+            setLoading(false)
           })
           .catch((err) => {
             setDbFetcherr(err.response.data.error);
@@ -61,15 +62,16 @@ const Mobileserviceindex = () => {
           <div className="loader-div d-flex justify-content-center ">
             <div className="on-img">
               <img src={logo} alt="loader" style={{width: "100px"}} />
-              <div class="loader">Loading ...</div>
+              <div className="loader">Loading ...</div>
             </div>
           </div>
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Hireus value={cart} action={cartAction.toggle} />
+        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
+              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
+
         <Headers
           title="MOBILE APPLICATION DEVELOPMENT"
           breadcrumb={[
@@ -91,9 +93,9 @@ const Mobileserviceindex = () => {
       </div>
     </section> */}
         <MobileService images={image} serviceContents={serviceContent} />
-
-        <Footer />
-        <BackToTop />
+      
+        {/* <Footer />
+        <BackToTop /> */}
       </div>
     </>
   );

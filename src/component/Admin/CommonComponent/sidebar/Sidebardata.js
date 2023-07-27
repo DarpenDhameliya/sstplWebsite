@@ -96,6 +96,14 @@ export default function Sidebardata() {
             <ListItemText primary="Testimonial" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
+        <Tooltip title={"Header Icons"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/icon" selected={"/online-admin/dashboard/icon" === location.pathname} className={classes.effectlist}>
+            <ListItemIcon style={{minWidth: "45px"}}>
+              <i className="fa fa-circle-user fs-25 white"></i>
+            </ListItemIcon>
+            <ListItemText primary="Icons" className={classes.setsidebaricon} />
+          </ListItemButton>
+        </Tooltip>
       </List>
     </>
   );

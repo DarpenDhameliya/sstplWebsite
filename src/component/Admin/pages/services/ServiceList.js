@@ -14,6 +14,7 @@ import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
+import logo from "../../../../assets/images/logo-removebg-preview.png";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,6 +40,7 @@ const ServiceList = () => {
   const [careerList, setCareerList] = useState([]);
   const [deleterr, setDeleterr] = useState("");
   const [dbFetcherr, setDbFetcherr] = useState("");
+  const [loading, setLoading] = useState(true);
   const classes = useMuiStyle();
   const history = useHistory();
 
@@ -56,9 +58,18 @@ const ServiceList = () => {
       })
       .then((result) => {
         setCareerList(result.data.result);
+        setLoading(false);
       })
       .catch((err) => {
+        if (err.response.status === 402) {
+          localStorage.removeItem("ssAdmin");
+          history.push("/online-admin");
+        }
+        setLoading(false);
         setDbFetcherr(err.response.data.error);
+        setTimeout(() => {
+          setDbFetcherr("");
+        }, 3000);
       });
   };
 
@@ -71,6 +82,8 @@ const ServiceList = () => {
   };
 
   const handledelete = (e) => {
+    setLoading(true);
+
     axios
       .delete(`service/service_delete/${e}`, {
         headers: {
@@ -80,72 +93,86 @@ const ServiceList = () => {
       })
       .then((result) => {
         fetchHiredata();
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         setDeleterr(err.response.data.error);
       });
   };
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
-        <div className={classes.setpageheading}>
-          <Typography variant="h4" gutterBottom className={classes.setheading}>
-            Service List
-          </Typography>
-          <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
-            Add
-          </Button>
-        </div>
+        {loading.toString() === "true" && (
+          <div className="onloadpage" id="page-load">
+            <div className="loader-div d-flex justify-content-center ">
+              <div className="on-img">
+                <img src={logo} alt="loader" style={{width: "100px"}} />
+                <div className="loader">Loading ...</div>
+              </div>
+            </div>
+          </div>
+        )}
+        <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
+          <div className={classes.setpageheading}>
+            <Typography variant="h4" gutterBottom className={classes.setheading}>
+              Service List
+            </Typography>
+            <Button variant="contained" size="medium" className={classes.setsendbtninside} onClick={handlesenddata}>
+              Add
+            </Button>
+          </div>
 
-        <Paper className={classes.setProductpaper} elevation={5}>
-          {deleterr && <Typography className={classes.seterrorlabel}>{deleterr} </Typography>}
-          {dbFetcherr && <Typography className={classes.seterrorlabel}>{dbFetcherr} </Typography>}
-          <TableContainer>
-            <Table className={classes.settable} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center" className={classes.tableth}>
-                    No.
-                  </TableCell>
-                  <TableCell align="center" className={classes.tableth}>
-                    Title
-                  </TableCell>
-                  <TableCell align="center" className={classes.tableth}>
-                    Action
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {careerList.map((e, index) => {
-                  return (
-                    <StyledTableRow>
-                      <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
-                        {index + 1}
-                      </StyledTableCell>
-                      <StyledTableCell className={classes.tabletd} align="center">
-                        {e.heading}
-                      </StyledTableCell>
-                      <StyledTableCell className={classes.tabletdicon} align="center">
-                        <div className={classes.seticondiv}>
-                          <div>
-                            <Tooltip title="Edit">
-                              <i aria-hidden="true" className={`${classes.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e._id)} />
-                            </Tooltip>
+          <Paper className={classes.setProductpaper} elevation={5}>
+            {deleterr && <Typography className={classes.seterrorlabel}>{deleterr} </Typography>}
+            {dbFetcherr && <Typography className={classes.seterrorlabel}>{dbFetcherr} </Typography>}
+            <TableContainer>
+              <Table className={classes.settable} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center" className={classes.tableth}>
+                      No.
+                    </TableCell>
+                    <TableCell align="center" className={classes.tableth}>
+                      Title
+                    </TableCell>
+                    <TableCell align="center" className={classes.tableth}>
+                      Action
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {careerList.map((e, index) => {
+                    return (
+                      <StyledTableRow>
+                        <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
+                          {index + 1}
+                        </StyledTableCell>
+                        <StyledTableCell className={classes.tabletd} align="center">
+                          {e.heading}
+                        </StyledTableCell>
+                        <StyledTableCell className={classes.tabletdicon} align="center">
+                          <div className={classes.seticondiv}>
+                            <div>
+                              <Tooltip title="Edit">
+                                <i aria-hidden="true" className={`${classes.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e._id)} />
+                              </Tooltip>
+                            </div>
+                            <div>
+                              <Tooltip title="Remove">
+                                <i aria-hidden="true" className={`${classes.setdeleteincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
+                              </Tooltip>
+                            </div>
                           </div>
-                          <div>
-                            <Tooltip title="Remove">
-                              <i aria-hidden="true" className={`${classes.setdeleteincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
-                            </Tooltip>
-                          </div>
-                        </div>
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Paper>
+        </div>
       </Container>
     </>
   );

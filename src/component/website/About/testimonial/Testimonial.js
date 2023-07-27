@@ -13,7 +13,7 @@ const Testimonial = ({className}) => {
 
   const fetchHiredata = () => {
     axios
-      .get("testimonial/testimonial_list", {
+      .post("testimonial/testimonial_list", {
         headers: {
           "Content-Type": "application/json",
         },

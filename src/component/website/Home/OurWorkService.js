@@ -9,7 +9,7 @@ import IconSeven from '../../../assets/images/icon/customer-support.svg';
 
 export default function OurWorkService(className) {
   return (<>
-    <section className={`softstormweb-service handleworkservice pt-70 pb-80 ${className}`} id="service">
+    <section className={`softstormweb-service handleworkservice pt-70 pb-80 ${className}`} id="service" style={{background:'none'}}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-12 col-md-11">

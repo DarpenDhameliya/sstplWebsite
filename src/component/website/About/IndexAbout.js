@@ -48,15 +48,16 @@ const IndexAbout = () => {
         <div className="loader-div d-flex justify-content-center ">
           <div className="on-img">
             <img src={logo} alt="loader" style={{width: "100px"}} />
-            <div class="loader">Loading ...</div>
+            <div className="loader">Loading ...</div>
           </div>
         </div>
       </div>
     )}
     <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-      <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-      <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-      <Hireus value={cart} action={cartAction.toggle} />
+      {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+      <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
+      {/*       {/* <Hireus value={cart} action={cartAction.toggle} /> */}
+ 
       <Headers
         title="ABOUT US"
         breadcrumb={[
@@ -70,8 +71,9 @@ const IndexAbout = () => {
       {/* <div className="container mt-3 mb-3">
         <Lottie animationData={homedata} />
       </div> */}
-      <Footer />
-      <BackToTop />
+    
+      {/* <Footer />
+      <BackToTop /> */}
       </div>
     </>
   );

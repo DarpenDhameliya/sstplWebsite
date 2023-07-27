@@ -202,7 +202,7 @@ const Desktipservice = ({images, serviceContents}) => {
                             <span className="handlespan"> | </span>
                             <div>
                               <a className={`handleservice_header handlefontweb  ${tab === "c++" ? "subHadactive" : ""}`} href="#c++">
-                                C ++
+                                C++
                               </a>
                             </div>
                             <span className="handlespan"> | </span>

@@ -24,8 +24,6 @@ const Login = () => {
   const history = useHistory();
 
 useEffect(() => {
-  let data = localStorage.getItem("ssAdmin");
-  console.log(data)
   localStorage.removeItem("ssAdmin");
 }, [])
 

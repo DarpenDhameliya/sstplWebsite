@@ -45,8 +45,8 @@ const Desktopserviceindex = () => {
                 setImage(e.servicepageimg);
                 setServiceContent(e.content);
               }
-              setLoading(false)
             });
+            setLoading(false)
           })
           .catch((err) => {
             setDbFetcherr(err.response.data.error);
@@ -63,15 +63,16 @@ const Desktopserviceindex = () => {
           <div className="loader-div d-flex justify-content-center ">
             <div className="on-img">
               <img src={logo} alt="loader" style={{width: "100px"}} />
-              <div class="loader">Loading ...</div>
+              <div className="loader">Loading ...</div>
             </div>
           </div>
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Hireus value={cart} action={cartAction.toggle} />
+        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
+              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
+
         <Headers
           title="DESKTOP SOFTWARE DEVELOPMENT"
           breadcrumb={[
@@ -82,8 +83,9 @@ const Desktopserviceindex = () => {
         />
 
         <Desktipservice images={image} serviceContents={serviceContent}/>
-        <Footer />
-        <BackToTop />
+      
+        {/* <Footer />
+        <BackToTop /> */}
       </div>
     </>
   );

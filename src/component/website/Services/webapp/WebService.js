@@ -62,7 +62,6 @@ const WebService = ({images, serviceContents}) => {
     if (states.response.result !== undefined) {
       states.response.result.map((e) => {
         if (e.heading === "Web Application Development") {
-          console.log("=======", e);
           setImage(e.servicepageimg);
           setServiceContent(e.content);
         }

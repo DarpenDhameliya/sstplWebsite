@@ -14,6 +14,7 @@ import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
+import logo from '../../../../assets/images/logo-removebg-preview.png'
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,6 +38,8 @@ const AboutValueList = () => {
   const [careerList, setCareerList] = useState([]);
   const [deleterr, setDeleterr] = useState('');
   const [dbFetcherr, setDbFetcherr] = useState('');
+  const [loading, setLoading] = useState(true);
+
   const classes = useMuiStyle();
   const history = useHistory();
 
@@ -54,9 +57,19 @@ const AboutValueList = () => {
       })
       .then((result) => {
         setCareerList(result.data.result);
+        setLoading(false);
+
       })
       .catch((err) => {
+        setLoading(false);
+        if (err.response.status === 402) {
+          localStorage.removeItem("ssAdmin");
+          history.push("/online-admin");
+        }
         setDbFetcherr(err.response.data.error);
+        setTimeout(() => {
+          setDbFetcherr('')
+        }, 3000);
       });
   };
 
@@ -69,6 +82,7 @@ const AboutValueList = () => {
   };
 
   const handledelete = (e) => {
+    setLoading(true);
     axios
       .delete(`aboutvalue/aboutvalue_delete/${e}`, {
         headers: {
@@ -77,15 +91,28 @@ const AboutValueList = () => {
         },
       })
       .then((result) => {
+        setLoading(false);
         fetchHiredata();
       })
       .catch((err) => {
+        setLoading(false);
         setDeleterr(err.response.data.error);
       });
   };
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+      {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             About Value List
@@ -152,6 +179,7 @@ const AboutValueList = () => {
             </Table>
           </TableContainer>
         </Paper>
+        </div>
       </Container>
     </>
   );

@@ -12,6 +12,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import axios from "../../../common/Axios";
+import logo from "../../../../assets/images/logo-removebg-preview.png";
 
 const ServiceEdit = () => {
   const [error, setError] = useState([]);
@@ -19,13 +20,14 @@ const ServiceEdit = () => {
   const [content, setContent] = useState("");
   const [slectImage, setSlectImage] = useState(null);
   const [image, setImage] = useState("");
-  const [updated, setUpdated] = useState('')
+  const [updated, setUpdated] = useState("");
   const [imgdisplay, setImgdisplay] = useState([]);
   const [imgpre, setImgpre] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [slectImage1, setSlectImage1] = useState(null);
   const [image1, setImage1] = useState("");
-  const [updated1, setUpdated1] = useState('')
+  const [updated1, setUpdated1] = useState("");
   const [imgdisplay1, setImgdisplay1] = useState([]);
   const [imgpre1, setImgpre1] = useState(false);
   const [dbAdderr, setDbAdderr] = useState("");
@@ -51,8 +53,11 @@ const ServiceEdit = () => {
         setImage1(result.data.result[0].servicepageimg);
         setImgpre(true);
         setImgpre1(true);
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
+
         setDbFetcherr(err.response.data.error);
       });
   };
@@ -64,7 +69,7 @@ const ServiceEdit = () => {
   const imagehandle = (e) => {
     let addImage = e.target.files[0];
     setImage(addImage);
-    setUpdated(addImage)
+    setUpdated(addImage);
     let displayImg = URL.createObjectURL(e.target.files[0]);
     setImgdisplay(displayImg);
     setImgpre(true);
@@ -93,13 +98,15 @@ const ServiceEdit = () => {
   };
 
   const handlesenddata = (e) => {
+    setLoading(true);
+
     let formData = new FormData();
     formData.append("heading", titleheading);
     formData.append("content", content);
     formData.append("image", imgdisplay.length > 0 ? updated : image);
     formData.append("image", imgdisplay1.length > 0 ? updated1 : image1);
 
-    if (!titleheading || !content ) {
+    if (!titleheading || !content) {
       if (!titleheading) {
         error.head = "Require !";
       }
@@ -124,10 +131,11 @@ const ServiceEdit = () => {
           setTitleheading("");
           setContent("");
           setImage("");
-
+          setLoading(false);
           history.push("/online-admin/dashboard/service");
         })
         .catch((err) => {
+          setLoading(false);
           setDbAdderr(err.response.data.error);
         });
     }
@@ -135,6 +143,17 @@ const ServiceEdit = () => {
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+      {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             Edit Service Details
@@ -153,10 +172,7 @@ const ServiceEdit = () => {
               {imgpre && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay.length > 0 ? imgdisplay : image} className={classes.setdisimage} />
-                  <Button
-                    className={classes.setdelbtn}
-                    onClick={handlemodel}
-                  >
+                  <Button className={classes.setdelbtn} onClick={handlemodel}>
                     Delete
                   </Button>
                 </Card>
@@ -168,10 +184,7 @@ const ServiceEdit = () => {
               {imgpre1 && (
                 <Card sx={{maxWidth: "250px"}}>
                   <CardMedia component="img" src={imgdisplay1.length > 0 ? imgdisplay1 : image1} className={classes.setdisimage} />
-                  <Button
-                    className={classes.setdelbtn}
-                    onClick={handlemodel1}
-                  >
+                  <Button className={classes.setdelbtn} onClick={handlemodel1}>
                     Delete
                   </Button>
                 </Card>
@@ -191,6 +204,7 @@ const ServiceEdit = () => {
             </Button>
           </div>
         </Paper>
+        </div>
       </Container>
     </>
   );

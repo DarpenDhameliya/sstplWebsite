@@ -43,19 +43,39 @@ const Careerdata = ({loding}) => {
   const [dbFetcherr, setDbFetcherr] = useState([]);
   const mailstate = useSelector(Careerstate);
   const [collaspsOpen, setCollaspsOpen] = useState(false);
+  const [ipAddress, setIpAddress] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [careerBtnClick, setCareerBtnClick] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+  const [captchres, setCaptchres] = useState('')
+  const [dbsubmit, setDbsubmit] = useState(false);
+  const [nameFocused, setNameFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [phoneFocused, setPhoneFocused] = useState(false);
   const [file, setFile] = useState("");
+  const recaptchaRef = useRef();
+
   const notify = useCallback(() => {
-    toast.success("Email Sent Successfully..", {
-      autoClose: 2000,
+    toast.success(" Apply Successfully..", {
+      autoClose: 1000,
+      closeOnClick: false,
     });
   }, []);
-  const notifyerr = () => toast("error");
 
+  const notifyerr = useCallback(() => {
+    toast.error("Server Error", {
+      autoClose: 1000,
+      closeOnClick: false,
+    });
+  }, []);
   useEffect(() => {
+    if (mailstate.status === "succeeded") {
+      notify();
+    } else if (mailstate.status === "failed") {
+      notifyerr();
+    }
+
     if (careerBtnClick) {
       if (mailstate.status === "loading") {
       } else if (mailstate.status === "succeeded") {
@@ -64,18 +84,38 @@ const Careerdata = ({loding}) => {
         setPhone("");
         setApply("");
         setFile("");
+        setCaptchres('')
         setFilename("Upload Resume");
         setOpen(false);
-        notify();
+        setDbsubmit(false);
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
+        }
         dispatch(Careerstatus());
       } else if (mailstate.status === "failed") {
-        notifyerr();
+        setDbsubmit(false);
+
         setDberr(mailstate.error);
+        setTimeout(() => {
+          setDberr([]);
+        }, 3000);
         dispatch(Careerstatus());
       } else {
       }
     }
   });
+
+  useEffect(() => {
+    axios
+      .get("https://api.ipify.org/?format=json")
+      .then((response) => {
+        const ipAddress = response.data.ip;
+        setIpAddress(ipAddress);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const fetchHiredata = () => {
     axios
@@ -103,6 +143,15 @@ const Careerdata = ({loding}) => {
   const dispatch = useDispatch();
 
   const handlesubmit = (e) => {
+    let name_verify;
+    const regex = /\b\w+\b/g;
+    const matches = name.match(regex);
+    if (matches && matches.length >= 2) {
+      name_verify = true;
+    } else {
+      name_verify = false;
+    }
+
     setCareerBtnClick(true);
     let number_verify;
     if (!/^\+?\d{0,3}\s?\d{6,14}$/.test(phone)) {
@@ -116,19 +165,26 @@ const Careerdata = ({loding}) => {
     } else {
       email_verify = true;
     }
-
-    if (!file || !name || !email || !phone || !apply || !isVerified || number_verify === false || email_verify === false) {
+// if(!file || !name || !email || !phone){
+    if (!file || !name || !email || !phone || !apply || email_verify === false || !number_verify || !isVerified || name_verify === false || !isVerified) {
       if (!file) {
         error.file = "File Required !";
       }
       if (!name) {
         error.name = "Name Required !";
+      } else {
+        error.name = "";
+        if (name_verify === false) {
+          error.name_verify = "Minimum Two Word Required";
+        } else {
+          error.name_verify = "";
+        }
       }
       if (!email) {
         error.email = "email Required !";
       } else {
         error.email = "";
-        if (!email_verify) {
+        if (email_verify === false) {
           error.em_verify = "Add Correct email";
         } else {
           error.em_verify = "";
@@ -157,13 +213,19 @@ const Careerdata = ({loding}) => {
         setError([]);
       }, 2000);
     } else {
+      let formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("apply", sendmailview);
+      formData.append("file", file);
+      const json1 = {file: file, name: name, email: email, phone: phone , apply: sendmailview};
+      const json2 = {ipAddress , captchres};
+      setDbsubmit(true);
       dispatch(
         CareerSlice({
-          file: file,
-          name: name,
-          email: email,
-          phone: phone,
-          apply: sendmailview,
+          formData,
+          json2,
         })
       );
     }
@@ -185,18 +247,68 @@ const Careerdata = ({loding}) => {
     setFile(e.target.files[0]);
   };
   const handleVerify = (response) => {
+    setCaptchres(response)
     setIsVerified(true);
   };
   const handlemodalOpen = () => {
+    setName("");
+    setEmail("");
+    setPhone("");
+    setApply("");
+    setFile("");
+    setCaptchres('')
+    setFilename("Upload Resume");
     setOpen(true);
   };
+
+  const handlefirstname = (e) => {
+    let name = e.target.value;
+    setName(e.target.value);
+    if (name.length > 5) {
+      error.name = "";
+    }
+  };
+  const handlefnameBlur = () => {
+    setNameFocused(false);
+    if (name.length < 4) {
+      error.name = "Required !!";
+    }
+  };
+
+  const handleemail = (e) => {
+    let data = e.target.value;
+    setEmail(e.target.value);
+    if (data) {
+      error.email = "";
+    }
+  };
+  const handleemailBlur = () => {
+    setEmailFocused(false);
+    if (!email) {
+      error.email = "Required !!";
+    }
+  };
+
+  const handlephone = (e) => {
+    let data = e.target.value;
+    setPhone(e.target.value);
+    if (data.length > 9) {
+      error.phone = "";
+    }
+  };
+  const handlephoneBlur = () => {
+    setPhoneFocused(false);
+    if (phone.length < 10) {
+      error.phone = "Required !!";
+    }
+  };
+
   return (
     <>
-      <ToastContainer position="top-right" style={{marginTop: "55px"}} />
+      <ToastContainer position="top-right" closeOnClick={false} style={{marginTop: "55px"}} />
 
       {dbFetcherr && <p className="handledberror ">{dbFetcherr}</p>}
       {careerList.map((res) => {
-        console.log(res);
         if (res.contentview === true) {
           return (
             <div className="card mt-3 mb-3 grey">
@@ -281,14 +393,15 @@ const Careerdata = ({loding}) => {
           <div className="modal-body" style={{border: "none", boxShadow: "none"}}>
             <form className="row">
               <div className="col-md-12">
-                <input type="text" className={`${error.name ? "handleinput_error" : ""}`} name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                <input type="text" className={`${error.name ? "handleinput_error" : ""} ${error.name_verify ? "handleinput_error" : ""}`} onBlur={handlefnameBlur} onFocus={() => setNameFocused(true)} name="name" placeholder="Name" value={name} onChange={handlefirstname} />
+                {dberr.name && <p className="handledberror ">{dberr.name}</p>}
+                {error.name_verify && <p className={`handledberror`}>{error.name_verify}</p>}
               </div>
-              {dberr.name && <p className="handledberror ">{dberr.name}</p>}
               <div className="col-md-12">
-                <input type="email" name="email" className={`${error.email ? "handleinput_error" : ""} ${error.em_verify ? "handleinput_error" : ""}`} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" />
+                <input type="email" name="email" className={`${error.email ? "handleinput_error" : ""} ${error.em_verify ? "handleinput_error" : ""} ${error.em_verify ? "error_padding" : ""}`} onBlur={handleemailBlur} onFocus={() => setEmailFocused(true)} value={email} onChange={handleemail} placeholder="Email Address" />
+                {dberr.email && <p className="handledberror ">{dberr.email}</p>}
+                {error.em_verify && <p className={`handledberror mb-0 `}>{error.em_verify}</p>}
               </div>
-              {dberr.email && <p className="handledberror ">{dberr.email}</p>}
-
               <div className="col-md-12">
                 <input
                   type="text"
@@ -296,11 +409,13 @@ const Careerdata = ({loding}) => {
                   className={`${error.phone ? "handleinput_error" : ""} mt-15   ${error.num_verify ? "error_padding" : ""}
                     `}
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onBlur={handlephoneBlur}
+                  onFocus={() => setPhoneFocused(true)}
+                  onChange={handlephone}
                   placeholder="Phone Number"
                 />
                 {dberr.phone && <p className="handledberror ">{dberr.phone}</p>}
-                {error.num_verify && <p className={`handledberror mb-0  ${error.num_verify ? "error_padding_add" : ""}`}>{error.num_verify}</p>}
+                {error.num_verify && <p className={`handledberror mb-0  `}>{error.num_verify}</p>}
               </div>
 
               <div className="col-md-12 ">
@@ -312,19 +427,19 @@ const Careerdata = ({loding}) => {
                   <span className="filename">{filename}</span>
                   <input type="file" className="inputfile form-control" name="file" onChange={hgandlefile} />
                 </div>
+                {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
               </div>
-              {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
 
               <div className="col-lg-6 col-md-12 col-sm-12 ">
                 <div className="recaptcha-container">
-                  <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={handleVerify} theme="light" size="normal" />
+                  <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} ref={recaptchaRef} onChange={handleVerify} theme="light" size="normal" />
                 </div>
                 {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
               </div>
             </form>
           </div>
           <div className="career-footer">
-            <button className="main-btn_carrer_apply" type="button" onClick={handlesubmit}>
+            <button className="main-btn_carrer_apply" disabled={dbsubmit} type="button" onClick={handlesubmit}>
               APPLY NOW
             </button>
           </div>

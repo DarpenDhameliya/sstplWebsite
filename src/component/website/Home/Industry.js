@@ -62,10 +62,9 @@ export default function Industry() {
             <div className="col-lg-12 col-md-11">
               <div className="row">
                 {workdata.map((e,index) => {
-
                   return (
                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" key={index}>
-                      <div className="softstormweb-name-industry mt-30">
+                      <div className="softstormweb-name-industry mt-30" data-aos-duration={` ${2000 + index * 500}`} data-aos="fade-up">
                         <div className="thumb">
                           <img src={e.image} alt="" />
                         </div>

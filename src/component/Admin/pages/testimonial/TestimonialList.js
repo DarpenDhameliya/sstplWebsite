@@ -21,6 +21,11 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import {useHistory} from "react-router-dom";
+import MenuItem from "@mui/material/MenuItem";
+import Pagination from "@mui/material/Pagination";
+import logo from "../../../../assets/images/logo-removebg-preview.png";
+
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -62,11 +67,17 @@ const TestimonialList = () => {
   const [selectedImage, setselectedImage] = useState("");
   const [upSendImage, setUpSendImage] = useState("");
   const [error, setError] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [page, setPage] = useState("1");
+  const [count, setCount] = useState("");
+  const [rowperpage, setRowperpage] = useState("10");
   const [dberr, setDberr] = useState("");
   const [dbAdderr, setDbAdderr] = useState("");
-  const [deleterr, setDeleterr] = useState('');
+  const [deleterr, setDeleterr] = useState("");
   const [fetcherr, setFetcherr] = useState("");
   const classes = useMuiStyle();
+  const history = useHistory();
 
   var token = localStorage.getItem("ssAdmin");
   const handlesenddata = (e) => {
@@ -99,6 +110,8 @@ const TestimonialList = () => {
           setError([]);
         }, 3000);
       } else {
+        setLoading(true);
+
         axios
           .post(`testimonial/testimonial_update/${upid}`, formData, {
             headers: {
@@ -114,11 +127,14 @@ const TestimonialList = () => {
             setSelectedValue("");
             setViewpo("");
             setUpid("");
-            upImage('')
-            setSendImage('')
-            fetchHiredata();
+            upImage("");
+            setSendImage("");
+            setLoading(false);
+
+            fetchHiredata(page, rowperpage);
           })
           .catch((err) => {
+            setLoading(false);
             setDberr(err.response.data.error);
           });
       }
@@ -155,6 +171,8 @@ const TestimonialList = () => {
           setError([]);
         }, 3000);
       } else {
+        setLoading(true);
+
         axios
           .post("testimonial/testimonial_add", formData, {
             headers: {
@@ -170,32 +188,48 @@ const TestimonialList = () => {
             setSelectedValue("");
             setViewpo("");
             handlemodel();
-            fetchHiredata();
+            setLoading(false);
+            fetchHiredata(page, rowperpage);
           })
           .catch((err) => {
+            setLoading(false);
             setDbAdderr(err.response.data.error);
           });
       }
     }
   };
 
-  const fetchHiredata = () => {
+  const fetchHiredata = (pagenumber, rowperpage) => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("pageNumber", pagenumber);
+    formData.append("page_size", rowperpage);
     axios
-      .get("testimonial/testimonial_list", {
+      .post("testimonial/testimonial_list", formData, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((result) => {
+        setLoading(false);
+        setCount(result.data.totalPages);
         setPortfolioList(result.data.result);
       })
       .catch((err) => {
+        setLoading(false);
+        if (err.response.status === 402) {
+          localStorage.removeItem("ssAdmin");
+          history.push("/online-admin");
+        }
         setFetcherr(err.response.data.error);
+        setTimeout(() => {
+          setFetcherr("");
+        }, 3000);
       });
   };
 
   useEffect(() => {
-    fetchHiredata();
+    fetchHiredata("1", rowperpage);
   }, []);
 
   const handleedit = (e) => {
@@ -209,6 +243,7 @@ const TestimonialList = () => {
   };
 
   const handledelete = (e) => {
+    setLoading(true);
     axios
       .delete(`testimonial/testimonial_delete/${e}`, {
         headers: {
@@ -217,9 +252,11 @@ const TestimonialList = () => {
         },
       })
       .then((result) => {
-        fetchHiredata();
+        setLoading(false);
+        fetchHiredata(page, rowperpage);
       })
       .catch((err) => {
+        setLoading(false);
         setDeleterr(err.response.data.error);
       });
   };
@@ -276,9 +313,32 @@ const TestimonialList = () => {
     setUpImgdisplay("");
     setUpImgpre(false);
   };
+
+  const handleChange = (e, value) => {
+    setPage(value);
+    fetchHiredata(value, rowperpage);
+  };
+
+  const handlesetRowperpageChange = (e) => {
+    const onpage = e.target.value;
+    setRowperpage(e.target.value);
+    setPage(1);
+    fetchHiredata("1", onpage);
+  };
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
+      {loading.toString() === 'true' && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <div className={classes.setpageheading}>
           <Typography variant="h4" gutterBottom className={classes.setheading}>
             Testimonial
@@ -432,9 +492,21 @@ const TestimonialList = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+              <div className={classes.setpaginationdiv}>
+                <div className={classes.setrowperpage}>
+                  <Typography className={classes.setlabelrow}>Rows per page :</Typography>
+                  <TextField size="small" select className={classes.textField} value={rowperpage} onChange={handlesetRowperpageChange} InputLabelProps={{shrink: false}} margin="normal" variant="outlined">
+                    <MenuItem value="10">10</MenuItem>
+                    <MenuItem value="20">20.</MenuItem>
+                    <MenuItem value="50">50.</MenuItem>
+                  </TextField>
+                </div>
+                <Pagination count={count} page={page} onChange={handleChange} variant="outlined" shape="rounded" color="primary" />
+              </div>
             </Paper>
           </Grid>
         </Grid>
+        </div>
         {/* )} */}
       </Container>
     </>
