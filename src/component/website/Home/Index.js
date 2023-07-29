@@ -14,7 +14,7 @@ import Testimonial from "./Testimonial";
 import BackToTop from "../../common/BackToTop";
 import Footer from "../../common/Footer";
 import Hireus from "../../common/Hireus";
-import logo from "../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 
 const Sstpl = ({addheader , action}) => {
   const [drawer, drawerAction] = useToggle(false);

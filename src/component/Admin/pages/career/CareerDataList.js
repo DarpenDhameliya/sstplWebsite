@@ -16,10 +16,10 @@ import Box from "@mui/material/Box";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api } from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
 // import Textarea from '@mui/joy/Textarea';
-import logo from '../../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../../assets/images/logo-removebg-preview.webp'
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -55,13 +55,8 @@ const CareerDataList = () => {
   };
 
   const fetchHiredata = () => {
-    axios
-      .get("career/careerdetails_list", {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
+    api
+      .get("career/careerdetails_list")
       .then((result) => {
         setCareerList(result.data.result);
         setLoading(false);
@@ -90,14 +85,8 @@ const CareerDataList = () => {
 
   const handledelete = (e) => {
     setLoading(true);
-
-    axios
-      .delete(`career/careerdetails_delete/${e}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`career/careerdetails_delete/${e}`)
       .then((result) => {
         setLoading(false);
         fetchHiredata();

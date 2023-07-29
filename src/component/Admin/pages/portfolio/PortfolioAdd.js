@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
-import axios from "../../../common/Axios";
+import axios, { apiimg } from "../../../common/Axios";
 import Select from "react-select";
 import {useHistory} from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -15,7 +15,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import logo from '../../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../../assets/images/logo-removebg-preview.webp'
 
 const PortfolioAdd = () => {
   const [name, setName] = useState("");
@@ -38,7 +38,6 @@ const PortfolioAdd = () => {
   const [dbAdderr, setDbAdderr] = useState("");
   const classes = useMuiStyle();
   const history = useHistory();
-  var token = localStorage.getItem("ssAdmin");
 
   // const fetchHiredata = () => {
   //   axios
@@ -114,14 +113,8 @@ const PortfolioAdd = () => {
       }, 3000);
     } else {
       setLoading(true)
-      axios
-        .post("portfolio/portfolio_add", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .post("portfolio/portfolio_add", formData)
         .then((result) => {
           setName("");
           setIndustry("");

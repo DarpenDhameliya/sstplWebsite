@@ -6,10 +6,8 @@ import digimg from "../../../assets/images/services/digital-marketing.webp";
 import graimg from "../../../assets/images/services/web-graphic-designing.webp";
 import entimg from "../../../assets/images/services/enterprise-services.webp";
 import {HashLink} from "react-router-hash-link";
-// import shapeTwo from '../../../assets/images/code.png'
-// import shapeThree  from '../../../assets/images/code.png'
-import shapeTwo from "../../../assets/images/shape/shape-10.webp";
-import shapeThree from "../../../assets/images/shape/shape-3.webp";
+import shapeTwo from "../../../assets/images/mobile and phone (1).webp";
+import shapeThree from "../../../assets/images/database (1).webp";
 import axios from "../../common/Axios";
 import {Servicestate, Servicestatus, ServiceSlice} from "../slice/Service";
 import {useSelector, useDispatch} from "react-redux";
@@ -70,19 +68,19 @@ export default function Services(className) {
   useEffect(() => {
     if (states.status === "loading") {
     } else if (states.status === "succeeded") {
-      if (states.response.result.length > 0) {
-        setWebappimg(states.response.result[0].frontpageimg);
-        setWebapptitle(states.response.result[0].heading);
-        setMobppimg(states.response.result[1].frontpageimg);
-        setMobpptitle(states.response.result[1].heading);
-        setDeskappimg(states.response.result[2].frontpageimg);
-        setDeskapptitle(states.response.result[2].heading);
-        setDigitalappimg(states.response.result[3].frontpageimg);
-        setDigitalapptitle(states.response.result[3].heading);
-        setWebgraappimg(states.response.result[4].frontpageimg);
-        setWebgraapptitle(states.response.result[4].heading);
-        setErpappimg(states.response.result[5].frontpageimg);
-        setErpapptitle(states.response.result[5].heading);
+      if (states.response.length > 0) {
+        setWebappimg(states.response[0].frontpageimg);
+        setWebapptitle(states.response[0].heading);
+        setMobppimg(states.response[1].frontpageimg);
+        setMobpptitle(states.response[1].heading);
+        setDeskappimg(states.response[2].frontpageimg);
+        setDeskapptitle(states.response[2].heading);
+        setDigitalappimg(states.response[3].frontpageimg);
+        setDigitalapptitle(states.response[3].heading);
+        setWebgraappimg(states.response[4].frontpageimg);
+        setWebgraapptitle(states.response[4].heading);
+        setErpappimg(states.response[5].frontpageimg);
+        setErpapptitle(states.response[5].heading);
       }
       dispatch(Servicestatus());
     } else if (states.status === "failed") {
@@ -271,7 +269,7 @@ export default function Services(className) {
         <div className="service-shape-1">
           <img src={shapeTwo} alt="" />
         </div>
-        <div className="service-shape-2">
+        <div className="service-shape-2" style={{width:"30px"}}>
           <img src={shapeThree} alt="" />
         </div>
       </section>

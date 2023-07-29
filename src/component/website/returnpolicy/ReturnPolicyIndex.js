@@ -8,7 +8,7 @@ import Headers from "../../common/PageHeader";
 import Hireus from "../../common/Hireus";
 import ReturnPolicy from "./ReturnPolicy";
 import {useEffect, useState} from "react";
-import logo from "../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 
 const ReturnPolicyIndex = () => {
   const [drawer, drawerAction] = useToggle(false);

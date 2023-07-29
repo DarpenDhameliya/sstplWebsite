@@ -9,7 +9,7 @@ import WebService from "./WebService";
 import BackToTop from "../../../common/BackToTop";
 import Hireus from "../../../common/Hireus";
 import {useEffect, useState} from "react";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import axios from "../../../common/Axios";
 import {Servicestate} from "../../slice/Service";
 import {useSelector} from "react-redux";

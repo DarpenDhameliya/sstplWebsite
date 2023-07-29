@@ -9,7 +9,7 @@ import axios from "axios";
 const Hireus = ({value, action}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState("");
   const [selectval, setSelectval] = useState([]);
   const [skype, setSkype] = useState("");
   const [work, setWork] = useState("");
@@ -21,7 +21,7 @@ const Hireus = ({value, action}) => {
   const [phoneFocused, setPhoneFocused] = useState(false);
   const [textFocused, setTextFocused] = useState(false);
   const [dbsubmit, setDbsubmit] = useState(false);
-  const [captchres, setCaptchres] = useState('')
+  const [captchres, setCaptchres] = useState("");
   const [ipAddress, setIpAddress] = useState("");
 
   const recaptchaRef = useRef();
@@ -48,7 +48,7 @@ const Hireus = ({value, action}) => {
       setName("");
       setEmail("");
       setPhone("");
-      setCaptchres('')
+      setCaptchres("");
       setSelectval([]);
       setDbsubmit(false);
       if (recaptchaRef.current) {
@@ -60,7 +60,7 @@ const Hireus = ({value, action}) => {
     } else if (state.status === "failed") {
       notifyerr();
       setDbsubmit(false);
-  
+
       setDberr(state.error);
       setTimeout(() => {
         setTimeout([]);
@@ -68,8 +68,7 @@ const Hireus = ({value, action}) => {
       dispatch(Hireusslicestatus());
     } else {
     }
-  })
-  
+  });
 
   const colourOptions = [
     {value: "nodejs", label: "Node.js"},
@@ -101,91 +100,99 @@ const Hireus = ({value, action}) => {
       .catch((error) => {
         console.log(error);
       });
-      setDbsubmit(false);
-    }, []);
+    setDbsubmit(false);
+  }, []);
 
   const handlehiresubmit = (e) => {
-    let name_verify;
-    const regex = /\b\w+\b/g;
-    const matches = name.match(regex);
-    if (matches && matches.length >= 2) {
-      name_verify = true
-    } else {
-      name_verify = false
-    }
+    if (dbsubmit === false) {
+      let name_verify;
+      const regex = /\b\w+\b/g;
+      const matches = name.match(regex);
+      if (matches && matches.length >= 2) {
+        name_verify = true;
+      } else {
+        name_verify = false;
+      }
 
-    let number_verify;
-    if (!/^\+?\d{0,3}\s?\d{6,16}$/.test(phone)) {
-      number_verify = false;
-    } else {
-      number_verify = true;
-    }
-    var email_verify;
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      email_verify = false;
-    } else {
-      email_verify = true;
-    }
-    if (!name || !email || !phone || selectval.length === 0 || !work || email_verify === false || number_verify === false || name_verify === false ) {
-      if (!name) {
-        error.name = "Name Required !";
-      }else {
-        error.name = '';
-        if(name_verify === false){
-          error.name_verify = 'Minimum Two Word Required' 
-        }else {
-          error.name_verify = ''
-        }
-      }
-      if (!email) {
-        error.email = "email Required !";
+      let number_verify;
+      if (!/^\+?\d{0,3}\s?\d{6,16}$/.test(phone)) {
+        number_verify = false;
       } else {
-        error.email = "";
-        if (email_verify === false) {
-          error.email_verify = "Add Correct email";
+        number_verify = true;
+      }
+      var email_verify;
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+        email_verify = false;
+      } else {
+        email_verify = true;
+      }
+
+      if (!name || !email || !phone || selectval.length === 0 || !work || email_verify === false || number_verify === false || name_verify === false || !isVerified) {
+        if (!name) {
+          error.name = "Name Required !";
         } else {
-          error.email_verify = "";
+          error.name = "";
+          if (name_verify === false) {
+            error.name_verify = "Minimum Two Word Required";
+          } else {
+            error.name_verify = "";
+          }
         }
-      }
-      if (!phone) {
-        error.phone = " NUmber Required !";
-      } else {
-        error.phone = "";
-        if (number_verify === false) {
-          error.num_verify = "Add Correct number";
+        if (!email) {
+          error.email = "email Required !";
         } else {
-          error.num_verify = "";
+          error.email = "";
+          if (email_verify === false) {
+            error.email_verify = "Add Correct email";
+          } else {
+            error.email_verify = "";
+          }
         }
-      }
-      if (selectval.length === 0) {
-        error.selectval = "Apply For Required !";
+        if (!phone) {
+          error.phone = " NUmber Required !";
+        } else {
+          error.phone = "";
+          if (number_verify === false) {
+            error.num_verify = "Add Correct number";
+          } else {
+            error.num_verify = "";
+          }
+        }
+        if (selectval.length === 0) {
+          error.selectval = "Apply For Required !";
+        } else {
+          error.selectval = "";
+        }
+        if (!work) {
+          error.work = "Work Details";
+        } else {
+          if (work.length < 9) {
+            error.work = "Required !!";
+          }
+        }
+
+        if (!isVerified) {
+          error.captcha = "Required !";
+        }
+        setError({...error, [e.target.name]: e.target.value});
+        setTimeout(() => {
+          setError([]);
+        }, 2000);
       } else {
-        error.selectval = "";
+        const json1 = {name, email, phone, selectval, skype, work};
+        const json2 = {ipAddress, captchres};
+        setDbsubmit(true);
+        dispatch(
+          HireusSlice({
+            json1,
+            json2,
+          })
+        );
       }
-      if (!work) {
-        error.work = "Work Details";
-      }
-      if (!isVerified) {
-        error.captcha = "Required !";
-      }
-      setError({...error, [e.target.name]: e.target.value});
-      setTimeout(() => {
-        setError([]);
-      }, 2000);
-    } else {
-      const json1 = {name, email, phone, selectval, skype, work};
-      const json2 = {ipAddress , captchres};
-      setDbsubmit(true);
-      dispatch(
-        HireusSlice({
-          json1,
-          json2,
-        })
-      );
     }
   };
   const handleVerify = (response) => {
-    setCaptchres(response)
+    setCaptchres(response);
     setIsVerified(true);
   };
 
@@ -256,7 +263,7 @@ const Hireus = ({value, action}) => {
                 <i className="fas fa-times"></i>
               </button>
             </div>
-            <form className="row hireform mt-3">
+            <div className="row hireform mt-3">
               <div className="col-md-12">
                 <input type="text" className={`${error.name ? "handleinput_error" : ""} ${dberr.name ? "mb-0" : ""}  ${error.name_verify ? "error_padding" : ""}`} name="f-name" placeholder="Full Name" onBlur={handlefnameBlur} onFocus={() => setNameFocused(true)} value={name} onChange={handlefirstname} />
                 {dberr.name && <p className="handledberror mb-2">{dberr.name}</p>}
@@ -278,10 +285,10 @@ const Hireus = ({value, action}) => {
                 </div>
                 {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
               </div>
-            </form>
+            </div>
             <div className="amm-shopping_cart-btn">
               <div className="cart-btn mt-3">
-                <button className="submit_btn" disabled={dbsubmit === true} style={{width: "100%", marginTop: "0px"}} onClick={handlehiresubmit}>
+                <button className="main_submit_btn" disabled={dbsubmit === true} style={{width: "100%", marginTop: "0px"}} onClick={handlehiresubmit}>
                   INQUIRE NOW
                 </button>
               </div>

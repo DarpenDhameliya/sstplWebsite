@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
-import axios from "../../../common/Axios";
+import axios, { api, apiimg } from "../../../common/Axios";
 import {useHistory, useParams} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -15,7 +15,7 @@ import Select from "react-select";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const PortfolioEdit = () => {
   const [name, setName] = useState("");
@@ -44,13 +44,8 @@ const PortfolioEdit = () => {
   let idparam = useParams();
   useEffect(() => {
     const fetchUpdatedata = () => {
-      axios
-        .get(`portfolio/portfolio_update_detail/${idparam.id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        })
+      api
+        .get(`portfolio/portfolio_update_detail/${idparam.id}`)
         .then((result) => {
           setSelectedValue(result.data.result.contentview);
           setContentpositionview(result.data.result.contentpositionview);
@@ -125,14 +120,8 @@ const PortfolioEdit = () => {
       }, 3000);
     } else {
       setLoading(true);
-      axios
-        .post(`portfolio/portfolio_update/${idparam.id}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data ",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .post(`portfolio/portfolio_update/${idparam.id}`, formData)
         .then((result) => {
           setName("");
           setIndustry("");

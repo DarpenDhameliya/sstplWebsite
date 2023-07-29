@@ -11,12 +11,12 @@ import TableRow from "@mui/material/TableRow";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api } from "../../../common/Axios";
 import Pagination from "@mui/material/Pagination";
 import { useHistory } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import logo from '../../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../../assets/images/logo-removebg-preview.webp'
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,21 +48,13 @@ const Contact_us = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 
-  var token = localStorage.getItem("ssAdmin");
-
   const fetchHiredata = (pagenumber, rowperpage) => {
     setLoading(true);
     const formData = new FormData();
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", rowperpage);
-    axios
-      .post("contactus/contact-list", formData, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: token,
-        },
-      })
+    api
+      .post("contactus/contact-list", formData)
       .then((result) => {
         setLoading(false);
         setCount(result.data.totalPages);
@@ -93,13 +85,8 @@ const Contact_us = () => {
   const handledelete = (e) => {
     setLoading(true);
 
-    axios
-      .delete(`contactus/contact_delete/${e}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`contactus/contact_delete/${e}`)
       .then((result) => {
         fetchHiredata(page, rowperpage);
         setLoading(false);

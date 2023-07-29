@@ -12,12 +12,12 @@ import TableRow from "@mui/material/TableRow";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api } from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Pagination from "@mui/material/Pagination";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -49,7 +49,6 @@ const PortfolioList = () => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
 
-  var token = localStorage.getItem("ssAdmin");
   const handlesenddata = () => {
     history.push("/online-admin/dashboard/portfolioadd");
   };
@@ -59,13 +58,8 @@ const PortfolioList = () => {
     const formData = new FormData();
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", rowperpage);
-    axios
-      .post("portfolio/portfolio_list", formData, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
+    api
+      .post("portfolio/portfolio_list", formData)
       .then((result) => {
         setLoading(false);
         setCount(result.data.totalPages);
@@ -94,13 +88,8 @@ const PortfolioList = () => {
 
   const handledelete = (e) => {
     setLoading(true);
-    axios
-      .delete(`portfolio/portfolio_delete/${e}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`portfolio/portfolio_delete/${e}`)
       .then((result) => {
         setLoading(false);
         fetchHiredata(page, rowperpage);

@@ -10,8 +10,8 @@ import useMuiStyle from "../../CommonComponent/MuiStyle";
 import {useHistory, useParams} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import axios from "../../../common/Axios";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import axios, { api, apiimg } from "../../../common/Axios";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const AboutValueEdit = () => {
   const [error, setError] = useState([]);
@@ -30,13 +30,8 @@ const AboutValueEdit = () => {
   var token = localStorage.getItem("ssAdmin");
   var idparam = useParams();
   const fetchHiredata = () => {
-    axios
-      .get(`aboutvalue/aboutvalue_update_detail/${idparam.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
+    api
+      .get(`aboutvalue/aboutvalue_update_detail/${idparam.id}`)
       .then((result) => {
         // setCareerList(result.data.result);
         setTitleheading(result.data.result[0].heading);
@@ -98,14 +93,8 @@ const AboutValueEdit = () => {
       }, 3000);
     } else {
       setLoading(true);
-      axios
-        .put(`aboutvalue/aboutvalue_update/${idparam.id}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .put(`aboutvalue/aboutvalue_update/${idparam.id}`, formData)
         .then((result) => {
           setTitleheading("");
           setContent("");

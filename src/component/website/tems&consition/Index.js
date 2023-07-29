@@ -7,7 +7,7 @@ import BackToTop from "../../common/BackToTop";
 import Headers from "../../common/PageHeader";
 import Hireus from "../../common/Hireus";
 import Temsandconsition from "./Tems&consition";
-import logo from "../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 
 const TermandConditionIndex = () => {
   const [drawer, drawerAction] = useToggle(false);

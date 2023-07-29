@@ -2,37 +2,12 @@ import React, {useRef, useEffect, useState} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import roop from "../../../assets/images/blog/roop (1).webp";
-import red from "../../../assets/images/blog/redchili.webp";
-import food from "../../../assets/images/blog/food.webp";
-import dimond from "../../../assets/images/blog/dimond (1).webp";
-import dalali from "../../../assets/images/blog/dalali.webp";
-import sk from "../../../assets/images/blog/sk.webp";
-import battle from "../../../assets/images/blog/battel.webp";
-import maktech from "../../../assets/images/blog/maktech.webp";
-import macswin from "../../../assets/images/blog/macswin.webp";
-import redient from "../../../assets/images/blog/redient.webp";
 import axios from "../../common/Axios";
 export default function Portfoliyo() {
-  const [workdata, setWorkdata] = useState([]);
   const [portfolioList, setPortfolioList] = useState([]);
   const [fetchErr, setFetchErr] = useState("");
 
-  useEffect(() => {
-    let data = [
-      {image: roop, title: "Roop Label", type: ["all", "web"]},
-      {image: red, title: "Red Chilli Fast Food", type: ["all", "mob", "web"]},
-      {image: food, title: "Food Book", type: ["all", "mob", "web"]},
-      {image: dimond, title: "Diamond Inventory Software", type: ["all", "desk"]},
-      {image: dalali, title: "DalaliBook", type: ["all", "mob"]},
-      {image: sk, title: "S.K. Enterprise", type: ["all", "mob", "web"]},
-      {image: battle, title: "Battle Village", type: ["all", "mob", "web"]},
-      {image: maktech, title: "MakTech Laser", type: ["all", "desk", "mob", "web"]},
-      {image: macswin, title: "MacSwin Technology", type: ["all", "desk", "mob", "web"]},
-      {image: redient, title: "The Radiant International School", type: ["all", "web"]},
-    ];
-    setWorkdata(data);
-  }, []);
+
 
   const fetchHiredata = () => {
     axios

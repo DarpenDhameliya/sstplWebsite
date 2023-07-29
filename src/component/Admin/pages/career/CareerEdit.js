@@ -6,12 +6,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
-import axios from "../../../common/Axios";
+import axios, { api, apiimg } from "../../../common/Axios";
 import {useHistory, useParams} from "react-router-dom";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import logo from '../../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../../assets/images/logo-removebg-preview.webp'
 
 const CareerEdit = () => {
   const [title, setTitle] = useState("");
@@ -21,16 +21,16 @@ const CareerEdit = () => {
   const [description, setDescription] = useState("");
   const [qualifaction, setQualifaction] = useState("");
   const [containPositionView, setContainPositionView] = useState("");
-  const [responsibilitys1, setResponsibilitys1] = useState("");
-  const [responsibilitys2, setResponsibilitys2] = useState("");
-  const [responsibilitys3, setResponsibilitys3] = useState("");
-  const [responsibilitys4, setResponsibilitys4] = useState("");
-  const [responsibilitys5, setResponsibilitys5] = useState("");
-  const [responsibilitys6, setResponsibilitys6] = useState("");
-  const [responsibilitys7, setResponsibilitys7] = useState("");
-  const [responsibilitys8, setResponsibilitys8] = useState("");
-  const [responsibilitys9, setResponsibilitys9] = useState("");
-  const [responsibilitys10, setResponsibilitys10] = useState("");
+  // const [responsibilitys1, setResponsibilitys1] = useState("");
+  // const [responsibilitys2, setResponsibilitys2] = useState("");
+  // const [responsibilitys3, setResponsibilitys3] = useState("");
+  // const [responsibilitys4, setResponsibilitys4] = useState("");
+  // const [responsibilitys5, setResponsibilitys5] = useState("");
+  // const [responsibilitys6, setResponsibilitys6] = useState("");
+  // const [responsibilitys7, setResponsibilitys7] = useState("");
+  // const [responsibilitys8, setResponsibilitys8] = useState("");
+  // const [responsibilitys9, setResponsibilitys9] = useState("");
+  // const [responsibilitys10, setResponsibilitys10] = useState("");
   const [loading, setLoading] = useState(true);
 
   const [selectedValue, setSelectedValue] = useState("");
@@ -69,13 +69,8 @@ const CareerEdit = () => {
   useEffect(() => {
 
     const fetchUpdatedata = () => {
-      axios
-        .get(`career/careerdetails_update_detail/${idparam.id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        })
+      api
+        .get(`career/careerdetails_update_detail/${idparam.id}`)
         .then((result) => {
           setLoading(false);
 
@@ -95,29 +90,29 @@ const CareerEdit = () => {
           setSelectedValue(result.data.result.contentview);
           setContainPositionView(result.data.result.contentpositionview);
           setInputs(parsedata);
-          parsedata.forEach((value, index) => {
-            if (index === 0) {
-              setResponsibilitys1(value);
-            } else if (index === 1) {
-              setResponsibilitys2(value);
-            } else if (index === 2) {
-              setResponsibilitys3(value);
-            } else if (index === 3) {
-              setResponsibilitys4(value);
-            } else if (index === 4) {
-              setResponsibilitys5(value);
-            } else if (index === 5) {
-              setResponsibilitys6(value);
-            } else if (index === 6) {
-              setResponsibilitys7(value);
-            } else if (index === 7) {
-              setResponsibilitys8(value);
-            } else if (index === 8) {
-              setResponsibilitys9(value);
-            } else if (index === 9) {
-              setResponsibilitys10(value);
-            }
-          });
+          // parsedata.forEach((value, index) => {
+          //   if (index === 0) {
+          //     setResponsibilitys1(value);
+          //   } else if (index === 1) {
+          //     setResponsibilitys2(value);
+          //   } else if (index === 2) {
+          //     setResponsibilitys3(value);
+          //   } else if (index === 3) {
+          //     setResponsibilitys4(value);
+          //   } else if (index === 4) {
+          //     setResponsibilitys5(value);
+          //   } else if (index === 5) {
+          //     setResponsibilitys6(value);
+          //   } else if (index === 6) {
+          //     setResponsibilitys7(value);
+          //   } else if (index === 7) {
+          //     setResponsibilitys8(value);
+          //   } else if (index === 8) {
+          //     setResponsibilitys9(value);
+          //   } else if (index === 9) {
+          //     setResponsibilitys10(value);
+          //   }
+          // });
         })
         .catch((err) => {
           setLoading(false);
@@ -172,14 +167,8 @@ const CareerEdit = () => {
     } else {
       setLoading(true);
 
-      axios
-        .put(`career/careerdetails_update/${idparam.id}`, formData, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .put(`career/careerdetails_update/${idparam.id}`, formData)
         .then((result) => {
           setTitle("");
           setLocation("");
@@ -189,16 +178,16 @@ const CareerEdit = () => {
           setQualifaction("");
           setSelectedValue(true);
           setContainPositionView("");
-          setResponsibilitys1("");
-          setResponsibilitys2("");
-          setResponsibilitys3("");
-          setResponsibilitys4("");
-          setResponsibilitys5("");
-          setResponsibilitys6("");
-          setResponsibilitys7("");
-          setResponsibilitys8("");
-          setResponsibilitys9("");
-          setResponsibilitys10("");
+          // setResponsibilitys1("");
+          // setResponsibilitys2("");
+          // setResponsibilitys3("");
+          // setResponsibilitys4("");
+          // setResponsibilitys5("");
+          // setResponsibilitys6("");
+          // setResponsibilitys7("");
+          // setResponsibilitys8("");
+          // setResponsibilitys9("");
+          // setResponsibilitys10("");
           jsonRepresentation = "";
           setLoading(false);
           history.push("/online-admin/dashboard/careerdetails");

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState, useCallback} from "react";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logo.webp";
 import {useDispatch, useSelector} from "react-redux";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,7 +23,7 @@ const ContactForm = () => {
   const [dbError, setDbError] = useState([]);
   const [error, setError] = useState([]);
   const [dbsubmit, setDbsubmit] = useState(false);
-  const [captchres, setCaptchres] = useState('')
+  const [captchres, setCaptchres] = useState("");
 
   const [recentYear, setRecentYear] = useState("");
   const [isVerified, setIsVerified] = useState(false);
@@ -69,90 +69,95 @@ const ContactForm = () => {
   }, []);
 
   const handlesendDATA = (e) => {
-setContactClick(true);
-    var email_verify;
-    var number_verify;
-    let name_verify;
-    const regex = /\b\w+\b/g;
-    const matches = fname.match(regex);
-    if (matches && matches.length >= 2) {
-      name_verify = true
-    } else {
-      name_verify = false
-    }
-    if (!/^\+?\d{0,3}\s?\d{6,16}$/.test(phone)) {
-      number_verify = false;
-    } else {
-      number_verify = true;
-    }
-
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      email_verify = false;
-    } else {
-      email_verify = true;
-    }
-      
-    if (!fname || !lname || !email || !phone ||  !textarea || number_verify === false || email_verify === false  || name_verify === false || !isVerified) {
-      if (!fname) {
-        error.fname = "Required !!";
+    setContactClick(true);
+    if (dbsubmit === false) {
+      var email_verify;
+      var number_verify;
+      let name_verify;
+      const regex = /\b\w+\b/g;
+      const matches = fname.match(regex);
+      if (matches && matches.length >= 2) {
+        name_verify = true;
       } else {
-        error.fname = "";
-        if(name_verify === false){
-          error.name_verify = 'Minimum Two Word Required' 
-        }else {
-          error.name_verify = ''
-        }
+        name_verify = false;
       }
-      if (!lname) {
-        error.lname = "Required !!";
+      if (!/^\+?\d{0,3}\s?\d{6,16}$/.test(phone)) {
+        number_verify = false;
       } else {
-        error.lname = "";
-      }
-      if (!textarea) {
-        error.textarea = "Required !!";
-      } else {
-        error.textarea = "";
-      }
-      if (!email) {
-        error.email = "Required !!";
-      } else {
-        error.email = "";
-        if (!email_verify) {
-          error.em_verify = "Add Correct email";
-        } else {
-          error.em_verify = "";
-        }
-      }
-      if (!phone) {
-        error.phone = "Required !!";
-      } else {
-        error.phone = "";
-        if (!number_verify) {
-          error.num_verify = "Add Correct number";
-        } else {
-          error.num_verify = "";
-        }
-      }
-      if (!isVerified) {
-        error.captcha = "Required !!";
-      } else {
-        error.captcha = "";
+        number_verify = true;
       }
 
-      setError({...error, [e.target.name]: e.target.value});
-      setTimeout(() => {
-        setError([]);
-      }, 3000);
-    } else {
-      const json1 = {fname, lname, email, phone, textarea};
-      const json2 = {ipAddress , captchres};
-      setDbsubmit(true);
-      dispatch(
-        ContactusSlice({
-          json1,
-          json2,
-        })
-      );
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+        email_verify = false;
+      } else {
+        email_verify = true;
+      }
+      if (!fname || !lname || !email || !phone || !textarea || number_verify === false || email_verify === false || name_verify === false || !isVerified) {
+        if (!fname) {
+          error.fname = "Required !!";
+        } else {
+          error.fname = "";
+          if (name_verify === false) {
+            error.name_verify = "Minimum Two Word Required";
+          } else {
+            error.name_verify = "";
+          }
+        }
+        if (!lname) {
+          error.lname = "Required !!";
+        } else {
+          if (lname.length < 4) {
+            error.lname = "Required !!";
+          }
+        }
+        if (!textarea) {
+          error.textarea = "Required !!";
+        } else {
+          if (textarea.length < 9) {
+            error.textarea = "Required !!";
+          }
+        }
+        if (!email) {
+          error.email = "Required !!";
+        } else {
+          error.email = "";
+          if (!email_verify) {
+            error.em_verify = "Add Correct email";
+          } else {
+            error.em_verify = "";
+          }
+        }
+        if (!phone) {
+          error.phone = "Required !!";
+        } else {
+          error.phone = "";
+          if (!number_verify) {
+            error.num_verify = "Add Correct number";
+          } else {
+            error.num_verify = "";
+          }
+        }
+        if (!isVerified) {
+          error.captcha = "Required !!";
+        } else {
+          error.captcha = "";
+        }
+
+        setError({...error, [e.target.name]: e.target.value});
+        setTimeout(() => {
+          setError([]);
+        }, 3000);
+      } else {
+        const json1 = {fname, lname, email, phone, textarea};
+        const json2 = {ipAddress, captchres};
+        setDbsubmit(true);
+        dispatch(
+          ContactusSlice({
+            json1,
+            json2,
+          })
+        );
+      }
     }
   };
 
@@ -166,7 +171,7 @@ setContactClick(true);
         setEmail("");
         setPhone("");
         setTextarea("");
-        setCaptchres("")
+        setCaptchres("");
         setDbsubmit(false);
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
@@ -192,13 +197,13 @@ setContactClick(true);
   }, [contactClick, notify, states.status]);
 
   const handleVerify = (response) => {
-    setCaptchres(response)
+    setCaptchres(response);
     setIsVerified(true);
   };
 
-  const handlefirstname =  (e) => {
+  const handlefirstname = (e) => {
     let name = e.target.value;
-     setFname(name);
+    setFname(name);
     if (name.length > 5) {
       error.fname = "";
     }
@@ -334,9 +339,9 @@ setContactClick(true);
                         </div>
                       </a>
                       <a href="mailto:hr.softstorm@gmail.com" rel="noopener noreferrer" className="pl-0 d-flex align-items-center">
-                      <div className="ml-1" style={{color: "#a10404"}}>
-                        hr.softstorm@gmail.com
-                      </div>
+                        <div className="ml-1" style={{color: "#a10404"}}>
+                          hr.softstorm@gmail.com
+                        </div>
                       </a>
                       {/* <p style={{color: "#a10404"}}>contact@softstorm.in</p> */}
                     </div>
@@ -393,7 +398,9 @@ setContactClick(true);
                         {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-end align-items-center">
-                        <button className="main-btn_footer main-btn-footer" disabled={dbsubmit} name="submit" value="Send Message" onClick={handlesendDATA} >Send Message</button>
+                        <button className="main-btn_footer main-btn-footer" disabled={dbsubmit} name="submit" value="Send Message" onClick={handlesendDATA}>
+                          Send Message
+                        </button>
                       </div>
                     </div>
                   </div>

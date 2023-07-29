@@ -8,7 +8,7 @@ import Headers from "../../common/PageHeader";
 import Hireus from "../../common/Hireus";
 import Privacy from "./Privacy";
 import {useEffect, useState} from "react";
-import logo from "../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 
 const PrivacyIndex = () => {
   const [drawer, drawerAction] = useToggle(false);

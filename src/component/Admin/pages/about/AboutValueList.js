@@ -12,9 +12,9 @@ import TableRow from "@mui/material/TableRow";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api } from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
-import logo from '../../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../../assets/images/logo-removebg-preview.webp'
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -43,18 +43,13 @@ const AboutValueList = () => {
   const classes = useMuiStyle();
   const history = useHistory();
 
-  var token = localStorage.getItem("ssAdmin");
   const handlesenddata = () => {
     history.push("/online-admin/dashboard/aboutvalueadd");
   };
 
   const fetchHiredata = () => {
-    axios
-      .get("aboutvalue/aboutvalue_list", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    api
+      .get("aboutvalue/aboutvalue_list")
       .then((result) => {
         setCareerList(result.data.result);
         setLoading(false);
@@ -83,13 +78,8 @@ const AboutValueList = () => {
 
   const handledelete = (e) => {
     setLoading(true);
-    axios
-      .delete(`aboutvalue/aboutvalue_delete/${e}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`aboutvalue/aboutvalue_delete/${e}`)
       .then((result) => {
         setLoading(false);
         fetchHiredata();

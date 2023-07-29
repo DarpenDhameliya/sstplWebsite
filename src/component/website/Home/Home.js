@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import shapeTwo from "../../../assets/images/shape/shape-10.webp";
-import shapeThree from "../../../assets/images/shape/shape-3.webp";
+import shapeTwo from "../../../assets/images/code (3).webp";
+import shapeThree from "../../../assets/images/network-security 1.webp";
 import Lottie from "lottie-react";
 import homedata from "../../common/fM1Ya2VfEr.json";
 import {Link} from "react-router-dom";

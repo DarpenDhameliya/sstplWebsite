@@ -6,7 +6,7 @@ import Portfoliyo from "./Portfoliyo";
 import Footer from "../../common/Footer";
 import BackToTop from "../../common/BackToTop";
 import Hireus from "../../common/Hireus";
-import logo from "../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 import {useEffect, useState} from "react";
 const WorlIndex = () => {
   const [drawer, drawerAction] = useToggle(false);

@@ -6,12 +6,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
-import axios from "../../../common/Axios";
+import axios, { api, apiimg } from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import logo from '../../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../../assets/images/logo-removebg-preview.webp'
 
 const CareerDetailsAdd = () => {
   const [title, setTitle] = useState("");
@@ -21,16 +21,16 @@ const CareerDetailsAdd = () => {
   const [description, setDescription] = useState("");
   const [qualifaction, setQualifaction] = useState("");
   const [containPositionView, setContainPositionView] = useState("");
-  const [responsibilitys1, setResponsibilitys1] = useState("");
-  const [responsibilitys2, setResponsibilitys2] = useState("");
-  const [responsibilitys3, setResponsibilitys3] = useState("");
-  const [responsibilitys4, setResponsibilitys4] = useState("");
-  const [responsibilitys5, setResponsibilitys5] = useState("");
-  const [responsibilitys6, setResponsibilitys6] = useState("");
-  const [responsibilitys7, setResponsibilitys7] = useState("");
-  const [responsibilitys8, setResponsibilitys8] = useState("");
-  const [responsibilitys9, setResponsibilitys9] = useState("");
-  const [responsibilitys10, setResponsibilitys10] = useState("");
+  // const [responsibilitys1, setResponsibilitys1] = useState("");
+  // const [responsibilitys2, setResponsibilitys2] = useState("");
+  // const [responsibilitys3, setResponsibilitys3] = useState("");
+  // const [responsibilitys4, setResponsibilitys4] = useState("");
+  // const [responsibilitys5, setResponsibilitys5] = useState("");
+  // const [responsibilitys6, setResponsibilitys6] = useState("");
+  // const [responsibilitys7, setResponsibilitys7] = useState("");
+  // const [responsibilitys8, setResponsibilitys8] = useState("");
+  // const [responsibilitys9, setResponsibilitys9] = useState("");
+  // const [responsibilitys10, setResponsibilitys10] = useState("");
   const [selectedValue, setSelectedValue] = useState("true");
   const [loading, setLoading] = useState(true);
 
@@ -94,14 +94,8 @@ const CareerDetailsAdd = () => {
     } else {
       setLoading(true);
 
-      axios
-        .post("career/careerdetails_add", formData, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .post("career/careerdetails_add", formData)
         .then((result) => {
           setTitle("");
           setLocation("");
@@ -111,16 +105,16 @@ const CareerDetailsAdd = () => {
           setQualifaction("");
           setSelectedValue("true");
           setContainPositionView("");
-          setResponsibilitys1("");
-          setResponsibilitys2("");
-          setResponsibilitys3("");
-          setResponsibilitys4("");
-          setResponsibilitys5("");
-          setResponsibilitys6("");
-          setResponsibilitys7("");
-          setResponsibilitys8("");
-          setResponsibilitys9("");
-          setResponsibilitys10("");
+          // setResponsibilitys1("");
+          // setResponsibilitys2("");
+          // setResponsibilitys3("");
+          // setResponsibilitys4("");
+          // setResponsibilitys5("");
+          // setResponsibilitys6("");
+          // setResponsibilitys7("");
+          // setResponsibilitys8("");
+          // setResponsibilitys9("");
+          // setResponsibilitys10("");
           setLoading(false);
 
           setInputs([]);

@@ -9,7 +9,7 @@ import Sidepoosition from "./Sidepoosition";
 import BackToTop from "../../common/BackToTop";
 import Hireus from "../../common/Hireus";
 import ApplyNow from "../../common/ApplyNow";
-import logo from "../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 
 const CareerIndex = () => {
   const [drawer, drawerAction] = useToggle(false);

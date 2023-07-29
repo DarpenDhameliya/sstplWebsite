@@ -7,7 +7,7 @@ import Footer from "../../../common/Footer";
 import Web_graphicservice from "./Web_graphicservice";
 import BackToTop from "../../../common/BackToTop";
 import Hireus from "../../../common/Hireus";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import { Servicestate } from "../../slice/Service";
 import { useSelector } from "react-redux";
 import axios from "../../../common/Axios";

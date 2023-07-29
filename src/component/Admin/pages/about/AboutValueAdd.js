@@ -10,8 +10,8 @@ import useMuiStyle from "../../CommonComponent/MuiStyle";
 import {useHistory} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import axios from "../../../common/Axios";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import axios, { apiimg } from "../../../common/Axios";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const AboutValueAdd = () => {
   const [error, setError] = useState([]);
@@ -69,14 +69,8 @@ const AboutValueAdd = () => {
       }, 3000);
     } else {
       setLoading(true);
-      axios
-        .post("aboutvalue/aboutvalue_add", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .post("aboutvalue/aboutvalue_add", formData)
         .then((result) => {
           setTitleheading("");
           setContent("");

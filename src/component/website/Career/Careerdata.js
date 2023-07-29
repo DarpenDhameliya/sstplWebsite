@@ -48,13 +48,14 @@ const Careerdata = ({loding}) => {
   const [careerBtnClick, setCareerBtnClick] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
-  const [captchres, setCaptchres] = useState('')
+  const [captchres, setCaptchres] = useState("");
   const [dbsubmit, setDbsubmit] = useState(false);
   const [nameFocused, setNameFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [phoneFocused, setPhoneFocused] = useState(false);
   const [file, setFile] = useState("");
   const recaptchaRef = useRef();
+  const fileInputRef = useRef(null);
 
   const notify = useCallback(() => {
     toast.success(" Apply Successfully..", {
@@ -84,7 +85,7 @@ const Careerdata = ({loding}) => {
         setPhone("");
         setApply("");
         setFile("");
-        setCaptchres('')
+        setCaptchres("");
         setFilename("Upload Resume");
         setOpen(false);
         setDbsubmit(false);
@@ -103,6 +104,7 @@ const Careerdata = ({loding}) => {
       } else {
       }
     }
+
   });
 
   useEffect(() => {
@@ -143,91 +145,90 @@ const Careerdata = ({loding}) => {
   const dispatch = useDispatch();
 
   const handlesubmit = (e) => {
-    let name_verify;
-    const regex = /\b\w+\b/g;
-    const matches = name.match(regex);
-    if (matches && matches.length >= 2) {
-      name_verify = true;
-    } else {
-      name_verify = false;
-    }
+    if (dbsubmit === false) {
+      let name_verify;
+      const regex = /\b\w+\b/g;
+      const matches = name.match(regex);
+      if (matches && matches.length >= 2) {
+        name_verify = true;
+      } else {
+        name_verify = false;
+      }
 
-    setCareerBtnClick(true);
-    let number_verify;
-    if (!/^\+?\d{0,3}\s?\d{6,14}$/.test(phone)) {
-      number_verify = false;
-    } else {
-      number_verify = true;
-    }
-    let email_verify;
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      email_verify = false;
-    } else {
-      email_verify = true;
-    }
-// if(!file || !name || !email || !phone){
-    if (!file || !name || !email || !phone || !apply || email_verify === false || !number_verify || !isVerified || name_verify === false || !isVerified) {
-      if (!file) {
-        error.file = "File Required !";
-      }
-      if (!name) {
-        error.name = "Name Required !";
+      setCareerBtnClick(true);
+      let number_verify;
+      if (!/^\+?\d{0,3}\s?\d{6,14}$/.test(phone)) {
+        number_verify = false;
       } else {
-        error.name = "";
-        if (name_verify === false) {
-          error.name_verify = "Minimum Two Word Required";
-        } else {
-          error.name_verify = "";
+        number_verify = true;
+      }
+      let email_verify;
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+        email_verify = false;
+      } else {
+        email_verify = true;
+      }
+      if (!file || !name || !email || !phone || email_verify === false || number_verify === false || name_verify === false || !isVerified) {
+        if (!file) {
+          error.file = "File Required !";
         }
-      }
-      if (!email) {
-        error.email = "email Required !";
-      } else {
-        error.email = "";
-        if (email_verify === false) {
-          error.em_verify = "Add Correct email";
+        if (!name) {
+          error.name = "Name Required !";
         } else {
-          error.em_verify = "";
+          error.name = "";
+          if (name_verify === false) {
+            error.name_verify = "Minimum Two Word Required";
+          } else {
+            error.name_verify = "";
+          }
         }
-      }
-      if (!phone) {
-        error.phone = "NUmber Required !";
-      } else {
-        error.phone = "";
-        if (!number_verify) {
-          error.num_verify = "Add Correct number";
+        if (!email) {
+          error.email = "email Required !";
         } else {
-          error.num_verify = "";
+          error.email = "";
+          if (email_verify === false) {
+            error.em_verify = "Add Correct email";
+          } else {
+            error.em_verify = "";
+          }
         }
-      }
-      if (!apply) {
-        error.apply = "Apply For Required !";
-      }
-      if (!isVerified) {
-        error.captcha = "Required !!";
+        if (!phone) {
+          error.phone = "NUmber Required !";
+        } else {
+          error.phone = "";
+          if (number_verify === false) {
+            error.num_verify = "Add Correct number";
+          } else {
+            error.num_verify = "";
+          }
+        }
+        if (!isVerified) {
+          error.captcha = "Required !!";
+        } else {
+          error.captcha = "";
+        }
+
+        setError({...error, [e.target.name]: e.target.value});
+        setTimeout(() => {
+          setError([]);
+        }, 2000);
       } else {
-        error.captcha = "";
+        let formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("phone", phone);
+        formData.append("apply", sendmailview);
+        formData.append("file", file);
+        const json2 = {ipAddress, captchres};
+        setDbsubmit(true);
+        dispatch(
+          CareerSlice({
+            formData,
+            json2,
+          })
+        );
+        
       }
-      setError({...error, [e.target.name]: e.target.value});
-      setTimeout(() => {
-        setError([]);
-      }, 2000);
-    } else {
-      let formData = new FormData();
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      formData.append("apply", sendmailview);
-      formData.append("file", file);
-      const json1 = {file: file, name: name, email: email, phone: phone , apply: sendmailview};
-      const json2 = {ipAddress , captchres};
-      setDbsubmit(true);
-      dispatch(
-        CareerSlice({
-          formData,
-          json2,
-        })
-      );
     }
   };
 
@@ -235,9 +236,6 @@ const Careerdata = ({loding}) => {
     setSendmailview(`${data.title} ${data.experience}`);
     setFormapplyview(data.title);
     setApply(data._id);
-    // setSendmailview(techview);
-    // setFormapplyview(tech);
-    // setApply(data);
     setCollaspsOpen(collaspsOpen === data._id ? false : data._id);
   };
 
@@ -246,8 +244,13 @@ const Careerdata = ({loding}) => {
     setFilename(file.name);
     setFile(e.target.files[0]);
   };
+  const handleTextKeyPress = (event) => {
+    if (event.key === "Enter") {
+      fileInputRef.current.click();
+    }
+  };
   const handleVerify = (response) => {
-    setCaptchres(response)
+    setCaptchres(response);
     setIsVerified(true);
   };
   const handlemodalOpen = () => {
@@ -256,7 +259,7 @@ const Careerdata = ({loding}) => {
     setPhone("");
     setApply("");
     setFile("");
-    setCaptchres('')
+    setCaptchres("");
     setFilename("Upload Resume");
     setOpen(true);
   };
@@ -419,13 +422,24 @@ const Careerdata = ({loding}) => {
               </div>
 
               <div className="col-md-12 ">
-                <div
+                {/* <div
                   className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
                     `}
                   style={{background: "#f5f5f7"}}
                 >
                   <span className="filename">{filename}</span>
                   <input type="file" className="inputfile form-control" name="file" onChange={hgandlefile} />
+                </div> */}
+                <div>
+                  <input
+                    className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
+                    `}
+                    type="text"
+                    value={filename}
+                    onClick={() => fileInputRef.current.click()}
+                    onKeyDown={handleTextKeyPress}
+                  />
+                  <input type="file" ref={fileInputRef} style={{display: "none"}} onChange={hgandlefile} />
                 </div>
                 {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
               </div>

@@ -7,7 +7,7 @@ import BackToTop from "../../../common/BackToTop";
 import Testimonial from "./Testimonial";
 import Headers from "../../../common/PageHeader";
 import Hireus from "../../../common/Hireus";
-import logo from '../../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../../assets/images/logo-removebg-preview.webp'
 const Testimonialindex = () => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);

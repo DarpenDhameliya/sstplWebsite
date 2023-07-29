@@ -13,7 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api, apiimg } from "../../../common/Axios";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Radio from "@mui/material/Radio";
@@ -24,7 +24,7 @@ import CardMedia from "@mui/material/CardMedia";
 import {useHistory} from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import Pagination from "@mui/material/Pagination";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -112,15 +112,10 @@ const TestimonialList = () => {
       } else {
         setLoading(true);
 
-        axios
-          .post(`testimonial/testimonial_update/${upid}`, formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: token,
-            },
-          })
+        apiimg
+          .post(`testimonial/testimonial_update/${upid}`, formData)
           .then((result) => {
+            fetchHiredata(page, rowperpage);
             setName("");
             setPosition("");
             setDiscription("");
@@ -131,7 +126,6 @@ const TestimonialList = () => {
             setSendImage("");
             setLoading(false);
 
-            fetchHiredata(page, rowperpage);
           })
           .catch((err) => {
             setLoading(false);
@@ -173,15 +167,10 @@ const TestimonialList = () => {
       } else {
         setLoading(true);
 
-        axios
-          .post("testimonial/testimonial_add", formData, {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: token,
-            },
-          })
+        apiimg
+          .post("testimonial/testimonial_add", formData)
           .then((result) => {
+            fetchHiredata(page, rowperpage);
             setName("");
             setPosition("");
             setDiscription("");
@@ -189,7 +178,6 @@ const TestimonialList = () => {
             setViewpo("");
             handlemodel();
             setLoading(false);
-            fetchHiredata(page, rowperpage);
           })
           .catch((err) => {
             setLoading(false);
@@ -204,12 +192,8 @@ const TestimonialList = () => {
     const formData = new FormData();
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", rowperpage);
-    axios
-      .post("testimonial/testimonial_list", formData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    api
+      .post("testimonial/testimonial_list", formData)
       .then((result) => {
         setLoading(false);
         setCount(result.data.totalPages);
@@ -244,13 +228,8 @@ const TestimonialList = () => {
 
   const handledelete = (e) => {
     setLoading(true);
-    axios
-      .delete(`testimonial/testimonial_delete/${e}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`testimonial/testimonial_delete/${e}`)
       .then((result) => {
         setLoading(false);
         fetchHiredata(page, rowperpage);

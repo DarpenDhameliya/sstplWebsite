@@ -1,14 +1,14 @@
 import React from "react";
-import shape13 from "../../../assets/images/shape/shape-13.webp";
+import shape13 from "../../../assets/images/it.webp";
 import shape14 from "../../../assets/images/shape/shape-14.webp";
-import shape15 from "../../../assets/images/shape/shape-15.webp";
-import image1 from "../../../assets/images/Group 16 (7).png";
+import shape15 from "../../../assets/images/persantage (1).webp";
+import image1 from "../../../assets/images/Group 16 (7).webp";
 // import mob1 from "../../../assets/images/icon/customer-support.webp";
 // import mob2 from "../../../assets/images/icon/customized-solution.webp";
 // import mob3 from "../../../assets/images/icon/latest-technologies.webp";
-import mob1 from "../../../assets/images/customize solution png.png";
-import mob2 from "../../../assets/images/CUSTOMER SUPPORT.png";
-import mob3 from "../../../assets/images/LATEST TECHNOLOGY.png";
+import mob1 from "../../../assets/images/customize solution png.webp";
+import mob2 from "../../../assets/images/CUSTOMER SUPPORT.webp";
+import mob3 from "../../../assets/images/LATEST TECHNOLOGY.webp";
 
 export default function WhyChoseUs() {
   return (
@@ -80,13 +80,13 @@ export default function WhyChoseUs() {
           </div>
         </div>
         <div className="features-shape-1">
-          <img src={shape13} alt="" />
+          <img src={shape15} alt=""  style={{width:"25px"}}/>
         </div>
         {/* <div className="features-shape-2">
           <img src={shape14} alt="" />
         </div> */}
         <div className="features-shape-3">
-          <img src={shape15} alt="" />
+          <img src={shape13} alt="" />
         </div>
       </section>
     </>

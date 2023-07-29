@@ -10,8 +10,11 @@ import useMuiStyle from "../../CommonComponent/MuiStyle";
 import {useHistory} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import axios from "../../../common/Axios";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import axios, { apiimg } from "../../../common/Axios";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const Serviceadd = () => {
   const [error, setError] = useState([]);
@@ -22,7 +25,8 @@ const Serviceadd = () => {
   const [imgdisplay, setImgdisplay] = useState([]);
   const [imgpre, setImgpre] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [selectedValue, setSelectedValue] = useState("");
+  const [viewpo, setViewpo] = useState("");
   const [slectImage1, setSlectImage1] = useState(null);
   const [image1, setImage1] = useState("");
   const [imgdisplay1, setImgdisplay1] = useState([]);
@@ -36,6 +40,10 @@ const Serviceadd = () => {
   setTimeout(() => {
     setLoading(false);
   }, 500);
+
+  const handleviewpo = (e) => {
+    setViewpo(e.target.value);
+  };
   const imagehandle = (e) => {
     let addImage = e.target.files[0];
     setImage(addImage);
@@ -67,13 +75,12 @@ const Serviceadd = () => {
   };
 
   const handlesenddata = (e) => {
-    
     let formData = new FormData();
     formData.append("heading", titleheading);
     formData.append("content", content);
     formData.append("image", image);
     formData.append("image", image1);
-    
+
     if (!titleheading || !content || !image || !image1) {
       if (!titleheading) {
         error.head = "Require !";
@@ -87,21 +94,15 @@ const Serviceadd = () => {
       if (!image1) {
         error.image1 = "Require !";
       }
-      
+
       setError({...error, [e.target.name]: e.target.value});
       setTimeout(() => {
         setError([]);
       }, 3000);
     } else {
       setLoading(true);
-      axios
-        .post("service/service_add", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .post("service/service_add", formData)
         .then((result) => {
           setTitleheading("");
           setContent("");
@@ -159,6 +160,7 @@ const Serviceadd = () => {
                   </Card>
                 )}
               </Grid>
+
               <Grid item xs={12} sm={6} className={classes.setinputlayout}>
                 <Typography className={classes.setlabel}>service page image :</Typography>
                 <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle1} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage1} />
@@ -171,6 +173,23 @@ const Serviceadd = () => {
                     </Button>
                   </Card>
                 )}
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6} className={classes.setinputlayout}>
+                <Typography className={classes.setlabel}>View position in home :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} style={{width: "100%"}} placeholder="position for homr" InputLabelProps={{shrink: false}} value={viewpo} onChange={handleviewpo} />
+                {error.upviewpo && <Typography className={classes.seterrorlabel}>{error.upviewpo} </Typography>}
+                {error.viewpo && <Typography className={classes.seterrorlabel}>{error.viewpo} </Typography>}
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.setinputlayout}>
+                <Typography className={classes.setlabel}>view in home :</Typography>
+                <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" sty value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
+                  <FormControlLabel value="true" control={<Radio />} label="true" />
+                  <FormControlLabel value="false" control={<Radio />} label="false" />
+                </RadioGroup>
+                {error.upimage && <Typography className={classes.seterrorlabel}>{error.upimage} </Typography>}
+                {error.addimage && <Typography className={classes.seterrorlabel}>{error.addimage} </Typography>}
               </Grid>
             </Grid>
           </Paper>

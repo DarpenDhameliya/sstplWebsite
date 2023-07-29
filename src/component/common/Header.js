@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import StickyMenu from "./lib/StickyMenu";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.webp";
 import {Link, useHistory} from "react-router-dom";
 import aboutheader1 from "../../assets/images/aboutus_header/appfutura.webp";
 import aboutheader2 from "../../assets/images/aboutus_header/clutch.webp";
@@ -39,7 +39,7 @@ const history = useHistory();
     };
     
     useEffect(() => {
-      // fetchHiredata();
+      fetchHiredata();
     }, []);
 
   return (
@@ -48,12 +48,12 @@ const history = useHistory();
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-6 col-sm-12 col-6">
-            {/* {fields.map((e) => {
+            {fields.map((e) => {
               return <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname:e.link}} target="_blank">
                 <i className={`fab ${e.icon}`} />
               </Link>
-            })} */}
-              <Link rel="noreferrer" className="ml-15" to={{pathname:"https://www.facebook.com/softstormtechnosys"}} target="_blank">
+            })}
+              {/* <Link rel="noreferrer" className="ml-15" to={{pathname:"https://www.facebook.com/softstormtechnosys"}} target="_blank">
                 <i className="fab fa-facebook-f" />
               </Link>
               <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://twitter.com/softstorm_india"}}>
@@ -70,7 +70,7 @@ const history = useHistory();
               </Link>
               <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"skype:softstorminfosys?chat"}}>
                 <i className="fab fa-skype" />
-              </Link>
+              </Link> */}
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 order-3 order-sm-2 handlerightheader">
               <a href="mailto:contact@softstorm.in" rel="noopener noreferrer" className="pl-0 d-flex align-items-center" style={{color: "#f1f1f1"}}>

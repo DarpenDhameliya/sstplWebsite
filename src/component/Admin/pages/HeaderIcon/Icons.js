@@ -22,7 +22,7 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Avatar from "@mui/material/Avatar";
 import {useHistory} from "react-router-dom";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const Icons = () => {
   const [icons, setIcons] = useState([]);

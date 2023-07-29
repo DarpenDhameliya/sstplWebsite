@@ -8,7 +8,7 @@ import Servicecontent from "./Servicecontent";
 import BackToTop from "../../common/BackToTop";
 import Hireus from "../../common/Hireus";
 import {useEffect, useState} from "react";
-import logo from "../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 import {Servicestate} from "../slice/Service";
 import {useSelector} from "react-redux";
 import axios from "../../common/Axios";
@@ -38,7 +38,8 @@ const Serviceindex = () => {
             },
           })
           .then((result) => {
-            setList(result.data.result);
+            let data = result.data.result.sort((a, b) => a.contentpositionview - b.contentpositionview);
+            setList(data);
             setLoading(false);
             // setWebappimg(result.data.result[0].frontpageimg);
             // setWebapptitle(result.data.result[0].heading);

@@ -9,7 +9,7 @@ import TextField from "@mui/material/TextField";
 import axios from "../../../common/Axios";
 import JoditEditor from "jodit-react";
 import {useHistory} from "react-router-dom";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import { api } from "../../../common/Axios";
 const AboutList = () => {
   const [abouthead, setAbouthead] = useState("");

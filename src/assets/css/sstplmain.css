@@ -413,6 +413,31 @@ p {
   transition: all 0.4s ease-out 0s;
   background-color: #c20004;
 }
+.main-btn_carrer_side {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid #c20004;
+  padding: 0 30px;
+  font-size: 15px;
+  line-height: 45px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 5;
+  -webkit-transition: all 0.4s ease-out 0s;
+  -moz-transition: all 0.4s ease-out 0s;
+  -ms-transition: all 0.4s ease-out 0s;
+  -o-transition: all 0.4s ease-out 0s;
+  transition: all 0.4s ease-out 0s;
+  background-color: #c20004;
+}
 .main-btn_carrer {
   display: inline-block;
   font-weight: 500;
@@ -525,6 +550,11 @@ p {
   color: #c20004;
   border-color: #c20004;
 }
+.main-btn_carrer_side:hover {
+  background-color: #fff;
+  color: #c20004;
+  border-color: #c20004;
+}
 .main-btn.main-btn-2 {
   background-color: #fff;
   color: #2b70fa;
@@ -556,7 +586,6 @@ p {
   .website-css-area {
     padding-top: 150px !important;
   }
-
 }
 @media (max-width: 992px) {
   .technoshap-shape-2 {
@@ -583,15 +612,14 @@ p {
 }
 .technoshap-shape-1 {
   position: absolute;
-    left: 55px;
-    top: 0;
-    z-index: -1;
-    animation: linear 20s animationFramesOne infinite;
-
+  left: 55px;
+  top: 0;
+  z-index: -1;
+  animation: linear 20s animationFramesOne infinite;
 }
 .technoshap-shape-2 {
   position: absolute;
-  right: 10px;
+  right: 200px;
   z-index: -1;
   top: 400px;
   animation: linear 25s animationFramesThree infinite;
@@ -980,10 +1008,23 @@ p {
   animation: linear 10s animationFramesThree infinite;
 }
 .service-shape-1 {
-
+  position: absolute;
+  bottom: 0px;
+  left: 220px;
+  z-index: -1;
+  animation: linear 15s animationFramesFive infinite;
 }
 .service-shape-2 {
-  
+  /* position: absolute;
+  bottom: 0px;
+  left: 220px;
+  z-index: -1;*/
+  animation: linear 4s infiniteScale infinite;
+  position: absolute;
+  position: absolute;
+  top: 82px;
+  right: 220px;
+  z-index: -1;
 }
 .website-css-area .hero-shape-3 {
   position: absolute;
@@ -1952,7 +1993,7 @@ p {
   left: 240px;
   top: 240px;
   z-index: -1;
-  animation: linear 20s animationFramesThree infinite;
+  animation: linear 20s animationFramesTwo infinite;
 }
 .softstormweb-chooseus .features-shape-2 {
   position: absolute;
@@ -1998,7 +2039,6 @@ p {
 }
 
 @media only screen and (min-width: 1201px) and (max-width: 1400px) {
-
   .handlewcu {
     min-width: 420px !important;
     max-width: 450px !important;
@@ -4405,7 +4445,6 @@ p {
   .main-btn-footer {
     /* margin-top: 15px !important; */
     height: 47px !important;
-
   }
 }
 .footer_bottomLinks:hover {
@@ -4419,7 +4458,6 @@ p {
   .main-btn-footer {
     width: 200px !important;
     height: 47px !important;
-
   }
 }
 .back-to-top {
@@ -4794,7 +4832,7 @@ p {
   left: 0;
   background-color: #fff;
 }
-.submit_btn {
+.main_submit_btn {
   display: inline-block;
   font-weight: 500;
   text-align: center;
@@ -4819,35 +4857,32 @@ p {
   transition: all 0.4s ease-out 0s;
   background-color: #c20004;
 }
-.submit_btn:hover {
+/* .main_submit_btn:hover {
   background-color: #fff;
   color: #c20004;
   border: 1px solid #c20004;
-}
-.main-submit_btn.disabled,
-.main-submit_btn:disabled {
+} */
+
+.main-btn_footers:disabled,
+.main_submit_btn:disabled {
   background-color: #c20004;
   color: #fff;
   border: 1px solid #c20004;
   opacity: 0.65;
-  cursor: auto;
+  cursor: wait;
+
 }
-.main-btn_footer.disabled,
+.main-btn_footers.disabled .main_submit_btn.disabled,
+.main-btn_carrer_side.disabled,
 .main-btn_footer:disabled {
   background-color: #c20004;
   color: #fff;
   border: 1px solid #c20004;
   opacity: 0.65;
-  cursor: auto;
+  cursor: wait;
+
 }
-.main-btn_footers.disabled,
-.main-btn_footers:disabled {
-  background-color: #c20004;
-  color: #fff;
-  border: 1px solid #c20004;
-  opacity: 0.65;
-  cursor: auto;
-}
+
 /* .main-btn main-btn-footer */
 
 /* .amm-shopping_cart-list-items {

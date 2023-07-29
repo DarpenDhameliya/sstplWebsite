@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import logo from "../../../assets/images/logo.png";
+import logo from "../../../assets/images/logo.webp";
 
 function Drawer({drawer, action, cartToggle, closetoggle}) {
   const [size, setSize] = useState("0px");

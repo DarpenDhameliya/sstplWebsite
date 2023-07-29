@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef, useCallback} from "react";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.webp";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Link, useHistory} from "react-router-dom";
@@ -31,29 +31,34 @@ export default function Footer(className) {
   const [footerClick, setFooterClick] = useState(false);
   const [fields, setFields] = useState([]);
   const [dataLength, setDataLength] = useState("");
-  const [ipAddress, setIpAddress] = useState('')
-  const [captchres, setCaptchres] = useState('')
+  const [ipAddress, setIpAddress] = useState("");
+  const [captchres, setCaptchres] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
   const states = useSelector(Contactusstate);
   const recaptchaRef = useRef();
 
   const notify = useCallback(() => {
-    toast.success("Email Sent Successfully..", {
+    toast.success("Apply Successfully..", {
       autoClose: 2000,
+      closeOnClick: false,
+    });
+  }, []);
+  const notifyerr = useCallback(() => {
+    toast.error("Server Error", {
+      autoClose: 1000,
       closeOnClick: false,
     });
   }, []);
 
   useEffect(() => {
     axioss
-      .get('https://api.ipify.org/?format=json')
-      .then(response => {
-
+      .get("https://api.ipify.org/?format=json")
+      .then((response) => {
         const ipAddress = response.data.ip;
         setIpAddress(ipAddress);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }, []);
@@ -76,7 +81,7 @@ export default function Footer(className) {
     const d = new Date();
     let year = d.getFullYear();
     setRecentYear(year);
-    // fetchHiredata();
+    fetchHiredata();
   }, []);
 
   useEffect(() => {
@@ -89,7 +94,7 @@ export default function Footer(className) {
         setPhone("");
         settextarea("");
         setDbsubmit(false);
-        setCaptchres('')
+        setCaptchres("");
         setDbError([]);
         setError([]);
         setFooterClick(false);
@@ -102,7 +107,6 @@ export default function Footer(className) {
       } else if (states.status === "failed") {
         setDbError(states.error);
         setDbsubmit(false);
-
         setTimeout(() => {
           setDbError([]);
         }, 3000);
@@ -112,98 +116,102 @@ export default function Footer(className) {
     }
   });
 
-
   const handleVerify = (response) => {
-    setCaptchres(response)
+    setCaptchres(response);
     setIsVerified(true);
   };
 
   const handlecontectform = (e) => {
     e.preventDefault();
-
-    setFooterClick(true);
-    let name_verify;
-    const regex = /\b\w+\b/g;
-    const matches = fname.match(regex);
-    if (matches && matches.length >= 2) {
-      name_verify = true
-    } else {
-      name_verify = false
-    }
-    let number_verify;
-    if (!/^\+?\d{0,3}\s?\d{6,14}$/.test(phone)) {
-      number_verify = false;
-    } else {
-      number_verify = true;
-    }
-
-    let email_verify;
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      email_verify = false;
-    } else {
-      email_verify = true;
-    }
-
-    if (!fname || !lname || !email || !phone  || !isVerified || number_verify === false || email_verify === false || !textarea ||  name_verify === false ) {
-      if (!fname) {
-        error.fname = "Required !";
+    if (dbsubmit === false) {
+      setFooterClick(true);
+      let name_verify;
+      const regex = /\b\w+\b/g;
+      const matches = fname.match(regex);
+      if (matches && matches.length >= 2) {
+        name_verify = true;
       } else {
-        error.fname = "";
-        if(name_verify === false){
-          error.name_verify = 'Minimum Two Word Required' 
-        }else {
-          error.name_verify = ''
-        }
+        name_verify = false;
       }
-      if (!lname) {
-        error.lname = "Required !";
+      let number_verify;
+      if (!/^\+?\d{0,3}\s?\d{6,14}$/.test(phone)) {
+        number_verify = false;
       } else {
-        error.lname = "";
+        number_verify = true;
       }
-      if (!email) {
-        error.email = "Required !";
+
+      let email_verify;
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+        email_verify = false;
       } else {
-        error.email = "";
-        if (!email_verify) {
-          error.em_verify = "Add Correct email";
+        email_verify = true;
+      }
+
+      if (!fname || !lname || !email || !phone || !isVerified || number_verify === false || email_verify === false || !textarea || name_verify === false) {
+        if (!fname) {
+          error.fname = "Required !";
         } else {
-          error.em_verify = "";
+          error.fname = "";
+          if (name_verify === false) {
+            error.name_verify = "Minimum Two Word Required";
+          } else {
+            error.name_verify = "";
+          }
         }
-      }
-      if (!phone) {
-        error.phone = "Required !";
-      } else {
-        error.phone = "";
-        if (!number_verify) {
-          error.num_verify = "Add Correct number";
+        if (!lname) {
+          error.lname = "Required !";
         } else {
-          error.num_verify = "";
+          if (lname.length < 4) {
+            error.lname = "Required !!";
+          }
         }
-      }
-      if (!textarea) {
-        error.textarea = "Required !";
+        if (!email) {
+          error.email = "Required !";
+        } else {
+          error.email = "";
+          if (!email_verify) {
+            error.em_verify = "Add Correct email";
+          } else {
+            error.em_verify = "";
+          }
+        }
+        if (!phone) {
+          error.phone = "Required !";
+        } else {
+          error.phone = "";
+          if (!number_verify) {
+            error.num_verify = "Add Correct number";
+          } else {
+            error.num_verify = "";
+          }
+        }
+        if (!textarea) {
+          error.textarea = "Required !";
+        } else {
+          if (textarea.length < 9) {
+            error.textarea = "Required !!";
+          }
+        }
+        if (!isVerified) {
+          error.captcha = "Required !";
+        } else {
+          error.captcha = "";
+        }
+        setError({...error, [e.target.name]: e.target.value});
+        setTimeout(() => {
+          setError([]);
+        }, 2000);
       } else {
-        error.textarea = "";
+        const json1 = {fname, lname, email, phone, textarea};
+        const json2 = {ipAddress, captchres};
+        setDbsubmit(true);
+        dispatch(
+          ContactusSlice({
+            json1,
+            json2,
+          })
+        );
       }
-      if (!isVerified) {
-        error.captcha = "Required !";
-      } else {
-        error.captcha = "";
-      }
-      setError({...error, [e.target.name]: e.target.value});
-      setTimeout(() => {
-        setError([]);
-      }, 2000);
-    } else {
-      const json1 = {fname, lname, email, phone, textarea};
-      const json2 = {ipAddress , captchres};
-      setDbsubmit(true);
-      dispatch(
-        ContactusSlice({
-          json1,
-          json2,
-        })
-      );
     }
   };
 
@@ -353,7 +361,8 @@ export default function Footer(className) {
                               type="email"
                               name="email"
                               placeholder="Email Address"
-                              onBlur={handleemailBlur} onFocus={() => setEmailFocused(true)}
+                              onBlur={handleemailBlur}
+                              onFocus={() => setEmailFocused(true)}
                               value={email}
                               onChange={handleemail}
                             />
@@ -372,7 +381,7 @@ export default function Footer(className) {
                               type="text"
                               name="phone"
                               onBlur={handlephoneBlur}
-                          onFocus={() => setPhoneFocused(true)}
+                              onFocus={() => setPhoneFocused(true)}
                               placeholder="Phone Number"
                               value={phone}
                               onChange={handlephone}
@@ -391,7 +400,9 @@ export default function Footer(className) {
                             {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                           </div>
                           <div className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-end align-items-center">
-                            <button className="main-btn_footers main-btn-footer" name="submit" disabled={dbsubmit}  onClick={handlecontectform} >Send Message</button>
+                            <button className="main-btn_footers main-btn-footer" name="submit" disabled={dbsubmit} onClick={handlecontectform}>
+                              Send Message
+                            </button>
                           </div>
                         </div>
                       </form>
@@ -415,27 +426,26 @@ export default function Footer(className) {
                 </div>
               </div>
               <div className="col-lg-12 d-flex justify-content-center align-items-center mb-2">
-                {/* {fields.map((e, index) => {
-                  if (dataLength -1 === index) {
-                  console.log(e)
+                {fields.map((e, index) => {
+                  if (dataLength - 1 === index) {
                     return (
                       <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname: e.link}} target="_blank">
-                        <i className={`fab ${e.icon}`} style={{color: "#4f4f4f "}}/>
+                        <i className={`fab ${e.icon}`} style={{color: "#4f4f4f "}} />
                       </Link>
                     );
                   } else {
                     return (
                       <>
                         <Link key={e.icon} rel="noreferrer" className="ml-10 mr-10" to={{pathname: e.link}} target="_blank">
-                          <i className={`fab ${e.icon}`} style={{color: "#4f4f4f "}}/>
+                          <i className={`fab ${e.icon}`} style={{color: "#4f4f4f "}} />
                         </Link>
                         <span> | </span>
                       </>
                     );
                   }
-                })} */}
-               
-                <Link className="social_icon ml-3" target="_blank" to={{pathname: "https://www.facebook.com/softstormtechnosys"}} rel="noopener noreferrer">
+                })}
+
+                {/* <Link className="social_icon ml-3" target="_blank" to={{pathname: "https://www.facebook.com/softstormtechnosys"}} rel="noopener noreferrer">
                   <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f"}} />
                 </Link>{" "}
                 <span> | </span>
@@ -457,7 +467,7 @@ export default function Footer(className) {
                 <span> | </span>
                 <Link className="social_icon" target="_blank" to={{pathname: "skype:softstorminfosys?chat"}} rel="noopener noreferrer">
                   <i className="fab fa-skype hovereffsky" style={{color: "#4f4f4f "}} />
-                </Link>
+                </Link> */}
               </div>
               <div className="col-lg-12  mt-2">
                 <div

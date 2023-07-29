@@ -1,5 +1,4 @@
 import React ,{useEffect}from "react";
-// import sponserShape from '../../assets/images/single-post/SSTPL-500.png';
 import sponserShape from "../../../assets/images/icon/SSTPL-500.webp";
 import bulletIcon from "../../../assets/images/icon/bullet1_list.webp";
 

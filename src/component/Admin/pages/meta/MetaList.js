@@ -16,9 +16,9 @@ import Box from "@mui/material/Box";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api } from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 // import Textarea from '@mui/joy/Textarea';
 
@@ -64,17 +64,9 @@ const MetaList = () => {
   const classes = useMuiStyle();
   const history = useHistory();
 
-  var token = localStorage.getItem("ssAdmin");
   const fetchHiredata = () => {
-    axios
-      .get("meta/meta_list", {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-
-          Authorization: token,
-        },
-      })
+    api
+      .get("meta/meta_list")
       .then((result) => {
         setLoading(false);
         seMetaList(result.data.result);
@@ -92,6 +84,7 @@ const MetaList = () => {
   useEffect(() => {
     fetchHiredata();
   }, []);
+  
   const handleurl = (e) => {
     setUrl(e.target.value);
   };
@@ -178,14 +171,8 @@ const MetaList = () => {
         formData.append("key", upkey);
         formData.append("schema", upschema);
 
-        axios
-          .put(`meta/meta_update/${upid}`, formData, {
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: token,
-            },
-          })
+        api
+          .put(`meta/meta_update/${upid}`, formData)
           .then((result) => {
             fetchHiredata();
             setLoading(false);
@@ -236,14 +223,8 @@ const MetaList = () => {
         formData.append("key", key);
         formData.append("schema", schema);
 
-        axios
-          .post("meta/meta_add", formData, {
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-              Authorization: token,
-            },
-          })
+        api
+          .post("meta/meta_add", formData)
           .then((result) => {
             fetchHiredata();
             setLoading(false);
@@ -259,13 +240,8 @@ const MetaList = () => {
   const handledelete = (e) => {
     setLoading(true);
 
-    axios
-      .delete(`meta/meta_delete/${e}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`meta/meta_delete/${e}`)
       .then((result) => {
         fetchHiredata();
         setLoading(false);

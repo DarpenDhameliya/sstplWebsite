@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useRef} from "react";
-// import singlePost from "../../../assets/images/icon/clicks.png";
 import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../../common/lib/ServiceSticky";
 import webimg from "../../../../assets/images/services/web-app-development.webp";

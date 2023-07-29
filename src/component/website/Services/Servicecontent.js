@@ -1,7 +1,6 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from "react";
-// import { useHistory } from "react-router-dom";
 import {useHistory} from "react-router-dom";
 import {HashLink} from "react-router-hash-link";
 // import webimg from "../../../assets/images/services/web-app-development.webp";
@@ -33,40 +32,9 @@ const Servicecontent = ({className, list}) => {
   const handlepagechange = (e, data) => {
     history.push(`/${e}`);
   };
-  // useEffect(() => {
-  //   document.title = "Our-Service | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
-  //   if (states.response.result === undefined) {
-  //     var fetchServiceata = () => {
-  //       axios
-  //         .get("service/service_list", {
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         })
-  //         .then((result) => {
-  //           setWebappimg(result.data.result[0].frontpageimg);
-  //           setWebapptitle(result.data.result[0].heading);
-  //           setMobppimg(result.data.result[1].frontpageimg);
-  //           setMobpptitle(result.data.result[1].heading);
-  //           setDeskappimg(result.data.result[2].frontpageimg);
-  //           setDeskapptitle(result.data.result[2].heading);
-  //           setDigitalappimg(result.data.result[3].frontpageimg);
-  //           setDigitalapptitle(result.data.result[3].heading);
-  //           setWebgraappimg(result.data.result[4].frontpageimg);
-  //           setWebgraapptitle(result.data.result[4].heading);
-  //           setErpappimg(result.data.result[5].frontpageimg);
-  //           setErpapptitle(result.data.result[5].heading);
-  //         })
-  //         .catch((err) => {
-  //           setDbFetcherr(err.response.data.error);
-  //         });
-  //     };
-  //     fetchServiceata();
-  //   }
-  // }, []);
   useEffect(() => {
-    if (states.response.result === undefined) {
+    if (!states.response) {
       if (list.length > 0) {
         setWebappimg(list[0].frontpageimg);
         setWebapptitle(list[0].heading);
@@ -81,24 +49,22 @@ const Servicecontent = ({className, list}) => {
         setErpappimg(list[5].frontpageimg);
         setErpapptitle(list[5].heading);
       }
+    } else {
+      setWebappimg(states.response[0].frontpageimg);
+      setWebapptitle(states.response[0].heading);
+      setMobppimg(states.response[1].frontpageimg);
+      setMobpptitle(states.response[1].heading);
+      setDeskappimg(states.response[2].frontpageimg);
+      setDeskapptitle(states.response[2].heading);
+      setDigitalappimg(states.response[3].frontpageimg);
+      setDigitalapptitle(states.response[3].heading);
+      setWebgraappimg(states.response[4].frontpageimg);
+      setWebgraapptitle(states.response[4].heading);
+      setErpappimg(states.response[5].frontpageimg);
+      setErpapptitle(states.response[5].heading);
     }
   });
-  useEffect(() => {
-    if (states.response.result !== undefined) {
-      setWebappimg(states.response.result[0].frontpageimg);
-      setWebapptitle(states.response.result[0].heading);
-      setMobppimg(states.response.result[1].frontpageimg);
-      setMobpptitle(states.response.result[1].heading);
-      setDeskappimg(states.response.result[2].frontpageimg);
-      setDeskapptitle(states.response.result[2].heading);
-      setDigitalappimg(states.response.result[3].frontpageimg);
-      setDigitalapptitle(states.response.result[3].heading);
-      setWebgraappimg(states.response.result[4].frontpageimg);
-      setWebgraapptitle(states.response.result[4].heading);
-      setErpappimg(states.response.result[5].frontpageimg);
-      setErpapptitle(states.response.result[5].heading);
-    }
-  });
+
 
   return (
     <>

@@ -27,11 +27,9 @@ import mob25 from '../../../assets/images/technology/vue_js.webp'
 import mob26 from '../../../assets/images/technology/angular.webp'
 import mob27 from '../../../assets/images/technology/typescript.webp'
 import mob28 from '../../../assets/images/technology/cloudservices.webp'
-import shapeTwo from "../../../assets/images/shape/shape-10.webp";
-import shapeThree from "../../../assets/images/shape/shape-3.webp";
-
-// import sponserShape from '../../assets/images/sponser-shape.png';
-// import sponserShape from '../../assets/images/single-post/SSTPL-500.png';
+import shapeTwo from "../../../assets/images/hashtag (1).webp";
+import shapeThree from "../../../assets/images/dollar (1).webp";
+import sponserShape from '../../../assets/images/sponser-shape.png'
 
 export default function Technology() {
   const [workdata, setWorkdata] = useState([]);
@@ -99,11 +97,11 @@ export default function Technology() {
               </ul>
         </div>
       </div>
-      {/* <div className="sponser-shape">
+      <div className="sponser-shape">
         <img src={sponserShape} alt="" />
-      </div> */}
+      </div>
        <div className="technoshap-shape-1">
-          <img src={shapeTwo} alt="" />
+          <img src={shapeTwo} alt=""  style={{width:"50px"}}/>
         </div>
         <div className="technoshap-shape-2">
           <img src={shapeThree} alt="" />

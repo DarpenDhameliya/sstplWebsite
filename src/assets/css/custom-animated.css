@@ -725,13 +725,19 @@
 }
 @keyframes infiniteScale {
   0% {
-    transform: scale(1);
+    transform: translate(200px, -99px) scale(3);
   }
+  /* 25% {
+    transform: scale(3);
+  } */
   50% {
-    transform: scale(1.2);
+    transform: scale(2);
   }
+  /* 75% {
+    transform: scale(2);
+  } */
   100% {
-    transform: scale(1);
+    transform: scale(3);
   }
 }
 @-webkit-keyframes sticky {

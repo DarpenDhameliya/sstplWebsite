@@ -11,12 +11,12 @@ import TableRow from "@mui/material/TableRow";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api } from "../../../common/Axios";
 import Pagination from "@mui/material/Pagination";
 import {useHistory} from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -56,15 +56,8 @@ const Hireus = () => {
     const formData = new FormData();
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", rowperpage);
-    axios
-      .post("hire/hire-list", formData, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-
-          Authorization: token,
-        },
-      })
+    api
+      .post("hire/hire-list", formData)
       .then((result) => {
         setLoading(false);
         setHireList(result.data.result);
@@ -91,13 +84,8 @@ const Hireus = () => {
   const handledelete = (e) => {
     setLoading(true);
 
-    axios
-      .delete(`hire/hire_delete/${e}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`hire/hire_delete/${e}`, )
       .then((result) => {
         fetchHiredata(page, rowperpage);
         setLoading(false);

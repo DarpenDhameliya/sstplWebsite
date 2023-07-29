@@ -11,9 +11,11 @@ import {useHistory, useParams} from "react-router-dom";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
-import axios from "../../../common/Axios";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
-
+import axios, { api, apiimg } from "../../../common/Axios";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 const ServiceEdit = () => {
   const [error, setError] = useState([]);
   const [titleheading, setTitleheading] = useState("");
@@ -24,7 +26,8 @@ const ServiceEdit = () => {
   const [imgdisplay, setImgdisplay] = useState([]);
   const [imgpre, setImgpre] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [selectedValue, setSelectedValue] = useState("");
+  const [viewpo, setViewpo] = useState("");
   const [slectImage1, setSlectImage1] = useState(null);
   const [image1, setImage1] = useState("");
   const [updated1, setUpdated1] = useState("");
@@ -38,15 +41,16 @@ const ServiceEdit = () => {
 
   var token = localStorage.getItem("ssAdmin");
 
+  const handleviewpo = (e) => {
+    setViewpo(e.target.value);
+  };
   const fetchHiredata = () => {
-    axios
-      .get(`service/service_update_detail/${idparam.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
+    api
+      .get(`service/service_update_detail/${idparam.id}`)
       .then((result) => {
+
+        setSelectedValue(result.data.result[0].contentview)
+        setViewpo(result.data.result[0].contentpositionview)
         setTitleheading(result.data.result[0].heading);
         setContent(result.data.result[0].content);
         setImage(result.data.result[0].frontpageimg);
@@ -105,6 +109,8 @@ const ServiceEdit = () => {
     formData.append("content", content);
     formData.append("image", imgdisplay.length > 0 ? updated : image);
     formData.append("image", imgdisplay1.length > 0 ? updated1 : image1);
+    formData.append("contentview", selectedValue);
+    formData.append("contentpositionview",viewpo );
 
     if (!titleheading || !content) {
       if (!titleheading) {
@@ -119,14 +125,8 @@ const ServiceEdit = () => {
         setError([]);
       }, 3000);
     } else {
-      axios
-        .put(`service/service_update/${idparam.id}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      apiimg
+        .put(`service/service_update/${idparam.id}`, formData)
         .then((result) => {
           setTitleheading("");
           setContent("");
@@ -170,7 +170,7 @@ const ServiceEdit = () => {
               <Typography className={classes.setlabel}>image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage} />
               {imgpre && (
-                <Card sx={{maxWidth: "250px"}}>
+                <Card sx={{maxWidth: "250px" }} className="mt-3">
                   <CardMedia component="img" src={imgdisplay.length > 0 ? imgdisplay : image} className={classes.setdisimage} />
                   <Button className={classes.setdelbtn} onClick={handlemodel}>
                     Delete
@@ -182,7 +182,7 @@ const ServiceEdit = () => {
               <Typography className={classes.setlabel}>image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle1} type="file" className={classes.settextfield} style={{width: "100%"}} placeholder="image" value={slectImage1} />
               {imgpre1 && (
-                <Card sx={{maxWidth: "250px"}}>
+                <Card sx={{maxWidth: "250px"}} className="mt-3"> 
                   <CardMedia component="img" src={imgdisplay1.length > 0 ? imgdisplay1 : image1} className={classes.setdisimage} />
                   <Button className={classes.setdelbtn} onClick={handlemodel1}>
                     Delete
@@ -191,6 +191,23 @@ const ServiceEdit = () => {
               )}
             </Grid>
           </Grid>
+          <Grid container spacing={2} className="mt-2">
+              <Grid item xs={12} sm={6} className={classes.setinputlayout}>
+                <Typography className={classes.setlabel}>View position in home :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className={classes.settextfield} style={{width: "100%"}} placeholder="position for homr" InputLabelProps={{shrink: false}} value={viewpo} onChange={handleviewpo} />
+                {error.upviewpo && <Typography className={classes.seterrorlabel}>{error.upviewpo} </Typography>}
+                {error.viewpo && <Typography className={classes.seterrorlabel}>{error.viewpo} </Typography>}
+              </Grid>
+              <Grid item xs={12} sm={6} className={classes.setinputlayout}>
+                <Typography className={classes.setlabel}>view in home :</Typography>
+                <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" sty value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
+                  <FormControlLabel value="true" control={<Radio />} label="true" />
+                  <FormControlLabel value="false" control={<Radio />} label="false" />
+                </RadioGroup>
+                {error.upimage && <Typography className={classes.seterrorlabel}>{error.upimage} </Typography>}
+                {error.addimage && <Typography className={classes.seterrorlabel}>{error.addimage} </Typography>}
+              </Grid>
+            </Grid>
         </Paper>
 
         <Paper className={classes.setProductpaper} elevation={5}>

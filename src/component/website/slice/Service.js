@@ -41,7 +41,9 @@ export const Serviceslice = createSlice({
       })
       .addCase(ServiceSlice.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.response = action.payload
+        let data = action.payload.result.sort((a ,b) => a.contentpositionview - b.contentpositionview)
+        state.response = data
+
         state.error = ''
       })
       .addCase(ServiceSlice.rejected, (state, action) => {

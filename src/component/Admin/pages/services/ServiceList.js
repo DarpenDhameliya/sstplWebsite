@@ -12,9 +12,9 @@ import TableRow from "@mui/material/TableRow";
 import {TableContainer} from "@mui/material";
 import {styled} from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import axios from "../../../common/Axios";
+import axios, { api } from "../../../common/Axios";
 import {useHistory} from "react-router-dom";
-import logo from "../../../../assets/images/logo-removebg-preview.png";
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -50,14 +50,11 @@ const ServiceList = () => {
   };
 
   const fetchHiredata = () => {
-    axios
-      .get("service/service_list", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    api
+      .get("service/service_list")
       .then((result) => {
-        setCareerList(result.data.result);
+        let data = result.data.result.sort((a ,b) => a.contentpositionview - b.contentpositionview)
+        setCareerList(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -72,7 +69,6 @@ const ServiceList = () => {
         }, 3000);
       });
   };
-
   useEffect(() => {
     fetchHiredata();
   }, []);
@@ -84,13 +80,8 @@ const ServiceList = () => {
   const handledelete = (e) => {
     setLoading(true);
 
-    axios
-      .delete(`service/service_delete/${e}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token,
-        },
-      })
+    api
+      .delete(`service/service_delete/${e}`)
       .then((result) => {
         fetchHiredata();
         setLoading(false);
@@ -137,6 +128,12 @@ const ServiceList = () => {
                       Title
                     </TableCell>
                     <TableCell align="center" className={classes.tableth}>
+                      contentview
+                    </TableCell>
+                    <TableCell align="center" className={classes.tableth}>
+                      View position
+                    </TableCell>
+                    <TableCell align="center" className={classes.tableth}>
                       Action
                     </TableCell>
                   </TableRow>
@@ -150,6 +147,12 @@ const ServiceList = () => {
                         </StyledTableCell>
                         <StyledTableCell className={classes.tabletd} align="center">
                           {e.heading}
+                        </StyledTableCell>
+                        <StyledTableCell className={classes.tabletd} align="center">
+                          {e.contentview === true ? 'true' : "false"}
+                        </StyledTableCell>
+                        <StyledTableCell className={classes.tabletd} align="center">
+                          {e.contentpositionview}
                         </StyledTableCell>
                         <StyledTableCell className={classes.tabletdicon} align="center">
                           <div className={classes.seticondiv}>

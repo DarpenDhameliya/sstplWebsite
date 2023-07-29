@@ -1,26 +1,7 @@
 import React, {useEffect, useState} from "react";
-// import about1 from "../../assets/images/icon/about1.svg";
-// import about2 from "../../assets/images/icon/about1.svg";
 import vission from "../../../assets/images/aboutus/our vission.png";
 import mission from "../../../assets/images/aboutus/mission.png";
-// import about4 from "../../assets/images/icon/about1.svg";
-// import about5 from "../../assets/images/icon/about1.svg";
-// import about6 from "../../assets/images/icon/about1.svg";
-// import about7 from "../../assets/images/icon/about1.svg";
-// import about8 from "../../assets/images/icon/about1.svg";
-// import about9 from "../../assets/images/icon/about1.svg";
-// import mob1 from "../../../assets/images/aboutus/1.png";
-// import mob2 from "../../../assets/images/aboutus/Mask group-2.png";
-// import mob3 from "../../../assets/images/aboutus/Mask group-3.png";
-// import mob4 from "../../../assets/images/aboutus/Mask group-4.png";
-// import mob5 from "../../../assets/images/aboutus/Mask group-5.png";
-// import mob6 from "../../../assets/images/aboutus/Mask group-6.png";
-// import mob7 from "../../../assets/images/aboutus/Mask group-7.png";
-// import mob8 from "../../../assets/images/aboutus/Mask group-8.png";
-// import mob9 from "../../../assets/images/aboutus/Mask group-9.png";
-// import mob10 from "../../../assets/images/aboutus/Mask group-10.png";
-// import mob11 from "../../../assets/images/aboutus/Mask group-11.png";
-// import mob12 from "../../../assets/images/aboutus/Mask group-12.png";
+
 
 import axios from "../../common/Axios";
 const AboutPart2 = ({list, loding}) => {

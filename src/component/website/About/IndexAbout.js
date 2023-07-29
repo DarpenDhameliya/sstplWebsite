@@ -11,7 +11,7 @@ import AboutPart2 from "./AboutPart2";
 // import Lottie from "lottie-react";
 // import homedata from "./Aboutpath.json";
 import axios from "../../common/Axios";
-import logo from '../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../assets/images/logo-removebg-preview.webp'
 const IndexAbout = () => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);

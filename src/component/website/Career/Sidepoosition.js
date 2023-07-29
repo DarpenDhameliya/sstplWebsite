@@ -28,28 +28,22 @@ const Sidepoosition = () => {
   const [btnclick, setBtnclick] = useState(false);
   const dispatch = useDispatch();
   const recaptchaRef = useRef();
+  const fileInputRef = useRef(null);
 
-  // const notify = useCallback(() => {
-  //   toast.success("Email Sent Successfully..", {
-  //     autoClose: 2000,
-  //     closeOnClick: false,
-  //   });
-  // }, []);
-
-  // const notifyerr =  useCallback(() => {
-  //   toast.error("Server Error", {
-  //     autoClose: 2000,
-  //     closeOnClick: false,
-  //   });
-  // }, []);
   const handleVerify = (response) => {
     setCaptchres(response);
     setIsVerified(true);
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+
     setFile(file);
     setFilename(file.name);
+  };
+  const handleTextKeyPress = (event) => {
+    if (event.key === "Enter") {
+      fileInputRef.current.click();
+    }
   };
 
   useEffect(() => {
@@ -65,16 +59,19 @@ const Sidepoosition = () => {
   }, []);
 
   useEffect(() => {
+    setTimeout(() => {
+      setDbsubmit(false);
+    }, 2000);
     if (btnclick === true) {
       if (mailstate.status === "loading") {
       } else if (mailstate.status === "succeeded") {
-        // setName("");
-        // setEmail("");
-        // setPhone("");
-        // setApply("");
-        // setCaptchres("")
-        // setFile("");
-        // setFilename("Upload Resume");
+        setName("");
+        setEmail("");
+        setPhone("");
+        setApply("");
+        setCaptchres("");
+        setFile("");
+        setFilename("Upload Resume");
         setBtnclick(false);
         if (recaptchaRef.current) {
           recaptchaRef.current.reset();
@@ -95,97 +92,97 @@ const Sidepoosition = () => {
   });
 
   const handlesubmit = (e) => {
-    let name_verify;
-    const regex = /\b\w+\b/g;
-    const matches = name.match(regex);
-    if (matches && matches.length >= 2) {
-      name_verify = true;
-    } else {
-      name_verify = false;
-    }
-
-    let number_verify;
-    if (!/^\+?\d{0,3}\s?\d{6,14}$/.test(phone)) {
-      number_verify = false;
-    } else {
-      number_verify = true;
-    }
-
-    let email_verify;
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-      email_verify = false;
-    } else {
-      email_verify = true;
-    }
-
-    setBtnclick(true);
-    if (!name || !email || !phone || !apply ) {
-    // if (!file || !name || !email || !phone || !apply || name_verify === false || number_verify === false || email_verify === false || !isVerified) {
-      if (!file) {
-        error.file = "File Required !";
-      }
-      if (!name) {
-        error.name = "Name Required !";
+    if (dbsubmit === false) {
+      let name_verify;
+      const regex = /\b\w+\b/g;
+      const matches = name.match(regex);
+      if (matches && matches.length >= 2) {
+        name_verify = true;
       } else {
-        error.name = "";
-        if (name_verify === false) {
-          error.name_verify = "Minimum Two Word Required";
-        } else {
-          error.name_verify = "";
-        }
+        name_verify = false;
       }
-      if (!email) {
-        error.email = "email Required !";
+
+      let number_verify;
+      if (!/^\+?\d{0,3}\s?\d{6,14}$/.test(phone)) {
+        number_verify = false;
       } else {
-        error.email = "";
-        if (!email_verify) {
-          error.em_verify = "Add Correct email";
-        } else {
-          error.em_verify = "";
-        }
+        number_verify = true;
       }
-      if (!phone) {
-        error.phone = " NUmber Required !";
+
+      let email_verify;
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+        email_verify = false;
       } else {
-        error.phone = "";
-        if (!number_verify) {
-          error.num_verify = "Add Correct number";
-        } else {
-          error.num_verify = "";
+        email_verify = true;
+      }
+
+      setBtnclick(true);
+      if (!file || !name || !email || !phone || !apply || name_verify === false || number_verify === false || email_verify === false || !isVerified) {
+        if (!file) {
+          error.file = "File Required !";
         }
+        if (!name) {
+          error.name = "Name Required !";
+        } else {
+          error.name = "";
+          if (name_verify === false) {
+            error.name_verify = "Minimum Two Word Required";
+          } else {
+            error.name_verify = "";
+          }
+        }
+        if (!email) {
+          error.email = "email Required !";
+        } else {
+          error.email = "";
+          if (!email_verify) {
+            error.em_verify = "Add Correct email";
+          } else {
+            error.em_verify = "";
+          }
+        }
+        if (!phone) {
+          error.phone = " NUmber Required !";
+        } else {
+          error.phone = "";
+          if (!number_verify) {
+            error.num_verify = "Add Correct number";
+          } else {
+            error.num_verify = "";
+          }
+        }
+        if (!apply) {
+          error.apply = "Apply For Required !";
+        } else {
+          if (apply.length < 4) {
+            error.apply = "Required !!";
+          }
+        }
+        if (!isVerified) {
+          error.captcha = "Required !";
+        }
+        setError({...error, [e.target.name]: e.target.value});
+        setTimeout(() => {
+          setError([]);
+        }, 2000);
+      } else {
+        let formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("phone", phone);
+        formData.append("apply", apply);
+        formData.append("file", file);
+        setDbsubmit(true);
+
+        // const json1 = {name: name, email: email, phone: phone, apply: apply,file: file};
+        const json2 = {ipAddress, captchres};
+        dispatch(
+          CareerSlice({
+            formData,
+            json2,
+          })
+        );
       }
-      if (!apply) {
-        error.apply = "Apply For Required !";
-      }
-      if (!isVerified) {
-        error.captcha = "Required !";
-      }
-      setError({...error, [e.target.name]: e.target.value});
-      setTimeout(() => {
-        setError([]);
-      }, 2000);
-    } else {
-      let formData = new FormData();
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      formData.append("apply", apply);
-      formData.append("file", file);
-      setDbsubmit(true);
-      // const json1 = {name: name, email: email, phone: phone, apply: apply,file: file};
-      const json2 = {ipAddress, captchres};
-      dispatch(
-        CareerSlice({
-          formData,
-          json2,
-        })
-      );
-      // setName("");
-      // setEmail("");
-      // setPhone("");
-      // setApply("");
-      // setFile("");
-      // setFilename('Upload Resume')
     }
   };
 
@@ -281,9 +278,9 @@ const Sidepoosition = () => {
                   <input className={`${error.apply ? "handleinput_error" : ""}`} onBlur={handleappyBlur} onFocus={() => setApplyFocused(true)} type="text" name="side_app-for" placeholder="Apply For" value={apply} onChange={handleappy} />
                 </div>
                 <div className="col-md-12 handlecontact_form">
-                  <div className={`${error.file ? "handleinput_error" : ""} ${dberr.file ? "error_padding" : ""} typefiledes`}>
-                    <span className="filename">{filename}</span>
-                    <input type="file" className="inputfile form-control" name="side_file" onChange={handleFileChange} />
+                  <div>
+                    <input className={`${error.file ? "handleinput_error" : ""} ${dberr.file ? "error_padding" : ""} typefiledes`} type="text" value={filename} onClick={() => fileInputRef.current.click()} onKeyDown={handleTextKeyPress} />
+                    <input type="file" ref={fileInputRef} style={{display: "none"}} onChange={handleFileChange} />
                   </div>
                 </div>
                 {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
@@ -294,7 +291,7 @@ const Sidepoosition = () => {
                   {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                 </div>
                 <div className="col-md-12 text-right handlecontact_form mb-2 mt-3">
-                  <button className={`main-btn ${dbsubmit ? "disabled" : ""}`} style={{width: "100%"}} onClick={handlesubmit}>
+                  <button className={`main-btn_carrer_side ${dbsubmit ? "disabled" : ""}`} style={{width: "100%"}} onClick={handlesubmit}>
                     SEND RESUME
                   </button>
                 </div>

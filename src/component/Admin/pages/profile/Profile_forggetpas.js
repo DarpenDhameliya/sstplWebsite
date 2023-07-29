@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
-import axios from "../../../common/Axios";
+import  { api } from "../../../common/Axios";
 
 
 const Profile_forggetpas = () => {
@@ -19,7 +19,6 @@ const Profile_forggetpas = () => {
   const classes = useMuiStyle();
 
   const handlesenddata = (e) => {
-    let token = localStorage.getItem("ssAdmin");
     const formData = new FormData();
     formData.append("current_password", currentpass);
     formData.append("new_password", newPass);
@@ -43,14 +42,8 @@ const Profile_forggetpas = () => {
         setError([]);
       }, 3000);
     } else {
-      axios
-        .post(`forget/forgetpass`, formData, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: token,
-          },
-        })
+      api
+        .post(`forget/forgetpass`, formData)
         .then((result) => {
           setDbresponce("password updated successfully");
           setCurrentpass("");

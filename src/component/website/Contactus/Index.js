@@ -6,7 +6,7 @@ import Headers from "../../common/PageHeader";
 import ContactForm from "./ContactForm";
 import BackToTop from "../../common/BackToTop";
 import Hireus from "../../common/Hireus";
-import logo from '../../../assets/images/logo-removebg-preview.png'
+import logo from '../../../assets/images/logo-removebg-preview.webp'
 
 const ContactIndex = () => {
   const [drawer, drawerAction] = useToggle(false);

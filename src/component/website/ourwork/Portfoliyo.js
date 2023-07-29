@@ -1,16 +1,16 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState, useEffect} from "react";
-import roop from "../../../assets/images/blog/roop (1).webp";
-import red from "../../../assets/images/blog/redchili.webp";
-import food from "../../../assets/images/blog/food.webp";
-import dimond from "../../../assets/images/blog/dimond (1).webp";
-import dalali from "../../../assets/images/blog/dalali.webp";
-import sk from "../../../assets/images/blog/sk.webp";
-import battle from "../../../assets/images/blog/battel.webp";
-import maktech from "../../../assets/images/blog/maktech.webp";
-import macswin from "../../../assets/images/blog/macswin.webp";
-import redient from "../../../assets/images/blog/redient.webp";
+// import roop from "../../../assets/images/blog/roop (1).webp";
+// import red from "../../../assets/images/blog/redchili.webp";
+// import food from "../../../assets/images/blog/food.webp";
+// import dimond from "../../../assets/images/blog/dimond (1).webp";
+// import dalali from "../../../assets/images/blog/dalali.webp";
+// import sk from "../../../assets/images/blog/sk.webp";
+// import battle from "../../../assets/images/blog/battel.webp";
+// import maktech from "../../../assets/images/blog/maktech.webp";
+// import macswin from "../../../assets/images/blog/macswin.webp";
+// import redient from "../../../assets/images/blog/redient.webp";
 import mob1 from "../../../assets/images/potfoliyo/industry (1).webp";
 import mob2 from "../../../assets/images/potfoliyo/team (1).webp";
 import mob3 from "../../../assets/images/potfoliyo/duration (2).webp";
@@ -47,19 +47,19 @@ const Portfoliyo = ({loding}) => {
   };
 
   useEffect(() => {
-    let data = [
-      {id: 1, image: roop, title: "Roop Label", type: ["all", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Retail & E-Commerce", technology: ["React", "PHP"]},
-      {id: 2, image: red, title: "Red Chilli Fast Food", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Retail & E-Commerce", technology: ["Flutter", "php"]},
-      {id: 3, image: food, title: "Food Book", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Retail & E-Commerce", technology: ["Flutter", "php"]},
-      {id: 4, image: dimond, title: "Diamond Inventory Software", type: ["all", "desk"], team: "3 Person", country: "India", duration: "2 month", industry: "Enterprise Solution", technology: ["PHP"]},
-      {id: 5, image: dalali, title: "DalaliBook", type: ["all", "mob"], team: "3 Person", country: "India", duration: "2 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
-      {id: 6, image: sk, title: "S.K. Enterprise", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "3 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
-      {id: 7, image: battle, title: "Battle Village", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Media & Entertainment", technology: ["Flutter", "PHP"]},
-      {id: 8, image: maktech, title: "MakTech Laser", type: ["all", "desk", "mob", "web"], team: "2 Person", country: "India", duration: "1.5 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
-      {id: 9, image: macswin, title: "MacSwin Technology", type: ["all", "desk", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
-      {id: 10, image: redient, title: "The Radiant International School", type: ["all", "web"], team: "2 Person", country: "India", duration: "1 month", industry: "Education", technology: ["React", "PHP"]},
-    ];
-    setWorkdata(data);
+    // let data = [
+    //   {id: 1, image: roop, title: "Roop Label", type: ["all", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Retail & E-Commerce", technology: ["React", "PHP"]},
+    //   {id: 2, image: red, title: "Red Chilli Fast Food", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Retail & E-Commerce", technology: ["Flutter", "php"]},
+    //   {id: 3, image: food, title: "Food Book", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Retail & E-Commerce", technology: ["Flutter", "php"]},
+    //   {id: 4, image: dimond, title: "Diamond Inventory Software", type: ["all", "desk"], team: "3 Person", country: "India", duration: "2 month", industry: "Enterprise Solution", technology: ["PHP"]},
+    //   {id: 5, image: dalali, title: "DalaliBook", type: ["all", "mob"], team: "3 Person", country: "India", duration: "2 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
+    //   {id: 6, image: sk, title: "S.K. Enterprise", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "3 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
+    //   {id: 7, image: battle, title: "Battle Village", type: ["all", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Media & Entertainment", technology: ["Flutter", "PHP"]},
+    //   {id: 8, image: maktech, title: "MakTech Laser", type: ["all", "desk", "mob", "web"], team: "2 Person", country: "India", duration: "1.5 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
+    //   {id: 9, image: macswin, title: "MacSwin Technology", type: ["all", "desk", "mob", "web"], team: "2 Person", country: "India", duration: "2 month", industry: "Enterprise Solution", technology: ["Flutter", "PHP"]},
+    //   {id: 10, image: redient, title: "The Radiant International School", type: ["all", "web"], team: "2 Person", country: "India", duration: "1 month", industry: "Education", technology: ["React", "PHP"]},
+    // ];
+    // setWorkdata(data);
 
     document.title = "Our-Work | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
@@ -74,10 +74,13 @@ const Portfoliyo = ({loding}) => {
       .then((result) => {
         let shortdata = result.data.result.sort((a, b) => a.contentpositionview - b.contentpositionview);
         setportfolioList(shortdata);
-        loding();
+        setTimeout(() => {
+          loding();
+        }, 300);
       })
       .catch((err) => {
         setFetchErr(err.response.data.error)
+        loding();
       });
   };
 
