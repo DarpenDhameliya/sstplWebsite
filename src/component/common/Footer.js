@@ -9,8 +9,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import "../../assets/css/custom-animated.css";
 import "aos/dist/aos.css";
 import "../../assets/css/default.css";
-import axios from "./Axios";
 import axioss from "axios";
+import { Iconstatus , Iconstate} from "../website/slice/IconSlice";
 
 export default function Footer(className) {
   const [fname, setFname] = useState("");
@@ -33,14 +33,14 @@ export default function Footer(className) {
   const [dataLength, setDataLength] = useState("");
   const [ipAddress, setIpAddress] = useState("");
   const [captchres, setCaptchres] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
   const states = useSelector(Contactusstate);
+  const iconstate = useSelector(Iconstate)
   const recaptchaRef = useRef();
 
   const notify = useCallback(() => {
     toast.success("Apply Successfully..", {
-      autoClose: 2000,
+      autoClose: 1000,
       closeOnClick: false,
     });
   }, []);
@@ -63,25 +63,11 @@ export default function Footer(className) {
       });
   }, []);
 
-  const fetchHiredata = () => {
-    axios
-      .get("icon/icon_list", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((result) => {
-        setFields(result.data.result[0].data);
-        setDataLength(result.data.result[0].data.length);
-      })
-      .catch((err) => {});
-  };
 
   useEffect(() => {
     const d = new Date();
     let year = d.getFullYear();
     setRecentYear(year);
-    fetchHiredata();
   }, []);
 
   useEffect(() => {
@@ -113,6 +99,19 @@ export default function Footer(className) {
         dispatch(Contactusstatus());
       } else {
       }
+    }
+  });
+
+  useEffect(() => {
+    if (iconstate.status === "loading") {
+    } else if (iconstate.status === "succeeded") {
+      setFields(iconstate.response.result[0].data);
+      setDataLength(iconstate.response.result[0].data.length);
+      dispatch(Iconstatus());
+    } else if (iconstate.status === "failed") {
+      notifyerr();
+      dispatch(Iconstatus());
+    } else {
     }
   });
 
@@ -347,7 +346,7 @@ export default function Footer(className) {
                   <div className="col-lg-8 pl-0 handlemobileset">
                     <div className="contact-form">
                       <h4>Let’s Connect</h4>
-                      <p>Integer at lorem eget diam facilisis lacinia ac id massa.</p>
+                      <p>Reach out today to spark innovation and unleash digital solutions in collaboration with us.</p>
                       <form onSubmit={handlecontectform}>
                         <div className="row">
                           <div className="col-lg-6 col-md-12 col-sm-12">
@@ -426,48 +425,52 @@ export default function Footer(className) {
                 </div>
               </div>
               <div className="col-lg-12 d-flex justify-content-center align-items-center mb-2">
-                {fields.map((e, index) => {
-                  if (dataLength - 1 === index) {
-                    return (
-                      <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname: e.link}} target="_blank">
-                        <i className={`fab ${e.icon}`} style={{color: "#4f4f4f "}} />
-                      </Link>
-                    );
-                  } else {
-                    return (
-                      <>
-                        <Link key={e.icon} rel="noreferrer" className="ml-10 mr-10" to={{pathname: e.link}} target="_blank">
-                          <i className={`fab ${e.icon}`} style={{color: "#4f4f4f "}} />
+                {fields.length > 0 ? (
+                  fields.map((e, index) => {
+                    if (dataLength - 1 === index) {
+                      return (
+                        <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname: e.link}} target="_blank">
+                          <i className={`fab ${e.icon} hoverefffac `} style={{color: "#4f4f4f "}} />
                         </Link>
-                        <span> | </span>
-                      </>
-                    );
-                  }
-                })}
-
-                {/* <Link className="social_icon ml-3" target="_blank" to={{pathname: "https://www.facebook.com/softstormtechnosys"}} rel="noopener noreferrer">
-                  <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f"}} />
-                </Link>{" "}
-                <span> | </span>
-                <Link className="social_icon" target="_blank" to={{pathname: "https://twitter.com/softstorm_india"}} rel="noopener noreferrer">
-                  <i className="fab fa-twitter hoverefftwi" style={{color: "#4f4f4f "}} />
-                </Link>
-                <span> | </span>
-                <Link className="social_icon" target="_blank" to={{pathname: "https://www.linkedin.com/company/softstorm-technosys"}} rel="noopener noreferrer">
-                  <i className="fab fa-linkedin-in hoverefflin" style={{color: "#4f4f4f "}} />
-                </Link>
-                <span> | </span>
-                <Link className="social_icon" target="_blank" to={{pathname: "https://instagram.com/softstorm.in"}} rel="noopener noreferrer">
-                  <i className="fab fa-instagram hovereffins" style={{color: "#4f4f4f "}} />
-                </Link>
-                <span> | </span>
-                <Link className="social_icon" target="_blank" to={{pathname: "https://wa.me/912613560756"}} rel="noopener noreferrer">
-                  <i className="fab fa-whatsapp hovereffwat" style={{color: "#4f4f4f "}} />
-                </Link>
-                <span> | </span>
-                <Link className="social_icon" target="_blank" to={{pathname: "skype:softstorminfosys?chat"}} rel="noopener noreferrer">
-                  <i className="fab fa-skype hovereffsky" style={{color: "#4f4f4f "}} />
-                </Link> */}
+                      );
+                    } else {
+                      return (
+                        <>
+                          <Link key={e.icon} rel="noreferrer" className="ml-10 mr-10" to={{pathname: e.link}} target="_blank">
+                            <i className={`fab ${e.icon} hoverefffac`} style={{color: "#4f4f4f "}} />
+                          </Link>
+                          <span> | </span>
+                        </>
+                      );
+                    }
+                  })
+                ) : (
+                  <>
+                    <Link className="social_icon ml-3" target="_blank" to={{pathname: "https://www.facebook.com/softstorm.in"}} rel="noopener noreferrer">
+                      <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f"}} />
+                    </Link>{" "}
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://twitter.com/softstorm_in"}} rel="noopener noreferrer">
+                      <i className="fab fa-twitter hoverefftwi" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://www.linkedin.com/company/softstorm-in"}} rel="noopener noreferrer">
+                      <i className="fab fa-linkedin-in hoverefflin" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://www.instagram.com/softstorm.in"}} rel="noopener noreferrer">
+                      <i className="fab fa-instagram hovereffins" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://wa.me/912613560756"}} rel="noopener noreferrer">
+                      <i className="fab fa-whatsapp hovereffwat" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "skype:softstorminfosys?chat"}} rel="noopener noreferrer">
+                      <i className="fab fa-skype hovereffsky" style={{color: "#4f4f4f "}} />
+                    </Link>
+                  </>
+                )}
               </div>
               <div className="col-lg-12  mt-2">
                 <div
@@ -479,21 +482,22 @@ export default function Footer(className) {
                       About Us
                     </Link>
                     <span> | </span>
-                    <Link className="footer_bottomLinks mr-2 ml-2" to="/contact-us">
-                      Contact us
+                    <Link className="footer_bottomLinks mr-2 ml-2" to="/our-work">
+                      Our Work
                     </Link>
+
                     <span> | </span>
                   </div>
                   <div
                     className="col-md-6 col-sm-6 d-flex justify-content-start
                 align-items-center pl-0 handlemobilfooter"
                   >
-                    <Link className="footer_bottomLinks mr-2 ml-2" to="/our-work">
-                      Our Work
-                    </Link>
-                    <span> | </span>
                     <Link className="footer_bottomLinks mr-2 ml-2" to="/career">
                       Career
+                    </Link>
+                    <span> | </span>
+                    <Link className="footer_bottomLinks mr-2 ml-2" to="/contact-us">
+                      Contact us
                     </Link>
                   </div>
                 </div>

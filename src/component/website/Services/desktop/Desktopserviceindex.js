@@ -1,20 +1,13 @@
 import React from "react";
-import Drawer from "../../Mobile/Drawer";
-import Header from "../../../common/Header";
-import useToggle from "../../../common/Hooks/useToggle";
+
 import Headers from "../../../common/PageHeader";
-import Footer from "../../../common/Footer";
 import Desktipservice from "./Desktipservice";
-import BackToTop from "../../../common/BackToTop";
-import Hireus from "../../../common/Hireus";
 import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import {useEffect, useState} from "react";
 import { Servicestate } from "../../slice/Service";
 import { useSelector } from "react-redux";
 import axios from "../../../common/Axios";
 const Desktopserviceindex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");
   const [image, setImage] = useState("");
@@ -49,6 +42,7 @@ const Desktopserviceindex = () => {
             setLoading(false)
           })
           .catch((err) => {
+            setLoading(false)
             setDbFetcherr(err.response.data.error);
           });
       };
@@ -69,23 +63,18 @@ const Desktopserviceindex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
 
         <Headers
           title="DESKTOP SOFTWARE DEVELOPMENT"
           breadcrumb={[
             {link: "/", title: "Home"},
-            {link: "/ourservice", title: "Our Service"},
-            {link: "/desktop", title: "Desktop Software"},
+            {link: "/our-service", title: "Our Service"},
+            {link: "/desktop-software-developement", title: "Desktop Software"},
           ]}
         />
 
         <Desktipservice images={image} serviceContents={serviceContent}/>
-      
-        {/* <Footer />
-        <BackToTop /> */}
+
       </div>
     </>
   );

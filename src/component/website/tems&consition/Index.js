@@ -1,23 +1,31 @@
 import React, {useState, useEffect} from "react";
-import Drawer from "../Mobile/Drawer";
-import Header from "../../common/Header";
-import useToggle from "../../common/Hooks/useToggle";
-import Footer from "../../common/Footer";
-import BackToTop from "../../common/BackToTop";
 import Headers from "../../common/PageHeader";
-import Hireus from "../../common/Hireus";
 import Temsandconsition from "./Tems&consition";
 import logo from "../../../assets/images/logo-removebg-preview.webp";
+import axios from "../../common/Axios";
 
 const TermandConditionIndex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
+  const [content, setContent] = useState('')
+
   const [loading, setLoading] = useState(true);
+
+  const fetchHiredata = () => {
+    axios
+      .get("terms/terms_list")
+      .then((result) => {
+        setContent(result.data.result[0].termscontent);
+        setTimeout(() => {
+          setLoading(false);
+        }, 200);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  });
+    fetchHiredata();
+  }, []);
   return (
     <>
       {loading && (
@@ -29,11 +37,8 @@ const TermandConditionIndex = () => {
             </div>
           </div>
         </div>
-      )}
+      )}{" "}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
         <Headers
           title="TERMS & CONDITIONS"
           breadcrumb={[
@@ -43,8 +48,6 @@ const TermandConditionIndex = () => {
           className={"handlebredcrumb"}
         />
         <Temsandconsition />
-        {/* <Footer />
-        <BackToTop /> */}
       </div>
     </>
   );

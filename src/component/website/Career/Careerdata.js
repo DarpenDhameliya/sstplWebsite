@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {CareerSlice, Careerstate, Careerstatus} from "../slice/MailSlice";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useHistory} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import bullet from "../../../assets/images/icon/finalclick1.webp";
 import career1 from "../../../assets/images/icon/location (1).webp";
@@ -11,7 +10,6 @@ import career2 from "../../../assets/images/icon/experience.webp";
 import career3 from "../../../assets/images/icon/position.webp";
 import axios from "../../common/Axios";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import closeimg from "../../../assets/images/close.png";
 import CardContent from "@mui/material/CardContent";
@@ -29,7 +27,6 @@ const style = {
 };
 
 const Careerdata = ({loding}) => {
-  // const [show, setShow] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -40,6 +37,7 @@ const Careerdata = ({loding}) => {
   const [dberr, setDberr] = useState([]);
   const [filename, setFilename] = useState("Upload Resume");
   const [careerList, setCareerList] = useState([]);
+  const [careerListStatic, setCareerListStatic] = useState([]);
   const [dbFetcherr, setDbFetcherr] = useState([]);
   const mailstate = useSelector(Careerstate);
   const [collaspsOpen, setCollaspsOpen] = useState(false);
@@ -70,6 +68,62 @@ const Careerdata = ({loding}) => {
       closeOnClick: false,
     });
   }, []);
+
+  useEffect(() => {
+    let data = [
+      {
+        _id: "649c05881b87759666a35cdd",
+        title: "Mobile Application Developer",
+        location: "Surat",
+        position: "2",
+        experience: "1 Year",
+        description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+        responsibility: ["Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+        qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+        contentview: true,
+        contentpositionview: "2",
+      },
+      {
+        _id: "649c05e11b87759666a35cdf",
+        title: "PHP MVC Developer",
+        location: "Surat",
+        position: "2",
+        experience: "Fresher",
+        description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+        responsibility: ["Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+        qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+        contentview: true,
+        contentpositionview: "4",
+      },
+      {
+        _id: "649c06321b87759666a35ce1",
+        title: "Mobile Application Developer",
+        location: "Surat",
+        position: "2",
+        experience: "Fresher",
+        description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+        responsibility: ["Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+        qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+        contentview: true,
+        contentpositionview: "3",
+      },
+      {
+        _id: "64a50da6811be9dd21462e6c",
+        title: "PHP MVC Developer",
+        location: "Surat",
+        position: "2",
+        experience: "1 to 2 year",
+        description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+        responsibility: ["Minimum 1.5 years of development experience in PHP & MVC (CodeIgniter and/or Laravel )", "Proficient in Core PHP, OOPS, HTML5, Bootstrap, JavaScript, jQuery, Ajax", "Excellent relational database skills with MySQL", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+        qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+        contentview: true,
+        contentpositionview: "1",
+      },
+    ];
+    data.sort((a, b) => a.contentpositionview - b.contentpositionview);
+    setCareerListStatic(data);
+  }, []);
+
   useEffect(() => {
     if (mailstate.status === "succeeded") {
       notify();
@@ -104,7 +158,6 @@ const Careerdata = ({loding}) => {
       } else {
       }
     }
-
   });
 
   useEffect(() => {
@@ -114,11 +167,9 @@ const Careerdata = ({loding}) => {
         const ipAddress = response.data.ip;
         setIpAddress(ipAddress);
       })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
+      .catch((error) => {});
+    }, []);
+    
   const fetchHiredata = () => {
     axios
       .get("career/careerdetails_list", {
@@ -133,6 +184,7 @@ const Careerdata = ({loding}) => {
       })
 
       .catch((err) => {
+        loding();
         setDbFetcherr(err.response);
       });
   };
@@ -213,6 +265,7 @@ const Careerdata = ({loding}) => {
           setError([]);
         }, 2000);
       } else {
+        setDbsubmit(true);
         let formData = new FormData();
         formData.append("name", name);
         formData.append("email", email);
@@ -220,14 +273,12 @@ const Careerdata = ({loding}) => {
         formData.append("apply", sendmailview);
         formData.append("file", file);
         const json2 = {ipAddress, captchres};
-        setDbsubmit(true);
         dispatch(
           CareerSlice({
             formData,
             json2,
           })
         );
-        
       }
     }
   };
@@ -311,77 +362,149 @@ const Careerdata = ({loding}) => {
       <ToastContainer position="top-right" closeOnClick={false} style={{marginTop: "55px"}} />
 
       {dbFetcherr && <p className="handledberror ">{dbFetcherr}</p>}
-      {careerList.map((res) => {
-        if (res.contentview === true) {
-          return (
-            <div className="card mt-3 mb-3 grey">
-              <div className="card-body grey">
-                <h4 className="handlecareerhireinghead">{res.title}</h4>
-                <div className="d-flex justify-content-between mt-1">
-                  <div className="d-flex justify-content-center align-items-center">
-                    <img src={career1} alt="car1" className="handlecareermain_img" />
-                    <div className="ml-1">
-                      <p className="handelmobilep"> Location</p>
-                      <h6 className="handelmobileh6">{res.location}</h6>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center ">
-                    <img src={career2} alt="car1" className="handlecareermain_img" />
+      {careerList.length > 0
+        ? careerList.map((res) => {
+            if (res.contentview === true) {
+              return (
+                <div className="card mt-3 mb-3 grey">
+                  <div className="card-body grey">
+                    <h4 className="handlecareerhireinghead">{res.title}</h4>
+                    <div className="d-flex justify-content-between mt-1">
+                      <div className="d-flex justify-content-center align-items-center">
+                        <img src={career1} alt="car1" className="handlecareermain_img" />
+                        <div className="ml-1">
+                          <p className="handelmobilep"> Location</p>
+                          <h6 className="handelmobileh6">{res.location}</h6>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-center align-items-center ">
+                        <img src={career2} alt="car1" className="handlecareermain_img" />
 
-                    <div className="ml-2">
-                      <p className="handelmobilep"> Experience</p>
-                      <h6 className="handelmobileh6">{res.experience}</h6>
+                        <div className="ml-2">
+                          <p className="handelmobilep"> Experience</p>
+                          <h6 className="handelmobileh6">{res.experience}</h6>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-center align-items-center tabrequirement">
+                        <img src={career3} alt="car1" className="handlecareermain_img" />
+                        <div className="ml-2">
+                          <p className="handelmobilep"> Position</p>
+                          <h6 className="handelmobileh6">{res.position}</h6>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-center align-items-center">
+                        <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
+                          View Details
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div className="d-flex justify-content-center align-items-center tabrequirement">
-                    <img src={career3} alt="car1" className="handlecareermain_img" />
-                    <div className="ml-2">
-                      <p className="handelmobilep"> Position</p>
-                      <h6 className="handelmobileh6">{res.position}</h6>
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center">
-                    <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
-                      View Details
-                    </button>
-                  </div>
+
+                  <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <div className="card-body_collpas">
+                        <p style={{color: "#000000"}}>{res.description}</p>
+                        <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
+                        <ul className="skill">
+                          {res.responsibility.map((e) => {
+                            return (
+                              <div className="handlediv">
+                                <img src={bullet} alt="symbol" className="handlecarrericon " />
+                                <li className="handlecareerli">{e}</li>
+                              </div>
+                            );
+                          })}
+                        </ul>
+                        <h6 className="handlecareerrespon mt-2">Qualification :</h6>
+                        <div className="handlediv">
+                          <img src={bullet} alt="symbol" className="handlecarrericon " />
+                          <p className="handlecareerli" style={{lineHeight: "20px"}}>
+                            {res.qualification}
+                          </p>
+                        </div>
+                        <div className="d-flex justify-content-end pt-3">
+                          <button className="main-btn_carrer_apply" type="button" onClick={handlemodalOpen}>
+                            Apply
+                          </button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Collapse>
                 </div>
-              </div>
+              );
+            }
+          })
+        : careerListStatic.map((res) => {
+            if (res.contentview === true) {
+              return (
+                <div className="card mt-3 mb-3 grey">
+                  <div className="card-body grey">
+                    <h4 className="handlecareerhireinghead">{res.title}</h4>
+                    <div className="d-flex justify-content-between mt-1">
+                      <div className="d-flex justify-content-center align-items-center">
+                        <img src={career1} alt="car1" className="handlecareermain_img" />
+                        <div className="ml-1">
+                          <p className="handelmobilep"> Location</p>
+                          <h6 className="handelmobileh6">{res.location}</h6>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-center align-items-center ">
+                        <img src={career2} alt="car1" className="handlecareermain_img" />
 
-              <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <div className="card-body_collpas">
-                    <p style={{color: "#000000"}}>{res.description}</p>
-                    <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
-                    <ul className="skill">
-                      {res.responsibility.map((e) => {
-                        return (
-                          <div className="handlediv">
-                            <img src={bullet} alt="symbol" className="handlecarrericon " />
-                            <li className="handlecareerli">{e}</li>
-                          </div>
-                        );
-                      })}
-                    </ul>
-                    <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-                    <div className="handlediv">
-                      <img src={bullet} alt="symbol" className="handlecarrericon " />
-                      <p className="handlecareerli" style={{lineHeight: "20px"}}>
-                        {res.qualification}
-                      </p>
-                    </div>
-                    <div className="d-flex justify-content-end pt-3">
-                      <button className="main-btn_carrer_apply" type="button" onClick={handlemodalOpen}>
-                        Apply
-                      </button>
+                        <div className="ml-2">
+                          <p className="handelmobilep"> Experience</p>
+                          <h6 className="handelmobileh6">{res.experience}</h6>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-center align-items-center tabrequirement">
+                        <img src={career3} alt="car1" className="handlecareermain_img" />
+                        <div className="ml-2">
+                          <p className="handelmobilep"> Position</p>
+                          <h6 className="handelmobileh6">{res.position}</h6>
+                        </div>
+                      </div>
+                      <div className="d-flex justify-content-center align-items-center">
+                        <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
+                          View Details
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </CardContent>
-              </Collapse>
-            </div>
-          );
-        }
-      })}
+
+                  <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <div className="card-body_collpas">
+                        <p style={{color: "#000000"}}>{res.description}</p>
+                        <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
+                        <ul className="skill">
+                          {res.responsibility.map((e) => {
+                            return (
+                              <div className="handlediv">
+                                <img src={bullet} alt="symbol" className="handlecarrericon " />
+                                <li className="handlecareerli">{e}</li>
+                              </div>
+                            );
+                          })}
+                        </ul>
+                        <h6 className="handlecareerrespon mt-2">Qualification :</h6>
+                        <div className="handlediv">
+                          <img src={bullet} alt="symbol" className="handlecarrericon " />
+                          <p className="handlecareerli" style={{lineHeight: "20px"}}>
+                            {res.qualification}
+                          </p>
+                        </div>
+                        <div className="d-flex justify-content-end pt-3">
+                          <button className="main-btn_carrer_apply" type="button" onClick={handlemodalOpen}>
+                            Apply
+                          </button>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Collapse>
+                </div>
+              );
+            }
+          })}
 
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
         <Box sx={style}>
@@ -422,14 +545,6 @@ const Careerdata = ({loding}) => {
               </div>
 
               <div className="col-md-12 ">
-                {/* <div
-                  className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
-                    `}
-                  style={{background: "#f5f5f7"}}
-                >
-                  <span className="filename">{filename}</span>
-                  <input type="file" className="inputfile form-control" name="file" onChange={hgandlefile} />
-                </div> */}
                 <div>
                   <input
                     className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
@@ -459,402 +574,8 @@ const Careerdata = ({loding}) => {
           </div>
         </Box>
       </Modal>
-      {/* <div className="card mb-3 grey">
-        <div className="card-body grey" id="headingOne">
-          <h4 className="handlecareerhireinghead">PHP MVC Developer</h4>
-          <div className="d-flex justify-content-between mt-1">
-            <div className="d-flex justify-content-center align-items-center">
-              <img src={career1} alt="car1" className="handlecareermain_img" />
-
-              <div className="ml-1">
-                <p className="handelmobilep"> Location</p>
-                <h6 className="handelmobileh6">surat</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center ">
-              <img src={career2} alt="car1" className="handlecareermain_img" />
-              <div className="ml-2">
-                <p className="handelmobilep"> Experience</p>
-                <h6 className="handelmobileh6"> 1 to 2 year</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center tabrequirement">
-              <img src={career3} alt="car1" className="handlecareermain_img" />
-              <div className="ml-2">
-                <p className="handelmobilep"> Position</p>
-                <h6 className="handelmobileh6">2</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center">
-              <button className="main-btn_carrer tab1" type="button" data-bs-toggle="collapse" data-bs-target="#tab1" onClick={() => handlecollaps("tab1", "PHP MVC Develope with Experience", "PHP MVC Develope")}>
-                VIEW DETAILS
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className={`collapse  ${apply === "tab1" ? "show" : ""} mt-2`} id="tab1" aria-labelledby="headingOne" style={{transition: "height 0.35s ease 0s"}}>
-          <div className="card-body_collpas">
-            <p style={{color: "#000000"}}>Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys</p>
-            <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
-            <ul>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Minimum 1.5 years of development experience in PHP & MVC (CodeIgniter and/or Laravel )</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Proficient in Core PHP, OOPS, HTML5, Bootstrap, JavaScript, jQuery, Ajax</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Excellent relational database skills with MySQL</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Hands on experience on integration of multiple data sources and databases into one system</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc.</li>
-              </div>
-            </ul>
-            <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-            <div className="handlediv">
-
-              <img src={bullet} alt="symbol" className="handlecarrericon" />
-              <p className="handlecareerli" style={{lineHeight: "20px"}}>
-                B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)
-              </p>
-            </div>
-            <div className="d-flex justify-content-end pt-3">
-              <button className="main-btn_carrer_apply " type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                APPLY NOW
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="card mt-3 mb-3 grey">
-        <div className="card-body" id="headingtwo" style={{backgroundColor: "#f8f9fab5"}}>
-          <h4 className="handlecareerhireinghead">Mobile Application Developer</h4>
-          <div className="d-flex justify-content-between mt-1">
-            <div className="d-flex justify-content-center align-items-center">
-              <img src={career1} alt="car1" className="handlecareermain_img" />
-              <div className="ml-1">
-                <p className="handelmobilep"> Location</p>
-                <h6 className="handelmobileh6">surat</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center ">
-              <img src={career2} alt="car1" className="handlecareermain_img" />
-
-              <div className="ml-2">
-                <p className="handelmobilep"> Experience</p>
-                <h6 className="handelmobileh6"> 1 to 2 year</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center tabrequirement">
-              <img src={career3} alt="car1" className="handlecareermain_img" />
-              <div className="ml-2">
-                <p className="handelmobilep"> Position</p>
-                <h6 className="handelmobileh6">2</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center">
-              <button className="main-btn_carrer tab2" type="button" data-bs-toggle="collapse" href="#tab2" onClick={() => handlecollaps("tab2", "Mobile Application Developer with experience", "Mobile Application Developer")}>
-                View Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className={`collapse ${apply === "tab2" ? "show" : ""} mt-2`} id="tab2" aria-labelledby="headingtwo" style={{transition: "height 0.35s ease 0s"}}>
-          <div className="card-body_collpas">
-            <p style={{color: "#000000"}}>Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys</p>
-            <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
-            <ul className="skill">
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Minimum 1.5 years of development experience in Android (Java / Flutter)</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Proficient in Core Android, OOPS, Firebase and Admob</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Excellent relational database skills with SQLite and Realm</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Hands on experience on integration of multiple data sources and databases into one system</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc.</li>
-              </div>
-            </ul>
-            <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-            <div className="handlediv">
-              <img src={bullet} alt="symbol" className="handlecarrericon " />
-              <p className="handlecareerli" style={{lineHeight: "20px"}}>
-                B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)
-              </p>
-            </div>
-            <div className="d-flex justify-content-end pt-3">
-              <button className="main-btn_carrer_apply" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                APPLY NOW
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="card mt-3 mb-3 grey">
-        <div className="card-body" style={{backgroundColor: "#f8f9fab5"}}>
-          <h4 className="handlecareerhireinghead">PHP MVC Developer</h4>
-          <div className="d-flex justify-content-between mt-1">
-            <div className="d-flex justify-content-center align-items-center">
-              <img src={career1} alt="car1" className="handlecareermain_img" />
-              <div className="ml-1">
-                <p className="handelmobilep"> Location</p>
-                <h6 className="handelmobileh6">surat</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center ">
-              <img src={career2} alt="car1" className="handlecareermain_img" />
-
-              <div className="ml-2">
-                <p className="handelmobilep"> Experience</p>
-                <h6 className="handelmobileh6"> Fresher</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center tabrequirement">
-              <img src={career3} alt="car1" className="handlecareermain_img" />
-              <div className="ml-2">
-                <p className="handelmobilep"> Position</p>
-                <h6 className="handelmobileh6">3</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center">
-              <button className="main-btn_carrer tab4" data-parent="#myGroup" data-bs-toggle="collapse" href="#tab4" type="button" onClick={() => handlecollaps("tab4", "PHP MVC Developer fresher", "PHP MVC Developer")}>
-                View Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className={`collapse ${apply === "tab4" ? "show" : ""} mt-2`} id="tab4" style={{transition: "height 0.35s ease 0s"}}>
-          <div className="card-body_collpas">
-            <p style={{color: "#000000"}}>Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys</p>
-            <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
-            <ul className="skill">
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Good Knowledge of development in PHP & MVC (CodeIgniter and/or Laravel )</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Proficient in Core PHP, OOPS, HTML5, Bootstrap, JavaScript, jQuery, Ajax, Angular</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Master in relational database skills with MySQL</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Hands on experience on integration of multiple data sources and databases into one system</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Basic Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc.</li>
-              </div>
-            </ul>
-            <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-            <div className="handlediv">
-              <img src={bullet} alt="symbol" className="handlecarrericon " />
-              <p className="handlecareerli" style={{lineHeight: "20px"}}>
-                B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)
-              </p>
-            </div>
-            <div className="d-flex justify-content-end pt-3">
-              <button className="main-btn_carrer_apply" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                APPLY NOW
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="card mt-3 mb-3 grey">
-        <div className="card-body" style={{backgroundColor: "#f8f9fab5"}}>
-          <h4 className="handlecareerhireinghead">Mobile Application Developer</h4>
-          <div className="d-flex justify-content-between mt-1">
-            <div className="d-flex justify-content-center align-items-center">
-              <img src={career1} alt="car1" className="handlecareermain_img" />
-              <div className="ml-1">
-                <p className="handelmobilep"> Location</p>
-                <h6 className="handelmobileh6">surat</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center ">
-              <img src={career2} alt="car1" className="handlecareermain_img" />
-
-              <div className="ml-2">
-                <p className="handelmobilep"> Experience</p>
-                <h6 className="handelmobileh6">Fresher</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center tabrequirement">
-              <img src={career3} alt="car1" className="handlecareermain_img" />
-              <div className="ml-2">
-                <p className="handelmobilep"> Position</p>
-                <h6 className="handelmobileh6">3</h6>
-              </div>
-            </div>
-            <div className="d-flex justify-content-center align-items-center">
-              <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href="#tab3" onClick={() => handlecollaps("tab3", "Mobile Application Developer fresher", "Mobile Application Developer")}>
-                View Details
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className={`collapse ${apply === "tab3" ? "show" : ""} mt-2`} id="tab3" style={{transition: "height 0.35s ease 0s"}}>
-          <div className="card-body_collpas">
-            <p style={{color: "#000000"}}>Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys</p>
-            <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
-            <ul className="skill">
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Good Knowledge of development in Android (Java / Flutter)</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Proficient in Core Android, OOPS, Firebase and Admob</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Good in relational database skills with SQLite and Realm</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Hands on experience on integration of multiple data sources and databases into one system</li>
-              </div>
-              <div className="handlediv">
-                <img src={bullet} alt="symbol" className="handlecarrericon " />
-                <li className="handlecareerli">Basic Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc.</li>
-              </div>
-            </ul>
-            <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-            <div className="handlediv">
-              <img src={bullet} alt="symbol" className="handlecarrericon " />
-              <p className="handlecareerli" style={{lineHeight: "20px"}}>
-                B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)
-              </p>
-            </div>
-            <div className="d-flex justify-content-end pt-3">
-              <button className="main-btn_carrer_apply" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Apply
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* <div className="modal fade" id="staticBackdrop" role="dialog" ref={modalRef}>
-        <div className="modal-dialog modal-dialog-centered ">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
-                {formapplyview}
-              </h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body" style={{border: "none", boxShadow: "none"}}>
-              <form className="row">
-                <div className="col-md-12">
-                  <input type="text" className={`${error.name ? "handleinput_error" : ""}`} name="name" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                </div>
-                {dberr.name && <p className="handledberror ">{dberr.name}</p>}
-                <div className="col-md-12">
-                  <input type="email" name="email" className={`${error.email ? "handleinput_error" : ""} ${error.em_verify ? "handleinput_error" : ""}`} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Address" />
-                </div>
-                {dberr.email && <p className="handledberror ">{dberr.email}</p>}
-
-                <div className="col-md-12">
-                  <input
-                    type="text"
-                    name="phone"
-                    className={`${error.phone ? "handleinput_error" : ""} mt-15   ${error.num_verify ? "error_padding" : ""}
-                    `}
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="Phone Number"
-                  />
-                  {dberr.phone && <p className="handledberror ">{dberr.phone}</p>}
-                  {error.num_verify && <p className={`handledberror mb-0  ${error.num_verify ? "error_padding_add" : ""}`}>{error.num_verify}</p>}
-                </div>
-
-                <div className="col-md-12 ">
-                  <div
-                    className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
-                    `}
-                    style={{background: "#f5f5f7"}}
-                  >
-                    <span className="filename">{filename}</span>
-                    <input type="file" className="inputfile form-control" name="file" onChange={hgandlefile} />
-                  </div>
-                </div>
-                {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
-
-                <div className="col-lg-6 col-md-12 col-sm-12 ">
-                  <div className="recaptcha-container">
-                    <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={handleVerify} theme="light" size="normal" />
-                  </div>
-                  {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button className="main-btn_carrer_apply" type="button" onClick={handlesubmit}>
-                APPLY NOW
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };
 
 export default Careerdata;
-
-// [{contentpositionview: "2";
-// contentview: true;
-// description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys";
-// experience: "1 Year";
-// location: "Surat";
-// position: "2";
-// qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)";
-// responsibility: (5)[("Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Fac…ok, Google maps, Payment Gateway Integration etc.")];
-// title: "Mobile Application Developer 1";
-// _id: "649c05881b87759666a35cdd";}
-// {contentpositionview: "1";
-// contentview: true;
-// description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys";
-// experience: "1 Year";
-// location: "Surat";
-// position: "2";
-// qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)";
-// responsibility: (5)[("Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Fac…ok, Google maps, Payment Gateway Integration etc.")];
-// title: "Mobile Application Developer 1";
-// _id: "649c05881b87759666a35cdd";}
-// {contentpositionview: "3";
-// contentview: true;
-// description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys";
-// experience: "1 Year";
-// location: "Surat";
-// position: "2";
-// qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)";
-// responsibility: (5)[("Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Fac…ok, Google maps, Payment Gateway Integration etc.")];
-// title: "Mobile Application Developer 1";
-// _id: "649c05881b87759666a35cdd";}]

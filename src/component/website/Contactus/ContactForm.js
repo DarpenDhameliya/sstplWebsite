@@ -8,6 +8,7 @@ import {Contactusstatus, Contactusstate, ContactusSlice} from "../slice/Contacku
 import {Link} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
+import {Iconstatus} from "../slice/IconSlice";
 
 const ContactForm = () => {
   const [lname, setLname] = useState("");
@@ -24,7 +25,8 @@ const ContactForm = () => {
   const [error, setError] = useState([]);
   const [dbsubmit, setDbsubmit] = useState(false);
   const [captchres, setCaptchres] = useState("");
-
+  const [fields, setFields] = useState([]);
+  const [dataLength, setDataLength] = useState("");
   const [recentYear, setRecentYear] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [contactClick, setContactClick] = useState(false);
@@ -42,16 +44,17 @@ const ContactForm = () => {
     document.title = "Contact-US | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
-  const notify = useCallback(() => {
-    toast.success("Email Sent Successfully..", {
-      autoClose: 2000,
+  const notifycon = useCallback(() => {
+    toast.success("Contact Us Successfully..", {
+      autoClose: 1000,
       closeOnClick: false,
     });
   }, []);
 
-  const notifyerr = useCallback(() => {
-    toast.success("Internal server ..", {
-      autoClose: 2000,
+  const notifyerrcon = useCallback(() => {
+    console.log('er')
+    toast.error("Internal Server ..", {
+      autoClose: 1000,
       closeOnClick: false,
     });
   }, []);
@@ -160,12 +163,23 @@ const ContactForm = () => {
       }
     }
   };
+  useEffect(() => {
+    if (states.status === "loading") {
+    } else if (states.status === "succeeded") {
+      setFields(states.response.result[0].data);
+      setDataLength(states.response.result[0].data.length);
+      dispatch(Iconstatus());
+    } else if (states.status === "failed") {
+      dispatch(Iconstatus());
+    } else {
+    }
+  });
 
   useEffect(() => {
     if (contactClick === true) {
       if (states.status === "loading") {
       } else if (states.status === "succeeded") {
-        notify();
+        notifycon();
         setLname("");
         setFname("");
         setEmail("");
@@ -183,7 +197,7 @@ const ContactForm = () => {
 
         dispatch(Contactusstatus());
       } else if (states.status === "failed") {
-        notifyerr();
+        notifyerrcon();
         setDbError(states.error);
         setDbsubmit(false);
 
@@ -194,7 +208,7 @@ const ContactForm = () => {
       } else {
       }
     }
-  }, [contactClick, notify, states.status]);
+  }, [states]);
 
   const handleVerify = (response) => {
     setCaptchres(response);
@@ -354,7 +368,7 @@ const ContactForm = () => {
                 <div className="col-md-12 handlemobile">
                   <div className="contact-form">
                     <h4>Let’s Connect</h4>
-                    <p>Integer at lorem eget diam facilisis lacinia ac id massa.</p>
+                    <p>Reach out today to spark innovation and unleash digital solutions in collaboration with us.</p>
                     <div className="row">
                       <div className="col-md-6 col-sm-6">
                         <input type="text" onBlur={handlefnameBlur} onFocus={() => setNameFocused(true)} className={` ${error.fname ? "handleinput_error" : ""} ${error.name_verify ? "error_padding" : ""} ${dbError.fname ? "error_padding" : ""}`} name="f-name" ref={nameRef} placeholder="Full Name " value={fname} onChange={handlefirstname} />
@@ -432,29 +446,52 @@ const ContactForm = () => {
                 className="col-lg-12 d-flex justify-content-center
                 align-items-center mb-2"
               >
-                <a className="login-btn " target="_blank" href="https://www.facebook.com/softstormtechnosys" rel="noopener noreferrer" style={{marginRight: "7px", marginLeft: "15px"}}>
-                  <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f"}} />
-                </a>{" "}
-                <span> | </span>
-                <a className="login-btn " target="_blank" href="https://twitter.com/softstorm_india" rel="noopener noreferrer" style={{marginRight: "7px", marginLeft: "7px"}}>
-                  <i className="fab fa-twitter hoverefftwi" style={{color: "#4f4f4f "}} />
-                </a>
-                <span> | </span>
-                <a className="login-btn " target="_blank" href="https://www.linkedin.com/company/softstorm-technosys" rel="noopener noreferrer" style={{marginRight: "7px", marginLeft: "7px"}}>
-                  <i className="fab fa-linkedin-in hoverefflin" style={{color: "#4f4f4f "}} />
-                </a>
-                <span> | </span>
-                <a className="login-btn " target="_blank" href="https://instagram.com/softstorm.in" rel="noopener noreferrer" style={{marginRight: "7px", marginLeft: "7px"}}>
-                  <i className="fab fa-instagram hovereffins" style={{color: "#4f4f4f "}} />
-                </a>
-                <span> | </span>
-                <a className="login-btn " target="_blank" href="https://wa.me/912613560756" rel="noopener noreferrer" style={{marginRight: "7px", marginLeft: "7px"}}>
-                  <i className="fab fa-whatsapp hovereffwat" style={{color: "#4f4f4f "}} />
-                </a>
-                <span> | </span>
-                <a className="login-btn " target="_blank" href="https://www.softstorm.in/skype:softstorminfosys?chat" rel="noopener noreferrer" style={{marginRight: "15px", marginLeft: "7px"}}>
-                  <i className="fab fa-skype hovereffsky" style={{color: "#4f4f4f "}} />
-                </a>
+                {fields.length > 0 ? (
+                  fields.map((e, index) => {
+                    if (dataLength - 1 === index) {
+                      return (
+                        <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname: e.link}} target="_blank">
+                          <i className={`fab ${e.icon} hoverefffac `} style={{color: "#4f4f4f "}} />
+                        </Link>
+                      );
+                    } else {
+                      return (
+                        <>
+                          <Link key={e.icon} rel="noreferrer" className="ml-10 mr-10" to={{pathname: e.link}} target="_blank">
+                            <i className={`fab ${e.icon} hoverefffac`} style={{color: "#4f4f4f "}} />
+                          </Link>
+                          <span> | </span>
+                        </>
+                      );
+                    }
+                  })
+                ) : (
+                  <>
+                    <Link className="social_icon ml-3" target="_blank" to={{pathname: "https://www.facebook.com/softstorm.in"}} rel="noopener noreferrer">
+                      <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f"}} />
+                    </Link>{" "}
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://twitter.com/softstorm_in"}} rel="noopener noreferrer">
+                      <i className="fab fa-twitter hoverefftwi" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://www.linkedin.com/company/softstorm-in"}} rel="noopener noreferrer">
+                      <i className="fab fa-linkedin-in hoverefflin" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://www.instagram.com/softstorm.in"}} rel="noopener noreferrer">
+                      <i className="fab fa-instagram hovereffins" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "https://wa.me/912613560756"}} rel="noopener noreferrer">
+                      <i className="fab fa-whatsapp hovereffwat" style={{color: "#4f4f4f "}} />
+                    </Link>
+                    <span> | </span>
+                    <Link className="social_icon" target="_blank" to={{pathname: "skype:softstorminfosys?chat"}} rel="noopener noreferrer">
+                      <i className="fab fa-skype hovereffsky" style={{color: "#4f4f4f "}} />
+                    </Link>
+                  </>
+                )}
               </div>
               <div className="col-lg-12  mt-2 ">
                 <div
@@ -480,22 +517,7 @@ const ContactForm = () => {
                     <span> | </span>
                     <Link
                       className="login-btn "
-                      to="/contact"
-                      style={{
-                        marginRight: "10px",
-                        marginLeft: "10px",
-                        color: "#0e1133",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Contact Us
-                    </Link>{" "}
-                    <span> | </span>
-                  </div>
-                  <div className="col-md-6 col-sm-6 d-flex justify-content-start align-items-center pl-0 handlemobilfooter">
-                    <Link
-                      className="login-btn "
-                      to="/ourwork"
+                      to="/our-work"
                       style={{
                         marginRight: "10px",
                         marginLeft: "10px",
@@ -506,6 +528,8 @@ const ContactForm = () => {
                       Our Work
                     </Link>
                     <span> | </span>
+                  </div>
+                  <div className="col-md-6 col-sm-6 d-flex justify-content-start align-items-center pl-0 handlemobilfooter">
                     <Link
                       className="login-btn "
                       to="/career"
@@ -518,6 +542,19 @@ const ContactForm = () => {
                     >
                       Career
                     </Link>
+                    <span> | </span>
+                    <Link
+                      className="login-btn "
+                      to="/contact"
+                      style={{
+                        marginRight: "10px",
+                        marginLeft: "10px",
+                        color: "#0e1133",
+                        fontWeight: 600,
+                      }}
+                    >
+                      Contact Us
+                    </Link>{" "}
                   </div>
                 </div>
               </div>

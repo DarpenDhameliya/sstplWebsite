@@ -1,4 +1,3 @@
-// import "./App.css";
 import Routes from "./Routes.js";
 import React from "react";
 import {store} from "./store";

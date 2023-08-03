@@ -1,17 +1,26 @@
-import { makeStyles ,useTheme } from "@mui/styles";
+import {makeStyles, useTheme} from "@mui/styles";
 
 const useMuiStyle = makeStyles((theme) => ({
   setcontainer: {
     maxWidth: "100% !important",
     minHeight: "100vh",
     position: "relative",
-    overflow: 'hidden',
+    overflow: "hidden",
     zIndex: 1,
     backgroundColor: "#f9fafc",
     paddingTop: "80px",
-    paddingBottom: '30px !important'
-
+    paddingBottom: "30px !important",
   },
+  setcontainer_return : {
+    maxWidth: "100% !important",
+    position: "relative",
+    overflow: "hidden",
+    zIndex: 1,
+    backgroundColor: "#f9fafc",
+    paddingTop: "80px",
+    paddingBottom: "30px !important",
+  },
+
   setloginbutton: {
     // marginTop: "20px !important",
     backgroundColor: "#367fa9 !important",
@@ -27,16 +36,16 @@ const useMuiStyle = makeStyles((theme) => ({
     borderRadius: "10px",
     marginTop: "50px",
   },
-  setlistfiltericon:{
+  setlistfiltericon: {
     display: "flex",
     justifyContent: "flex-start",
-    
+
     // alignItems:'center'
   },
   setavtarback: {
     backgroundColor: "transparent !important",
     // marginLeft: "5px",
-    marginTop:'16px !important',
+    marginTop: "16px !important",
     border: "1px solid #202223",
   },
   setheading: {
@@ -47,6 +56,14 @@ const useMuiStyle = makeStyles((theme) => ({
     fontSize: "35px !important",
     lineHeight: "32px",
     fontFamily: ["Poppins", "sans-serif", "!important"],
+  },
+  handleContactmodel: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "10px",
+  },
+  handlep: {
+    marginLeft: "10px",
   },
   setpageheading: {
     maxWidth: "100% !important",
@@ -60,16 +77,16 @@ const useMuiStyle = makeStyles((theme) => ({
     fontWeight: 600,
     textTransform: "none",
     padding: "0px 15px",
-    height:'40px',
-    marginTop: '6px',
+    height: "40px",
+    marginTop: "6px",
     backgroundColor: "#3c8dbc",
     color: "white",
-    "&:hover": { backgroundColor: "#3c8dbc !important" },
+    "&:hover": {backgroundColor: "#3c8dbc !important"},
   },
   setProductpaper: {
     textAlign: "left",
     backgroundColor: theme.palette.background.paper,
-    padding: '10px',
+    padding: "10px",
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
@@ -88,30 +105,29 @@ const useMuiStyle = makeStyles((theme) => ({
     marginTop: "7px !important",
     marginRight: "10px !important",
     marginBottom: "2px !important",
-    fontWeight: '600 !important',
+    fontWeight: "600 !important",
   },
   textField: {
     margin: "0 !important",
-    "&:hover": { boxShadow: `${theme.shadows[3]}`, border: 0 },
-    '& .MuiInputBase-root':{
+    "&:hover": {boxShadow: `${theme.shadows[3]}`, border: 0},
+    "& .MuiInputBase-root": {
       fontFamily: ["Poppins", "sans-serif", "!important"],
     },
   },
   settextfield: {
-    '& .MuiInputBase-root':{
+    "& .MuiInputBase-root": {
       fontFamily: ["Poppins", "sans-serif", "!important"],
     },
-    "&:hover": { boxShadow: `${theme.shadows[3]}`, border: 0 },
-    '& .MuiTextField-root':{
-      width:"100% !important"
-    }
+    "&:hover": {boxShadow: `${theme.shadows[3]}`, border: 0},
+    "& .MuiTextField-root": {
+      width: "100% !important",
+    },
   },
 
   setsendbutton: {
     display: "flex",
     justifyContent: "end",
-    marginTop: '7px'
-
+    marginTop: "7px",
   },
   setsendbtninside: {
     height: "40px",
@@ -120,35 +136,35 @@ const useMuiStyle = makeStyles((theme) => ({
     padding: "0px 15px",
     backgroundColor: "#3c8dbc !important",
     color: "white",
-    "&:hover": { backgroundColor: "#3c8dbccc  !important" },
+    "&:hover": {backgroundColor: "#3c8dbccc  !important"},
   },
-  tableth:{
-    padding:'8px !important',
-    fontWeight: '600 !important',
-    color:'#353535 !important',
-    fontFamily:["Poppins", "sans-serif", "!important"],
+  tableth: {
+    padding: "8px !important",
+    fontWeight: "600 !important",
+    color: "#353535 !important",
+    fontFamily: ["Poppins", "sans-serif", "!important"],
   },
-  tablethaction:{
+  tablethaction: {
     // width: '75px',
-    padding:'8px !important',
-    fontWeight: '600 !important',
-    color:'#353535 !important',
-    fontFamily:["Poppins", "sans-serif", "!important"],
+    padding: "8px !important",
+    fontWeight: "600 !important",
+    color: "#353535 !important",
+    fontFamily: ["Poppins", "sans-serif", "!important"],
   },
-  tabletd:{
-    fontFamily:["Poppins", "sans-serif", "!important"],
-    padding:'8px !important',
-    color:'#202223 !important',
-    fontSize: '16px !important'
+  tabletd: {
+    fontFamily: ["Poppins", "sans-serif", "!important"],
+    padding: "8px !important",
+    color: "#202223 !important",
+    fontSize: "16px !important",
   },
-  seteditincon:{
-    color:'#353535e0',
-    "&:hover": { color: "#3c8dbc !important" , backgroundColor: "#d6efef6e"},
+  seteditincon: {
+    color: "#353535e0",
+    "&:hover": {color: "#3c8dbc !important", backgroundColor: "#d6efef6e"},
   },
-  setdeleteincon:{
-    color:'#353535e0',
+  setdeleteincon: {
+    color: "#353535e0",
     // marginRight:'-15px',
-    "&:hover": { color: "#7f2121 !important" , backgroundColor: "antiquewhite"},
+    "&:hover": {color: "#7f2121 !important", backgroundColor: "antiquewhite"},
   },
   setmodeldisplay: {
     position: "absolute",
@@ -176,22 +192,22 @@ const useMuiStyle = makeStyles((theme) => ({
   },
   deletebtn: {
     fontWeight: 600,
-    height: '35px',
+    height: "35px",
     textTransform: "none",
     padding: "0px 15px",
     backgroundColor: "#931d1d",
     color: "white",
-    "&:hover": { backgroundColor: "#931d1d !important" },
+    "&:hover": {backgroundColor: "#931d1d !important"},
   },
-  canclebtn:{
-    fontWeight: '600 !important',
-    height: '35px',
+  canclebtn: {
+    fontWeight: "600 !important",
+    height: "35px",
     textTransform: "none",
     padding: "0px 15px",
     backgroundColor: "#3c8dbc",
-    marginRight:'5px',
+    marginRight: "5px",
     color: "white",
-    "&:hover": { backgroundColor: "#3c8dbc !important" },
+    "&:hover": {backgroundColor: "#3c8dbc !important"},
   },
   setbtndeldiv: {
     display: "flex",
@@ -208,25 +224,25 @@ const useMuiStyle = makeStyles((theme) => ({
     marginBottom: "20px !important",
     fontWeight: "600 !important",
   },
-  setstateclear:{
+  setstateclear: {
     height: "40px",
     fontWeight: "600 !important",
     textTransform: "none",
     padding: "0px 15px",
     backgroundColor: "#367fa9 !important",
     color: "white !important",
-    marginRight:'15px !important',
+    marginRight: "15px !important",
     // "&:hover": { backgroundColor: "#3c8dbccc  !important" },
   },
-  seticondiv:{
-    display:'flex',
-    justifyContent:'center'
+  seticondiv: {
+    display: "flex",
+    justifyContent: "center",
   },
-  tabletdicon:{
-    fontFamily:["Poppins", "sans-serif", "!important"],
-    justifyContent: 'center',
-    padding:'8px !important',
-    color:'#202223 !important'
+  tabletdicon: {
+    fontFamily: ["Poppins", "sans-serif", "!important"],
+    justifyContent: "center",
+    padding: "8px !important",
+    color: "#202223 !important",
   },
 
   setcarddiv: {
@@ -238,7 +254,7 @@ const useMuiStyle = makeStyles((theme) => ({
     boxShadow: `${theme.shadows[5]}`,
   },
   setGridcard: {
-    columnSpacing: '3 !important',
+    columnSpacing: "3 !important",
     [theme.breakpoints.down("xs")]: {
       columnSpacing: "1 !important",
     },
@@ -279,17 +295,16 @@ const useMuiStyle = makeStyles((theme) => ({
       fontSize: "16px !important",
     },
   },
-  setpaginationdiv:{
+  setpaginationdiv: {
     display: "flex",
     justifyContent: "space-between",
-    marginTop:'7px !important',
-    alignItems: 'center',
-
+    marginTop: "7px !important",
+    alignItems: "center",
   },
-  setrowperpage:{
+  setrowperpage: {
     display: "flex",
     justifyContent: "start",
-    alignItems: 'center',
+    alignItems: "center",
   },
   setlabelrow: {
     fontFamily: ["Poppins", "sans-serif", "!important"],
@@ -298,7 +313,7 @@ const useMuiStyle = makeStyles((theme) => ({
     marginRight: "10px !important",
     marginBottom: "2px !important",
     fontWeight: "600 !important",
-    minWidth:"122px !important"
+    minWidth: "122px !important",
   },
   // setlistdiv: {
   //   display: "flex !important",
@@ -320,7 +335,7 @@ const useMuiStyle = makeStyles((theme) => ({
   seteditbtn: {
     width: "20%",
     fontWeight: 800,
-    "&:hover": { color: "#3c8dbc !important", backgroundColor: "#d6efef" },
+    "&:hover": {color: "#3c8dbc !important", backgroundColor: "#d6efef"},
   },
 
   // addproductheader: {
@@ -403,7 +418,6 @@ const useMuiStyle = makeStyles((theme) => ({
   //   display:'flex',
   //   justifyContent:'flex-end',
   // },
-
-}))
+}));
 
 export default useMuiStyle;

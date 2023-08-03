@@ -6,14 +6,11 @@ import digimg from "../../../assets/images/services/digital-marketing.webp";
 import graimg from "../../../assets/images/services/web-graphic-designing.webp";
 import entimg from "../../../assets/images/services/enterprise-services.webp";
 import {HashLink} from "react-router-hash-link";
-import shapeTwo from "../../../assets/images/mobile and phone (1).webp";
-import shapeThree from "../../../assets/images/database (1).webp";
-import axios from "../../common/Axios";
 import {Servicestate, Servicestatus, ServiceSlice} from "../slice/Service";
 import {useSelector, useDispatch} from "react-redux";
+import { useHistory } from "react-router-dom";
 
 export default function Services(className) {
-  const [serviceList, setServiceList] = useState([]);
   const [dbFetcherr, setDbFetcherr] = useState("");
   const [webappimg, setWebappimg] = useState("");
   const [mobappimg, setMobppimg] = useState("");
@@ -29,38 +26,7 @@ export default function Services(className) {
   const [erpapptitle, setErpapptitle] = useState("");
   const states = useSelector(Servicestate);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   if (states.response.result === undefined) {
-  //   const fetchServiceata = () => {
-  //     axios
-  //       .get("service/service_list", {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       })
-  //       .then((result) => {
-  //         setWebappimg(result.data.result[0].frontpageimg);
-  //         setWebapptitle(result.data.result[0].heading);
-  //         setMobppimg(result.data.result[1].frontpageimg);
-  //         setMobpptitle(result.data.result[1].heading);
-  //         setDeskappimg(result.data.result[2].frontpageimg);
-  //         setDeskapptitle(result.data.result[2].heading);
-  //         setDigitalappimg(result.data.result[3].frontpageimg);
-  //         setDigitalapptitle(result.data.result[3].heading);
-  //         setWebgraappimg(result.data.result[4].frontpageimg);
-  //         setWebgraapptitle(result.data.result[4].heading);
-  //         setErpappimg(result.data.result[5].frontpageimg);
-  //         setErpapptitle(result.data.result[5].heading);
-  //       })
-  //       .catch((err) => {
-  //         setDbFetcherr(err.response.data.error);
-  //       });
-  //   };
-
-  //   fetchServiceata();
-  // }
-  // }, []);
-
+const history = useHistory();
   useEffect(() => {
     dispatch(ServiceSlice());
   }, []);
@@ -93,6 +59,10 @@ export default function Services(className) {
     }
   });
 
+  const handlepagechange = (e, data) => {
+    history.push(`/${e}`);
+  };
+
   return (
     <>
       <section className={`softstormweb-service handleservice pt-70 pb-80 ${className}`} id="service">
@@ -111,26 +81,26 @@ export default function Services(className) {
               <div className="row">
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="400">
-                    <div className="imagedisplay" style={{minHeight: "240px", background: "#ddf4fd"}}>
-                      <img src={webappimg} alt="webimg" style={{borderRadius: "10px"}} />
+                    <div className="imagedisplay" onClick={() => handlepagechange("web-application-developement")} style={{minHeight: "240px", background: "#ddf4fd"}}>
+                      <img src={webappimg ? webappimg : webimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
-                      {webapptitle}
+                      {webapptitle ? webapptitle : "Web Application Developement"}
                     </h4>
                     <div className="servicedisplay">
-                      <HashLink className="main-btn-about mob1 ml-10" to="/web-application-developement#nodejs">
+                      <HashLink className="main-btn-about mob1 ml-1 mr-1" to="/web-application-developement#nodejs">
                         NODE JS
                       </HashLink>
-                      <HashLink smooth className="main-btn-about mob1 ml-10" to="/web-application-developement#php">
+                      <HashLink smooth className="main-btn-about mob1 ml-1 mr-1" to="/web-application-developement#php">
                         PHP
                       </HashLink>
-                      <HashLink className="main-btn-about mob1 ml-10" to="/web-application-developement#laravel">
+                      <HashLink className="main-btn-about mob1 ml-1 mr-1" to="/web-application-developement#laravel">
                         LARAVEL
                       </HashLink>
-                      <HashLink className="main-btn-about mob1 ml-10" to="/web-application-developement#codeigniter">
+                      <HashLink className="main-btn-about mob1 ml-1 mr-1" to="/web-application-developement#codeigniter">
                         CODEIGNITER
                       </HashLink>
-                      <HashLink className="main-btn-about mob1 ml-10" exact to="/web-application-developement#python">
+                      <HashLink className="main-btn-about mob1 ml-1 mr-1" exact to="/web-application-developement#python">
                         PYTHON
                       </HashLink>
                     </div>
@@ -138,20 +108,20 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-2 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="800">
-                    <div className="imagedisplay" style={{minHeight: "240px", background: "#fedaf4"}}>
-                      <img src={mobappimg} alt="webimg" style={{borderRadius: "10px"}} />
+                    <div className="imagedisplay" onClick={() => handlepagechange("mobile-application-developement")} style={{minHeight: "240px", background: "#fedaf4"}}>
+                      <img src={mobappimg ? mobappimg : mobimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
-                      {mobapptitle}
+                      {mobapptitle ? mobapptitle : "Mobile Application Developer"}
                     </h4>
                     <div className="servicedisplay">
-                      <HashLink className="main-btn-about mob2 ml-10" to="/mobile-application-developement#flutter">
+                      <HashLink className="main-btn-about mob2 ml-1 mr-1" to="/mobile-application-developement#flutter">
                         FLUTTER
                       </HashLink>
-                      <HashLink className="main-btn-about mob2 ml-10" to="/mobile-application-developement#android">
+                      <HashLink className="main-btn-about mob2 ml-1 mr-1" to="/mobile-application-developement#android">
                         ANDROID
                       </HashLink>
-                      <HashLink className="main-btn-about mob2 ml-10" to="/mobile-application-developement#ios">
+                      <HashLink className="main-btn-about mob2 ml-1 mr-1" to="/mobile-application-developement#ios">
                         IOS
                       </HashLink>
                     </div>
@@ -159,29 +129,29 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-3 mt-30 wow animated fadeInUp " data-aos="fade-right" data-aos-duration="1000">
-                    <div className="imagedisplay" style={{minHeight: "240px", background: "#cadcff"}}>
-                      <img src={deskappimg} alt="webimg" style={{borderRadius: "10px"}} />
+                    <div className="imagedisplay" onClick={() => handlepagechange("desktop-software-developement")} style={{minHeight: "240px", background: "#cadcff"}}>
+                      <img src={deskappimg ? deskappimg : deskimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
-                      {deskapptitle}
+                      {deskapptitle ? deskapptitle : "Desktop Software Developement"}
                     </h4>
                     <div className="servicedisplay">
-                      <HashLink className="main-btn-about mob3 ml-10" to="/desktop-software-developement#c">
+                      <HashLink className="main-btn-about mob3 ml-1 mr-1" to="/desktop-software-developement#c">
                         C#
                       </HashLink>
-                      <HashLink className="main-btn-about mob3 ml-10" to="/desktop-software-developement#c++">
+                      <HashLink className="main-btn-about mob3 ml-1 mr-1" to="/desktop-software-developement#c++">
                         C ++
                       </HashLink>
-                      <HashLink className="main-btn-about mob3 ml-10" to="/desktop-software-developement#mashinlerning">
+                      <HashLink className="main-btn-about mob3 ml-1 mr-1" to="/desktop-software-developement#mashinlerning">
                         MASHINE LEARNING
                       </HashLink>
-                      <HashLink className="main-btn-about mob3 ml-10" to="/desktop-software-developement#controller">
+                      <HashLink className="main-btn-about mob3 ml-1 mr-1" to="/desktop-software-developement#controller">
                         CONTEROLLER BASED
                       </HashLink>
-                      <HashLink className="main-btn-about mob3 ml-10" to="/desktop-software-developement#axistravelling">
+                      <HashLink className="main-btn-about mob3 ml-1 mr-1" to="/desktop-software-developement#axistravelling">
                         AXIS TRAVELLING
                       </HashLink>
-                      <HashLink className="main-btn-about mob3 ml-10" to="/desktop-software-developement#lasersource">
+                      <HashLink className="main-btn-about mob3 ml-1 mr-1" to="/desktop-software-developement#lasersource">
                         LASER SOURCE
                       </HashLink>
                     </div>
@@ -189,23 +159,23 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-4 mt-30 wow animated fadeInUp  " data-aos="fade-right" data-aos-duration="400">
-                    <div className="imagedisplay" style={{minHeight: "240px", background: "#ffbc8d"}}>
-                      <img src={digitalappimg} alt="webimg" style={{borderRadius: "10px"}} />
+                    <div className="imagedisplay" onClick={() => handlepagechange("digital-marketing")} style={{minHeight: "240px", background: "#ffbc8d"}}>
+                      <img src={digitalappimg ? digitalappimg : digimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
-                      {digitalapptitle}
+                      {digitalapptitle ? digitalapptitle : "Digital Marketing"}
                     </h4>
                     <div className="servicedisplay">
-                      <HashLink className="main-btn-about mob4 ml-10" to="/digital-marketing#seo">
+                      <HashLink className="main-btn-about mob4 ml-1 mr-1" to="/digital-marketing#seo">
                         SEO
                       </HashLink>
-                      <HashLink className="main-btn-about mob4 ml-10" to="/digital-marketing#smm">
+                      <HashLink className="main-btn-about mob4 ml-1 mr-1" to="/digital-marketing#smm">
                         SMM
                       </HashLink>
-                      <HashLink className="main-btn-about mob4 ml-10" to="/digital-marketing#political">
+                      <HashLink className="main-btn-about mob4 ml-1 mr-1" to="/digital-marketing#political">
                         POLITICAL PROFILE
                       </HashLink>
-                      <HashLink className="main-btn-about mob4 ml-10" to="/digital-marketing#mobileapp">
+                      <HashLink className="main-btn-about mob4 ml-1 mr-1" to="/digital-marketing#mobileapp">
                         MOBILE APP PROMOTION
                       </HashLink>
                     </div>
@@ -213,29 +183,29 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-5 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="800">
-                    <div className="imagedisplay" style={{minHeight: "240px", background: "#97adff"}}>
-                      <img src={webgraappimg} alt="webimg" style={{borderRadius: "10px"}} />
+                    <div className="imagedisplay" onClick={() => handlepagechange("web_graphic-designing")} style={{minHeight: "240px", background: "#97adff"}}>
+                      <img src={webgraappimg ? webgraappimg : graimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
-                      {webgraapptitle}
+                      {webgraapptitle ? webgraapptitle : "Web & Graphic Designing"}
                     </h4>
                     <div className="servicedisplay">
-                      <HashLink className="main-btn-about mob5 ml-10" to="/web_graphic-designing#webdesign">
+                      <HashLink className="main-btn-about mob5 ml-1 mr-1" to="/web_graphic-designing#webdesign">
                         WEB DESIGN
                       </HashLink>
-                      <HashLink className="main-btn-about mob5 ml-10" to="/web_graphic-designing#uiux">
+                      <HashLink className="main-btn-about mob5 ml-1 mr-1" to="/web_graphic-designing#uiux">
                         UI & UX DESIGN
                       </HashLink>
-                      <HashLink className="main-btn-about mob5 ml-10" to="/web_graphic-designing#reactjs">
+                      <HashLink className="main-btn-about mob5 ml-1 mr-1" to="/web_graphic-designing#reactjs">
                         REACT JS
                       </HashLink>
-                      <HashLink className="main-btn-about mob5 ml-10" to="/web_graphic-designing#viewjs">
+                      <HashLink className="main-btn-about mob5 ml-1 mr-1" to="/web_graphic-designing#viewjs">
                         VUE JS
                       </HashLink>
-                      <HashLink className="main-btn-about mob5 ml-10" to="/web_graphic-designing#logo">
+                      <HashLink className="main-btn-about mob5 ml-1 mr-1" to="/web_graphic-designing#logo">
                         LOGO BANNER
                       </HashLink>
-                      <HashLink className="main-btn-about mob5 ml-10" to="/web_graphic-designing#brochur">
+                      <HashLink className="main-btn-about mob5 ml-1 mr-1" to="/web_graphic-designing#brochur">
                         BROCHUR & MOKEUP
                       </HashLink>
                     </div>
@@ -243,20 +213,20 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-6 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="1000">
-                    <div className="imagedisplay" style={{minHeight: "240px", background: "#98e7d4"}}>
-                      <img src={erpappimg} alt="webimg" style={{borderRadius: "10px"}} />
+                    <div className="imagedisplay" onClick={() => handlepagechange("enterprise-services")} style={{minHeight: "240px", background: "#98e7d4"}}>
+                      <img src={erpappimg ? erpappimg : entimg} alt="webimg" style={{borderRadius: "10px"}} />
                     </div>
                     <h4 className="title" style={{textAlign: "center"}}>
-                      {erpapptitle}
+                      {erpapptitle ? erpapptitle : "Enterprice Services"}
                     </h4>
                     <div className="servicedisplay">
-                      <HashLink className="main-btn-about mob6 ml-10" to="/enterprise-services#erp">
+                      <HashLink className="main-btn-about mob6 ml-1 mr-1" to="/enterprise-services#erp">
                         ERP
                       </HashLink>
-                      <HashLink className="main-btn-about mob6 ml-10" to="/enterprise-services#crm">
+                      <HashLink className="main-btn-about mob6 ml-1 mr-1" to="/enterprise-services#crm">
                         CRM
                       </HashLink>
-                      <HashLink className="main-btn-about mob6 ml-10" to="/enterprise-services#accounting">
+                      <HashLink className="main-btn-about mob6 ml-1 mr-1" to="/enterprise-services#accounting">
                         CUSTOMIZED ACCOUNTING
                       </HashLink>
                     </div>
@@ -265,12 +235,6 @@ export default function Services(className) {
               </div>
             </div>
           </div>
-        </div>
-        <div className="service-shape-1">
-          <img src={shapeTwo} alt="" />
-        </div>
-        <div className="service-shape-2" style={{width:"30px"}}>
-          <img src={shapeThree} alt="" />
         </div>
       </section>
     </>

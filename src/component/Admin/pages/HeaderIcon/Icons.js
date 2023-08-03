@@ -4,29 +4,13 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import {TableContainer} from "@mui/material";
-import {styled} from "@mui/material/styles";
-import Tooltip from "@mui/material/Tooltip";
 import axios from "../../../common/Axios";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import Avatar from "@mui/material/Avatar";
 import {useHistory} from "react-router-dom";
 import logo from "../../../../assets/images/logo-removebg-preview.webp";
 
 const Icons = () => {
-  const [icons, setIcons] = useState([]);
-  const [links, setLinks] = useState([]);
   const classes = useMuiStyle();
   const [fields, setFields] = useState([]);
   const [updateId, setUpdateId] = useState("");
@@ -158,7 +142,7 @@ const Icons = () => {
           <Paper className={classes.setProductpaper} elevation={5}>
             <div className={classes.setlistfiltericon}>
               <Avatar className={`${classes.setavtarback} mb-3`} onClick={addField} variant="rounded">
-                <i className="fa fa-plus black" aria-hidden="true" />
+                <i className="fa fa-plus" style={{color:'black' , fontSize:"23px"}}  aria-hidden="true" />
               </Avatar>
             </div>
             {addError && <Typography className={classes.seterrorlabel}>{addError} </Typography>}
@@ -168,7 +152,7 @@ const Icons = () => {
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "48%"}} placeholder="icon name" className={`${classes.settextfield} mt-1 mb-1`} multiline InputLabelProps={{shrink: false}} value={field.icon} onChange={(e) => handleChange(index, "icon", e.target.value)} />
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "48%"}} placeholder="Link" className={`${classes.settextfield} mt-1 mb-1 ml-2`} multiline InputLabelProps={{shrink: false}} value={field.link} onChange={(e) => handleChange(index, "link", e.target.value)} />
 
-                <i aria-hidden="true" className={` fa fa-trash ml-1 fs-17`} onClick={() => removeField(index)} />
+                <i aria-hidden="true" className={` fa fa-trash`}  onClick={() => removeField(index)} />
               </div>
             ))}
 

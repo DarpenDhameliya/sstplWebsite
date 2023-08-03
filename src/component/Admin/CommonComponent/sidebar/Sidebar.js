@@ -8,32 +8,16 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-// import MenuIcon from "@mui/icons-material/Menu";
 import { useState, useEffect } from "react";
-// import MailOutlineOutlinedIcon from "@mui/icons-material/MailOutlineOutlined";
 import Tooltip from "@mui/material/Tooltip";
-// import PersonOutlineIcon from "@mui/icons-material/PersonOutline";<i className="fa fa-circle-user"></i>
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-// import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Sidebardata from "./Sidebardata";
-import { useDispatch, useSelector } from "react-redux";
-// import { openstatus } from "./slice/AppReducer";
 import useStyleMainDisplay from "./MainDisplayStyle";
 import { useHistory } from "react-router-dom";
 import sstpl from "../../../../assets/images/logo.jpg";
 import Avatar from "@mui/material/Avatar";
-// import AutorenewIcon from '@mui/icons-material/Autorenew';
 
-// import {
-//   WalletBallenceSlice,
-//   Walletballencestate,
-//   Walletballencestatus,
-// } from "./slice/WalletBallenceSlice";
-// import { Manualaddstate } from "../order/orderEntryPage/slice/ManualAddSlice";
-// import { Messhosenddatastate } from "../order/orderEntryPage/slice/MesshodatasendSlice";
-// import { Flipcartsenddatastate } from "../order/orderEntryPage/slice/FlipcartsenddataSlice";
-// import { Amazonsenddatastate } from "../order/orderEntryPage/slice/AmazondatasendSlice";
 
 const drawerWidth = 250;
 const closedrawerWidth = 60;
@@ -52,7 +36,6 @@ const openedMixin = (theme) => ({
   "&:hover": {
     "&::-webkit-scrollbar": {
       display: "flex",
-      // position: 'absolute',
       width: "7px",
       zIndex: 1201,
     },
@@ -94,7 +77,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar, {
-  // shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   width: `calc(100% - ${closedrawerWidth}px)`,
   marginLeft: closedrawerWidth,
@@ -139,14 +121,6 @@ export default function Sidebar() {
   const [spin, setSpin] = useState(false);
   const settingOpenBoolean = Boolean(settingOpen);
   const history = useHistory();
-  // const wallestate = useSelector(Walletballencestate);
-  // const dispatch = useDispatch();
-  // const manualadd = useSelector(Manualaddstate);
-  // const messhosenddatastates = useSelector(Messhosenddatastate);
-  // const Flipcartsenddatastates = useSelector(Flipcartsenddatastate);
-  // const amazonsenddata = useSelector(Amazonsenddatastate);
-
-
 
   const handleSettingClose = () => {
     setSettingOpen(null);
@@ -156,7 +130,6 @@ export default function Sidebar() {
 
   const handleDrawerOpen = () => {
     setOpen(!open);
-    // dispatch(openstatus(open));
   };
 
   const handleuserprofile = () => {
@@ -195,7 +168,6 @@ const handlelogout = () => {
               Softstorm Technosys
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
-            {/* <Box className={classes.setboxwallet}> */}
             <Tooltip title="Account" arrow>
                 <IconButton
                   className={classes.seticonbtn}
@@ -207,12 +179,11 @@ const handlelogout = () => {
                   aria-haspopup="true"
                   aria-expanded={settingOpenBoolean ? "true" : undefined}
                 >
-                   <i className="fa fa-user white fs-20"></i>
+                   <i className={`fa fa-user ${classes.white} ${classes.fs}`}></i>
                 </IconButton>
               </Tooltip>
           </Toolbar>
         </AppBar>
-        {/* <WebDrawer variant="permanent" open={open} onClose={handleDrawerClose}> */}
         <WebDrawer
           variant="permanent"
           open={open}
@@ -245,7 +216,6 @@ const handlelogout = () => {
               ml: -0.5,
               mr: 1,
             },
-            // before : use for arrow of menulist
             "&:before": {
               content: '""',
               display: "block",

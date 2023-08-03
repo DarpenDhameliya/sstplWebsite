@@ -1,16 +1,10 @@
 import React, {useState, useEffect} from "react";
-import Drawer from "../Mobile/Drawer";
-import Header from "../../common/Header";
-import useToggle from "../../common/Hooks/useToggle";
 import Headers from "../../common/PageHeader";
 import ContactForm from "./ContactForm";
-import BackToTop from "../../common/BackToTop";
-import Hireus from "../../common/Hireus";
 import logo from '../../../assets/images/logo-removebg-preview.webp'
 
 const ContactIndex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
+
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -31,10 +25,6 @@ const ContactIndex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
         <Headers
           title="Contact Us"
           breadcrumb={[
@@ -43,7 +33,6 @@ const ContactIndex = () => {
           ]}
         />
         <ContactForm />
-        {/* <BackToTop /> */}
         </div>
     </>
   );

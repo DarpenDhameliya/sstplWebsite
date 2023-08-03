@@ -1,19 +1,12 @@
 import React, {useState} from "react";
-import Drawer from "../Mobile/Drawer";
-import Header from "../../common/Header";
 import useToggle from "../../common/Hooks/useToggle";
 import Headers from "../../common/PageHeader";
-import Footer from "../../common/Footer";
 import Careerdata from "./Careerdata";
 import Sidepoosition from "./Sidepoosition";
-import BackToTop from "../../common/BackToTop";
-import Hireus from "../../common/Hireus";
 import ApplyNow from "../../common/ApplyNow";
 import logo from "../../../assets/images/logo-removebg-preview.webp";
 
 const CareerIndex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
   const [apply, applyAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
 
@@ -34,10 +27,6 @@ const CareerIndex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
         <ApplyNow open={apply} action={applyAction.toggle} />
         <Headers
           title="Careers"
@@ -62,9 +51,6 @@ const CareerIndex = () => {
             </div>
           </div>
         </section>
-
-        {/* <Footer />
-        <BackToTop /> */}
       </div>
     </>
   );

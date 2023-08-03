@@ -1,11 +1,5 @@
 import React from "react";
-import shape13 from "../../../assets/images/it.webp";
-import shape14 from "../../../assets/images/shape/shape-14.webp";
-import shape15 from "../../../assets/images/persantage (1).webp";
 import image1 from "../../../assets/images/Group 16 (7).webp";
-// import mob1 from "../../../assets/images/icon/customer-support.webp";
-// import mob2 from "../../../assets/images/icon/customized-solution.webp";
-// import mob3 from "../../../assets/images/icon/latest-technologies.webp";
 import mob1 from "../../../assets/images/customize solution png.webp";
 import mob2 from "../../../assets/images/CUSTOMER SUPPORT.webp";
 import mob3 from "../../../assets/images/LATEST TECHNOLOGY.webp";
@@ -30,10 +24,6 @@ export default function WhyChoseUs() {
               <div>
                 <div className="softstormweb-left-chooseus softstormweb-left-chooseus-l1 maintaincooseus" data-aos="fade-right" data-aos-duration="400">
                   <div className="whychoosebox">
-                    {/* <i
-                      className="fa fa-clock fa-regular icon_whychoos"
-                      aria-hidden="true"
-                    /> */}
                     <img src={mob1} alt="imagheader" style={{maxWidth:"67px"}}/>
                   </div>
                   <div>
@@ -43,10 +33,6 @@ export default function WhyChoseUs() {
                 </div>
                 <div className="softstormweb-left-chooseus item-2 softstormweb-left-chooseus-l1" data-aos="fade-right" data-aos-duration="600">
                   <div className="whychoosebox">
-                    {/* <i
-                      className="fa fa-thumbs-up icon_whychoos"
-                      aria-hidden="true"
-                    ></i> */}
                     <img src={mob2} alt="imagheader" draggable="false" style={{maxWidth:"67px"}}/>
                   </div>
                   <div>
@@ -56,10 +42,6 @@ export default function WhyChoseUs() {
                 </div>
                 <div className="softstormweb-left-chooseus item-3 softstormweb-left-chooseus-l1" data-aos="fade-right" data-aos-duration="800">
                   <div className="whychoosebox">
-                    {/* <i
-                      className="fa fa-globe icon_whychoos"
-                      aria-hidden="true"
-                    ></i> */}
                     <img src={mob3} alt="imagheader" style={{maxWidth:"67px"}}/>
                   </div>
                   <div>
@@ -70,24 +52,14 @@ export default function WhyChoseUs() {
               </div>
             </div>
             <div className="col-lg-6 col-md-11 col-sm-11">
-              {/* <div className="softstormweb-right-chooseus- wow animated fadeInRight" data-aos="zoom-out-up" data-aos-duration="800" style={{minHeight: "530px", maxWidth: "100%"}}>
-                <img src={image1} alt="" style={{width: "100%", height: "500px", objectFit: "cover"}} />
-              </div> */}
               <div className="image-container wow animated fadeInRight image-container d-flex justify-content-center" data-aos="zoom-out-up" data-aos-duration="800" >
                 <img src={image1} alt=""  className="handlewcu" />
               </div>
             </div>
           </div>
         </div>
-        <div className="features-shape-1">
-          <img src={shape15} alt=""  style={{width:"25px"}}/>
-        </div>
-        {/* <div className="features-shape-2">
-          <img src={shape14} alt="" />
-        </div> */}
-        <div className="features-shape-3">
-          <img src={shape13} alt="" />
-        </div>
+      
+       
       </section>
     </>
   );

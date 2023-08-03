@@ -9,7 +9,6 @@ function Drawer({drawer, action, cartToggle, closetoggle}) {
 
   const handler = (e, value, sizes) => {
     e.preventDefault();
-    // console.log(value)
     if (value === "about-us" || value === "testimoial" || value === "value_home" || value === 'value_home_img') {
       action(e);
     }
@@ -21,7 +20,6 @@ function Drawer({drawer, action, cartToggle, closetoggle}) {
       setSize("0px");
     } else {
       if (value !== "about") {
-        // console.log(value)
         action(e);
       }
 
@@ -31,12 +29,9 @@ function Drawer({drawer, action, cartToggle, closetoggle}) {
         setSize(`${43 * getItems}px`);
         setItem(value);
       }
-      // console.log('enter size' ,size)
     }
 
-    // handleaction()
   };
-  // console.log(closetoggle)
   const handleaction = (e) => {
     action(e);
   };
@@ -77,7 +72,6 @@ function Drawer({drawer, action, cartToggle, closetoggle}) {
                           <Link to="/">Blog</Link>
                         </li>
                         <li onClick={(e) => handler(e, "value_home_img", size)} id="value_home">
-                          {/* <a href="https://www.google.com/maps/uv?pb=!1s0x3be04f50264611d1%3A0x76746ef930af1752!5sSoftStorm%20Technosys%20Pvt.%20Ltd.!15sCgIgARICEAE&imagekey=!1e10!2sAF1QipM9setE_GO3u642xJu5mJb6uNQ7a20enuyXAxag" target="_blank" rel="noopener noreferrer">Life@SSTPL</a> */}
                           <Link to="#">Life@SSTPL</Link>
                         </li>
                       </ul>
@@ -104,22 +98,22 @@ function Drawer({drawer, action, cartToggle, closetoggle}) {
                 <div className="offcanvas-social">
                   <ul className="text-center">
                     <li>
-                      <a target="_blank" href="https://www.facebook.com/softstormtechnosys" rel="noopener noreferrer">
+                      <a target="_blank" href="https://www.facebook.com/softstorm.in" rel="noopener noreferrer">
                         <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f "}} />
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" href="https://twitter.com/softstorm_india" rel="noopener noreferrer">
+                      <a target="_blank" href="https://twitter.com/softstorm_in" rel="noopener noreferrer">
                         <i className="fab fa-twitter hoverefftwi" style={{color: "#4f4f4f "}} />
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" href="https://www.linkedin.com/company/softstorm-technosys" rel="noopener noreferrer">
+                      <a target="_blank" href="https://www.linkedin.com/company/softstorm-in" rel="noopener noreferrer">
                         <i className="fab fa-linkedin-in hoverefflin" style={{color: "#4f4f4f "}} />
                       </a>
                     </li>
                     <li>
-                      <a target="_blank" href="https://instagram.com/softstorm.in" rel="noopener noreferrer">
+                      <a target="_blank" href="https://www.instagram.com/softstorm.in" rel="noopener noreferrer">
                         <i className="fab fa-instagram hovereffins" style={{color: "#4f4f4f "}} />
                       </a>
                     </li>
@@ -138,7 +132,7 @@ function Drawer({drawer, action, cartToggle, closetoggle}) {
                 <div className="footer-widget-info">
                   <ul>
                     <li>
-                      <a href="mailto:dkdhameliya24@gmail.com" rel="noopener noreferrer" className="pl-0">
+                      <a href="mailto:hr.softstorm@gmail.com" rel="noopener noreferrer" className="pl-0">
                         <i className="fa fa-envelope mr-2 drawer_locat" />
                         <div className="ml-30">contact@softstorm.in</div>
                       </a>

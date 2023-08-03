@@ -4,7 +4,6 @@ import {CareerSlice, Careerstate, Careerstatus} from "../slice/MailSlice";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useRef} from "react";
 import axios from "../../common/Axios";
-import {ToastContainer, toast} from "react-toastify";
 
 const Sidepoosition = () => {
   const [name, setName] = useState("");
@@ -174,7 +173,6 @@ const Sidepoosition = () => {
         formData.append("file", file);
         setDbsubmit(true);
 
-        // const json1 = {name: name, email: email, phone: phone, apply: apply,file: file};
         const json2 = {ipAddress, captchres};
         dispatch(
           CareerSlice({

@@ -1,21 +1,12 @@
 import React from "react";
-import Drawer from "../../Mobile/Drawer";
-import Header from "../../../common/Header";
-import useToggle from "../../../common/Hooks/useToggle";
 import Headers from "../../../common/PageHeader";
-import Footer from "../../../common/Footer";
 import WebService from "./WebService";
-// import SidePortion from "../SidePortion";
-import BackToTop from "../../../common/BackToTop";
-import Hireus from "../../../common/Hireus";
 import {useEffect, useState} from "react";
 import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import axios from "../../../common/Axios";
 import {Servicestate} from "../../slice/Service";
 import {useSelector} from "react-redux";
 const WebserviceIndex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");
   const [image, setImage] = useState("");
@@ -48,6 +39,7 @@ const WebserviceIndex = () => {
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         setDbFetcherr(err.response.data.error);
       });
   };
@@ -69,23 +61,17 @@ const WebserviceIndex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-      <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
-        <Headers
+    <Headers
           title="WEB APPLICATION DEVELOPMENT"
           breadcrumb={[
             {link: "/", title: "Home"},
-            {link: "/ourservice", title: "Our Service"},
-            {link: "/webapp", title: "Web Development"},
+            {link: "/our-service", title: "Our Service"},
+            {link: "/web-application-developement", title: "Web Development"},
           ]}
         />
 
         <WebService images={image} serviceContents={serviceContent} />
 
-        {/* <Footer />
-      <BackToTop /> */}
       </div>
     </>
   );

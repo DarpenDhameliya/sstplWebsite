@@ -1,24 +1,33 @@
 import React from "react";
-import Drawer from "../Mobile/Drawer";
-import Header from "../../common/Header";
-import useToggle from "../../common/Hooks/useToggle";
-import Footer from "../../common/Footer";
-import BackToTop from "../../common/BackToTop";
 import Headers from "../../common/PageHeader";
-import Hireus from "../../common/Hireus";
 import ReturnPolicy from "./ReturnPolicy";
 import {useEffect, useState} from "react";
 import logo from "../../../assets/images/logo-removebg-preview.webp";
+import axios from "../../common/Axios";
 
 const ReturnPolicyIndex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
+  const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  });
+    fetchHiredata();
+  }, []);
+
+  const fetchHiredata = () => {
+    axios
+      .get("return/return_list")
+      .then((result) => {
+        setContent(result.data.result[0].returnpolicycontent);
+        setTimeout(() => {
+          setLoading(false);
+        }, 200);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
+  };
+
   return (
     <>
       {loading && (
@@ -32,10 +41,6 @@ const ReturnPolicyIndex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
         <Headers
           title="RETURN POLICY"
           breadcrumb={[
@@ -44,10 +49,7 @@ const ReturnPolicyIndex = () => {
           ]}
           className={"handlebredcrumb"}
         />
-        <ReturnPolicy />
-      
-        {/* <Footer />
-        <BackToTop /> */}
+        <ReturnPolicy content={content} />
       </div>
     </>
   );

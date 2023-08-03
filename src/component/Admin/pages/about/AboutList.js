@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import useMuiStyle from "../../CommonComponent/MuiStyle";
 import TextField from "@mui/material/TextField";
-import axios from "../../../common/Axios";
 import JoditEditor from "jodit-react";
 import {useHistory} from "react-router-dom";
 import logo from "../../../../assets/images/logo-removebg-preview.webp";
@@ -32,21 +31,16 @@ const AboutList = () => {
   // const [mission, setMission] = useState("");
   // const [aboutList, setAboutList] = useState([]);
   // const [id, setId] = useState("");
-  const [dberr, setDberr] = useState([]);
   // const [content, setContent] = useState("");
-  const [dbAdderr, setDbAdderr] = useState("");
   // const [cardView, setCardView] = useState(false);
+  const [dberr, setDberr] = useState([]);
+  const [dbAdderr, setDbAdderr] = useState("");
   const classes = useMuiStyle();
   const history = useHistory();
   //firstfetchdata
   const fetchHiredata = () => {
     api
-      .get("about/about_list", {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
+      .get("about/about_list", )
       .then((result) => {
         if (result.data.result.length === 0) {
           setAdddata(true);
@@ -248,49 +242,6 @@ const AboutList = () => {
 
             {dberr && <Typography className={classes.seterrorlabel}>{dberr} </Typography>}
             {dbAdderr && <Typography className={classes.seterrorlabel}>{dbAdderr} </Typography>}
-            {/* <Grid container className={classes.setGridcard}>
-              {aboutList.map((e) => {
-                return (
-                  <Grid item xs={12} sm={6} md={4} lg={4} className={classes.setonegried}>
-                    <Card style={{position: "relative", width: "100%"}} className={classes.setcardeff}>
-                      <CardContent sx={{padding: "5px 10px"}}>
-                        <div className={classes.setlistdiv}>
-                          <Typography gutterBottom variant="h5" component="div" className={classes.settypohead}>
-                            title :<span className={classes.settypo}>{e.about}</span>
-                          </Typography>
-                        </div>
-                        <Typography gutterBottom variant="h6" component="div" className={classes.settypohead}>
-                          vision:
-                          <span className={classes.settypo}>{e.ourevision}</span>
-                        </Typography>
-                        <Typography gutterBottom variant="h6" component="div" className={classes.settypohead}>
-                          mission:
-                          <span className={classes.settypo}>{e.ouremission}</span>
-                        </Typography>
-                      </CardContent>
-                      <Divider />
-                      <CardActions className={classes.setbtn} sx={{justifyContent: "left"}}>
-                        <Grid className={classes.setbtndisplay}>
-                          <Grid item xs={12}>
-                            <Button className={classes.seteditbtn} onClick={() => handleeditdata(e._id)}>
-                              Edit
-                            </Button>
-                          </Grid>
-                          <Divider orientation="vertical" flexItem />
-
-                          <Grid item xs={12}>
-                            <Button className={classes.setdelbtn} onClick={() => handledelete(e._id)}>
-                              Delete
-                            </Button>
-                          </Grid>
-                        </Grid>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                );
-              })}
-            </Grid> */}
-
             <Grid container spacing={2}>
               <Grid item xs={12} sm={3} className={classes.setinputlayout}>
                 <Typography className={classes.setlabel}>about main heading :</Typography>

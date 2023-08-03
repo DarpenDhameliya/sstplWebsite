@@ -6,6 +6,7 @@ import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
+
 const Hireus = ({value, action}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,22 +24,47 @@ const Hireus = ({value, action}) => {
   const [dbsubmit, setDbsubmit] = useState(false);
   const [captchres, setCaptchres] = useState("");
   const [ipAddress, setIpAddress] = useState("");
+  const [isToastShown, setIsToastShown] = useState(false);
 
   const recaptchaRef = useRef();
   const state = useSelector(Hireusslicestate);
   const notify = useCallback(() => {
     toast("Great to touch with you ..", {
-      autoClose: 2000,
+      autoClose: 1000,
       closeOnClick: false,
     });
   }, []);
   const notifyerr = useCallback(() => {
     toast.error("Server Error", {
-      autoClose: 2000,
+      autoClose: 1000,
       closeOnClick: false,
     });
   }, []);
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleClick = () => {
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCaptchres("");
+      setSelectval([]);
+      setSkype("");
+      setWork("");
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+    };
+
+    const myButton = document.getElementById("closehirebox");
+
+    myButton.addEventListener("click", handleClick);
+
+    return () => {
+      myButton.removeEventListener("click", handleClick);
+    };
+  }, []);
 
   useEffect(() => {
     if (state.status === "loading") {
@@ -68,7 +94,7 @@ const Hireus = ({value, action}) => {
       dispatch(Hireusslicestatus());
     } else {
     }
-  });
+  }, [ state]);
 
   const colourOptions = [
     {value: "nodejs", label: "Node.js"},
@@ -179,15 +205,15 @@ const Hireus = ({value, action}) => {
           setError([]);
         }, 2000);
       } else {
-        const json1 = {name, email, phone, selectval, skype, work};
-        const json2 = {ipAddress, captchres};
-        setDbsubmit(true);
-        dispatch(
-          HireusSlice({
-            json1,
-            json2,
-          })
-        );
+      const json1 = {name, email, phone, selectval, skype, work};
+      const json2 = {ipAddress, captchres};
+      setDbsubmit(true);
+      dispatch(
+        HireusSlice({
+          json1,
+          json2,
+        })
+      );
       }
     }
   };
@@ -260,37 +286,41 @@ const Hireus = ({value, action}) => {
             <div className="amm-shopping_cart-top-bar d-flex justify-content-between">
               <h6>Hire us!</h6>
               <button type="button" onClick={action} className="amm-shopping-cart-close" id="closehirebox">
-                <i className="fas fa-times"></i>
+                <i className="fas fa-times white" />
               </button>
             </div>
-            <div className="row hireform mt-3">
-              <div className="col-md-12">
-                <input type="text" className={`${error.name ? "handleinput_error" : ""} ${dberr.name ? "mb-0" : ""}  ${error.name_verify ? "error_padding" : ""}`} name="f-name" placeholder="Full Name" onBlur={handlefnameBlur} onFocus={() => setNameFocused(true)} value={name} onChange={handlefirstname} />
+            <div className="row hireform mt-3 handlespaces">
+              <div className="col-md-12 ">
+                <label>Full Name</label>
+                <input type="text" className={`${error.name ? "handleinput_error" : ""} ${dberr.name ? "mb-0" : ""}  ${error.name_verify ? "error_padding" : ""}`} name="f-name" placeholder="" onBlur={handlefnameBlur} onFocus={() => setNameFocused(true)} value={name} onChange={handlefirstname} />
                 {dberr.name && <p className="handledberror mb-2">{dberr.name}</p>}
                 {error.name_verify && <p className={`handledberror mb-0  ${error.name_verify ? "error_padding_add" : ""}`}>{error.name_verify}</p>}
-                <input type="email" className={`${error.email ? "handleinput_error" : ""} ${dberr.email ? "mb-0" : ""} ${error.email_verify ? "error_padding" : ""}`} onBlur={handleemailBlur} onFocus={() => setEmailFocused(true)} value={email} name="email" placeholder="Email " onChange={handleemail} />
+                <label>Email</label>
+                <input type="email" className={`${error.email ? "handleinput_error" : ""} ${dberr.email ? "mb-0" : ""} ${error.email_verify ? "error_padding" : ""}`} onBlur={handleemailBlur} onFocus={() => setEmailFocused(true)} value={email} name="email" onChange={handleemail} />
                 {dberr.email && <p className="handledberror mb-2">{dberr.email}</p>}
                 {error.email_verify && <p className={`handledberror mb-0  ${error.email_verify ? "error_padding_add" : ""}`}>{error.email_verify}</p>}
-                <input type="text" name="number" className={`${error.phone ? "handleinput_error" : ""} ${dberr.phone ? "mb-0" : ""}  ${error.num_verify ? "error_padding" : ""} `} onBlur={handlephoneBlur} onFocus={() => setPhoneFocused(true)} placeholder="Contect Number " value={phone} onChange={handlephone} />
+                <label>Phone</label>
+                <input type="text" name="number" className={`${error.phone ? "handleinput_error" : ""} ${dberr.phone ? "mb-0" : ""}  ${error.num_verify ? "error_padding" : ""} `} onBlur={handlephoneBlur} onFocus={() => setPhoneFocused(true)} value={phone} onChange={handlephone} />
+
                 {dberr.phone && <p className="handledberror mb-2">{dberr.phone}</p>}
                 {error.num_verify && <p className={`handledberror mb-0  ${error.num_verify ? "error_padding_add" : ""}`}>{error.num_verify}</p>}
-
+                <label>Technology</label>
                 <Select isMulti maxMenuHeight={"200px"} classNamePrefix="select" name="color" className={` ${error.selectval ? "handleinput_error" : ""} ${dberr.hiredev ? "mb-0" : ""}`} value={colourOptions.filter((obj) => selectval.includes(obj.value))} onChange={handleChange} options={colourOptions} />
                 {dberr.hiredev && <p className="handledberror mb-2">{dberr.hiredev}</p>}
-                <input type="text" name="skype" placeholder="Skype id " className="mt-3" value={skype} onChange={(e) => setSkype(e.target.value)} />
-                <textarea style={{lineHeight: "25px", minHeight: "70px"}} onBlur={handletextBlur} onFocus={() => setTextFocused(true)} name="message" placeholder="Work Detail" rows="3" className={` ${error.work ? "handleinput_error" : ""} ${dberr.work ? "mb-0" : ""}`} value={work} onChange={handletextarea} />
+                <label className="mt-3">Skype Id</label>
+                <input type="text" name="skype" value={skype} onChange={(e) => setSkype(e.target.value)} />
+                <label>Wrok Details</label>
+                <textarea style={{lineHeight: "25px", minHeight: "70px"}} onBlur={handletextBlur} onFocus={() => setTextFocused(true)} name="message" rows="3" className={` ${error.work ? "handleinput_error" : ""} ${dberr.work ? "mb-0" : ""}`} value={work} onChange={handletextarea} />
                 {dberr.work && <p className="handledberror mb-2">{dberr.work}</p>}
                 <div className="recaptcha-container">
                   <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} ref={recaptchaRef} onChange={handleVerify} theme="light" size="normal" />
                 </div>
                 {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
-              </div>
-            </div>
-            <div className="amm-shopping_cart-btn">
-              <div className="cart-btn mt-3">
-                <button className="main_submit_btn" disabled={dbsubmit === true} style={{width: "100%", marginTop: "0px"}} onClick={handlehiresubmit}>
-                  INQUIRE NOW
-                </button>
+                <div className="cart-btn mt-3">
+                  <button className="main_submit_btn" disabled={dbsubmit === true} style={{width: "100%", marginTop: "0px"}} onClick={handlehiresubmit}>
+                    INQUIRE NOW
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -3,11 +3,28 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "../../common/Axios";
+import images from "../../common/Images";
+
 export default function Portfoliyo() {
+  const [workdata, setWorkdata] = useState([]);
   const [portfolioList, setPortfolioList] = useState([]);
   const [fetchErr, setFetchErr] = useState("");
 
-
+  useEffect(() => {
+    let data = [
+      {image: images.roop, title: "Roop Label", type: ["all", "web"]},
+      {image: images.red, title: "Red Chilli Fast Food", type: ["all", "mob", "web"]},
+      {image: images.food, title: "Food Book", type: ["all", "mob", "web"]},
+      {image: images.dimond, title: "Diamond Inventory Software", type: ["all", "desk"]},
+      {image: images.dalali, title: "DalaliBook", type: ["all", "mob"]},
+      {image: images.sk, title: "S.K. Enterprise", type: ["all", "mob", "web"]},
+      {image: images.battle, title: "Battle Village", type: ["all", "mob", "web"]},
+      {image: images.maktech, title: "MakTech Laser", type: ["all", "desk", "mob", "web"]},
+      {image: images.macswin, title: "MacSwin Technology", type: ["all", "desk", "mob", "web"]},
+      {image: images.redient, title: "The Radiant International School", type: ["all", "web"]},
+    ];
+    setWorkdata(data);
+  }, []);
 
   const fetchHiredata = () => {
     axios
@@ -34,8 +51,8 @@ export default function Portfoliyo() {
     arrows: false,
     dots: true,
     speed: 800,
+    swipeToSlide: true,
     slidesToShow: 3,
-    slidesToScroll: 1,
   };
   const settingsForArticle1 = {
     autoplay: true,
@@ -48,10 +65,9 @@ export default function Portfoliyo() {
     autoplay: true,
     arrows: true,
     speed: 1000,
+    swipeToSlide: true,
     slidesToShow: 2,
-    slidesToScroll: 1,
   };
-  // webportfoliyo
 
   return (
     <>
@@ -72,32 +88,33 @@ export default function Portfoliyo() {
             <div className="col-lg-12">
               <div className="testimonial-about-slider-active ">
                 <Slider {...settingsForArticle} ref={articleCarosel}>
-                  {/* {workdata.map((e , index) => {
-                  return <div className="testimonial-parent-item" key={index}>
-                    <div className="testimonial-box">
-                      <div className="icon" >
-                        <img src={e.image} className='handleportfoliyohomeweb' alt='logo' style={{ borderRadius: '15px', height: '230px', width: '350px' }} />
-                      </div>
-                      <h4 className="pt-4">
-                        {e.title}
-                      </h4>
-                    </div>
-                  </div>
-                })} */}
-                  {portfolioList.map((e, index) => {
-                    if (e.contentview === true) {
-                      return (
-                        <div className="testimonial-parent-item" key={index}>
-                          <div className="testimonial-box">
-                            <div className="icon">
-                              <img src={e.uploadimg} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px", height: "230px", width: "350px"}} />
+                  {portfolioList.length > 0
+                    ? portfolioList.map((e, index) => {
+                        if (e.contentview === true) {
+                          return (
+                            <div className="testimonial-parent-item" key={index}>
+                              <div className="testimonial-box">
+                                <div className="icon">
+                                  <img src={e.uploadimg} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px", height: "230px", width: "350px"}} />
+                                </div>
+                                <h4 className="pt-4">{e.name}</h4>
+                              </div>
                             </div>
-                            <h4 className="pt-4">{e.name}</h4>
+                          );
+                        }
+                      })
+                    : workdata.map((e, index) => {
+                        return (
+                          <div className="testimonial-parent-item" key={index}>
+                            <div className="testimonial-box">
+                              <div className="icon">
+                                <img src={e.image} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px", height: "230px", width: "350px"}} />
+                              </div>
+                              <h4 className="pt-4">{e.title}</h4>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    }
-                  })}
+                        );
+                      })}
                 </Slider>
               </div>
             </div>
@@ -120,18 +137,6 @@ export default function Portfoliyo() {
             <div className="col-lg-12 ">
               <div className="testimonial-about-slider-active ">
                 <Slider {...settingsForArticle1} ref={articleCarosel}>
-                  {/* {workdata.map((e, index) => {
-                    return (
-                      <div key={index}>
-                        <div className="testimonial-box ">
-                          <div className="icon d-flex justify-content-center">
-                            <img src={e.image} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px"}} />
-                          </div>
-                          <p>{e.title}</p>
-                        </div>
-                      </div>
-                    );
-                  })} */}
                   {portfolioList.map((e, index) => {
                     return (
                       <div key={index}>
@@ -152,7 +157,7 @@ export default function Portfoliyo() {
       </div>
 
       {/* tab view */}
-      <div className="softstormweb-portfoliyo-about-area pb-45 displayporttab">
+      <div className="softstormweb-portfoliyo-about-area pt-40 pb-45 displayporttab">
         <div className="container">
           <div className="row justify-content-center text-center">
             <div className="col-lg-5">
@@ -167,18 +172,6 @@ export default function Portfoliyo() {
             <div className="col-lg-12 col-md-11">
               <div className="testimonial-about-slider-active ">
                 <Slider {...settingsForArticleteb} ref={articleCarosel}>
-                  {/* {workdata.map((e, index) => {
-                    return (
-                      <div className="testimonial-parent-item" key={index}>
-                        <div className="testimonial-box">
-                          <div className="icon d-flex justify-content-center">
-                            <img src={e.image} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px"}} />
-                          </div>
-                          <p>{e.title}</p>
-                        </div>
-                      </div>
-                    );
-                  })} */}
                   {portfolioList.map((e, index) => {
                     return (
                       <div className="testimonial-parent-item" key={index}>

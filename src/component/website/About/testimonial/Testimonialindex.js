@@ -1,26 +1,16 @@
-import React , {useState , useEffect} from "react";
-import Drawer from "../../Mobile/Drawer";
-import Header from "../../../common/Header";
-import useToggle from "../../../common/Hooks/useToggle";
-import Footer from "../../../common/Footer";
-import BackToTop from "../../../common/BackToTop";
+import React, {useState, useEffect} from "react";
 import Testimonial from "./Testimonial";
 import Headers from "../../../common/PageHeader";
-import Hireus from "../../../common/Hireus";
-import logo from '../../../../assets/images/logo-removebg-preview.webp'
+import logo from "../../../../assets/images/logo-removebg-preview.webp";
 const Testimonialindex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  });
+  const cleartimeout = () => {
+    setLoading(false);
+  };
   return (
     <>
-    {loading && (
+      {loading && (
         <div className="onloadpage" id="page-load">
           <div className="loader-div d-flex justify-content-center ">
             <div className="on-img">
@@ -31,22 +21,15 @@ const Testimonialindex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-      {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-      <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-            {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
-      <Headers
-        title="TESTIMONIAL"
-        breadcrumb={[
-          {link: "/", title: "Home"},
-          {link: "/testimonial", title: "Testimonial"},
-        ]}
-        className={"handlebredcrumb"}
-      />
-      <Testimonial />
-    
-      {/* <Footer />
-      <BackToTop /> */}
+        <Headers
+          title="TESTIMONIAL"
+          breadcrumb={[
+            {link: "/", title: "Home"},
+            {link: "/testimonial", title: "Testimonial"},
+          ]}
+          className={"handlebredcrumb"}
+        />
+        <Testimonial loding={cleartimeout}/>
       </div>
     </>
   );

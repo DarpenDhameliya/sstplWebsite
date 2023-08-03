@@ -19,7 +19,16 @@ const useStyleMainDisplay = makeStyles((theme) => ({
       color: "white",
     },
   },
-
+  white : {
+    color:"white"
+  },
+  fs20 :{
+    fontSize:"20px"
+  },
+  SidebarImg :{
+    fontSize:"25px",
+    color:"white"
+  },
   seticonbtn: {
     padding: "12px !important",
   },

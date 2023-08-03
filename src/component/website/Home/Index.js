@@ -1,29 +1,29 @@
 import React, {useEffect, useState} from "react";
-import Drawer from "../Mobile/Drawer";
-import Header from "../../common/Header";
-import useToggle from "../../common/Hooks/useToggle";
-import Home from "./Home";
-import Discription from "./Discription";
-import WhyChoseUs from "./WhyChoseUs";
-import Services from "./Services";
-import OurWorkService from "./OurWorkService";
-import Technology from "./Technology";
-import Industry from "./Industry";
-import Portfoliyo from "./Portfoliyo";
-import Testimonial from "./Testimonial";
-import BackToTop from "../../common/BackToTop";
-import Footer from "../../common/Footer";
-import Hireus from "../../common/Hireus";
 import logo from "../../../assets/images/logo-removebg-preview.webp";
+import useToggle from "../../common/Hooks/useToggle";
+import { lazy } from "react";
+const Drawer = lazy(() => import("../Mobile/Drawer"))
+const Header = lazy(() => import("../../common/Header"))
+const Footer = lazy(() => import("../../common/Footer"))
+const Hireus = lazy(() => import("../../common/Hireus"))
+const Home = lazy(() => import("./Home"));
+const Discription = lazy(() => import("./Discription"));
+const WhyChoseUs = lazy(() => import("./WhyChoseUs"));
+const Services = lazy(() => import("./Services"));
+const OurWorkService = lazy(() => import("./OurWorkService"));
+const Technology = lazy(() => import("./Technology"));
+const Industry = lazy(() => import("./Industry"));
+const Portfoliyo = lazy(() => import("./Portfoliyo"));
+const Testimonial = lazy(() => import("./Testimonial"));
 
-const Sstpl = ({addheader , action}) => {
+const Sstpl = ({addheader, action}) => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 200);
   });
   useEffect((e) => {
     document.title = "SoftStorm - Custom Software Development Service Provider Company in Surat, India";
@@ -32,7 +32,8 @@ const Sstpl = ({addheader , action}) => {
 
   return (
     <>
-      {loading.toString() === 'true' && (
+
+      {loading && (
         <div className="onloadpage" id="page-load">
           <div className="loader-div d-flex justify-content-center ">
             <div className="on-img">
@@ -43,23 +44,20 @@ const Sstpl = ({addheader , action}) => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
-        <Home />
-        <Discription />
-        <WhyChoseUs />
-        <Services />
-        <OurWorkService />
-        <Technology />
-        <Industry />
-        <Portfoliyo />
-        <Testimonial />
-      
-        {/* <Footer />
-        <BackToTop /> */}
-      </div>
+      <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
+          <Home />
+          <Discription />
+          <WhyChoseUs />
+          <Services />
+          <OurWorkService />
+          <Technology />
+          <Industry />
+          <Portfoliyo />
+          <Testimonial />
+        <Footer />
+        </div>
     </>
   );
 };

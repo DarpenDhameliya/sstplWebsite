@@ -1,20 +1,11 @@
 import React, {useState, useEffect} from "react";
-import Drawer from "../../Mobile/Drawer";
-import Header from "../../../common/Header";
-import useToggle from "../../../common/Hooks/useToggle";
 import Headers from "../../../common/PageHeader";
-import Footer from "../../../common/Footer";
-import SidePortion from "../SidePortion";
 import Enterpriseservice from "./Enterpriseservice";
-import BackToTop from "../../../common/BackToTop";
-import Hireus from "../../../common/Hireus";
 import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import {Servicestate} from "../../slice/Service";
 import {useSelector} from "react-redux";
 import axios from "../../../common/Axios";
 const Enterpriseserviceindex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");
   const [image, setImage] = useState("");
@@ -47,6 +38,7 @@ const Enterpriseserviceindex = () => {
             setLoading(false);
           })
           .catch((err) => {
+            setLoading(false)
             setDbFetcherr(err.response.data.error);
           });
       };
@@ -67,22 +59,17 @@ const Enterpriseserviceindex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-        {/* <Hireus value={cart} action={cartAction.toggle} /> */}
 
         <Headers
           title="ENTERPRISE SERVICES"
           breadcrumb={[
             {link: "/", title: "Home"},
-            {link: "/ourservice", title: "Our Service"},
-            {link: "/enterprise", title: "Enterprise Servise"},
+            {link: "/our-service", title: "Our Service"},
+            {link: "/enterprise-services", title: "Enterprise Servise"},
           ]}
         />
         <Enterpriseservice images={image} serviceContents={serviceContent} />
 
-        {/* <Footer />
-        <BackToTop /> */}
       </div>
     </>
   );

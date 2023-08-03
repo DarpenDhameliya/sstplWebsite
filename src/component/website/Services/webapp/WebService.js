@@ -2,8 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../../common/lib/ServiceSticky";
 import webimg from "../../../../assets/images/services/web-app-development.webp";
-import axios from "../../../common/Axios";
-import {Servicestate, Servicestatus} from "../../slice/Service";
+import {Servicestate} from "../../slice/Service";
 import {useDispatch, useSelector} from "react-redux";
 const WebService = ({images, serviceContents}) => {
   const [tab, setTab] = useState("");
@@ -12,50 +11,6 @@ const WebService = ({images, serviceContents}) => {
   const [image, setImage] = useState("");
   const dispatch = useDispatch();
   const states = useSelector(Servicestate);
-  // const ref1 = useRef(null);
-  // const ref2 = useRef(null);
-  // const ref3 = useRef(null);
-  // const ref4 = useRef(null);
-  // const ref5 = useRef(null);
-
-  // useEffect(() => {
-  //   document.title = "SoftStorm - Web Application Developer";
-
-  //   const handleScroll = () => {
-  //     const middle = window.innerHeight / 2; // Calculate the middle of the window
-
-  //     const rect1 = ref1.current.getBoundingClientRect();
-  //     const rect2 = ref2.current.getBoundingClientRect();
-  //     const rect3 = ref3.current.getBoundingClientRect();
-  //     const rect4 = ref4.current.getBoundingClientRect();
-  //     const rect5 = ref5.current.getBoundingClientRect();
-
-  //     const div1IsMiddle = rect1.top <= middle && rect1.bottom >= middle;
-  //     const div2IsMiddle = rect2.top <= middle && rect2.bottom >= middle;
-  //     const div3IsMiddle = rect3.top <= middle && rect3.bottom >= middle;
-  //     const div4IsMiddle = rect4.top <= middle && rect4.bottom >= middle;
-  //     const div5IsMiddle = rect5.top <= middle && rect5.bottom >= middle;
-
-  //     if (div1IsMiddle) {
-  //       setTab("php");
-  //     } else if (div2IsMiddle) {
-  //       setTab("codeigniter");
-  //     } else if (div3IsMiddle) {
-  //       setTab("laravel");
-  //     } else if (div4IsMiddle) {
-  //       setTab("nodejs");
-  //     } else if (div5IsMiddle) {
-  //       setTab("python");
-  //     } else {
-  //       setTab("");
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
 
   useEffect(() => {
     if (states.response.result !== undefined) {
@@ -121,17 +76,6 @@ const WebService = ({images, serviceContents}) => {
   }, []);
 
 
-  // useEffect(() => {
-  //   if (states.response.result === undefined) {
-  //     console.log(images)
-  //     if (images) {
-  //       setImage(images);
-  //     }
-  //     if (serviceContents) {
-  //       setServiceContent(serviceContents);
-  //     }
-  //   }
-  // });
 
   // header small big code
   useEffect(() => {
@@ -198,7 +142,7 @@ const WebService = ({images, serviceContents}) => {
             <div className="col-lg-8 col-md-7 ">
               <div className="single-post-area">
                 <div className="post-thumb">
-                  <img src={image} alt="" />
+                  <img src={image ? image : webimg} alt="" />
                 </div>
                 <span id="nodejs" style={{paddingTop: "15px"}}></span>
                 <h4 className="article-title mt-1">Web App</h4>
@@ -244,107 +188,109 @@ const WebService = ({images, serviceContents}) => {
                     </div>
                   </div>
                 </header>
-                <div dangerouslySetInnerHTML={{__html: serviceContent}} />
+                {serviceContent.length > 0 ? (
+                  <div dangerouslySetInnerHTML={{__html: serviceContent}} />
+                ) : (
+                  <div className="row">
+                    <div className="col-lg-12">
+                      <div className="softstormweb-web-service mt-25" id="div4">
+                        <div className="content">
+                          <h4 className="title">Node.js</h4>
+                          <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
+                          <h6>SoftStorm Provides:</h6>
+                          <ul className="ml-15 mt-2 handlelist">
+                            <li>Python Dynamic Website Development</li>
+                            <li>Web Application Development using Python</li>
+                            <li>Data Science Projects</li>
+                            <li>
+                              Python Active Directory integration services
+                              <span id="php"></span>
+                            </li>
+                            <li>Web Crawler Development</li>
+                            <li>Migration Services</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="softstormweb-web-service mt-25" id="div1">
+                        <div className="content">
+                          <h4 className="title">PHP Development</h4>
+                          <p>If your business demands a website which needs to gather information. Then PHP is the tool of choice. PHP gives web developers the ability to create dynamic web pages, which can collect data from visitors. Perfect for those business concerns which rely on capturing data. Travel Agents, Hospitals and similar concerns should go for PHP.</p>
+                          <h6>SoftStorm Provides:</h6>
+                          <ul className="ml-15 mt-2 handlelist">
+                            <li>Custom PHP Developmente</li>
+                            <li>SaaS using PHP</li>
+                            <li>E-Commerce Solutions using PHP</li>
+                            <li>
+                              Portal Development Solutions
+                              <span id="laravel"></span>
+                            </li>
+                            <li>PHP/MySql Development</li>
+                            <li>Web application and Social Networking Solution</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="softstormweb-web-service mt-25" id="div3">
+                        <div className="content">
+                          <h4 className="title">Laravel Website Development</h4>
+                          <p>A perfect tool for SME industry and their web Development needs. This framework gives the freedom of deploying highly multifunctional websites quickly. Department level, functional web Development, and data integration are possible with Laravel.</p>
+                          <h6>SoftStorm Provides:</h6>
+                          <ul className="ml-15 mt-2 handlelist">
+                            <li>Custom Development</li>
+                            <li>SaaS Development</li>
+                            <li>
+                              Custom Theme Development
+                              <span id="codeigniter"></span>
+                            </li>
+                            <li>Migration to Laravel</li>
 
-                {/* <div className="row">
-                  <div className="col-lg-12">
-                    <div className='softstormweb-web-service mt-25' ref={ref4} id="div4">
-                      <div className="content">
-                        <h4 className="title">Node.js</h4>
-                        <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                        <h6>SoftStorm Provides:</h6>
-                        <ul className="ml-15 mt-2 handlelist">
-                          <li>Python Dynamic Website Development</li>
-                          <li>Web Application Development using Python</li>
-                          <li>Data Science Projects</li>
-                          <li>Python Active Directory integration services
-                          <span id="php"></span></li>
-                          <li>Web Crawler Development</li>
-                          <li>Migration Services</li>
-                        </ul>
+                            <li>Extension Development</li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-lg-12">
-                    <div className='softstormweb-web-service mt-25'  ref={ref1} id="div1">
-                      <div className="content">
-                        <h4 className="title">PHP Development</h4>
-                        <p>If your business demands a website which needs to gather information. Then PHP is the tool of choice. PHP gives web developers the ability to create dynamic web pages, which can collect data from visitors. Perfect for those business concerns which rely on capturing data. Travel Agents, Hospitals and similar concerns should go for PHP.</p>
-                        <h6>SoftStorm Provides:</h6>
-                        <ul className="ml-15 mt-2 handlelist">
-                          <li>
-                            Custom PHP Developmente
-                          </li>
-                          <li>SaaS using PHP</li>
-                          <li>E-Commerce Solutions using PHP</li>
-                          <li>
-                            Portal Development Solutions
-                            <span id="laravel"></span>
-                          </li>
-                          <li>PHP/MySql Development</li>
-                          <li>Web application and Social Networking Solution</li>
-                        </ul>
+                    <div className="col-lg-12">
+                      <div className="softstormweb-web-service mt-25" id="div2">
+                        <div className="content">
+                          <h4 className="title">Codeigniter Development</h4>
+                          <p>Perhaps the most popular PHP Development framework of present times. Perfect for travel aggregators and similar business. It is light and flexible. Data and logic based services are constructed on this framework.</p>
+                          <h6>SoftStorm Provides:</h6>
+                          <ul className="ml-15 mt-2 handlelist">
+                            <li>Codeigniter Migration Service</li>
+                            <li>Fast Development using CI</li>
+                            <li>
+                              Application Development
+                              <span id="python"></span>
+                            </li>
+                            <li>Networking Solutions</li>
+                            <li>Templating Development using CI</li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-lg-12">
-                    <div className='softstormweb-web-service mt-25' ref={ref3} id="div3">
-                      <div className="content">
-                        <h4 className="title">Laravel Website Development</h4>
-                        <p>A perfect tool for SME industry and their web Development needs. This framework gives the freedom of deploying highly multifunctional websites quickly. Department level, functional web Development, and data integration are possible with Laravel.</p>
-                        <h6>SoftStorm Provides:</h6>
-                        <ul className="ml-15 mt-2 handlelist">
-                          <li>Custom Development</li>
-                          <li>SaaS Development</li>
-                          <li>
-                            Custom Theme Development
-                            <span id="codeigniter"></span>
-                          </li>
-                          <li>Migration to Laravel</li>
 
-                          <li>Extension Development</li>
-                        </ul>
+                    <div className="col-lg-12">
+                      <div className="softstormweb-web-service mt-25" id="div5">
+                        <div className="content">
+                          <h4 className="title">Python Development</h4>
+                          <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
+                          <h6>SoftStorm Provides:</h6>
+                          <ul className="ml-15 mt-2 handlelist">
+                            <li>Python Dynamic Website Development</li>
+                            <li>Web Application Development using Python</li>
+                            <li>Data Science Projects</li>
+                            <li>Python Active Directory integration services</li>
+                            <li>Web Crawler Development</li>
+                            <li>Migration Services</li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-12">
-                    <div className='softstormweb-web-service mt-25' ref={ref2} id="div2">
-                      <div className="content">
-                        <h4 className="title">Codeigniter Development</h4>
-                        <p>Perhaps the most popular PHP Development framework of present times. Perfect for travel aggregators and similar business. It is light and flexible. Data and logic based services are constructed on this framework.</p>
-                        <h6>SoftStorm Provides:</h6>
-                        <ul className="ml-15 mt-2 handlelist">
-                          <li>Codeigniter Migration Service</li>
-                          <li>Fast Development using CI</li>
-                          <li>
-                            Application Development
-                            <span id="python"></span>
-                          </li>
-                          <li>Networking Solutions</li>
-                          <li>Templating Development using CI</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-lg-12">
-                    <div className='softstormweb-web-service mt-25' ref={ref5} id="div5">
-                      <div className="content">
-                        <h4 className="title">Python Development</h4>
-                        <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                        <h6>SoftStorm Provides:</h6>
-                        <ul className="ml-15 mt-2 handlelist">
-                          <li>Python Dynamic Website Development</li>
-                          <li>Web Application Development using Python</li>
-                          <li>Data Science Projects</li>
-                          <li>Python Active Directory integration services</li>
-                          <li>Web Crawler Development</li>
-                          <li>Migration Services</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div> */}
+                )}
               </div>
             </div>
             <div className="col-lg-4 col-md-5">

@@ -13,34 +13,32 @@ import counterIconTwo from "../../assets/images/icon/counter-icon-2.svg";
 import counterIconFour from "../../assets/images/icon/counter-icon-4.svg";
 import image from "../../assets/images/services banner.webp";
 import {HashLink} from "react-router-hash-link";
-import '../../assets/css/Fonts.css'
-import axios from "./Axios";
+import "../../assets/css/Fonts.css";
+import {IconSlice, Iconstate, Iconstatus} from "../website/slice/IconSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const Header = ({action, cartToggle}) => {
   const [fields, setFields] = useState([]);
-const history = useHistory();
+  const dispatch = useDispatch();
+  const states = useSelector(Iconstate);
   useEffect(() => {
     StickyMenu();
   }, []);
 
-  const fetchHiredata = () => {
-    axios
-      .get("icon/icon_list", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((result) => {
-        setFields(result.data.result[0].data);
-      })
-      .catch((err) => {
-        // history.push("/");
-      });
-    };
-    
-    useEffect(() => {
-      fetchHiredata();
-    }, []);
+  useEffect(() => {
+    dispatch(IconSlice());
+  }, []);
+
+  useEffect(() => {
+    if (states.status === "loading") {
+    } else if (states.status === "succeeded") {
+      setFields(states.response.result[0].data);
+      dispatch(Iconstatus());
+    } else if (states.status === "failed") {
+      dispatch(Iconstatus());
+    } else {
+    }
+  });
 
   return (
     <>
@@ -48,29 +46,36 @@ const history = useHistory();
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-6 col-sm-12 col-6">
-            {fields.map((e) => {
-              return <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname:e.link}} target="_blank">
-                <i className={`fab ${e.icon}`} />
-              </Link>
-            })}
-              {/* <Link rel="noreferrer" className="ml-15" to={{pathname:"https://www.facebook.com/softstormtechnosys"}} target="_blank">
-                <i className="fab fa-facebook-f" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://twitter.com/softstorm_india"}}>
-                <i className="fab fa-twitter" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://www.linkedin.com/company/softstorm-technosys"}}>
-                <i className="fab fa-linkedin-in" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://instagram.com/softstorm.in"}}>
-                <i className="fab fa-instagram" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"https://wa.me/912613560756"}}>
-                <i className="fab fa-whatsapp" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname:"skype:softstorminfosys?chat"}}>
-                <i className="fab fa-skype" />
-              </Link> */}
+              {fields.length > 0 ? (
+                fields.map((e) => {
+                  return (
+                    <Link key={e.icon} rel="noreferrer" className="ml-15" to={{pathname: e.link}} target="_blank">
+                      <i className={`fab ${e.icon}`} />
+                    </Link>
+                  );
+                })
+              ) : (
+                <>
+                  <Link rel="noreferrer" className="ml-15" to={{pathname: "https://www.facebook.com/softstorm.in"}} target="_blank">
+                    <i className="fab fa-facebook-f" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname: "https://twitter.com/softstorm_in"}}>
+                    <i className="fab fa-twitter" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname: "https://www.linkedin.com/company/softstorm-in"}}>
+                    <i className="fab fa-linkedin-in" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname: "https://www.instagram.com/softstorm.in"}}>
+                    <i className="fab fa-instagram" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname: "https://wa.me/912613560756"}}>
+                    <i className="fab fa-whatsapp" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" to={{pathname: "skype:softstorminfosys?chat"}}>
+                    <i className="fab fa-skype" />
+                  </Link>
+                </>
+              )}
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 order-3 order-sm-2 handlerightheader">
               <a href="mailto:contact@softstorm.in" rel="noopener noreferrer" className="pl-0 d-flex align-items-center" style={{color: "#f1f1f1"}}>
@@ -126,7 +131,7 @@ const history = useHistory();
                                       <li className="mb-2">
                                         <Link to="/about-us" className="handlesub-menu p-2">
                                           <div className="aboutheadre_left">
-                                            <img src={bullet1} alt="symbol"  className='header_icno' />
+                                            <img src={bullet1} alt="symbol" className="header_icno" />
                                           </div>{" "}
                                           <span className="ml-15 hoverLink">About Us</span>{" "}
                                         </Link>
@@ -134,7 +139,7 @@ const history = useHistory();
                                       <li className="mb-2">
                                         <Link to="/testimonial" className="handlesub-menu p-2">
                                           <div className="aboutheadre_left">
-                                            <img src={bullet1} alt="symbol"  className='header_icno' />
+                                            <img src={bullet1} alt="symbol" className="header_icno" />
                                           </div>{" "}
                                           <span className="ml-15 hoverLink">Testimonial</span>{" "}
                                         </Link>
@@ -142,15 +147,15 @@ const history = useHistory();
                                       <li className="mb-2">
                                         <Link to="/" className="handlesub-menu p-2">
                                           <div className="aboutheadre_left">
-                                            <img src={bullet1} alt="symbol"  className='header_icno' />
+                                            <img src={bullet1} alt="symbol" className="header_icno" />
                                           </div>{" "}
                                           <span className="ml-15 hoverLink">Blog</span>{" "}
                                         </Link>
                                       </li>
                                       <li className="mb-2">
-                                        <a rel="noreferrer" target="_blank" href="https://www.google.com/maps/uv?pb=!1s0x3be04f50264611d1%3A0x76746ef930af1752!5sSoftStorm%20Technosys%20Pvt.%20Ltd.!15sCgIgARICEAE&imagekey=!1e10!2sAF1QipM9setE_GO3u642xJu5mJb6uNQ7a20enuyXAxag" className="handlesub-menu p-2" >
+                                        <a rel="noreferrer" target="_blank" href="https://www.google.com/maps/uv?pb=!1s0x3be04f50264611d1%3A0x76746ef930af1752!5sSoftStorm%20Technosys%20Pvt.%20Ltd.!15sCgIgARICEAE&imagekey=!1e10!2sAF1QipM9setE_GO3u642xJu5mJb6uNQ7a20enuyXAxag" className="handlesub-menu p-2">
                                           <div className="aboutheadre_left">
-                                            <img src={bullet1} alt="symbol"  className='header_icno' />
+                                            <img src={bullet1} alt="symbol" className="header_icno" />
                                           </div>
                                           <span className="ml-15 hoverLink">Life@SSTPL</span>{" "}
                                         </a>
@@ -296,10 +301,12 @@ const history = useHistory();
                     </div>
                   </div>
                 </li>
-                <li  className="megamenu">
-                  <Link to="/our-service" className={`menu-links `}>Our Service</Link>
+                <li className="megamenu">
+                  <Link to="/our-service" className={`menu-links `}>
+                    Our Service
+                  </Link>
                   {/* <div className="menu-dropdown" style={{opacity:'1'}}> */}
-                  <div className="menu-dropdown" >
+                  <div className="menu-dropdown">
                     <div className="menu-block-set">
                       <div className="container submenuList ">
                         <div className="menu-block-a_service">
@@ -316,51 +323,41 @@ const history = useHistory();
                                   <li className="mb-1">
                                     <HashLink to="/web-application-developement#nodejs" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Node.js
-                                      </span>{" "}
+                                      <span className="header_service_span ">Node.js</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web-application-developement#php" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        PHP
-                                      </span>{" "}
+                                      <span className="header_service_span ">PHP</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web-application-developement#laravel" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Laravel
-                                      </span>{" "}
+                                      <span className="header_service_span ">Laravel</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web-application-developement#codeigniter" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Codeigniter
-                                      </span>{" "}
+                                      <span className="header_service_span ">Codeigniter</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web-application-developement#python" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Python
-                                      </span>{" "}
+                                      <span className="header_service_span ">Python</span>{" "}
                                     </HashLink>
                                   </li>
                                 </ul>
@@ -371,61 +368,49 @@ const history = useHistory();
                                   <li className="mb-1">
                                     <HashLink to="/desktop-software-developement#c" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        C#
-                                      </span>{" "}
+                                      <span className="header_service_span ">C#</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/desktop-software-developement#c++" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        C++
-                                      </span>{" "}
+                                      <span className="header_service_span ">C++</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/desktop-software-developement#mashinlerning" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Machine Learning
-                                      </span>{" "}
+                                      <span className="header_service_span ">Machine Learning</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/desktop-software-developement#controller" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Controller Based
-                                      </span>{" "}
+                                      <span className="header_service_span ">Controller Based</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/desktop-software-developement#axistravelling" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Axis Traveling
-                                      </span>{" "}
+                                      <span className="header_service_span ">Axis Traveling</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/desktop-software-developement#lasersource" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Laser Source
-                                      </span>{" "}
+                                      <span className="header_service_span ">Laser Source</span>{" "}
                                     </HashLink>
                                   </li>
                                 </ul>
@@ -436,62 +421,50 @@ const history = useHistory();
                                   <li className="mb-1">
                                     <HashLink to="/web_graphic-designing#webdesign" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Web Designing
-                                      </span>{" "}
+                                      <span className="header_service_span ">Web Designing</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web_graphic-designing#uiux" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        UI/UX
-                                      </span>{" "}
+                                      <span className="header_service_span ">UI/UX</span>{" "}
                                     </HashLink>
                                   </li>
-                                 
+
                                   <li className="mb-1">
                                     <HashLink to="/web_graphic-designing#reactjs" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        React.js
-                                      </span>{" "}
+                                      <span className="header_service_span ">React.js</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web_graphic-designing#viewjs" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Vue.js
-                                      </span>{" "}
+                                      <span className="header_service_span ">Vue.js</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web_graphic-designing#logo" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Logo & Banner
-                                      </span>{" "}
+                                      <span className="header_service_span ">Logo & Banner</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/web_graphic-designing#brochur" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Brochure & Mokeup
-                                      </span>{" "}
+                                      <span className="header_service_span ">Brochure & Mokeup</span>{" "}
                                     </HashLink>
                                   </li>
                                 </ul>
@@ -504,31 +477,25 @@ const history = useHistory();
                                   <li className="mb-1">
                                     <HashLink to="/mobile-application-developement#flutter" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  style={{width: "25px"}} />
+                                        <img src={bullet1} alt="symbol" style={{width: "25px"}} />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Flutter
-                                      </span>{" "}
+                                      <span className="header_service_span ">Flutter</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/mobile-application-developement#android" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Android
-                                      </span>{" "}
+                                      <span className="header_service_span ">Android</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/mobile-application-developement#ios" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        iOS
-                                      </span>{" "}
+                                      <span className="header_service_span ">iOS</span>{" "}
                                     </HashLink>
                                   </li>
                                 </ul>
@@ -540,7 +507,7 @@ const history = useHistory();
                                     {" "}
                                     <HashLink to="/digital-marketing#seo" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
                                       <span className="ml-15 hoverLink" e={{fontSize: "15px"}}>
                                         SEO
@@ -550,31 +517,25 @@ const history = useHistory();
                                   <li className="mb-1">
                                     <HashLink to="/digital-marketing#smm" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        SMM
-                                      </span>{" "}
+                                      <span className="header_service_span ">SMM</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/digital-marketing#political" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Political Profile
-                                      </span>{" "}
+                                      <span className="header_service_span ">Political Profile</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/digital-marketing#mobileapp" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Mobile App Promotion
-                                      </span>{" "}
+                                      <span className="header_service_span ">Mobile App Promotion</span>{" "}
                                     </HashLink>
                                   </li>
                                 </ul>
@@ -585,36 +546,29 @@ const history = useHistory();
                                   <li className="mb-1">
                                     <HashLink to="/enterprise-services#erp" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        ERP
-                                      </span>{" "}
+                                      <span className="header_service_span ">ERP</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/enterprise-services#crm" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        CRM
-                                      </span>{" "}
+                                      <span className="header_service_span ">CRM</span>{" "}
                                     </HashLink>
                                   </li>
                                   <li className="mb-1">
                                     <HashLink to="/enterprise-services#accounting" className=" p-1">
                                       <div>
-                                        <img src={bullet1} alt="symbol"  className='header_icno' />
+                                        <img src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
-                                      <span className="header_service_span " >
-                                        Customized Accounting
-                                      </span>{" "}
+                                      <span className="header_service_span ">Customized Accounting</span>{" "}
                                     </HashLink>
                                   </li>
                                 </ul>
                               </div>
-
                             </div>
                           </div>
                           <img src={image} alt="sstpl" />
@@ -652,7 +606,6 @@ const history = useHistory();
           </div>
         </div>
       </header>
-      
     </>
   );
 };

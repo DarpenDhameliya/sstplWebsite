@@ -13,10 +13,11 @@ import aboutheader3 from "../../../assets/images/aboutus_header/glassdoor.webp";
 import aboutheader4 from "../../../assets/images/aboutus_header/goodfirms.webp";
 import aboutheader5 from "../../../assets/images/aboutus_header/upwork.webp";
 import axios from "../../common/Axios";
+
 export default function Testimonial(className) {
   const sliderRef = useRef();
   const settings = {
-    autoplay: true,
+    // autoplay: true,
     arrows: false,
     dots: false,
   };
@@ -26,9 +27,9 @@ export default function Testimonial(className) {
   const sliderPrev = () => {
     sliderRef.current.slickPrev();
   };
-
+  const [staticdata, setStaticdata] = useState([]);
   const [workdata, setWorkdata] = useState([]);
-  const [fetcherr, setFetcherr] = useState('')
+  const [fetcherr, setFetcherr] = useState("");
 
   const fetchHiredata = () => {
     axios
@@ -38,7 +39,7 @@ export default function Testimonial(className) {
         },
       })
       .then((result) => {
-        let data = result.data.result.sort((a ,b) => a.contentpositionview - b.contentpositionview)
+        let data = result.data.result.sort((a, b) => a.contentpositionview - b.contentpositionview);
         setWorkdata(data);
       })
       .catch((err) => {
@@ -82,7 +83,7 @@ export default function Testimonial(className) {
         title1: "Trustee, The Radiant International School",
       },
     ];
-    // setWorkdata(data);
+    setStaticdata(data);
   }, []);
   return (
     <>
@@ -122,37 +123,67 @@ export default function Testimonial(className) {
             <div className="col-lg-5 col-md-6">
               <div className="softstormweb-right-testimoial handleview" style={{position: "relative", minHeight: "200px"}}>
                 <Slider ref={sliderRef} {...settings}>
-                  {workdata.map((e, index) => {
-                    return (
-                      <div className="item doublequate" key={index}>
-                        <p className="pb-3 pl-10">
-                          <sup>
-                            {" "}
-                            <i className="fa fa-quote-left fafaquatsstart" aria-hidden="true"></i>
-                          </sup>
-                          {e.discription}
-                          {/* <sup> <i className="fa fa-quote-right" aria-hidden="true" ></i></sup> */}
-                          <i className="fa fa-quote-right fafaquatsend" aria-hidden="true"></i>
-                        </p>
-                        <div className="d-flex justify-content-start">
-                          <img
-                            src={e.image}
-                            alt=""
-                            style={{
-                              maxWidth: "75px",
-                              height: "75px",
-                              borderRadius: "50%",
-                              marginLeft: "15px",
-                            }}
-                          />
-                          <div>
-                            <span className="testimonialspan">{e.name}</span>
-                            <span className="d-flex ml-3">{e.position}</span>
+                  {workdata.length > 0
+                    ? workdata.map((e, index) => {
+                        return (
+                          <div className="item doublequate" key={index}>
+                            <p className="pb-3 pl-10">
+                              <sup>
+                                {" "}
+                                <i className="fa fa-quote-left fafaquatsstart" aria-hidden="true"></i>
+                              </sup>
+                              {e.discription}
+                              <i className="fa fa-quote-right fafaquatsend" aria-hidden="true"></i>
+                            </p>
+                            <div className="d-flex justify-content-start">
+                              <img
+                                src={e.image}
+                                alt=""
+                                style={{
+                                  maxWidth: "75px",
+                                  height: "75px",
+                                  borderRadius: "50%",
+                                  marginLeft: "15px",
+                                }}
+                              />
+                              <div>
+                                <span className="testimonialspan">{e.name}</span>
+                                <span className="d-flex ml-3">{e.position}</span>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                        );
+                      })
+                    : staticdata.map((e, index) => {
+                        return (
+                          <div className="item doublequate" key={index}>
+                            <p className="pb-3 pl-10">
+                              <sup>
+                                {" "}
+                                <i className="fa fa-quote-left fafaquatsstart" aria-hidden="true"></i>
+                              </sup>
+                              {e.title}
+                              <i className="fa fa-quote-right fafaquatsend" aria-hidden="true"></i>
+                            </p>
+                            <div className="d-flex justify-content-start" >
+                              <img
+                                src={e.image}
+                                alt=""
+                                style={{
+                                  maxWidth: "75px",
+                                  height: "75px",
+                                  borderRadius: "50%",
+                                  marginLeft: "15px",
+                                }}
+                              />
+                              <div>
+                                <span className="testimonialspan">{e.owner}</span>
+                                <span className="d-flex ml-3">{e.title1}</span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
                 </Slider>
                 <span onClick={sliderPrev} className="prev slick-arrow" style={{display: "block"}}>
                   <i className="fa fa-arrow-left" />

@@ -1,16 +1,8 @@
-import Drawer from "../Mobile/Drawer";
-import Header from "../../common/Header";
-import useToggle from "../../common/Hooks/useToggle";
 import Headers from "../../common/PageHeader";
 import Portfoliyo from "./Portfoliyo";
-import Footer from "../../common/Footer";
-import BackToTop from "../../common/BackToTop";
-import Hireus from "../../common/Hireus";
 import logo from "../../../assets/images/logo-removebg-preview.webp";
-import {useEffect, useState} from "react";
+import { useState} from "react";
 const WorlIndex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
 
   const cleartimeout = () => {
@@ -29,10 +21,6 @@ const WorlIndex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
         <Headers
           title="Portfolio"
           breadcrumb={[
@@ -41,9 +29,7 @@ const WorlIndex = () => {
           ]}
         />
         <Portfoliyo loding={cleartimeout}/>
-      
-        {/* <Footer />
-        <BackToTop /> */}
+
       </div>
     </>
   );

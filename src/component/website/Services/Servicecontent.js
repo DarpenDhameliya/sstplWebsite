@@ -3,13 +3,12 @@
 import React, {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
 import {HashLink} from "react-router-hash-link";
-// import webimg from "../../../assets/images/services/web-app-development.webp";
-// import mobimg from "../../../assets/images/services/mobile-app-development.webp";
-// import deskimg from "../../../assets/images/services/desktop-software-development.webp";
-// import digimg from "../../../assets/images/services/digital-marketing.webp";
-// import graimg from "../../../assets/images/services/web-graphic-designing.webp";
-// import entimg from "../../../assets/images/services/enterprise-services.webp";
-import axios from "../../common/Axios";
+import webimg from "../../../assets/images/services/web-app-development.webp";
+import mobimg from "../../../assets/images/services/mobile-app-development.webp";
+import deskimg from "../../../assets/images/services/desktop-software-development.webp";
+import digimg from "../../../assets/images/services/digital-marketing.webp";
+import graimg from "../../../assets/images/services/web-graphic-designing.webp";
+import entimg from "../../../assets/images/services/enterprise-services.webp";
 import {Servicestate} from "../slice/Service";
 import {useSelector} from "react-redux";
 
@@ -70,173 +69,19 @@ const Servicecontent = ({className, list}) => {
     <>
       <section className={`softstormweb-service pt-70 pb-80 ${className}`} id="service">
         <div className="container">
-          {/* <div className="row">
-            <div className="col-lg-4 col-md-6 col-sm-6">
-              <div className="softstormweb-techno-service mt-30 wow animated fadeInUp" data-wow-duration="2000ms" data-wow-delay="200ms">
-                <div onClick={() => handlepagechange("web-application-developement")}>
-                  <img src={webappimg} alt="webimg" style={{borderRadius: "10px"}} />
-                </div>
-                <h4 className="title" style={{textAlign: "center"}}>
-                  {webapptitle}
-                </h4>
-                <div className="display-service text-center">
-                  <HashLink className="main-btn-about mob1 ml-10" to="/web-application-developement#nodejs">
-                    NODE JS
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob1 ml-10" to="/web-application-developement#php">
-                    PHP
-                  </HashLink>
-                  <HashLink className="main-btn-about mob1 ml-10" to="/web-application-developement#laravel">
-                    LARAVEL
-                  </HashLink>
-                  <HashLink className="main-btn-about mob1 ml-10" to="/web-application-developement#codeigniter">
-                    CODEIGNITER
-                  </HashLink>
-                  <HashLink className="main-btn-about mob1 ml-10" exact to="/web-application-developement#python">
-                    PYTHON
-                  </HashLink>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6">
-              <div className="softstormweb-techno-service item-2 mt-30 wow animated fadeInUp" data-wow-duration="2000ms" data-wow-delay="400ms">
-                <div onClick={() => handlepagechange("mobile-application-developement")}>
-                  <img src={mobappimg} alt="webimg" style={{borderRadius: "10px"}} />
-                </div>
-                <h4 className="title" style={{textAlign: "center"}}>
-                  {mobapptitle}
-                </h4>
-                <div className="display-service text-center">
-                  <HashLink smooth className="main-btn-about mob2 ml-10" to="/mobile-application-developement#flutter">
-                    FLUTTER
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob2 ml-10" to="/mobile-application-developement#android">
-                    ANDROID
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob2 ml-10" to="/mobile-application-developement#ios">
-                    IOS
-                  </HashLink>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6">
-              <div className="softstormweb-techno-service item-3 mt-30 wow animated fadeInUp " data-wow-duration="2000ms" data-wow-delay="600ms">
-                <div onClick={() => handlepagechange("desktop-software-developement")}>
-                  <img src={deskappimg} alt="webimg" style={{borderRadius: "10px"}} />
-                </div>
-                <h4 className="title" style={{textAlign: "center"}}>
-                  {deskapptitle}
-                </h4>
-                <div className="display-service text-center">
-                  <HashLink smooth className="main-btn-about mob3 ml-10" to="/desktop-software-developement#c">
-                    C#
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob3 ml-10" to="/desktop-software-developement#c++">
-                    C++
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob3 ml-10" to="/desktop-software-developement#mashinlerning">
-                    MASHINE LEARNING
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob3 ml-10" to="/desktop-software-developement#controller">
-                    CONTEROLLER BASED
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob3 ml-10" to="/desktop-software-developement#axistravelling">
-                    AXIS TRAVELLING
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob3 ml-10" to="/desktop-software-developement#lasersource">
-                    LASER SOURCE
-                  </HashLink>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6">
-              <div className="softstormweb-techno-service item-4 mt-30 wow animated fadeInUp  " data-wow-duration="2000ms" data-wow-delay="200ms">
-                <div onClick={() => handlepagechange("digital-marketing")}>
-                  <img src={digitalappimg} alt="webimg" style={{borderRadius: "10px"}} />
-                </div>
-                <h4 className="title" style={{textAlign: "center"}}>
-                  {digitalapptitle}
-                </h4>
-                <div className="display-service text-center">
-                  <HashLink smooth className="main-btn-about mob4 ml-10" to="/digital-marketing#seo" scroll={(el) => el.scrollIntoView({behavior: "auto", block: "end"})}>
-                    SEO
-                  </HashLink>
-                  <HashLink className="main-btn-about mob4 ml-10" to="/digital-marketing#smm">
-                    SMM
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob4 ml-10" to="/digital-marketing#political">
-                    POLITICAL PROFILE
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob4 ml-10" to="/digital-marketing#mobileapp">
-                    MOBILE APP PROMOTION
-                  </HashLink>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6">
-              <div className="softstormweb-techno-service item-5 mt-30 wow animated fadeInUp" data-wow-duration="2000ms" data-wow-delay="400ms">
-                <div onClick={() => handlepagechange("web_graphic-designing")}>
-                  <img src={webgraappimg} alt="webimg" style={{borderRadius: "10px"}} />
-                </div>
-                <h4 className="title" style={{textAlign: "center"}}>
-                  {webgraapptitle}
-                </h4>
-                <div className="display-service text-center">
-                  <HashLink smooth className="main-btn-about mob5 ml-10" to="/web_graphic-designing#webdesign">
-                    WEB DESIGN
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob5 ml-10" to="/web_graphic-designing#uiux">
-                    UI & UX DESIGN
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob5 ml-10" to="/web_graphic-designing#reactjs">
-                    REACT JS
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob5 ml-10" to="/web_graphic-designing#viewjs">
-                    VUE JS
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob5 ml-10" to="/web_graphic-designing#logo">
-                    LOGO BANNER
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob5 ml-10" to="/web_graphic-designing#brochur">
-                    BROCHUR & MOKEUP
-                  </HashLink>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-sm-6">
-              <div className="softstormweb-techno-service item-6 mt-30 wow animated fadeInUp" data-wow-duration="2000ms" data-wow-delay="600ms">
-                <div onClick={() => handlepagechange("enterprise-services")}>
-                  <img src={erpappimg} alt="webimg" style={{borderRadius: "10px"}} />
-                </div>
-                <h4 className="title" style={{textAlign: "center"}}>
-                  {erpapptitle}
-                </h4>
-                <div className="display-service text-center">
-                  <HashLink smooth className="main-btn-about mob6 ml-10" to="/enterprise-services#erp">
-                    ERP
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob6 ml-10" to="/enterprise-services#crm">
-                    CRM
-                  </HashLink>
-                  <HashLink smooth className="main-btn-about mob6 ml-10" to="/enterprise-services#accounting">
-                    CUSTOMIZED ACCOUNTING
-                  </HashLink>
-                </div>
-              </div>
-            </div>
-          </div> */}
+         
           <div className="row">
             <div className="col-md-12 col-sm-12 " style={{padding: "25px 10px", background: "#fafbfb"}}>
               <div className="row maintainpd_service">
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
                   <div onClick={() => handlepagechange("web-application-developement")}>
-                    <img src={webappimg} alt="webimg" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
+                    <img src={webappimg ? webappimg : webimg} alt="webimg" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
                 <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
                   <div>
-                    <h4 className="mb-3">{webapptitle}</h4>
+                    <h4 className="mb-3">{webapptitle ? webapptitle : "Web Application Developement"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
@@ -275,7 +120,7 @@ const Servicecontent = ({className, list}) => {
               <div className="row maintainpd_service">
                 <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
                   <div>
-                    <h4 className="mb-3">{mobapptitle}</h4>
+                    <h4 className="mb-3">{mobapptitle ? mobapptitle : "Mobile Application Developer"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
@@ -300,7 +145,7 @@ const Servicecontent = ({className, list}) => {
                 </div>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   <div onClick={() => handlepagechange("mobile-application-developement")}>
-                    <img src={mobappimg} alt="webimg" className="maintainright_img" />
+                    <img src={mobappimg ? mobappimg : mobimg} alt="webimg" className="maintainright_img" />
                   </div>
                 </div>
               </div>
@@ -309,13 +154,13 @@ const Servicecontent = ({className, list}) => {
               <div className="row maintainpd_service">
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
-                  <div onClick={() => handlepagechange("web-application-developement")}>
-                    <img src={deskappimg} alt="Desktop" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
+                  <div onClick={() => handlepagechange("desktop-software-developement")}>
+                    <img src={deskappimg ? deskappimg : deskimg}  alt="Desktop" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
                 <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
                   <div>
-                    <h4 className="mb-3">{deskapptitle}</h4>
+                    <h4 className="mb-3">{deskapptitle ? deskapptitle : "Desktop Software Developement"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
@@ -359,7 +204,7 @@ const Servicecontent = ({className, list}) => {
               <div className="row maintainpd_service">
                 <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
                   <div>
-                    <h4 className="mb-3">{digitalapptitle}</h4>
+                    <h4 className="mb-3">{digitalapptitle ? digitalapptitle : "Digital Marketing"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
@@ -388,8 +233,8 @@ const Servicecontent = ({className, list}) => {
                   </div>
                 </div>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
-                  <div onClick={() => handlepagechange("mobile-application-developement")}>
-                    <img src={digitalappimg} alt="webimg" className="maintainright_img" />
+                  <div onClick={() => handlepagechange("digital-marketing")}>
+                    <img src={digitalappimg ? digitalappimg : digimg} alt="webimg" className="maintainright_img" />
                   </div>
                 </div>
               </div>
@@ -398,13 +243,13 @@ const Servicecontent = ({className, list}) => {
               <div className="row maintainpd_service">
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
-                  <div onClick={() => handlepagechange("web-application-developement")}>
-                    <img src={webgraappimg} className="maintainleft_img" alt="graphic poster" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
+                  <div onClick={() => handlepagechange("web_graphic-designing")}>
+                    <img src={webgraappimg ? webgraappimg : graimg} className="maintainleft_img" alt="graphic poster" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
                 <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
                   <div>
-                    <h4 className="mb-3">{webgraapptitle}</h4>
+                    <h4 className="mb-3">{webgraapptitle ? webgraapptitle : "Web & Graphic Designing"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
@@ -449,7 +294,7 @@ const Servicecontent = ({className, list}) => {
               <div className="row maintainpd_service">
                 <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
                   <div>
-                    <h4 className="mb-3">{erpapptitle}</h4>
+                    <h4 className="mb-3">{erpapptitle ? erpapptitle : "Enterprice Services"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
@@ -473,8 +318,8 @@ const Servicecontent = ({className, list}) => {
                   </div>
                 </div>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
-                  <div onClick={() => handlepagechange("mobile-application-developement")}>
-                    <img src={erpappimg} alt="webimg" className="maintainright_img" />
+                  <div onClick={() => handlepagechange("enterprise-services")}>
+                    <img src={erpappimg ? erpappimg : entimg} alt="webimg" className="maintainright_img" />
                   </div>
                 </div>
               </div>
@@ -487,33 +332,3 @@ const Servicecontent = ({className, list}) => {
 };
 
 export default Servicecontent;
-
-{
-  /* <header className="service-header " id="service-header_id" >
-<div className="container">
-  <div className="header-nav-box">
-    <div className="row align-items-center">
-      <div className="col-lg-12">
-        <div className=" d-flex">
-          <div>
-            <a className={` pl-10 pr-10 ${tab === "ios" ? "subHadactive" : ""}`} style={{ color: "#0e1133" }} href="#ios">
-              IOS
-            </a>
-          </div>
-          <div>
-            <a className={` pl-10 pr-10 ${tab === 'flutter' ? 'subHadactive' : ''}`} style={{ color: '#0e1133' }} href="#flutter">
-              FLUTTER
-            </a>
-          </div>
-          <div>
-            <a className={` pl-10 pr-10 ${tab === 'android' ? 'subHadactive' : ''}`} style={{ color: '#0e1133' }} href="#android">
-              ANDROID
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</header> */
-}

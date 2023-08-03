@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from "react";
 import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../../common/lib/ServiceSticky";
 import digimg from "../../../../assets/images/services/digital-marketing.webp";
-import axios from "../../../common/Axios";
 import {Servicestate, Servicestatus} from "../../slice/Service";
 import {useDispatch, useSelector} from "react-redux";
 const Digitalservice = ({images , serviceContents}) => {
@@ -54,32 +53,6 @@ const Digitalservice = ({images , serviceContents}) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  // useEffect(() => {
-  //   if (states.response.result === undefined) {
-  //   const fetchServiceata = () => {
-  //     axios
-  //       .get("service/service_list", {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       })
-  //       .then((result) => {
-  //         result.data.result.map((e) => {
-  //           if (e.heading === "Digital Marketing") {
-  //             setImage(e.servicepageimg);
-  //             setServiceContent(e.content);
-  //           }
-  //         });
-  //       })
-  //       .catch((err) => {
-  //         setDbFetcherr(err.response.data.error);
-  //       });
-  //   };
-
-  //   fetchServiceata();
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (states.response.result !== undefined) {
@@ -159,7 +132,7 @@ const Digitalservice = ({images , serviceContents}) => {
             <div className="col-lg-8 col-md-7 ">
               <div className="single-post-area">
                 <div className="post-thumb">
-                  <img src={image} alt="" />
+                  <img src={image ? image : digimg} alt="" />
                 </div>
                 <span id="seo" style={{paddingTop: "15px"}}></span>
                 <h4 className="article-title">Digital Marketing</h4>
@@ -199,9 +172,10 @@ const Digitalservice = ({images , serviceContents}) => {
                   </div>
                   {/* </div> */}
                 </header>
+                {serviceContent.length > 0 ?
                 <div dangerouslySetInnerHTML={{__html: serviceContent}} />
-
-                {/* <div className="row">
+                 :
+                <div className="row">
                   <div className="col-lg-12">
                     <div className='softstormweb-web-service mt-25'  id="div1">
                       <div className="content">
@@ -276,7 +250,9 @@ const Digitalservice = ({images , serviceContents}) => {
                       </div>
                     </div>
                   </div>
-                </div> */}
+                </div>
+                 }
+
               </div>
             </div>
             <div className="col-lg-4 col-md-5">

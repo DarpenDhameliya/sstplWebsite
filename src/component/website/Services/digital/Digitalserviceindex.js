@@ -1,28 +1,21 @@
 import React from "react";
-import Drawer from "../../Mobile/Drawer";
-import Header from "../../../common/Header";
-import useToggle from "../../../common/Hooks/useToggle";
+
 import Headers from "../../../common/PageHeader";
-import Footer from "../../../common/Footer";
 import Digitalservice from "./Digitalservice";
-import BackToTop from "../../../common/BackToTop";
-import Hireus from "../../../common/Hireus";
 import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import {useEffect, useState} from "react";
-import { Servicestate } from "../../slice/Service";
-import { useSelector } from "react-redux";
+import {Servicestate} from "../../slice/Service";
+import {useSelector} from "react-redux";
 import axios from "../../../common/Axios";
 const Digitalserviceindex = () => {
-  const [drawer, drawerAction] = useToggle(false);
-  const [cart, cartAction] = useToggle(false);
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");
   const [image, setImage] = useState("");
-  const [dbFetcherr, setDbFetcherr] = useState('')
+  const [dbFetcherr, setDbFetcherr] = useState("");
   const states = useSelector(Servicestate);
 
   useEffect(() => {
-    if(states.response.result !== undefined){
+    if (states.response.result !== undefined) {
       setTimeout(() => {
         setLoading(false);
       }, 500);
@@ -31,28 +24,29 @@ const Digitalserviceindex = () => {
 
   useEffect(() => {
     if (states.response.result === undefined) {
-    const fetchServiceata = () => {
-      axios
-        .get("service/service_list", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((result) => {
-          result.data.result.map((e) => {
-            if (e.heading === "Digital Marketing") {
-              setImage(e.servicepageimg);
-              setServiceContent(e.content);
-            }
+      const fetchServiceata = () => {
+        axios
+          .get("service/service_list", {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((result) => {
+            result.data.result.map((e) => {
+              if (e.heading === "Digital Marketing") {
+                setImage(e.servicepageimg);
+                setServiceContent(e.content);
+              }
+            });
+            setLoading(false);
+          })
+          .catch((err) => {
+            setLoading(false);
+            setDbFetcherr(err.response.data.error);
           });
-          setLoading(false)
-        })
-        .catch((err) => {
-          setDbFetcherr(err.response.data.error);
-        });
-    };
+      };
 
-    fetchServiceata();
+      fetchServiceata();
     }
   }, []);
   return (
@@ -68,23 +62,15 @@ const Digitalserviceindex = () => {
         </div>
       )}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-              {/* <Hireus value={cart} action={cartAction.toggle} /> */}
-
         <Headers
           title="DIGITAL MARKETING"
           breadcrumb={[
             {link: "/", title: "Home"},
-            {link: "/ourservice", title: "Our Service"},
-            {link: "/digital", title: "Degital Marketing"},
+            {link: "/our-service", title: "Our Service"},
+            {link: "/digital-marketing", title: "Degital Marketing"},
           ]}
         />
-
-        <Digitalservice images={image} serviceContents={serviceContent}/>
-      
-        {/* <Footer />
-        <BackToTop /> */}
+        <Digitalservice images={image} serviceContents={serviceContent} />
       </div>
     </>
   );

@@ -1,47 +1,41 @@
 import React, {useEffect} from "react";
 import shapeTwo from "../../../assets/images/code (3).webp";
-import shapeThree from "../../../assets/images/network-security 1.webp";
+import shape15 from "../../../assets/images/PERSANTAGE (3).png";
+import shapeThree from "../../../assets/images/curly brecket (1).png";
 import Lottie from "lottie-react";
 import homedata from "../../common/fM1Ya2VfEr.json";
 import {Link} from "react-router-dom";
-import fileContent from "../../../sample.txt";
+// import fileContent from "../../../sample.txt";
+
 
 export default function Home() {
-  useEffect(() => {
-    readFile();
-  }, []);
+  // useEffect(() => {
+  //   readFile();
+  // }, []);
 
+  // const readFile = async () => {
+  //   try {
+  //     const response = await fetch(fileContent);
+  //     if (response.ok) {
+  //       const text = await response.text();
+  //       const parser = new DOMParser();
+  //       const doc = parser.parseFromString(text, "text/html");
+  //       const metaTag = doc.querySelector('meta[name="google-site-verification"]');
+  //       const scriptTags = doc.querySelectorAll("script");
+  //       if (metaTag) {
+  //         document.head.appendChild(metaTag);
+  //       }
+  //       scriptTags.forEach((scriptTag) => {
+  //         document.head.appendChild(scriptTag);
+  //       });
+  //     } else {
+  //       console.error("Error reading file:", response.status);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error reading file:", error);
+  //   }
+  // };
 
-  const readFile = async () => {
-    try {
-      const response = await fetch(fileContent);
-      if (response.ok) {
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "text/html");
-        const metaTag = doc.querySelector('meta[name="google-site-verification"]');
-        const scriptTags = doc.querySelectorAll("script");
-        if (metaTag) {
-          document.head.appendChild(metaTag);
-        }
-        scriptTags.forEach((scriptTag) => {
-          document.head.appendChild(scriptTag);
-        });
-        // checkMetaTag();
-      } else {
-        console.error("Error reading file:", response.status);
-      }
-    } catch (error) {
-      console.error("Error reading file:", error);
-    }
-  };
-
-  // const checkMetaTag = () => {
-  //   const metaTag = document.head.querySelector('meta[name="google-site-verification"]');
-  //   const scriptTags = document.head.querySelectorAll('script');
-  //   scriptTags.forEach((scriptTag) => {
-  //   });
-  // }
 
   return (
     <>
@@ -78,15 +72,16 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="hero-shape-1">
+        <div className="hero-shape-1 ">
           <img src={shapeTwo} alt="" />
         </div>
         <div className="hero-shape-2">
-          <img src={shapeThree} alt="" />
+          <img src={shapeThree} alt="" style={{width:"25px"}}/>
         </div>
-        {/* <div className="hero-shape-3">
-        <img src={shapeFour} alt="" />
-      </div> */}
+        <div className="service-shape-2">
+          <img src={shape15} alt="" style={{width:"25px"}}/>
+        </div>
+
       </section>
     </>
   );

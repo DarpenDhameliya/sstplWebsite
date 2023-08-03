@@ -11,7 +11,7 @@ import AboutPart2 from "./AboutPart2";
 // import Lottie from "lottie-react";
 // import homedata from "./Aboutpath.json";
 import axios from "../../common/Axios";
-import logo from '../../../assets/images/logo-removebg-preview.webp'
+import logo from "../../../assets/images/logo-removebg-preview.webp";
 const IndexAbout = () => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);
@@ -31,6 +31,7 @@ const IndexAbout = () => {
         cleartimeout();
       })
       .catch((err) => {
+        cleartimeout();
         setDberr(err.response.data.error);
       });
   };
@@ -40,40 +41,31 @@ const IndexAbout = () => {
   }, []);
 
   const cleartimeout = () => {
-    setLoading(false)
-  }
+    setLoading(false);
+  };
   return (
-    <>{loading && (
-      <div className="onloadpage" id="page-load">
-        <div className="loader-div d-flex justify-content-center ">
-          <div className="on-img">
-            <img src={logo} alt="loader" style={{width: "100px"}} />
-            <div className="loader">Loading ...</div>
+    <>
+      {loading && (
+        <div className="onloadpage" id="page-load">
+          <div className="loader-div d-flex justify-content-center ">
+            <div className="on-img">
+              <img src={logo} alt="loader" style={{width: "100px"}} />
+              <div className="loader">Loading ...</div>
+            </div>
           </div>
         </div>
-      </div>
-    )}
-    <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-      {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-      <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-      {/*       {/* <Hireus value={cart} action={cartAction.toggle} /> */}
- 
-      <Headers
-        title="ABOUT US"
-        breadcrumb={[
-          {link: "/", title: "Home"},
-          {link: "/about", title: "About Us"},
-        ]}
-        className={"handlebredcrumb"}
-      />
-      <About list={aboutList} error={dberr} />
-      <AboutPart2 list={aboutList} loding={cleartimeout}/>
-      {/* <div className="container mt-3 mb-3">
-        <Lottie animationData={homedata} />
-      </div> */}
-    
-      {/* <Footer />
-      <BackToTop /> */}
+      )}
+      <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
+        <Headers
+          title="ABOUT US"
+          breadcrumb={[
+            {link: "/", title: "Home"},
+            {link: "/about", title: "About Us"},
+          ]}
+          className={"handlebredcrumb"}
+        />
+        <About list={aboutList} error={dberr} />
+        <AboutPart2 list={aboutList} loding={cleartimeout} />
       </div>
     </>
   );

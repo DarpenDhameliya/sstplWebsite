@@ -17,6 +17,9 @@ import {useHistory} from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import logo from "../../../../assets/images/logo-removebg-preview.webp";
+import closeimg from "../../../../assets/images/close.png";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -46,8 +49,10 @@ const Hireus = () => {
   const [dbDeleteerr, setDbDeleteerr] = useState("");
   const [rowperpage, setRowperpage] = useState("10");
   const [loading, setLoading] = useState(false);
-
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
   const [fetcherr, setFetcherr] = useState("");
+  const [viewData, setViewData] = useState([])
   const classes = useMuiStyle();
   var token = localStorage.getItem("ssAdmin");
   const history = useHistory();
@@ -102,6 +107,11 @@ const Hireus = () => {
     setPage(1);
     fetchHiredata("1", onpage);
   };
+
+  const handleedit = (data) => {
+    setOpen(true);
+    setViewData(data);
+  };
   return (
     <>
       <Container component="main" maxWidth="xl" className={classes.setcontainer}>
@@ -133,6 +143,9 @@ const Hireus = () => {
                       No.
                     </TableCell>
                     <TableCell align="center" className={classes.tableth}>
+                      Date
+                    </TableCell>
+                    <TableCell align="center" className={classes.tableth}>
                       Name
                     </TableCell>
                     <TableCell align="center" className={classes.tableth}>
@@ -144,9 +157,7 @@ const Hireus = () => {
                     <TableCell align="center" className={classes.tableth}>
                       Language
                     </TableCell>
-                    <TableCell align="center" className={classes.tableth}>
-                      Work Details
-                    </TableCell>
+                   
                     <TableCell align="center" className={classes.tableth}>
                       Ip Address
                     </TableCell>
@@ -168,6 +179,9 @@ const Hireus = () => {
                       <StyledTableRow>
                         <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
                           {index + 1}
+                        </StyledTableCell>
+                        <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
+                        {new Date(e.date).toLocaleDateString("en-GB")}
                         </StyledTableCell>
                         <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
                           {e.name}
@@ -196,9 +210,6 @@ const Hireus = () => {
                           })}
                         </StyledTableCell>
                         <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
-                          {e.work_detai}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
                           {e.ip}
                         </StyledTableCell>
                         <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
@@ -209,14 +220,26 @@ const Hireus = () => {
                         </StyledTableCell>
                        
                         <StyledTableCell align="center" component="th" scope="row" className={classes.tabletd}>
-                          <Tooltip title="Remove">
+                          {/* <Tooltip title="Remove">
                             <i
                               className="fa fa-trash"
                               aria-hidden="true"
                               //  className={classes.setdeleteincon}
                               onClick={() => handledelete(e._id)}
                             />
-                          </Tooltip>
+                          </Tooltip> */}
+                          <div className={classes.seticondiv}>
+                            <div>
+                              <Tooltip title="Edit">
+                                <i aria-hidden="true" className={`${classes.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
+                              </Tooltip>
+                            </div>
+                            <div>
+                              <Tooltip title="Remove">
+                                <i aria-hidden="true" className={`${classes.setdeleteincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
+                              </Tooltip>
+                            </div>
+                          </div>
                         </StyledTableCell>
                       </StyledTableRow>
                     );
@@ -237,6 +260,39 @@ const Hireus = () => {
             </TableContainer>
           </Paper>
         </div>
+        <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+          <Box className="handle_portfolio_modal_mui contact_modal">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                {viewData.name}
+              </h5>
+              <div onClick={handleClose} style={{cursor: "pointer"}}>
+                <img src={closeimg} alt="car1" />
+              </div>
+            </div>{" "}
+            <div className="modal-body" style={{border: "none", boxShadow: "none"}}>
+              <div className={classes.handleContactmodel}>
+                <h6 style={{minWidth:"120px"}}>Date : </h6>
+                <p className={classes.handlep}>{new Date(viewData.date).toLocaleDateString("en-GB")}</p>
+              </div>
+              <hr />
+              <div className={classes.handleContactmodel}>
+                <h6 style={{minWidth:"120px"}}>Email : </h6>
+                <p className={classes.handlep}>{viewData.email}</p>
+              </div>
+              <hr />
+              <div className={classes.handleContactmodel}>
+                <h6 style={{minWidth:"120px"}}>Language : </h6>
+                <p className={classes.handlep}>{viewData.technology}</p>
+              </div>
+              <hr />
+              <div className={classes.handleContactmodel}>
+                <h6 style={{minWidth:"120px"}}>Work Detail : </h6>
+                <p className={classes.handlep}>{viewData.help}</p>
+              </div>
+            </div>
+          </Box>
+        </Modal>
       </Container>
     </>
   );

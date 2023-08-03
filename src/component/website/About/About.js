@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState, useEffect, useRef} from "react";
 import aboutvodeo from "../../../assets/images/about_video.mp4";
+import aboutvodeo1 from "../../../assets/images/about_video.webm";
+
 
 const About = ({className, list, error}) => {
-  const [metaList, setMetaList] = useState([]);
   const [aboutheading, setAboutheading] = useState("");
   const [aboutcontent, setAboutcontent] = useState("");
 
@@ -18,34 +19,7 @@ const About = ({className, list, error}) => {
     videoElement.currentTime = 0;
     videoElement.muted = false;
     videoElement.play();
-  };
-
-  // useEffect(() => {
-  //   // Create or update the meta
-  //   const metaTitle = document.querySelector('meta[name="title"]');
-  //   if (metaTitle) {
-  //     metaTitle.setAttribute("content", "sstpl content");
-  //   }
-  //   // else {
-  //   //   const newMetaTitle = document.createElement('meta');
-  //   //   newMetaTitle.setAttribute('name', 'title');
-  //   //   newMetaTitle.setAttribute('content', 'sstpl content');
-  //   //   document.head.appendChild(newMetaTitle);
-  //   // }
-
-  //   const metaDescription = document.querySelector('meta[name="description"]');
-  //   if (metaDescription) {
-  //     metaDescription.setAttribute("content", "Softstorm Techonosys dk");
-  //   }
-  //   // else {
-  //   //   const newMetaDescription = document.createElement('meta');
-  //   //   console.log(newMetaDescription)
-  //   //   newMetaDescription.setAttribute('name', 'description');
-  //   //   newMetaDescription.setAttribute('content', 'Softstorm Techonosys dk');
-  //   //   document.head.appendChild(newMetaDescription);
-  //   // }
-  // }, []);
-  
+  };  
 
 
   useEffect(() => {
@@ -67,8 +41,8 @@ const About = ({className, list, error}) => {
               <div className="row justify-content-center">
                 <div className="col-lg-6 col-md-6 col-sm-10">
                   <div className="softstormweb-about-main-title">
-                    <h3 className="mb-10">{aboutheading}</h3>
-                    <div dangerouslySetInnerHTML={{ __html: aboutcontent }} />
+                    <h3 className="mb-10">{aboutheading ? aboutheading : 'We are SoftStorm'} </h3>
+                    {aboutcontent ? <div dangerouslySetInnerHTML={{ __html: aboutcontent }} /> : <p>SoftStorm is your trusted partner for digital transformation, offering tailored services in software development, business intelligence, and mobile/web app development. With a proven track record of 30+ global clients in five years, we deliver over 50 successful projects with 100% client satisfaction. Our team's extensive 100K+ hours of freelancing experience guarantee the expertise to bring your vision to reality. Ranked among the top 1% talent on platforms like Upwork, we keep you ahead in the dynamic business landscape.</p>}
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-10">
@@ -77,7 +51,6 @@ const About = ({className, list, error}) => {
                       ref={videoRef}
                       id="video"
                       width="100%"
-                      // height="240"
                       muted
                       onClick={handleclick}
                       autoPlay
@@ -85,6 +58,7 @@ const About = ({className, list, error}) => {
                       // controls
                       loop
                     >
+                      <source src={aboutvodeo1} type="video/webm" />
                       <source src={aboutvodeo} type="video/mp4" />
                     </video>
                   </div>

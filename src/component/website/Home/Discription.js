@@ -1,4 +1,4 @@
-import React ,{useEffect} from "react";
+import React  from "react";
 import CounterUpCom from "../../common/lib/CounterUpCom";
 import counterIconOne from '../../../assets/images/icon/counter-icon-1.svg';
 import counterIconTwo from '../../../assets/images/icon/counter-icon-2.svg';
