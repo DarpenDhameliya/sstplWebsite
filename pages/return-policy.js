@@ -2,6 +2,7 @@ import Seo from "@/Component/Seo";
 import ReturnPolicyIndex from "@/Component/websiteComponent/returnpolicy/ReturnPolicyIndex";
 import React from "react";
 import axios from '../Component/Axios';
+import { Metaapicall } from "@/redux/Metaapicall";
 
 const returnpolicy = ({initialPortfolioList}) => {
   let data = initialPortfolioList.find((e) => e.url === '/return-policy')
@@ -17,21 +18,11 @@ const returnpolicy = ({initialPortfolioList}) => {
 export default returnpolicy;
 
 export const getServerSideProps = async () => {
-  try {
-    const response = await axios.get("meta/meta_list");
-    const initialPortfolioList = response.data.result;
+  const initialPortfolioList = await Metaapicall();
 
-    return {
-      props: {
-        initialPortfolioList,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching initial portfolio data:", error);
-    return {
-      props: {
-        initialPortfolioList: error,
-      },
-    };
-  }
+  return {
+    props: {
+      initialPortfolioList,
+    },
+  };
 };

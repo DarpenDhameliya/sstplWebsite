@@ -33,14 +33,14 @@ const Seo = ({ title, pagedescription, keywords }) => {
         <meta name="Rating" content="General" />
         <meta name="Robots" content="INDEX,FOLLOW" />
         <meta name="Revisit-after" content="7 Days" />
-        <link rel="canonical" href="softstorm.in" />
+        <link  rel="canonical" href="softstorm.in" />
 
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={title ? title : lasttitle} />
         <meta name="twitter:description" content={pagedescription ? pagedescription : defaultpagedescription} />
         <meta name="twitter:site" content={url} />
         <meta name="twitter:creator" content={url} />
-        <link rel="icon" href="/favicon.ico" />
+        <link  rel="icon" href="/favicon.ico" />
 
         <meta name="google-site-verification" content="dTL5N67zsh_JdPUzgOM_q7BMlDHMaScJcQ7R8PyHJGI" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142119303-1"></script>

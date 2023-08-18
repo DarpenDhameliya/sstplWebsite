@@ -86,28 +86,28 @@ const Servicecontent = ({className, list}) => {
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
-                        <Link className="maintain_link  " href="/web-application-developement#nodejs">
-                          <li className="handleul_servicetechno_list border1" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} className="maintain_link  " href="/web-application-developement#nodejs">
+                          <li className="handleul_servicetechno_list border1" >
                             NODE JS
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link " href="/web-application-developement#php">
-                          <li className="handleul_servicetechno_list border1" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link " href="/web-application-developement#php">
+                          <li className="handleul_servicetechno_list border1" >
                             PHP
                           </li>
                         </Link>
-                        <Link className="maintain_link " href="/web-application-developement#laravel">
-                          <li className="handleul_servicetechno_list border1" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} className="maintain_link " href="/web-application-developement#laravel">
+                          <li className="handleul_servicetechno_list border1" >
                             LARAVEL
                           </li>
                         </Link>
-                        <Link className="maintain_link  " href="/web-application-developement#codeigniter">
-                          <li className="handleul_servicetechno_list border1" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} className="maintain_link  " href="/web-application-developement#codeigniter">
+                          <li className="handleul_servicetechno_list border1" >
                             CODEIGNITER
                           </li>
                         </Link>
-                        <Link className="maintain_link  " exact href="/web-application-developement#python">
-                          <li className="handleul_servicetechno_list border1" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} className="maintain_link  " exact href="/web-application-developement#python">
+                          <li className="handleul_servicetechno_list border1" >
                             PYTHON
                           </li>
                         </Link>
@@ -125,18 +125,18 @@ const Servicecontent = ({className, list}) => {
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
-                        <Link smooth className="maintain_link1 " href="/mobile-application-developement#flutter">
-                          <li className="handleul_servicetechno_list border2" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link1 " href="/mobile-application-developement#flutter">
+                          <li className="handleul_servicetechno_list border2" >
                             FLUTTER
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link1 " href="/mobile-application-developement#android">
-                          <li className="handleul_servicetechno_list border2" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link1 " href="/mobile-application-developement#android">
+                          <li className="handleul_servicetechno_list border2" >
                             ANDROID
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link1 " href="/mobile-application-developement#ios">
-                          <li className="handleul_servicetechno_list border2" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link1 " href="/mobile-application-developement#ios">
+                          <li className="handleul_servicetechno_list border2" >
                             IOS
                           </li>
                         </Link>
@@ -165,33 +165,33 @@ const Servicecontent = ({className, list}) => {
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
-                        <Link smooth className="maintain_link2 " href="/desktop-software-developement#c">
-                          <li className="handleul_servicetechno_list border3" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link2 " href="/desktop-software-developement#c">
+                          <li className="handleul_servicetechno_list border3" >
                             C#
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link2 " href="/desktop-software-developement#c++">
-                          <li className="handleul_servicetechno_list border3" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link2 " href="/desktop-software-developement#c++">
+                          <li className="handleul_servicetechno_list border3" >
                             C++
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link2 " href="/desktop-software-developement#mashinlerning">
-                          <li className="handleul_servicetechno_list border3" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link2 " href="/desktop-software-developement#mashinlerning">
+                          <li className="handleul_servicetechno_list border3" >
                             MASHINE LEARNING
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link2" href="/desktop-software-developement#controller">
-                          <li className="handleul_servicetechno_list border3" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link2" href="/desktop-software-developement#controller">
+                          <li className="handleul_servicetechno_list border3" >
                             CONTEROLLER BASED
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link2 ml-10" href="/desktop-software-developement#axistravelling">
-                          <li className="handleul_servicetechno_list border3" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link2 ml-10" href="/desktop-software-developement#axistravelling">
+                          <li className="handleul_servicetechno_list border3" >
                             AXIS TRAVELLING
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link2 ml-10" href="/desktop-software-developement#lasersource">
-                          <li className="handleul_servicetechno_list border3" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link2 ml-10" href="/desktop-software-developement#lasersource">
+                          <li className="handleul_servicetechno_list border3" >
                             LASER SOURCE
                           </li>
                         </Link>
@@ -209,23 +209,23 @@ const Servicecontent = ({className, list}) => {
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
-                        <Link smooth className="maintain_link3 " href="/digital-marketing#seo" >
-                          <li className="handleul_servicetechno_list border4" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link3 " href="/digital-marketing#seo" >
+                          <li className="handleul_servicetechno_list border4" >
                             SEO
                           </li>
                         </Link>
-                        <Link className="maintain_link3 " href="/digital-marketing#smm">
-                          <li className="handleul_servicetechno_list border4" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} className="maintain_link3 " href="/digital-marketing#smm">
+                          <li className="handleul_servicetechno_list border4" >
                             SMM
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link3 " href="/digital-marketing#political">
-                          <li className="handleul_servicetechno_list border4" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link3 " href="/digital-marketing#political">
+                          <li className="handleul_servicetechno_list border4" >
                             POLITICAL PROFILE
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link3" href="/digital-marketing#mobileapp">
-                          <li className="handleul_servicetechno_list border4" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link3" href="/digital-marketing#mobileapp">
+                          <li className="handleul_servicetechno_list border4" >
                             MOBILE APP PROMOTION
                           </li>
                         </Link>
@@ -254,34 +254,34 @@ const Servicecontent = ({className, list}) => {
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
-                        <Link smooth className="maintain_link4 " href="/web_graphic-designing#webdesign">
-                          <li className="handleul_servicetechno_list border5" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#webdesign">
+                          <li className="handleul_servicetechno_list border5" >
                             WEB DESIGN
                           </li>
                         </Link>
 
-                        <Link smooth className="maintain_link4 " href="/web_graphic-designing#uiux">
-                          <li className="handleul_servicetechno_list border5" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#uiux">
+                          <li className="handleul_servicetechno_list border5" >
                             UI & UX DESIGN
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link4 " href="/web_graphic-designing#reactjs">
-                          <li className="handleul_servicetechno_list border5" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#reactjs">
+                          <li className="handleul_servicetechno_list border5" >
                             REACT JS
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link4 " href="/web_graphic-designing#viewjs">
-                          <li className="handleul_servicetechno_list border5" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#viewjs">
+                          <li className="handleul_servicetechno_list border5" >
                             VUE JS
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link4 " href="/web_graphic-designing#logo">
-                          <li className="handleul_servicetechno_list border5" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#logo">
+                          <li className="handleul_servicetechno_list border5" >
                             LOGO BANNER
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link4 " href="/web_graphic-designing#brochur">
-                          <li className="handleul_servicetechno_list border5" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#brochur">
+                          <li className="handleul_servicetechno_list border5" >
                             BROCHUR & MOKEUP
                           </li>
                         </Link>
@@ -299,18 +299,18 @@ const Servicecontent = ({className, list}) => {
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
                     <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
                       <ul className="handleul_servicetechno">
-                        <Link smooth className="maintain_link5" href="/enterprise-services#erp">
-                          <li className="handleul_servicetechno_list border6" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link5" href="/enterprise-services#erp">
+                          <li className="handleul_servicetechno_list border6" >
                             ERP
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link5" href="/enterprise-services#crm">
-                          <li className="handleul_servicetechno_list border6" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link5" href="/enterprise-services#crm">
+                          <li className="handleul_servicetechno_list border6" >
                             CRM
                           </li>
                         </Link>
-                        <Link smooth className="maintain_link5" href="/enterprise-services#accounting">
-                          <li className="handleul_servicetechno_list border6" data-aos="zoom-in" data-aos-duration="1000">
+                        <Link scroll={false} smooth className="maintain_link5" href="/enterprise-services#accounting">
+                          <li className="handleul_servicetechno_list border6" >
                             CUSTOMIZED ACCOUNTING
                           </li>
                         </Link>

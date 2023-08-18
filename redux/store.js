@@ -5,6 +5,7 @@ import hireusReducer from "./slice/HireusSlice";
 import metaResucer from "./slice/Mets";
 import serviceReducer from "./slice/Service";
 import iconReducer from "./slice/IconSlice"
+import logoReducer from './slice/logoSlice'
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +15,7 @@ export const store = configureStore({
     meta: metaResucer,
     service: serviceReducer,
     icon:iconReducer,
-    // meta:metaReducer,
+    logo:logoReducer,
   },
 
   middleware: getDefaultMiddleware({

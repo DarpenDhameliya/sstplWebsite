@@ -237,9 +237,9 @@ button {
   border-radius: 0
 }
 
-button:focus {
+/* button:focus {
   outline: 1px dotted;
-}
+} */
 
 button,
 input,

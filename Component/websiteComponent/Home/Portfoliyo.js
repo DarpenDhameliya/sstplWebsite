@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import axios from "../../Axios";
+import { api } from "../../Axios";
 
 export default function Portfoliyo({data}) {
   const [workdata, setWorkdata] = useState([]);
@@ -14,12 +14,8 @@ export default function Portfoliyo({data}) {
   }, [data]);
 
   const fetchHiredata = () => {
-    axios
-      .post("portfolio/portfolio_list", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    api
+      .post("portfolio/portfolio_list")
       .then((result) => {
         setPortfolioList(result.data.result);
       })

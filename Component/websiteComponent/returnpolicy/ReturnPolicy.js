@@ -4,7 +4,6 @@ import sponserShape from "../../../assets/images/icon/SSTPL-500.webp";
 
 const ReturnPolicy = ({ content }) => {
   useEffect(() => {
-    document.title = "Return Policy | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
   const adjustedHtmlContent = content.replace(

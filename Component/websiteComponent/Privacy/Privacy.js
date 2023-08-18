@@ -4,7 +4,6 @@ import Image from "next/image"
 
 const Privacy = ({className, content}) => {
   useEffect(() => {
-    document.title = "Privacy Policy | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
   const adjustedHtmlContent = content.replace(

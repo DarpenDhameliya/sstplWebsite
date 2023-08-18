@@ -15,7 +15,6 @@ const Desktipservice = ({images, serviceContents}) => {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    document.title = "Desktop Software Developer | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2; // Calculate the middle of the window

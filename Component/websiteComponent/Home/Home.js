@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import homedata from "./fM1Ya2VfEr.json";
-
 const Home = () => {
   return (
     <>
@@ -29,7 +28,7 @@ const Home = () => {
                 </div>
 
                 <p className="home_effect_p pb-2">Save time to build your business, let us build the softwares and apps for you!</p>
-                <Link href="/contact" className="main-btn  mt-4 fw-600">
+                <Link scroll={false} href="/contact" className="main-btn  mt-4 fw-600">
                   CONSULT SOFTSTORM
                 </Link>
               </div>

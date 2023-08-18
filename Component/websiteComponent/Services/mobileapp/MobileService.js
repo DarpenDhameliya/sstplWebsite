@@ -11,7 +11,6 @@ const MobileService = ({images, serviceContents}) => {
   const states = useSelector(Servicestate);
 
   useEffect(() => {
-    document.title = "Mobile Application Developer | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2;

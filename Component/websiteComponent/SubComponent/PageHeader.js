@@ -14,7 +14,7 @@ const Header = ({title, breadcrumb}) => {
                   <ol className="breadcrumb">
                     {breadcrumb.map((value) => (
                       <li key={Math.random()} className="breadcrumb-item">
-                        <Link href={value.link}>{value.title}</Link>
+                        <Link scroll={false} href={value.link}>{value.title}</Link>
                       </li>
                     ))}
                   </ol>

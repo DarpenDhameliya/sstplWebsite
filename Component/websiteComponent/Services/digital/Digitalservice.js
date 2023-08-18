@@ -15,7 +15,6 @@ const Digitalservice = ({images , serviceContents}) => {
   var filterdata;
 
   useEffect(() => {
-    document.title = "Digital Marketing | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2;

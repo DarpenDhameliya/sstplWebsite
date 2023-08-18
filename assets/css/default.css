@@ -48,36 +48,11 @@ a {
 .mt-30 {
 	margin-top: 30px;
 }
-.mt-35 {
-	margin-top: 35px;
-}
 .mt-40 {
 	margin-top: 40px;
 }
-.mt-45 {
-	margin-top: 45px;
-}
-.mt-50 {
-	margin-top: 50px;
-}
-.mt-55 {
-	margin-top: 55px;
-}
-.mt-60 {
-	margin-top: 60px;
-}
-.mt-65 {
-	margin-top: 65px;
-}
-.mt-70 {
-	margin-top: 70px;
-}
-.mt-75 {
-	margin-top: 75px;
-}
-.mt-80 {
-	margin-top: 80px;
-}
+
+
 .mt-85 {
 	margin-top: 85px;
 }
@@ -928,6 +903,9 @@ a {
 }
 .black {
 	color: #222;
+}
+.themeblue {
+	color:#3c8dbc;
 }
 .grey {
 	background-color: #f8f9fab5 !important;

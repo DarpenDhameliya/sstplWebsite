@@ -47,6 +47,9 @@ export default function Footer(className) {
     });
   }, []);
 
+
+
+
   useEffect(() => {
     axioss
       .get("https://api.ipify.org/?format=json")
@@ -94,6 +97,9 @@ export default function Footer(className) {
       }
     }
 
+  });
+
+  useEffect(() => {
     if (iconstate.status === "loading") {
     } else if (iconstate.status === "succeeded") {
       setFields(iconstate.response.result[0].data);
@@ -104,7 +110,9 @@ export default function Footer(className) {
       dispatch(Iconstatus());
     } else {
     }
-  });
+
+  }, [ iconstate])
+  
 
   const handlecontectform = (e) => {
     e.preventDefault();
@@ -163,7 +171,7 @@ export default function Footer(className) {
         if (!phone) {
           error.phone = "Required !";
         } else {
-          error.phone = "";
+          error.phone = ""; 
           if (!number_verify) {
             error.num_verify = "Add Correct number";
           } else {

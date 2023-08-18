@@ -1,13 +1,16 @@
-"use client";
-
-import { ThemeProvider } from "@mui/styles";
 import React from "react";
-import { theme } from "../common/Theme";
+import Sidebar from "../common/sidebar/Sidebar";
+import { useRouter } from "next/router";
 
 const AdminLayout = ({ children }) => {
+  const router = useRouter();
+  const { pathname } = router;
+  const Layout = pathname.startsWith("/online-admin/dashboard");
+
   return (
     <>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        {Layout && <Sidebar />}
+        <div style={{width:"100%"}}>{children}</div>
     </>
   );
 };

@@ -84,7 +84,7 @@ export default function Technology() {
             <ul className="handleul_technology">
               {workdata.map((e, index) => {
                 return (
-                  <li className="handle_list" data-aos="zoom-in" data-aos-duration="1000" key={index}>
+                  <li className="handle_list" data-aos="zoom-in" data-aos-duration="1000" key={e.title}>
                     <div className="tech_icon">
                       <Image className="" src={e.image} alt="Apple" />
                     </div>

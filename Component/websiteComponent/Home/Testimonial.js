@@ -13,7 +13,7 @@ import aboutheader3 from "../../../assets/images/aboutus_header/glassdoor.webp";
 import aboutheader4 from "../../../assets/images/aboutus_header/goodfirms.webp";
 import aboutheader5 from "../../../assets/images/aboutus_header/upwork.webp";
 import Image from "next/image";
-import axios from "../../Axios";
+import axios, { api } from "../../Axios";
 
 const data = [
   {
@@ -65,12 +65,8 @@ export default function Testimonial(className) {
   const [fetcherr, setFetcherr] = useState("");
 
   const fetchHiredata = () => {
-    axios
-      .post("testimonial/testimonial_list", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+    api
+      .post("testimonial/testimonial_list")
       .then((result) => {
         let data = result.data.result.sort((a, b) => a.contentpositionview - b.contentpositionview);
         setWorkdata(data);

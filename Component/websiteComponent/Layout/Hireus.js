@@ -16,6 +16,7 @@ const Hireus = ({ value, action }) => {
   const [work, setWork] = useState("");
   const [error, setError] = useState([]);
   const [dberr, setDberr] = useState([]);
+  const [captchErr, setCaptchErr] = useState('')
   const [isVerified, setIsVerified] = useState(false);
   const [nameFocused, setNameFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
@@ -95,10 +96,11 @@ const Hireus = ({ value, action }) => {
     } else if (state.status === "failed") {
       notifyerr();
       setDbsubmit(false);
-
+      setCaptchErr(state.error.error)
       setDberr(state.error);
       setTimeout(() => {
-        setTimeout([]);
+        setDberr('');
+        setCaptchErr('')
       }, 2000);
       dispatch(Hireusslicestatus());
     } else {
@@ -311,6 +313,7 @@ const Hireus = ({ value, action }) => {
                 <div className="recaptcha-container">
                   <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_SITE_KEY} ref={recaptchaRef} onChange={handleVerify} theme="light" size="normal" />
                 </div>
+                {captchErr && <p className="handledberror mb-0">{captchErr}</p>}
                 {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                 <div className="cart-btn mt-3">
                   <button className="main_submit_btn" disabled={dbsubmit === true} style={{ width: "100%", marginTop: "0px" }} onClick={handlehiresubmit}>

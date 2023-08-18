@@ -42,7 +42,6 @@ const Testimonial = ({className , loding}) => {
       {image: redientt, title: "Looking at the technical knowledge and innovative ideas of Softstorm, everyone can say that the company will make great strides in the future.", owner: "Kishan Mangukiya", title1: "Trustee, The Radiant International School"},
     ];
     setWorkdata(data);
-    document.title = "Testimonial | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
   return (
     <>

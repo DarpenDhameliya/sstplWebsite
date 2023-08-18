@@ -116,7 +116,7 @@ const Sidepoosition = () => {
       }
 
       setBtnclick(true);
-      if (!file || !name || !email || !phone || !apply || name_verify === false || number_verify === false || email_verify === false ) {
+      if (!file || !name || !email || !phone || !apply || name_verify === false || number_verify === false || email_verify === false || !isVerified) {
         if (!file) {
           error.file = "File Required !";
         }
@@ -157,9 +157,9 @@ const Sidepoosition = () => {
             error.apply = "Required !!";
           }
         }
-        // if (!isVerified) {
-        //   error.captcha = "Required !";
-        // }
+        if (!isVerified) {
+          error.captcha = "Required !";
+        }
         setError({...error, [e.target.name]: e.target.value});
         setTimeout(() => {
           setError([]);

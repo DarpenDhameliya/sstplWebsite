@@ -1,228 +1,280 @@
-import React, {useEffect, useRef, useState, useCallback} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
-import axios from "axios";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
+import { ContactusSlice, Contactusstate, Contactusstatus } from "@/redux/slice/Contackus";
 
 const Contactus = () => {
-    const [lname, setLname] = useState("");
-    const [fname, setFname] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [textarea, setTextarea] = useState("");
-    const [nameFocused, setNameFocused] = useState(false);
-    const [emailFocused, setEmailFocused] = useState(false);
-    const [subFocused, setSubFocused] = useState(false);
-    const [phoneFocused, setPhoneFocused] = useState(false);
-    const [textFocused, setTextFocused] = useState(false);
-    const [dbError, setDbError] = useState([]);
-    const [error, setError] = useState([]);
-    const [dbsubmit, setDbsubmit] = useState(false);
-    const [captchres, setCaptchres] = useState("");
-    const [fields, setFields] = useState([]);
-    const [dataLength, setDataLength] = useState("");
-    const [recentYear, setRecentYear] = useState("");
-    const [isVerified, setIsVerified] = useState(false);
-    const [contactClick, setContactClick] = useState(false);
-    const [ipAddress, setIpAddress] = useState("");
-    const nameRef = useRef(null);
-    const recaptchaRef = useRef();
-  
-    useEffect(() => {
-      const d = new Date();
-      let year = d.getFullYear();
-      setRecentYear(year);
-  
-      document.title = "Contact-US | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
-    }, []);
-  
-    const notifycon = useCallback(() => {
-      toast.success("Contact Us Successfully..", {
-        autoClose: 1000,
-        closeOnClick: false,
-      });
-    }, []);
-  
-    const notifyerrcon = useCallback(() => {
-      toast.error("Internal Server ..", {
-        autoClose: 1000,
-        closeOnClick: false,
-      });
-    }, []);
-  
+  const [lname, setLname] = useState("");
+  const [fname, setFname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [textarea, setTextarea] = useState("");
+  const [nameFocused, setNameFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [subFocused, setSubFocused] = useState(false);
+  const [phoneFocused, setPhoneFocused] = useState(false);
+  const [textFocused, setTextFocused] = useState(false);
+  const [dbError, setDbError] = useState([]);
+  const [error, setError] = useState([]);
+  const [dbsubmit, setDbsubmit] = useState(false);
+  const [captchres, setCaptchres] = useState("");
+  const [fields, setFields] = useState([]);
+  const [dataLength, setDataLength] = useState("");
+  const [recentYear, setRecentYear] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
+  const [contactClick, setContactClick] = useState(false);
+  const [ipAddress, setIpAddress] = useState("");
+  const nameRef = useRef(null);
+  const recaptchaRef = useRef();
 
-  
-    const handlesendDATA = (e) => {
-      setContactClick(true);
-      if (dbsubmit === false) {
-        var email_verify;
-        var number_verify;
-        let name_verify;
-        const regex = /\b\w+\b/g;
-        const matches = fname.match(regex);
-        if (matches && matches.length >= 2) {
-          name_verify = true;
-        } else {
-          name_verify = false;
+  const dispatch = useDispatch();
+  const states = useSelector(Contactusstate);
+  const iconstate = useSelector(Iconstate);
+  useEffect(() => {
+    const d = new Date();
+    let year = d.getFullYear();
+    setRecentYear(year);
+
+  }, []);
+
+  const notifycon = useCallback(() => {
+    toast.success("Contact Us Successfully..", {
+      autoClose: 1000,
+      closeOnClick: false,
+    });
+  }, []);
+
+  const notifyerrcon = useCallback(() => {
+    toast.error("Internal Server ..", {
+      autoClose: 1000,
+      closeOnClick: false,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (iconstate.status === "loading") {
+    } else if (iconstate.status === "succeeded") {
+      setFields(iconstate.response.result[0].data);
+      setDataLength(iconstate.response.result[0].data.length);
+      dispatch(Iconstatus());
+    } else if (iconstate.status === "failed") {
+      notifyerrcon();
+      dispatch(Iconstatus());
+    } else {
+    }
+  });
+
+  useEffect(() => {
+    if (contactClick === true) {
+      if (states.status === "loading") {
+      } else if (states.status === "succeeded") {
+        notifycon();
+        setLname("");
+        setFname("");
+        setEmail("");
+        setPhone("");
+        setTextarea("");
+        setCaptchres("");
+        setDbsubmit(false);
+        if (recaptchaRef.current) {
+          recaptchaRef.current.reset();
         }
-        if (!/^\+?\d{0,3}\s?\d{6,16}$/.test(phone)) {
-          number_verify = false;
+        setDbError([]);
+        setError([]);
+        setIsVerified(false);
+        setContactClick(false);
+
+        dispatch(Contactusstatus());
+      } else if (states.status === "failed") {
+        notifyerrcon();
+        setDbError(states.error);
+        setDbsubmit(false);
+
+        setTimeout(() => {
+          setDbError([]);
+        }, 3000);
+        dispatch(Contactusstatus());
+      } else {
+      }
+    }
+  }, [states]);
+
+  const handlesendDATA = (e) => {
+    setContactClick(true);
+    if (dbsubmit === false) {
+      var email_verify;
+      var number_verify;
+      let name_verify;
+      const regex = /\b\w+\b/g;
+      const matches = fname.match(regex);
+      if (matches && matches.length >= 2) {
+        name_verify = true;
+      } else {
+        name_verify = false;
+      }
+      if (!/^\+?\d{0,3}\s?\d{6,16}$/.test(phone)) {
+        number_verify = false;
+      } else {
+        number_verify = true;
+      }
+
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+        email_verify = false;
+      } else {
+        email_verify = true;
+      }
+      if (!fname || !lname || !email || !phone || !textarea || number_verify === false || email_verify === false || name_verify === false || !isVerified) {
+        if (!fname) {
+          error.fname = "Required !!";
         } else {
-          number_verify = true;
-        }
-  
-        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
-          email_verify = false;
-        } else {
-          email_verify = true;
-        }
-        if (!fname || !lname || !email || !phone || !textarea || number_verify === false || email_verify === false || name_verify === false || !isVerified) {
-          if (!fname) {
-            error.fname = "Required !!";
+          error.fname = "";
+          if (name_verify === false) {
+            error.name_verify = "Minimum Two Word Required";
           } else {
-            error.fname = "";
-            if (name_verify === false) {
-              error.name_verify = "Minimum Two Word Required";
-            } else {
-              error.name_verify = "";
-            }
+            error.name_verify = "";
           }
-          if (!lname) {
+        }
+        if (!lname) {
+          error.lname = "Required !!";
+        } else {
+          if (lname.length < 4) {
             error.lname = "Required !!";
-          } else {
-            if (lname.length < 4) {
-              error.lname = "Required !!";
-            }
           }
-          if (!textarea) {
-            error.textarea = "Required !!";
-          } else {
-            if (textarea.length < 9) {
-              error.textarea = "Required !!";
-            }
-          }
-          if (!email) {
-            error.email = "Required !!";
-          } else {
-            error.email = "";
-            if (!email_verify) {
-              error.em_verify = "Add Correct email";
-            } else {
-              error.em_verify = "";
-            }
-          }
-          if (!phone) {
-            error.phone = "Required !!";
-          } else {
-            error.phone = "";
-            if (!number_verify) {
-              error.num_verify = "Add Correct number";
-            } else {
-              error.num_verify = "";
-            }
-          }
-          if (!isVerified) {
-            error.captcha = "Required !!";
-          } else {
-            error.captcha = "";
-          }
-  
-          setError({...error, [e.target.name]: e.target.value});
-          setTimeout(() => {
-            setError([]);
-          }, 3000);
-        } else {
-          const json1 = {fname, lname, email, phone, textarea};
-          const json2 = {ipAddress, captchres};
-          setDbsubmit(true);
-          dispatch(
-            ContactusSlice({
-              json1,
-              json2,
-            })
-          );
         }
-      }
-    };
+        if (!textarea) {
+          error.textarea = "Required !!";
+        } else {
+          if (textarea.length < 9) {
+            error.textarea = "Required !!";
+          }
+        }
+        if (!email) {
+          error.email = "Required !!";
+        } else {
+          error.email = "";
+          if (!email_verify) {
+            error.em_verify = "Add Correct email";
+          } else {
+            error.em_verify = "";
+          }
+        }
+        if (!phone) {
+          error.phone = "Required !!";
+        } else {
+          error.phone = "";
+          if (!number_verify) {
+            error.num_verify = "Add Correct number";
+          } else {
+            error.num_verify = "";
+          }
+        }
+        if (!isVerified) {
+          error.captcha = "Required !!";
+        } else {
+          error.captcha = "";
+        }
 
-  
-  
-    const handleVerify = (response) => {
-      setCaptchres(response);
-      setIsVerified(true);
-    };
-  
-    const handlefirstname = (e) => {
-      let name = e.target.value;
-      setFname(name);
-      if (name.length > 5) {
-        error.fname = "";
+        setError({ ...error, [e.target.name]: e.target.value });
+        setTimeout(() => {
+          setError([]);
+        }, 3000);
+      } else {
+        const json1 = { fname, lname, email, phone, textarea };
+        const json2 = { ipAddress, captchres };
+        setDbsubmit(true);
+        dispatch(
+          ContactusSlice({
+            json1,
+            json2,
+          })
+        );
       }
-    };
-    const handlefnameBlur = () => {
-      setNameFocused(false);
-      if (fname.length < 4) {
-        error.fname = "Required !!";
-      }
-    };
-  
-    const handleemail = (e) => {
-      let data = e.target.value;
-      setEmail(e.target.value);
-      if (data) {
-        error.email = "";
-      }
-    };
-    const handleemailBlur = () => {
-      setEmailFocused(false);
-      if (!email) {
-        error.email = "Required !!";
-      }
-    };
-  
-    const handlephone = (e) => {
-      let data = e.target.value;
-      setPhone(e.target.value);
-      if (data.length > 9) {
-        error.phone = "";
-      }
-    };
-    const handlephoneBlur = () => {
-      setPhoneFocused(false);
-      if (phone.length < 10) {
-        error.phone = "Required !!";
-      }
-    };
-  
-    const handlesubject = (e) => {
-      let data = e.target.value;
-      setLname(e.target.value);
-      if (data.length > 4) {
-        error.lname = "";
-      }
-    };
-    const handlesubjectBlur = () => {
-      setSubFocused(false);
-      if (lname.length < 4) {
-        error.lname = "Required !!";
-      }
-    };
-  
-    const handletextarea = (e) => {
-      let data = e.target.value;
-      setTextarea(e.target.value);
-      if (data.length > 10) {
-        error.textarea = "";
-      }
-    };
-    const handletextBlur = () => {
-      setTextFocused(false);
-      if (textarea.length < 9) {
-        error.textarea = "Required !!";
-      }
-    };
+    }
+  };
+
+  const handleVerify = (response) => {
+    setCaptchres(response);
+    setIsVerified(true);
+  };
+
+  const handlefirstname = (e) => {
+    let name = e.target.value;
+    setFname(name);
+    if (name.length > 5) {
+      error.fname = "";
+    }
+  };
+  const handlefnameBlur = () => {
+    setNameFocused(false);
+    if (fname.length < 4) {
+      error.fname = "Required !!";
+    }
+  };
+
+  const handleemail = (e) => {
+    let data = e.target.value;
+    setEmail(e.target.value);
+    if (data) {
+      error.email = "";
+    }
+  };
+  const handleemailBlur = () => {
+    setEmailFocused(false);
+    if (!email) {
+      error.email = "Required !!";
+    }
+  };
+
+  const handlephone = (e) => {
+    let data = e.target.value;
+    setPhone(e.target.value);
+    if (data.length > 9) {
+      error.phone = "";
+    }
+  };
+  const handlephoneBlur = () => {
+    setPhoneFocused(false);
+    if (phone.length < 10) {
+      error.phone = "Required !!";
+    }
+  };
+
+  const handlesubject = (e) => {
+    let data = e.target.value;
+    setLname(e.target.value);
+    if (data.length > 4) {
+      error.lname = "";
+    }
+  };
+  const handlesubjectBlur = () => {
+    setSubFocused(false);
+    if (lname.length < 4) {
+      error.lname = "Required !!";
+    }
+  };
+
+  const handletextarea = (e) => {
+    let data = e.target.value;
+    setTextarea(e.target.value);
+    if (data.length > 10) {
+      error.textarea = "";
+    }
+  };
+  const handletextBlur = () => {
+    setTextFocused(false);
+    if (textarea.length < 9) {
+      error.textarea = "Required !!";
+    }
+  };
   return (
     <>
-    <section className=" pt-60 pb-60" id="service">
+      <ToastContainer position="top-right" closeOnClick={false} style={{ marginTop: "55px" }} />
+
+      <section className=" pt-60 pb-60" id="service">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-12 col-md-11">
@@ -230,16 +282,16 @@ const Contactus = () => {
               <div className="row justify-content-center pb-50">
                 <div className="col-lg-4 col-md-6 col-sm-6">
                   <div className="sstpl_contact-card r-bg-c mt-40 ">
-                    <div className="sstpl_contact-card-img shadows" style={{border: "2px solid #005889"}}>
+                    <div className="sstpl_contact-card-img shadows" style={{ border: "2px solid #005889" }}>
                       {/* <img src={e.image} alt="services" />{" "} */}
-                      <i className="fa fa-location-dot contectus_icon" style={{fontSize: "40px", color: "#4f4f4f"}} aria-hidden="true"></i>
+                      <i className="fa fa-location-dot contectus_icon" style={{ fontSize: "40px", color: "#4f4f4f" }} aria-hidden="true"></i>
                     </div>
                     <div className="ree-card-content mt40 d-flex align-items-center flex-column">
-                      <h4 className=" mb-2" style={{color: "#005889"}}>
+                      <h4 className=" mb-2" style={{ color: "#005889" }}>
                         Address
                       </h4>
                       <a href="https://www.google.com/maps/dir/21.2369408,72.8629248/softstorm/@21.2356059,72.8587446,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3be04f50264611d1:0x76746ef930af1752!2m2!1d72.8590564!2d21.2349749?entry=ttu" target="_blank" rel="noreferrer" className="pl-0 d-flex ">
-                        <div className="ml-1" style={{color: "#005889"}}>
+                        <div className="ml-1" style={{ color: "#005889" }}>
                           305-306, Amby Valley Arcade, Opp. Santosa Height, Manisha Garnala. Uttran, Surat, Gujarat.
                         </div>
                       </a>
@@ -249,21 +301,21 @@ const Contactus = () => {
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-6">
                   <div className="sstpl_contact-card1 r-bg-c mt-40 ">
-                    <div className="sstpl_contact-card-img shadows" style={{border: "2px solid #006308"}}>
+                    <div className="sstpl_contact-card-img shadows" style={{ border: "2px solid #006308" }}>
                       {/* <img src={e.image} alt="services" />{" "} */}
-                      <i className="fa fa-phone contectus_icon" style={{fontSize: "40px", color: "#4f4f4f"}} aria-hidden="true"></i>
+                      <i className="fa fa-phone contectus_icon" style={{ fontSize: "40px", color: "#4f4f4f" }} aria-hidden="true"></i>
                     </div>
                     <div className="ree-card-content mt40 d-flex align-items-center flex-column">
-                      <h4 className="mb-2" style={{color: "#006308"}}>
+                      <h4 className="mb-2" style={{ color: "#006308" }}>
                         Phone Number
                       </h4>
                       <a href="tel:+91261-3560756" className="pl-0 pb-1 d-flex align-items-center">
-                        <div className="ml-1" style={{color: "#006308"}}>
+                        <div className="ml-1" style={{ color: "#006308" }}>
                           HR: +91261-3560756
                         </div>
                       </a>
                       <a href="tel:+919099919947" className="pl-0 pb-1 d-flex align-items-center">
-                        <div className="ml-1" style={{color: "#006308"}}>
+                        <div className="ml-1" style={{ color: "#006308" }}>
                           Contact: +91 90999 19947
                         </div>
                       </a>
@@ -272,21 +324,21 @@ const Contactus = () => {
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-6">
                   <div className="sstpl_contact-card2 r-bg-c mt-40 ">
-                    <div className="sstpl_contact-card-img shadows" style={{border: "2px solid #a10404"}}>
+                    <div className="sstpl_contact-card-img shadows" style={{ border: "2px solid #a10404" }}>
                       {/* <img src={e.image} alt="services" />{" "} */}
-                      <i className="fa fa-envelope contectus_icon" style={{fontSize: "40px", color: "#4f4f4f"}} aria-hidden="true"></i>
+                      <i className="fa fa-envelope contectus_icon" style={{ fontSize: "40px", color: "#4f4f4f" }} aria-hidden="true"></i>
                     </div>
                     <div className="ree-card-content mt40 d-flex align-items-center flex-column">
-                      <h4 className=" mb-2" style={{color: "#a10404"}}>
+                      <h4 className=" mb-2" style={{ color: "#a10404" }}>
                         Email Address
                       </h4>
                       <a href="mailto:contact@softstorm.in" rel="noopener noreferrer" className="pl-0 d-flex align-items-center">
-                        <div className="ml-1" style={{color: "#a10404"}}>
+                        <div className="ml-1" style={{ color: "#a10404" }}>
                           contact@softstorm.in
                         </div>
                       </a>
                       <a href="mailto:hr.softstorm@gmail.com" rel="noopener noreferrer" className="pl-0 d-flex align-items-center">
-                        <div className="ml-1" style={{color: "#a10404"}}>
+                        <div className="ml-1" style={{ color: "#a10404" }}>
                           hr.softstorm@gmail.com
                         </div>
                       </a>
@@ -335,7 +387,7 @@ const Contactus = () => {
                       </div>
 
                       <div className="col-md-12">
-                        <textarea name="message" className={`${error.textarea ? "handleinput_error" : ""}`} onBlur={handletextBlur} onFocus={() => setTextFocused(true)} placeholder="How can we help?" style={{resize: "none"}} rows="5" value={textarea} onChange={handletextarea} />
+                        <textarea name="message" className={`${error.textarea ? "handleinput_error" : ""}`} onBlur={handletextBlur} onFocus={() => setTextFocused(true)} placeholder="How can we help?" style={{ resize: "none" }} rows="5" value={textarea} onChange={handletextarea} />
                         {dbError.textarea && <p className={`handledberror mb-0 ${dbError.textarea ? "error_padding_add" : ""}`}>{dbError.textarea}</p>}
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-12 ">
@@ -362,9 +414,8 @@ const Contactus = () => {
       <div className="bisylms-map">
         <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.2511780843033!2d72.83197811493592!3d21.2218860858941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04f50264611d1%3A0x76746ef930af1752!2sSoftStorm%20Technosys%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1585860623345!5m2!1sen!2sin"></iframe>
       </div>
-
     </>
-  )
-}
+  );
+};
 
-export default Contactus
+export default Contactus;

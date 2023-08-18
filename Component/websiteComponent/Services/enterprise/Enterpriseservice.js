@@ -13,7 +13,6 @@ const Enterpriseservice = ({images, serviceContents}) => {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    document.title = "Enterprice Services | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2;

@@ -32,8 +32,8 @@ const Portfoliyo = ({loding , data}) => {
   useEffect(() => {
     // fetchHiredata();
     
-    console.log(data);
     if(data.length > 0){
+      data = data.sort(() => Math.random() - 0.5);
       setportfolioList(data)
       loding();
     }
@@ -110,9 +110,8 @@ const Portfoliyo = ({loding , data}) => {
                 <div className={`tab-pane fade show ${tab === "all" ? "show active" : ""}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row">
                     {portfolioList.map((e, index) => {
-                      if (e.contentview) {
                         return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                      }
+                      
                     })}
                   </div>
                 </div>
@@ -121,14 +120,13 @@ const Portfoliyo = ({loding , data}) => {
                   <div className="row">
                     {portfolioList.length > 0
                       ? portfolioList.map((e, index) => {
-                          if (e.contentview) {
                             let data = e.category.split(",");
                             for (let i = 0; i < data.length; i++) {
                               if (data[i] === "desktopsoftware") {
                                 return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
                               }
                             }
-                          }
+                          
                         })
                       : workdata.map((e, index) => {
                           return e.type.map((ea) => {
@@ -143,14 +141,13 @@ const Portfoliyo = ({loding , data}) => {
                   <div className="row">
                     {portfolioList.length > 0
                       ? portfolioList.map((e, index) => {
-                          if (e.contentview) {
                             let data = e.category.split(",");
                             for (let i = 0; i < data.length; i++) {
                               if (data[i] === "mobileapplication") {
                                 return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
                               }
                             }
-                          }
+                          
                         })
                       : workdata.map((e, index) => {
                           return e.type.map((ea) => {
@@ -165,14 +162,13 @@ const Portfoliyo = ({loding , data}) => {
                   <div className="row">
                     {portfolioList.length > 0
                       ? portfolioList.map((e, index) => {
-                          if (e.contentview) {
                             let data = e.category.split(",");
                             for (let i = 0; i < data.length; i++) {
                               if (data[i] === "webapplication") {
                                 return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
                               }
                             }
-                          }
+                          
                         })
                       : workdata.map((e) => {
                           return e.type.map((ea, index) => {

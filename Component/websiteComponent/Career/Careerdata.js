@@ -192,7 +192,6 @@ const Careerdata = ({ loding }) => {
 
   useEffect(() => {
     fetchHiredata();
-    document.title = "Career | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   }, []);
 
   const dispatch = useDispatch();

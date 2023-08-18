@@ -12,52 +12,59 @@ import counterIconOne from "../../../assets/images/icon/counter-icon-1.svg";
 import counterIconTwo from "../../../assets/images/icon/counter-icon-2.svg";
 import counterIconFour from "../../../assets/images/icon/counter-icon-4.svg";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { IconSlice } from "@/redux/slice/IconSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { IconSlice, Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
 import StickyMenu from "../SubComponent/lib/StickyMenu";
 import axios from "../../Axios";
+import { Logostate, LogoSlice, Logostatus } from "@/redux/slice/logoSlice";
 
 const Header = ({ action, cartToggle }) => {
-  const [selectedLogo, setSelectedLogo] = useState('')
+  const [selectedLogo, setSelectedLogo] = useState("");
+  const [fields, setFields] = useState([]);
+
   const dispatch = useDispatch();
+  const states = useSelector(Iconstate);
+  const logostates = useSelector(Logostate);
 
   function getCurrentFormattedDate() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Add 1 to month because it's 0-indexed
-    const day = String(currentDate.getDate()).padStart(2, '0');
-  
-    // return `${year}-${month}-${day}`;
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Add 1 to month because it's 0-indexed
+    const day = String(currentDate.getDate()).padStart(2, "0");
     return `${month}-${day}`;
   }
   useEffect(() => {
+    dispatch(IconSlice());
     StickyMenu();
-  });
-
-  const functionapi = () => {
-    axios
-      .post("logo/logo_list")
-      .then((result) => {
-        let data = result.data.result;
-        const newFormattedDate = getCurrentFormattedDate();
-        let finddatedata = data.find((e) => e.date.slice(5, 10) === newFormattedDate);
-        if (finddatedata === undefined) {
-          setSelectedLogo('')
-        } else {
-          setSelectedLogo(finddatedata.image);
-        }
-      })
-      .catch((err) => {
-        setTimeout(() => {
-        }, 3000);
-      });
-  };
-  console.log(selectedLogo)
+    dispatch(LogoSlice());
+  }, []);
 
   useEffect(() => {
-    functionapi();
-    dispatch(IconSlice());
-  }, []);
+    if (states.status === "loading") {
+    } else if (states.status === "succeeded") {
+      setFields(states.response.result[0].data);
+      dispatch(Iconstatus());
+    } else if (states.status === "failed") {
+      dispatch(Iconstatus());
+    } else {
+    }
+
+    if (logostates.status === "loading") {
+    } else if (logostates.status === "succeeded") {
+      let data = logostates.response.result;
+      const newFormattedDate = getCurrentFormattedDate();
+      let finddatedata = data.find((e) => e.date.slice(5, 10) === newFormattedDate);
+      if (finddatedata === undefined) {
+        setSelectedLogo("");
+      } else {
+        setSelectedLogo(finddatedata.image);
+      }
+      dispatch(Logostatus());
+    } else if (logostates.status === "failed") {
+      dispatch(Logostatus());
+    } else {
+    }
+  }, [states, logostates]);
 
   return (
     <>
@@ -65,24 +72,36 @@ const Header = ({ action, cartToggle }) => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-6 col-sm-12 col-6">
-              <Link rel="noreferrer" className="ml-15" href={{ pathname: "https://www.facebook.com/softstorm.in" }} target="_blank">
-                <i className="fab fa-facebook-f" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://twitter.com/softstorm_in" }}>
-                <i className="fab fa-twitter" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://www.linkedin.com/company/softstorm-in" }}>
-                <i className="fab fa-linkedin-in" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://www.instagram.com/softstorm.in" }}>
-                <i className="fab fa-instagram" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://wa.me/912613560756" }}>
-                <i className="fab fa-whatsapp" />
-              </Link>
-              <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "skype:softstorminfosys?chat" }}>
-                <i className="fab fa-skype" />
-              </Link>
+              {fields.length > 0 ? (
+                fields.map((e) => {
+                  return (
+                    <Link key={e.icon} rel="noreferrer" className="ml-15" href={{ pathname: e.link }} target="_blank">
+                      <i className={`fab ${e.icon}`} />
+                    </Link>
+                  );
+                })
+              ) : (
+                <>
+                  <Link rel="noreferrer" className="ml-15" href={{ pathname: "https://www.facebook.com/softstorm.in" }} target="_blank">
+                    <i className="fab fa-facebook-f" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://twitter.com/softstorm_in" }}>
+                    <i className="fab fa-twitter" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://www.linkedin.com/company/softstorm-in" }}>
+                    <i className="fab fa-linkedin-in" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://www.instagram.com/softstorm.in" }}>
+                    <i className="fab fa-instagram" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://wa.me/912613560756" }}>
+                    <i className="fab fa-whatsapp" />
+                  </Link>
+                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "skype:softstorminfosys?chat" }}>
+                    <i className="fab fa-skype" />
+                  </Link>
+                </>
+              )}
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 order-3 order-sm-2 handlerightheader">
               <a href="mailto:contact@softstorm.in" rel="noopener noreferrer" className="pl-0 d-flex align-items-center" style={{ color: "#f1f1f1" }}>
@@ -106,19 +125,19 @@ const Header = ({ action, cartToggle }) => {
         <div className="container">
           <div className="menu-header ">
             <div className="dskt-logo">
-              <Link className="nav-brand" href="/">
-                <Image src={selectedLogo ? selectedLogo : logo} alt="Logo" layout="responsive" className="max_width_web" width={250} height={100}/>
+              <Link scroll={false} className="nav-brand" href="/">
+                <Image src={selectedLogo ? selectedLogo : logo} alt="Logo" layout="responsive" className="max_width_web" width={250} height={100} />
               </Link>{" "}
             </div>
             <div className="softstrom_header  handlenavigation" role="navigation">
               <ul className="nav-list">
                 <li className={`megamenu `}>
-                  <Link href="/" className={`menu-links`}>
+                  <Link scroll={false} href="/" className={`menu-links`}>
                     Home
                   </Link>
                 </li>
                 <li className="megamenu">
-                  <Link href="/about-us" className={`menu-links `}>
+                  <Link scroll={false} href="/about-us" className={`menu-links `}>
                     About Us
                   </Link>
                   <div className="menu-dropdown">
@@ -132,7 +151,7 @@ const Header = ({ action, cartToggle }) => {
                                   <div>
                                     <ul className="menu-li-link">
                                       <li className="mb-2">
-                                        <Link href="/about-us" className="handlesub-menu p-2">
+                                        <Link scroll={false} href="/about-us" className="handlesub-menu p-2">
                                           <div className="aboutheadre_left">
                                             <Image src={bullet1} alt="symbol" className="header_icno" />
                                           </div>{" "}
@@ -140,7 +159,7 @@ const Header = ({ action, cartToggle }) => {
                                         </Link>
                                       </li>
                                       <li className="mb-2">
-                                        <Link href="/testimonial" className="handlesub-menu p-2">
+                                        <Link scroll={false} href="/testimonial" className="handlesub-menu p-2">
                                           <div className="aboutheadre_left">
                                             <Image src={bullet1} alt="symbol" className="header_icno" />
                                           </div>{" "}
@@ -148,7 +167,7 @@ const Header = ({ action, cartToggle }) => {
                                         </Link>
                                       </li>
                                       <li className="mb-2">
-                                        <Link href="/" className="handlesub-menu p-2">
+                                        <Link scroll={false} href="/" className="handlesub-menu p-2">
                                           <div className="aboutheadre_left">
                                             <Image src={bullet1} alt="symbol" className="header_icno" />
                                           </div>{" "}
@@ -294,7 +313,7 @@ const Header = ({ action, cartToggle }) => {
                   </div>
                 </li>
                 <li className="megamenu">
-                  <Link href="/our-service" className={`menu-links `}>
+                  <Link scroll={false} href="/our-service" className={`menu-links `}>
                     Our Service
                   </Link>
                   <div className="menu-dropdown">
@@ -312,7 +331,7 @@ const Header = ({ action, cartToggle }) => {
                                 <h6 className="mb-2 pl-1"> Web App</h6>
                                 <ul className="menu-li-link ">
                                   <li className="mb-1">
-                                    <Link href="/web-application-developement#nodejs" className=" p-1">
+                                    <Link scroll={false} href="/web-application-developement#nodejs" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -320,7 +339,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web-application-developement#php" className=" p-1">
+                                    <Link scroll={false} href="/web-application-developement#php" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -328,7 +347,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web-application-developement#laravel" className=" p-1">
+                                    <Link scroll={false} href="/web-application-developement#laravel" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -336,7 +355,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web-application-developement#codeigniter" className=" p-1">
+                                    <Link scroll={false} href="/web-application-developement#codeigniter" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -344,7 +363,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web-application-developement#python" className=" p-1">
+                                    <Link scroll={false} href="/web-application-developement#python" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -357,7 +376,7 @@ const Header = ({ action, cartToggle }) => {
                                 <h6 className="mb-2 pl-1"> Desktop & Embeded</h6>
                                 <ul className="menu-li-link ">
                                   <li className="mb-1">
-                                    <Link href="/desktop-software-developement#c" className=" p-1">
+                                    <Link scroll={false} href="/desktop-software-developement#c" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -365,7 +384,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/desktop-software-developement#c++" className=" p-1">
+                                    <Link scroll={false} href="/desktop-software-developement#c++" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -373,7 +392,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/desktop-software-developement#mashinlerning" className=" p-1">
+                                    <Link scroll={false} href="/desktop-software-developement#mashinlerning" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -381,7 +400,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/desktop-software-developement#controller" className=" p-1">
+                                    <Link scroll={false} href="/desktop-software-developement#controller" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -389,7 +408,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/desktop-software-developement#axistravelling" className=" p-1">
+                                    <Link scroll={false} href="/desktop-software-developement#axistravelling" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -397,7 +416,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/desktop-software-developement#lasersource" className=" p-1">
+                                    <Link scroll={false} href="/desktop-software-developement#lasersource" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -410,7 +429,7 @@ const Header = ({ action, cartToggle }) => {
                                 <h6 className="mb-2 pl-1"> Web & Graphic</h6>
                                 <ul className="menu-li-link " style={{ marginRight: "12px" }}>
                                   <li className="mb-1">
-                                    <Link href="/web_graphic-designing#webdesign" className=" p-1">
+                                    <Link scroll={false} href="/web_graphic-designing#webdesign" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -418,7 +437,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web_graphic-designing#uiux" className=" p-1">
+                                    <Link scroll={false} href="/web_graphic-designing#uiux" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -427,7 +446,7 @@ const Header = ({ action, cartToggle }) => {
                                   </li>
 
                                   <li className="mb-1">
-                                    <Link href="/web_graphic-designing#reactjs" className=" p-1">
+                                    <Link scroll={false} href="/web_graphic-designing#reactjs" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -435,7 +454,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web_graphic-designing#viewjs" className=" p-1">
+                                    <Link scroll={false} href="/web_graphic-designing#viewjs" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -443,7 +462,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web_graphic-designing#logo" className=" p-1">
+                                    <Link scroll={false} href="/web_graphic-designing#logo" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -451,7 +470,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/web_graphic-designing#brochur" className=" p-1">
+                                    <Link scroll={false} href="/web_graphic-designing#brochur" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -466,7 +485,7 @@ const Header = ({ action, cartToggle }) => {
                                 <h6 className="mb-2 pl-1"> Mobile App</h6>
                                 <ul className="menu-li-link ">
                                   <li className="mb-1">
-                                    <Link href="/mobile-application-developement#flutter" className=" p-1">
+                                    <Link scroll={false} href="/mobile-application-developement#flutter" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" style={{ width: "25px" }} />
                                       </div>{" "}
@@ -474,7 +493,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/mobile-application-developement#android" className=" p-1">
+                                    <Link scroll={false} href="/mobile-application-developement#android" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -482,7 +501,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/mobile-application-developement#ios" className=" p-1">
+                                    <Link scroll={false} href="/mobile-application-developement#ios" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -496,7 +515,7 @@ const Header = ({ action, cartToggle }) => {
                                 <ul className="menu-li-link ">
                                   <li className="mb-1">
                                     {" "}
-                                    <Link href="/digital-marketing#seo" className=" p-1">
+                                    <Link scroll={false} href="/digital-marketing#seo" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -506,7 +525,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/digital-marketing#smm" className=" p-1">
+                                    <Link scroll={false} href="/digital-marketing#smm" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -514,7 +533,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/digital-marketing#political" className=" p-1">
+                                    <Link scroll={false} href="/digital-marketing#political" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -522,7 +541,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/digital-marketing#mobileapp" className=" p-1">
+                                    <Link scroll={false} href="/digital-marketing#mobileapp" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -535,7 +554,7 @@ const Header = ({ action, cartToggle }) => {
                                 <h6 className="mb-2 pl-1"> Enterprise Services</h6>
                                 <ul className="menu-li-link " style={{ marginRight: "12px" }}>
                                   <li className="mb-1">
-                                    <Link href="/enterprise-services#erp" className=" p-1">
+                                    <Link scroll={false} href="/enterprise-services#erp" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -543,7 +562,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/enterprise-services#crm" className=" p-1">
+                                    <Link scroll={false} href="/enterprise-services#crm" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -551,7 +570,7 @@ const Header = ({ action, cartToggle }) => {
                                     </Link>
                                   </li>
                                   <li className="mb-1">
-                                    <Link href="/enterprise-services#accounting" className=" p-1">
+                                    <Link scroll={false} href="/enterprise-services#accounting" className=" p-1">
                                       <div>
                                         <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
                                       </div>{" "}
@@ -570,17 +589,17 @@ const Header = ({ action, cartToggle }) => {
                   </div>
                 </li>
                 <li className="megamenu">
-                  <Link href="/our-work" className={`menu-links `}>
+                  <Link scroll={false} href="/our-work" className={`menu-links `}>
                     Our Work
                   </Link>
                 </li>
                 <li className="megamenu">
-                  <Link href="/career" className={`menu-links `}>
+                  <Link scroll={false} href="/career" className={`menu-links `}>
                     Career
                   </Link>
                 </li>
                 <li className="megamenu">
-                  <Link href="/contact-us" className={`menu-links `}>
+                  <Link scroll={false} href="/contact-us" className={`menu-links `}>
                     Contact Us
                   </Link>
                 </li>

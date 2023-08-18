@@ -1,7 +1,7 @@
 import Seo from "@/Component/Seo";
 import Loader from "@/Component/loader";
-import axios from "../Component/Axios";
 import React, { Suspense, lazy } from "react";
+import { Metaapicall } from "@/redux/Metaapicall";
 const IndexAbout = lazy(() => import("@/Component/websiteComponent/About/IndexAbout"));
 
 const aboutus = ({initialPortfolioList}) => {
@@ -20,21 +20,11 @@ let data = initialPortfolioList.find((e) => e.url === '/about-us')
 export default aboutus;
 
 export const getServerSideProps = async () => {
-  try {
-    const response = await axios.get("meta/meta_list");
-    const initialPortfolioList = response.data.result;
+  const initialPortfolioList = await Metaapicall();
 
-    return {
-      props: {
-        initialPortfolioList,
-      },
-    };
-  } catch (error) {
-    console.error("Error fetching initial portfolio data:", error);
-    return {
-      props: {
-        initialPortfolioList: error,
-      },
-    };
-  }
+  return {
+    props: {
+      initialPortfolioList,
+    },
+  };
 };

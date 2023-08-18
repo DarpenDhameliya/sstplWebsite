@@ -50,13 +50,13 @@ function Drawer({drawer, action, cartToggle}) {
                 <div id="menu" className="text-left ">
                   <ul className="offcanvas_main_menu">
                     <li onClick={(e) => handler(e, "home", size)} id="home" className="menu-item-has-children active">
-                      <Link href="/">Home</Link>
+                      <Link scroll={false} href="/">Home</Link>
                     </li>
                     <li onClick={(e) => handler(e, "about", size)} id="about" className="menu-item-has-children active">
                       <span className="menu-expand">
                         <i className="fa fa-angle-down"></i>
                       </span>
-                      <Link href="#">ABOUT US</Link>
+                      <Link scroll={false} href="#">ABOUT US</Link>
                       <ul
                         className="sub-menu"
                         style={{
@@ -64,30 +64,30 @@ function Drawer({drawer, action, cartToggle}) {
                         }}
                       >
                         <li onClick={(e) => handler(e, "about-us", size)} id="about-us">
-                          <Link href="/about-us">About SSTPL</Link>
+                          <Link scroll={false} href="/about-us">About SSTPL</Link>
                         </li>
                         <li onClick={(e) => handler(e, "testimoial", size)} id="testimoial">
-                          <Link href="/testimonial">Testimonial</Link>
+                          <Link scroll={false} href="/testimonial">Testimonial</Link>
                         </li>
                         <li onClick={(e) => handler(e, "value_home", size)} id="value_home">
-                          <Link href="/">Blog</Link>
+                          <Link scroll={false} href="/">Blog</Link>
                         </li>
                         <li onClick={(e) => handler(e, "value_home_img", size)} id="value_home">
-                          <Link href="#">Life@SSTPL</Link>
+                          <Link scroll={false} href="#">Life@SSTPL</Link>
                         </li>
                       </ul>
                     </li>
                     <li onClick={(e) => handler(e, "ourservice", size)} id="ourservice" className="menu-item-has-children active">
-                      <Link href="/our-service">Our Service</Link>
+                      <Link scroll={false} href="/our-service">Our Service</Link>
                     </li>
                     <li onClick={(e) => handler(e, "OurWork", size)} id="OurWork" className="menu-item-has-children active">
-                      <Link href="/our-work">OUR WORK</Link>
+                      <Link scroll={false} href="/our-work">OUR WORK</Link>
                     </li>
                     <li onClick={(e) => handler(e, "careers", size)} id="home" className="menu-item-has-children active">
-                      <Link href="/career">CAREERS</Link>
+                      <Link scroll={false} href="/career">CAREERS</Link>
                     </li>
                     <li onClick={(e) => handler(e, "contact-us", size)} id="contactus" className="menu-item-has-children active">
-                      <Link href="/contact-us">CONTACT US</Link>
+                      <Link scroll={false} href="/contact-us">CONTACT US</Link>
                     </li>
                   </ul>
                 </div>
@@ -99,32 +99,32 @@ function Drawer({drawer, action, cartToggle}) {
                 <div className="offcanvas-social">
                   <ul className="text-center">
                     <li>
-                      <Link target="_blank" href="https://www.facebook.com/softstorm.in" rel="noopener noreferrer">
+                      <Link scroll={false} target="_blank" href="https://www.facebook.com/softstorm.in" rel="noopener noreferrer">
                         <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f "}} />
                       </Link>
                     </li>
                     <li>
-                      <Link target="_blank" href="https://twitter.com/softstorm_in" rel="noopener noreferrer">
+                      <Link scroll={false} target="_blank" href="https://twitter.com/softstorm_in" rel="noopener noreferrer">
                         <i className="fab fa-twitter hoverefftwi" style={{color: "#4f4f4f "}} />
                       </Link>
                     </li>
                     <li>
-                      <Link target="_blank" href="https://www.linkedin.com/company/softstorm-in" rel="noopener noreferrer">
+                      <Link scroll={false} target="_blank" href="https://www.linkedin.com/company/softstorm-in" rel="noopener noreferrer">
                         <i className="fab fa-linkedin-in hoverefflin" style={{color: "#4f4f4f "}} />
                       </Link>
                     </li>
                     <li>
-                      <Link target="_blank" href="https://www.instagram.com/softstorm.in" rel="noopener noreferrer">
+                      <Link scroll={false} target="_blank" href="https://www.instagram.com/softstorm.in" rel="noopener noreferrer">
                         <i className="fab fa-instagram hovereffins" style={{color: "#4f4f4f "}} />
                       </Link>
                     </li>
                     <li>
-                      <Link target="_blank" href="https://wa.me/912613560756" rel="noopener noreferrer">
+                      <Link scroll={false} target="_blank" href="https://wa.me/912613560756" rel="noopener noreferrer">
                         <i className="fab fa-whatsapp hovereffwat" style={{color: "#4f4f4f "}} />
                       </Link>
                     </li>
                     <li>
-                      <Link target="_blank" href="https://www.softstorm.in/skype:softstorminfosys?chat" rel="noopener noreferrer">
+                      <Link scroll={false} target="_blank" href="https://www.softstorm.in/skype:softstorminfosys?chat" rel="noopener noreferrer">
                         <i className="fab fa-skype hovereffsky" style={{color: "#4f4f4f "}} />
                       </Link>
                     </li>

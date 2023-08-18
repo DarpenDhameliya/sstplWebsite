@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import sponserShape from "../../../assets/images/icon/SSTPL-500.webp";
 import Image from "next/image";
 
 const Temsandconsition = ({ className, content }) => {
-  useEffect(() => {
-    document.title = "Tems & Condition | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
-  }, []);
   const adjustedHtmlContent = content.replace(/<img src="\/static\/media\//g, '<Image src="/images/');
 
 

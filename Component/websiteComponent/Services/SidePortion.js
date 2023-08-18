@@ -221,37 +221,37 @@ const SidePortion = () => {
           <h3 className="widget-title">OUR SERVICES</h3>
           <ul>
             <li>
-              <Link href="/web-application-developement" className="handlesideportion">
+              <Link scroll={false} href="/web-application-developement" className="handlesideportion">
                 <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
                 Web Application Development
               </Link>
             </li>
             <li>
-              <Link href="/mobile-application-developement" className="handlesideportion">
+              <Link scroll={false} href="/mobile-application-developement" className="handlesideportion">
                 <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
                 Mobile Application Development
               </Link>
             </li>
             <li>
-              <Link href="/desktop-software-developement" className="handlesideportion">
+              <Link scroll={false} href="/desktop-software-developement" className="handlesideportion">
                 <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
                 Desktop Software Development
               </Link>
             </li>
             <li>
-              <Link href="/digital-marketing" className="handlesideportion">
+              <Link scroll={false} href="/digital-marketing" className="handlesideportion">
                 <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
                 Digital Marketing
               </Link>
             </li>
             <li>
-              <Link href="/web_graphic-designing" className="handlesideportion">
+              <Link scroll={false} href="/web_graphic-designing" className="handlesideportion">
                 <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
                 Web & Graphic Designing
               </Link>
             </li>
             <li>
-              <Link href="/enterprise-services" className="handlesideportion">
+              <Link scroll={false} href="/enterprise-services" className="handlesideportion">
                 <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
                 Enterprise Services
               </Link>

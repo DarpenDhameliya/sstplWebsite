@@ -6,11 +6,10 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-// import { useHistory} from "react-router-dom";
-import useStyleAuth from "./AuthuStyle";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Typography from "@mui/material/Typography";
 import axios from "../../Axios";
+import { useRouter } from "next/router";
 const ariaLabel = { "aria-label": "description" };
 
 const Login = () => {
@@ -19,11 +18,10 @@ const Login = () => {
   const [passvisible, setPassvisible] = useState(false);
   const [error, setError] = useState([]);
   const [dberror, setDberror] = useState();
-  const classes = useStyleAuth();
-  //   const history = useHistory();
+  const router = useRouter();
 
   useEffect(() => {
-    //   localStorage.removeItem("ssAdmin");
+    localStorage.removeItem("ssAdmin");
   }, []);
 
   const handleEnter = (e) => {
@@ -54,9 +52,11 @@ const Login = () => {
           password,
         })
         .then((result) => {
+          router.push("/online-admin/dashboard/career");
           localStorage.setItem("ssAdmin", result.data.result);
         })
         .catch((error) => {
+          console.log(error);
           setDberror(error.response.data.error);
           setTimeout(() => {
             setDberror([]);
@@ -66,61 +66,65 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xl" className={classes.setcontainer}>
-      <div className={classes.setpageheading}>
-        <Typography gutterBottom className={classes.setheading}>
-          <span gutterBottom className={classes.setheadingfront}>
+    <Container component="main" maxWidth="xl" className="setcontainerLogin">
+      <div className="setpageheading_login">
+        <Typography gutterBottom className="setheading">
+          <span gutterBottom className="setheadingfront">
             SSTPL - A
           </span>
           dmin
         </Typography>
       </div>
 
-      {/* <Paper className={classes.setloginbackpaper} elevation={5}>
-          <Typography variant="h6" gutterBottom>
-            Sign in to start your session
-          </Typography>
-          {dberror && <><Typography className={classes.seterrorlabel}>{dberror}</Typography></>}
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <div className={classes.setinput}>
-                <label className={classes.setlabel}>Email :</label>
-                <TextField id="outlined-basic" size="small" type="email" placeholder="email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} onKeyPress={handleEnter} />
-              </div>
-              {error.email && (
-                <Typography className={classes.seterrorlabel}>{error.email}</Typography>
-              )}
-            </Grid>
-            <Grid item xs={12}>
-              <div className={classes.setinput}>
-                <label className={classes.setlabel}>Password :</label>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type={passvisible ? "text" : "password"}
-                  value={password}
-                  size="small"
-                  placeholder="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  onKeyPress={handleEnter}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} edge="end" inputProps={ariaLabel}>
-                        {passvisible ? <i className="fa fa-eye fs-15" /> : <i className="fa fa-eye-slash fs-15" />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </div>
-              {error.password && ( <>
-                <Typography className={classes.seterrorlabel}>{error.password}</Typography>
-              </>)}
-            </Grid>
+      <Paper className="setloginbackpaperLogin" elevation={5}>
+        <Typography variant="h6" gutterBottom>
+          Sign in to start your session
+        </Typography>
+        {dberror && (
+          <>
+            <Typography className="seterrorlabel">{dberror}</Typography>
+          </>
+        )}
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <div className="setinput">
+              <label className="setlabel">Email :</label>
+              <TextField id="outlined-basic" size="small" type="email" placeholder="email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} onKeyPress={handleEnter} />
+            </div>
+            {error.email && <Typography className="seterrorlabel">{error.email}</Typography>}
           </Grid>
+          <Grid item xs={12}>
+            <div className="setinput">
+              <label className="setlabel">Password :</label>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={passvisible ? "text" : "password"}
+                value={password}
+                size="small"
+                placeholder="password"
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyPress={handleEnter}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton aria-label="toggle password visibility" onClick={handleClickShowPassword} edge="end" inputProps={ariaLabel}>
+                      {passvisible ? <i className="fa fa-eye fs-15" /> : <i className="fa fa-eye-slash fs-15" />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </div>
+            {error.password && (
+              <>
+                <Typography className="seterrorlabel">{error.password}</Typography>
+              </>
+            )}
+          </Grid>
+        </Grid>
 
-          <Button variant="contained" className={classes.setloginbutton} onClick={handlesenddata}>
-            Login
-          </Button>
-        </Paper> */}
+        <Button variant="contained" className="setloginbutton" onClick={handlesenddata}>
+          Login
+        </Button>
+      </Paper>
     </Container>
   );
 };

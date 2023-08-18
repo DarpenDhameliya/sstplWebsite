@@ -11,7 +11,7 @@ const Web_graphicservice = ({images, serviceContents}) => {
   const [dbFetcherr, setDbFetcherr] = useState("");
   const states = useSelector(Servicestate);
 
-  // logic fro redux handle
+  // logic for redux handle
   useEffect(() => {
     if (states.response.result !== undefined) {
       states.response.result.map((e) => {
@@ -34,7 +34,6 @@ const Web_graphicservice = ({images, serviceContents}) => {
 
   // logic for active technology
   useEffect(() => {
-    document.title = "Web & Graphic Designing | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2;

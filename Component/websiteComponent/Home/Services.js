@@ -88,26 +88,26 @@ export default function Services(className) {
               <div className="row">
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="400">
-                    <div className="imagedisplay" onClick={() => handlepagechange("web-application-developement")} style={{minHeight: "240px", background: "#ddf4fd"}}>
-                      <Image src={state.webappimg ? state.webappimg : webimg} width={600} height={300}  alt="webimg" style={{borderRadius: "10px"}} />
+                    <div className="imagedisplay" onClick={() => handlepagechange("web-application-developement")} style={{ minHeight: "240px", background: "#ddf4fd" }}>
+                      <Image src={state.webappimg ? state.webappimg : webimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
-                    <h4 className="title" style={{textAlign: "center"}}>
+                    <h4 className="title" style={{ textAlign: "center" }}>
                       {state.webapptitle ? state.webapptitle : "Web Application Developement"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link className="main-btn-about mob1 ml-1 mr-1" prefetch  href="/web-application-developement#nodejs">
+                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#nodejs">
                         NODE JS
                       </Link>
-                      <Link smooth className="main-btn-about mob1 ml-1 mr-1" prefetch  href="/web-application-developement#php">
+                      <Link scroll={false} smooth className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#php">
                         PHP
                       </Link>
-                      <Link className="main-btn-about mob1 ml-1 mr-1" prefetch  href="/web-application-developement#laravel">
+                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#laravel">
                         LARAVEL
                       </Link>
-                      <Link className="main-btn-about mob1 ml-1 mr-1" prefetch  href="/web-application-developement#codeigniter">
+                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#codeigniter">
                         CODEIGNITER
                       </Link>
-                      <Link className="main-btn-about mob1 ml-1 mr-1" exact prefetch  href="/web-application-developement#python">
+                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" exact href="/web-application-developement#python">
                         PYTHON
                       </Link>
                     </div>
@@ -122,13 +122,13 @@ export default function Services(className) {
                       {state.mobapptitle ? state.mobapptitle : "Mobile Application Developer"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link className="main-btn-about mob2 ml-1 mr-1" prefetch href="/mobile-application-developement#flutter">
+                      <Link scroll={false} className="main-btn-about mob2 ml-1 mr-1" href="/mobile-application-developement#flutter">
                         FLUTTER
                       </Link>
-                      <Link className="main-btn-about mob2 ml-1 mr-1" prefetch href="/mobile-application-developement#android">
+                      <Link scroll={false} className="main-btn-about mob2 ml-1 mr-1" href="/mobile-application-developement#android">
                         ANDROID
                       </Link>
-                      <Link className="main-btn-about mob2 ml-1 mr-1" prefetch href="/mobile-application-developement#ios">
+                      <Link scroll={false} className="main-btn-about mob2 ml-1 mr-1" href="/mobile-application-developement#ios">
                         IOS
                       </Link>
                     </div>
@@ -143,22 +143,22 @@ export default function Services(className) {
                       {state.deskapptitle ? state.deskapptitle : "Desktop Software Developement"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link className="main-btn-about mob3 ml-1 mr-1" prefetch href="/desktop-software-developement#c">
+                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#c">
                         C#
                       </Link>
-                      <Link className="main-btn-about mob3 ml-1 mr-1" prefetch href="/desktop-software-developement#c++">
+                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#c++">
                         C++
                       </Link>
-                      <Link className="main-btn-about mob3 ml-1 mr-1" prefetch href="/desktop-software-developement#mashinlerning">
+                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#mashinlerning">
                         MASHINE LEARNING
                       </Link>
-                      <Link className="main-btn-about mob3 ml-1 mr-1" prefetch href="/desktop-software-developement#controller">
+                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#controller">
                         CONTEROLLER BASED
                       </Link>
-                      <Link className="main-btn-about mob3 ml-1 mr-1" prefetch href="/desktop-software-developement#axistravelling">
+                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#axistravelling">
                         AXIS TRAVELLING
                       </Link>
-                      <Link className="main-btn-about mob3 ml-1 mr-1" prefetch href="/desktop-software-developement#lasersource">
+                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#lasersource">
                         LASER SOURCE
                       </Link>
                     </div>
@@ -173,16 +173,16 @@ export default function Services(className) {
                       {state.digitalapptitle ? state.digitalapptitle : "Digital Marketing"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link className="main-btn-about mob4 ml-1 mr-1" prefetch href="/digital-marketing#seo">
+                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#seo">
                         SEO
                       </Link>
-                      <Link className="main-btn-about mob4 ml-1 mr-1" prefetch href="/digital-marketing#smm">
+                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#smm">
                         SMM
                       </Link>
-                      <Link className="main-btn-about mob4 ml-1 mr-1" prefetch href="/digital-marketing#political">
+                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#political">
                         POLITICAL PROFILE
                       </Link>
-                      <Link className="main-btn-about mob4 ml-1 mr-1" prefetch href="/digital-marketing#mobileapp">
+                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#mobileapp">
                         MOBILE APP PROMOTION
                       </Link>
                     </div>
@@ -197,22 +197,22 @@ export default function Services(className) {
                       {state.webgraapptitle ? state.webgraapptitle : "Web & Graphic Designing"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link className="main-btn-about mob5 ml-1 mr-1" prefetch href="/web_graphic-designing#webdesign">
+                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#webdesign">
                         WEB DESIGN
                       </Link>
-                      <Link className="main-btn-about mob5 ml-1 mr-1" prefetch href="/web_graphic-designing#uiux">
+                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#uiux">
                         UI & UX DESIGN
                       </Link>
-                      <Link className="main-btn-about mob5 ml-1 mr-1" prefetch href="/web_graphic-designing#reactjs">
+                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#reactjs">
                         REACT JS
                       </Link>
-                      <Link className="main-btn-about mob5 ml-1 mr-1" prefetch href="/web_graphic-designing#viewjs">
+                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#viewjs">
                         VUE JS
                       </Link>
-                      <Link className="main-btn-about mob5 ml-1 mr-1" prefetch href="/web_graphic-designing#logo">
+                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#logo">
                         LOGO BANNER
                       </Link>
-                      <Link className="main-btn-about mob5 ml-1 mr-1" prefetch href="/web_graphic-designing#brochur">
+                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#brochur">
                         BROCHUR & MOKEUP
                       </Link>
                     </div>
@@ -227,13 +227,13 @@ export default function Services(className) {
                       {state.erpapptitle ? state.erpapptitle : "Enterprice Services"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link className="main-btn-about mob6 ml-1 mr-1" prefetch href="/enterprise-services#erp">
+                      <Link scroll={false} className="main-btn-about mob6 ml-1 mr-1" href="/enterprise-services#erp">
                         ERP
                       </Link>
-                      <Link className="main-btn-about mob6 ml-1 mr-1" prefetch href="/enterprise-services#crm">
+                      <Link scroll={false} className="main-btn-about mob6 ml-1 mr-1" href="/enterprise-services#crm">
                         CRM
                       </Link>
-                      <Link className="main-btn-about mob6 ml-1 mr-1" prefetch href="/enterprise-services#accounting">
+                      <Link scroll={false} className="main-btn-about mob6 ml-1 mr-1" href="/enterprise-services#accounting">
                         CUSTOMIZED ACCOUNTING
                       </Link>
                     </div>

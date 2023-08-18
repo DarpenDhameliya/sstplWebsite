@@ -32,7 +32,6 @@ const WebService = ({images, serviceContents}) => {
 
   // active header code
   useEffect(() => {
-    document.title = "Web Application Developer | SoftStorm - Custom Software Development Service Provider Company in Surat, India";
 
     const handleScroll = () => {
       const middle = window.innerHeight / 2;
