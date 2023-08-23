@@ -1,5 +1,5 @@
 import React from "react";
-import Headers from "../SubComponent/PageHeader";
+const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 import ReturnPolicy from "./ReturnPolicy";
 import {useEffect, useState} from "react";
 import axios from "../../Axios";

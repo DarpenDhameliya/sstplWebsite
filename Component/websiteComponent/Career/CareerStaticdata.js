@@ -1,0 +1,53 @@
+
+let CareerStaticdata = [
+    {
+      _id: "649c05881b87759666a35cdd",
+      title: "Mobile Application Developer",
+      location: "Surat",
+      position: "2",
+      experience: "1 Year",
+      description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+      responsibility: ["Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+      qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+      contentview: true,
+      contentpositionview: "2",
+    },
+    {
+      _id: "649c05e11b87759666a35cdf",
+      title: "PHP MVC Developer",
+      location: "Surat",
+      position: "2",
+      experience: "Fresher",
+      description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+      responsibility: ["Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+      qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+      contentview: true,
+      contentpositionview: "4",
+    },
+    {
+      _id: "649c06321b87759666a35ce1",
+      title: "Mobile Application Developer",
+      location: "Surat",
+      position: "2",
+      experience: "Fresher",
+      description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+      responsibility: ["Minimum 1.5 years of development experience in Android (Java / Flutter)", "Proficient in Core Android, OOPS, Firebase and Admob", "Excellent relational database skills with SQLite and Realm", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+      qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+      contentview: true,
+      contentpositionview: "3",
+    },
+    {
+      _id: "64a50da6811be9dd21462e6c",
+      title: "PHP MVC Developer",
+      location: "Surat",
+      position: "2",
+      experience: "1 to 2 year",
+      description: "Your job feed required the following area where you need to perform your best for developing your own future with Softstrom Technosys",
+      responsibility: ["Minimum 1.5 years of development experience in PHP & MVC (CodeIgniter and/or Laravel )", "Proficient in Core PHP, OOPS, HTML5, Bootstrap, JavaScript, jQuery, Ajax", "Excellent relational database skills with MySQL", "Hands on experience on integration of multiple data sources and databases into one system", "Knowledge of Web Services / REST APIs, such as Facebook, Google maps, Payment Gateway Integration etc."],
+      qualification: "B.E.(Computer,IT), MCA, MSc.IT, Msc.ICT, BCA, Diploma(Computer, IT)",
+      contentview: true,
+      contentpositionview: "1",
+    },
+  ];
+
+  export default CareerStaticdata;

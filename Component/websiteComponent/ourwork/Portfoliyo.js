@@ -1,7 +1,6 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
-import axios from "../../Axios";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import dynamic from "next/dynamic";
@@ -31,28 +30,14 @@ const Portfoliyo = ({ loding, data }) => {
   };
 
   useEffect(() => {
-    fetchHiredata();
-  }, []);
+    // fetchHiredata();
+    let fillterdata = data.sort(() => Math.random() - 0.5);
+    setportfolioList(fillterdata);
+    setTimeout(() => {
+      loding();
+    }, 200);
+  }, [data]);
 
-  const fetchHiredata = () => {
-    axios
-      .post("portfolio/portfolio_list", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((result) => {
-        data = result.data.result.sort(() => Math.random() - 0.5);
-        setportfolioList(data);
-        setTimeout(() => {
-          loding();
-        }, 300);
-      })
-      .catch((err) => {
-        loding();
-        setFetchErr(err.response.data.error);
-      });
-  };
 
   const handle_modal = (e, data) => {
     setOpen(true);

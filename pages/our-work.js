@@ -1,17 +1,16 @@
 import Seo from "@/Component/Seo";
 import Loader from "@/Component/loader";
 import React, { Suspense, lazy } from "react";
-import { Metaapicall } from "@/redux/Metaapicall";
+import { Metaapicall, PortfolioListApiCall } from "@/redux/Metaapicall";
 const WorlIndex = lazy(() => import("@/Component/websiteComponent/ourwork/WorlIndex"));
 
-const ourwork = ({initialPortfolioList}) => {
+const ourwork = ({initialPortfolioList,initialPortfolioData}) => {
   let data = initialPortfolioList.find((e) => e.url === "/our-work");
-
   return (
     <>
       <Seo title={data ? data.title : "Our-Work"} pagedescription={data ? data.description : ""} keywords={data ? data.key : ""} />
       <Suspense fallback={<Loader />}>
-        <WorlIndex  />
+        <WorlIndex  data={initialPortfolioData}/>
       </Suspense>
     </>
   );
@@ -20,13 +19,23 @@ const ourwork = ({initialPortfolioList}) => {
 export default ourwork;
 
 export const getServerSideProps = async () => {
-  const initialPortfolioList = await Metaapicall();
-
-  return {
-    props: {
-      initialPortfolioList,
-    },
-  };
- 
+  try {
+    const initialPortfolioList = await Metaapicall();
+    const initialPortfolioData = await PortfolioListApiCall(); 
+    return {
+      props: {
+        initialPortfolioList,
+        initialPortfolioData,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        initialPortfolioList: [],
+        initialPortfolioData,
+      },
+    };
+  }
 };
 

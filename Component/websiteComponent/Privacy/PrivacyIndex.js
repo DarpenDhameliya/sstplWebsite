@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Headers from "../SubComponent/PageHeader";
+const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 import Privacy from "./Privacy";
 import axios from "../../Axios";
 import Loader from "@/Component/loader";

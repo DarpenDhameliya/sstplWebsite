@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Careerdata from "./Careerdata";
 import Sidepoosition from "./Sidepoosition";
-import Headers from "../SubComponent/PageHeader";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
+const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 
-const CareerIndex = () => {
+const CareerIndex = ({data}) => {
   const [loading, setLoading] = useState(true);
 
   const cleartimeout = () => {
@@ -28,7 +29,7 @@ const CareerIndex = () => {
               <div className="col-md-12 col-lg-12">
                 <div className="row justify-content-center">
                   <div className="col-lg-8 col-md-12 col-sm-12 ">
-                    <Careerdata loding={cleartimeout} />
+                    <Careerdata loding={cleartimeout} data={data}/>
                   </div>
                   <div className="col-lg-4 col-md-12 col-sm-12">
                     <Sidepoosition />

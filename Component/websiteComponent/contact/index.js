@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Contactus from './Home'
-import Headers from '../SubComponent/PageHeader'
+const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 import Loader from "@/Component/loader";
 
 const Contactindex = () => {

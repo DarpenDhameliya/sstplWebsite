@@ -2,10 +2,10 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 // import aboutvodeo1 from '../../../assets/images/about_video.webm';
-import aboutvodeo1 from '../../../public/about_video.webm';
+import aboutvodeo1 from "../../../public/about_video.webm";
 import about from "../../../public/about.mp4";
 
-const About = ({ className, list, error }) => {
+const About = ({ list }) => {
   const [aboutheading, setAboutheading] = useState("");
   const [aboutcontent, setAboutcontent] = useState("");
 
@@ -22,7 +22,7 @@ const About = ({ className, list, error }) => {
   };
 
   useEffect(() => {
-    if (list.length > 0) {
+    if (list.length > 2) {
       list[0].aboutcontent.replace(/<\/?p>/g, "");
       setAboutheading(list[0].about);
       setAboutcontent(list[0].aboutcontent.replace(/<\/?p>/g, ""));
@@ -44,16 +44,7 @@ const About = ({ className, list, error }) => {
                 </div>
                 <div className="col-lg-6 col-md-6 col-sm-10">
                   <div className="about-tab">
-                    <video
-                      ref={videoRef}
-                      id="video"
-                      width="100%"
-                      muted
-                      onClick={handleclick}
-                      autoPlay
-                      style={{borderRadius: "30px"}}
-                      loop
-                    >
+                    <video ref={videoRef} id="video" width="100%" muted onClick={handleclick} autoPlay style={{ borderRadius: "30px" }} loop>
                       <source src={aboutvodeo1} type="video/webm" />
                       <source src={about} type="video/mp4" />
                     </video>

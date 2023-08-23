@@ -3,7 +3,7 @@ import Testimonial from "./Testimonial";
 import Headers from "../../SubComponent/PageHeader";
 import Loader from "@/Component/loader";
 
-const Testimonialindex = () => {
+const Testimonialindex = ({data}) => {
   const [loading, setLoading] = useState(true);
 
   const cleartimeout = () => {
@@ -21,7 +21,7 @@ const Testimonialindex = () => {
           ]}
           className={"handlebredcrumb"}
         />
-        <Testimonial loding={cleartimeout} />
+        <Testimonial loding={cleartimeout} data={data}/>
       </div>
     </>
   );
