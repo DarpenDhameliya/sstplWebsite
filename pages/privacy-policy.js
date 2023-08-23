@@ -1,7 +1,6 @@
 import Seo from "@/Component/Seo";
 import PrivacyIndex from "@/Component/websiteComponent/Privacy/PrivacyIndex";
 import React from "react";
-import axios from '../Component/Axios';
 import { Metaapicall } from "@/redux/Metaapicall";
 
 const privacy = ({initialPortfolioList}) => {

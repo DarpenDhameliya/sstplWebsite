@@ -3,15 +3,12 @@ import Slider from "react-slick";
 import Image from "next/image";
 import { api } from "../../Axios";
 
-export default function Portfoliyo({data}) {
+export default function Portfoliyo({ data }) {
   const [workdata, setWorkdata] = useState([]);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [portfolioList, setPortfolioList] = useState([]);
   const [fetchErr, setFetchErr] = useState("");
 
-  useEffect(() => {
-    // setWorkdata(data);
-    setPortfolioList(data)
-  }, [data]);
 
   const fetchHiredata = () => {
     api
@@ -25,7 +22,19 @@ export default function Portfoliyo({data}) {
   };
 
   useEffect(() => {
-    // fetchHiredata();
+    fetchHiredata();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setInnerWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const articleCarosel = useRef();
@@ -41,7 +50,7 @@ export default function Portfoliyo({data}) {
     autoplay: true,
     arrows: true,
     speed: 1000,
-    slidesToShow: 1,
+    swipeToSlide: true,
     slidesToScroll: 1,
   };
   const settingsForArticleteb = {
@@ -54,8 +63,7 @@ export default function Portfoliyo({data}) {
 
   return (
     <>
-      {/* web view */}
-      <div className="softstormweb-portfoliyo-about-area pb-80 pt-80 webportfoliyo">
+      <div className="softstormweb-portfoliyo-about-area pb-80 pt-80">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8">
@@ -70,90 +78,56 @@ export default function Portfoliyo({data}) {
           <div className="row justify-content-center ">
             <div className="col-lg-12">
               <div className="testimonial-about-slider-active ">
-                <Slider {...settingsForArticle} ref={articleCarosel}>
-                  {portfolioList.map((e, index) => {
-                    if (e.contentview === true) {
+                {innerWidth > 992 && (
+                  <Slider {...settingsForArticle} ref={articleCarosel}>
+                    {portfolioList.map((e, index) => {
+                      if (e.contentview === true) {
+                        return (
+                          <div className="testimonial-parent-item" key={index}>
+                            <div className="testimonial-box">
+                              <div className="icon">
+                                <Image src={e.uploadimg} className="handleportfoliyohomeweb" height={230} width={350} alt="logo" style={{ borderRadius: "15px" }} />
+                              </div>
+                              <h4 className="pt-4">{e.name}</h4>
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                  </Slider>
+                )}
+                {innerWidth < 992 && innerWidth > 767 && (
+                  <Slider {...settingsForArticleteb} ref={articleCarosel}>
+                    {portfolioList.map((e, index) => {
                       return (
                         <div className="testimonial-parent-item" key={index}>
                           <div className="testimonial-box">
-                            <div className="icon">
+                            <div className="icon d-flex justify-content-center">
                               <Image src={e.uploadimg} className="handleportfoliyohomeweb" height={230} width={350} alt="logo" style={{ borderRadius: "15px" }} />
                             </div>
-                            <h4 className="pt-4">{e.name}</h4>
+                            <p>{e.name}</p>
                           </div>
                         </div>
                       );
-                    }
-                  })}
-                </Slider>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* mobile view */}
-      <div className="softstormweb-portfoliyo-about-area pt-40 pb-45 displayport">
-        <div className="container">
-          <div className="row justify-content-center text-center">
-            <div className="col-lg-5">
-              <div>
-                <h3>Work Portfolio</h3>
-                <span className="main-header-line_choos"></span>
-                <p>See what we do for our valuable clients.</p>
-              </div>
-            </div>
-          </div>
-          <div className="row justify-content-center handlemobview">
-            <div className="col-lg-12 ">
-              <div className="testimonial-about-slider-active ">
-                <Slider {...settingsForArticle1} ref={articleCarosel}>
-                  {portfolioList.map((e, index) => {
-                    return (
-                      <div key={index}>
-                        <div className="testimonial-box ">
-                          <div className="icon d-flex justify-content-center">
-                            <Image src={e.uploadimg} className="handleportfoliyohomeweb" height={230} width={350} alt="logo" />
+                    })}
+                  </Slider>
+                )}
+                {innerWidth < 767 && (
+                  <Slider {...settingsForArticle1} ref={articleCarosel}>
+                    {portfolioList.map((e, index) => {
+                      return (
+                        <div key={index}>
+                          <div className="testimonial-box ">
+                            <div className="icon d-flex justify-content-center">
+                              <Image src={e.uploadimg} className="handleportfoliyohomeweb" height={230} width={350} alt="logo" />
+                            </div>
+                            <h6 className="mt-3">{e.name}</h6>
                           </div>
-                          <p>{e.name}</p>
                         </div>
-                      </div>
-                    );
-                  })}
-                </Slider>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* tab view */}
-      <div className="softstormweb-portfoliyo-about-area pt-40 pb-45 displayporttab">
-        <div className="container">
-          <div className="row justify-content-center text-center">
-            <div className="col-lg-5">
-              <div className="softstormweb-title-main-portfoliyo text-center">
-                <h3 className="softstormweb-title-portfoliyo">Work Portfolio</h3>
-                <span className="main-header-line_choos"></span>
-                <p>See what we do for our valuable clients.</p>
-              </div>
-            </div>
-          </div>
-          <div className="row justify-content-center handlemobview">
-            <div className="col-lg-12 col-md-11">
-              <div className="testimonial-about-slider-active ">
-                <Slider {...settingsForArticleteb} ref={articleCarosel}>
-                  {portfolioList.map((e, index) => {
-                    return (
-                      <div className="testimonial-parent-item" key={index}>
-                        <div className="testimonial-box">
-                          <div className="icon d-flex justify-content-center">
-                            <Image src={e.uploadimg} className="handleportfoliyohomeweb" height={230} width={350} alt="logo" style={{ borderRadius: "15px" }} />
-                          </div>
-                          <p>{e.name}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </Slider>
+                      );
+                    })}
+                  </Slider>
+                )}
               </div>
             </div>
           </div>

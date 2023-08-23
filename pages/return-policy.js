@@ -1,7 +1,6 @@
 import Seo from "@/Component/Seo";
 import ReturnPolicyIndex from "@/Component/websiteComponent/returnpolicy/ReturnPolicyIndex";
 import React from "react";
-import axios from '../Component/Axios';
 import { Metaapicall } from "@/redux/Metaapicall";
 
 const returnpolicy = ({initialPortfolioList}) => {

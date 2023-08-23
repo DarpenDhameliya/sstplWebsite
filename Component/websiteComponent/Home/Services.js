@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import webimg from "../../../assets/images/services/web-app-development.webp";
-import mobimg from "../../../assets/images/services/mobile-app-development.webp";
-import deskimg from "../../../assets/images/services/desktop-software-development.webp";
-import digimg from "../../../assets/images/services/digital-marketing.webp";
-import graimg from "../../../assets/images/services/web-graphic-designing.webp";
-import entimg from "../../../assets/images/services/enterprise-services.webp";
-import Link from "next/link";
 import Image from "next/image";
 import { ServiceSlice, Servicestate, Servicestatus } from "@/redux/slice/Service";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+const HomeImages = dynamic(() => import("./HomeImages"));
+const FooterLink = dynamic(() => import("../SubComponent/FooterLink").then((module) => module.FooterLink));
 
 export default function Services(className) {
   const [dbFetcherr, setDbFetcherr] = useState("");
@@ -89,153 +85,153 @@ export default function Services(className) {
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="400">
                     <div className="imagedisplay" onClick={() => handlepagechange("web-application-developement")} style={{ minHeight: "240px", background: "#ddf4fd" }}>
-                      <Image src={state.webappimg ? state.webappimg : webimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
+                      <Image src={state.webappimg ? state.webappimg : HomeImages.webimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
                     <h4 className="title" style={{ textAlign: "center" }}>
                       {state.webapptitle ? state.webapptitle : "Web Application Developement"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#nodejs">
+                      <FooterLink className="main-btn-about mob1 m-1" href="/web-application-developement#nodejs">
                         NODE JS
-                      </Link>
-                      <Link scroll={false} smooth className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#php">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob1 m-1" href="/web-application-developement#php">
                         PHP
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#laravel">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob1 m-1" href="/web-application-developement#laravel">
                         LARAVEL
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" href="/web-application-developement#codeigniter">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob1 m-1" href="/web-application-developement#codeigniter">
                         CODEIGNITER
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob1 ml-1 mr-1" exact href="/web-application-developement#python">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob1 m-1" exact href="/web-application-developement#python">
                         PYTHON
-                      </Link>
+                      </FooterLink>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-2 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="800">
                     <div className="imagedisplay" onClick={() => handlepagechange("mobile-application-developement")} style={{ minHeight: "240px", background: "#fedaf4" }}>
-                      <Image src={state.mobappimg ? state.mobappimg : mobimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
+                      <Image src={state.mobappimg ? state.mobappimg : HomeImages.mobimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
                     <h4 className="title" style={{ textAlign: "center" }}>
                       {state.mobapptitle ? state.mobapptitle : "Mobile Application Developer"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link scroll={false} className="main-btn-about mob2 ml-1 mr-1" href="/mobile-application-developement#flutter">
+                      <FooterLink className="main-btn-about mob2 m-1" href="/mobile-application-developement#flutter">
                         FLUTTER
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob2 ml-1 mr-1" href="/mobile-application-developement#android">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob2 m-1" href="/mobile-application-developement#android">
                         ANDROID
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob2 ml-1 mr-1" href="/mobile-application-developement#ios">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob2 m-1" href="/mobile-application-developement#ios">
                         IOS
-                      </Link>
+                      </FooterLink>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-3 mt-30 wow animated fadeInUp " data-aos="fade-right" data-aos-duration="1000">
                     <div className="imagedisplay" onClick={() => handlepagechange("desktop-software-developement")} style={{ minHeight: "240px", background: "#cadcff" }}>
-                      <Image src={state.deskappimg ? state.deskappimg : deskimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
+                      <Image src={state.deskappimg ? state.deskappimg : HomeImages.deskimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
                     <h4 className="title" style={{ textAlign: "center" }}>
                       {state.deskapptitle ? state.deskapptitle : "Desktop Software Developement"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#c">
+                      <FooterLink className="main-btn-about mob3 m-1" href="/desktop-software-developement#c">
                         C#
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#c++">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob3 m-1" href="/desktop-software-developement#c++">
                         C++
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#mashinlerning">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob3 m-1" href="/desktop-software-developement#mashinlerning">
                         MASHINE LEARNING
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#controller">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob3 m-1" href="/desktop-software-developement#controller">
                         CONTEROLLER BASED
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#axistravelling">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob3 m-1" href="/desktop-software-developement#axistravelling">
                         AXIS TRAVELLING
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob3 ml-1 mr-1" href="/desktop-software-developement#lasersource">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob3 m-1" href="/desktop-software-developement#lasersource">
                         LASER SOURCE
-                      </Link>
+                      </FooterLink>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-4 mt-30 wow animated fadeInUp  " data-aos="fade-right" data-aos-duration="400">
                     <div className="imagedisplay" onClick={() => handlepagechange("digital-marketing")} style={{ minHeight: "240px", background: "#ffbc8d" }}>
-                      <Image src={state.digitalappimg ? state.digitalappimg : digimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
+                      <Image src={state.digitalappimg ? state.digitalappimg : HomeImages.digimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
                     <h4 className="title" style={{ textAlign: "center" }}>
                       {state.digitalapptitle ? state.digitalapptitle : "Digital Marketing"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#seo">
+                      <FooterLink className="main-btn-about mob4 m-1" href="/digital-marketing#seo">
                         SEO
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#smm">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob4 m-1" href="/digital-marketing#smm">
                         SMM
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#political">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob4 m-1" href="/digital-marketing#political">
                         POLITICAL PROFILE
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob4 ml-1 mr-1" href="/digital-marketing#mobileapp">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob4 m-1" href="/digital-marketing#mobileapp">
                         MOBILE APP PROMOTION
-                      </Link>
+                      </FooterLink>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-5 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="800">
                     <div className="imagedisplay" onClick={() => handlepagechange("web_graphic-designing")} style={{ minHeight: "240px", background: "#97adff" }}>
-                      <Image src={state.webgraappimg ? state.webgraappimg : graimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
+                      <Image src={state.webgraappimg ? state.webgraappimg : HomeImages.graimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
                     <h4 className="title" style={{ textAlign: "center" }}>
                       {state.webgraapptitle ? state.webgraapptitle : "Web & Graphic Designing"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#webdesign">
+                      <FooterLink className="main-btn-about mob5 m-1" href="/web_graphic-designing#webdesign">
                         WEB DESIGN
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#uiux">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob5 m-1" href="/web_graphic-designing#uiux">
                         UI & UX DESIGN
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#reactjs">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob5 m-1" href="/web_graphic-designing#reactjs">
                         REACT JS
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#viewjs">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob5 m-1" href="/web_graphic-designing#viewjs">
                         VUE JS
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#logo">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob5 m-1" href="/web_graphic-designing#logo">
                         LOGO BANNER
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob5 ml-1 mr-1" href="/web_graphic-designing#brochur">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob5 m-1" href="/web_graphic-designing#brochur">
                         BROCHUR & MOKEUP
-                      </Link>
+                      </FooterLink>
                     </div>
                   </div>
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className="softstormweb-techno-service item-6 mt-30 wow animated fadeInUp" data-aos="fade-right" data-aos-duration="1000">
                     <div className="imagedisplay" onClick={() => handlepagechange("enterprise-services")} style={{ minHeight: "240px", background: "#98e7d4" }}>
-                      <Image src={state.erpappimg ? state.erpappimg : entimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
+                      <Image src={state.erpappimg ? state.erpappimg : HomeImages.entimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
                     <h4 className="title" style={{ textAlign: "center" }}>
                       {state.erpapptitle ? state.erpapptitle : "Enterprice Services"}
                     </h4>
                     <div className="servicedisplay">
-                      <Link scroll={false} className="main-btn-about mob6 ml-1 mr-1" href="/enterprise-services#erp">
+                      <FooterLink className="main-btn-about mob6 m-1" href="/enterprise-services#erp">
                         ERP
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob6 ml-1 mr-1" href="/enterprise-services#crm">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob6 m-1" href="/enterprise-services#crm">
                         CRM
-                      </Link>
-                      <Link scroll={false} className="main-btn-about mob6 ml-1 mr-1" href="/enterprise-services#accounting">
+                      </FooterLink>
+                      <FooterLink className="main-btn-about mob6 m-1" href="/enterprise-services#accounting">
                         CUSTOMIZED ACCOUNTING
-                      </Link>
+                      </FooterLink>
                     </div>
                   </div>
                 </div>

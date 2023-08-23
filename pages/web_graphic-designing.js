@@ -1,6 +1,5 @@
 import Seo from "@/Component/Seo";
 import React, { Suspense, lazy } from "react";
-import axios from '../Component/Axios';
 import Loader from "@/Component/loader";
 import { Metaapicall } from "@/redux/Metaapicall";
 

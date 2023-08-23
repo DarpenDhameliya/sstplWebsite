@@ -1,26 +1,30 @@
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import logo from "../../../assets/images/logo.webp";
 import Link from "next/link";
 import { Logostate, Logostatus } from "@/redux/slice/logoSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { FooterLink, PrivacyLink, SocialLink, socialMediaLinks } from "../SubComponent/FooterLink";
+import { Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
+
 
 const CommonLowerFooter = () => {
   const [selectedLogo, setSelectedLogo] = useState("");
+  const [fields, setFields] = useState([]);
+
   const dispatch = useDispatch();
   const logostates = useSelector(Logostate);
+  const iconstate = useSelector(Iconstate);
 
   function getCurrentFormattedDate() {
     const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Add 1 to month because it's 0-indexed
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
     const day = String(currentDate.getDate()).padStart(2, "0");
     return `${month}-${day}`;
   }
 
   useEffect(() => {
-    if (logostates.status === "loading") {
-    } else if (logostates.status === "succeeded") {
+    if (logostates.status === "succeeded") {
       let data = logostates.response.result;
       const newFormattedDate = getCurrentFormattedDate();
       let finddatedata = data.find((e) => e.date.slice(5, 10) === newFormattedDate);
@@ -34,7 +38,16 @@ const CommonLowerFooter = () => {
       dispatch(Logostatus());
     } else {
     }
-  }, [logostates ])
+
+    if (iconstate.status === "succeeded") {
+      setFields(iconstate.response.result[0].data);
+      dispatch(Iconstatus());
+    } else if (iconstate.status === "failed") {
+      notifyerr();
+      dispatch(Iconstatus());
+    } else {
+    }
+  }, [logostates, iconstate]);
   return (
     <>
       <section className="softstormweb-footer-area softstormweb-footer-area-about softstormweb-footer-area-about-1">
@@ -49,29 +62,25 @@ const CommonLowerFooter = () => {
                 </div>
               </div>
               <div className="col-lg-12 d-flex justify-content-center align-items-center mb-2">
-                <Link scroll={false} className="social_icon ml-3" target="_blank" href={{ pathname: "https://www.facebook.com/softstorm.in" }} rel="noopener noreferrer">
-                  <i className="fab fa-facebook-f hoverefffac" style={{ color: "#4f4f4f" }} />
-                </Link>{" "}
-                <span> | </span>
-                <Link scroll={false} className="social_icon" target="_blank" href={{ pathname: "https://twitter.com/softstorm_in" }} rel="noopener noreferrer">
-                  <i className="fab fa-twitter hoverefftwi" style={{ color: "#4f4f4f " }} />
-                </Link>
-                <span> | </span>
-                <Link scroll={false} className="social_icon" target="_blank" href={{ pathname: "https://www.linkedin.com/company/softstorm-in" }} rel="noopener noreferrer">
-                  <i className="fab fa-linkedin-in hoverefflin" style={{ color: "#4f4f4f " }} />
-                </Link>
-                <span> | </span>
-                <Link scroll={false} className="social_icon" target="_blank" href={{ pathname: "https://www.instagram.com/softstorm.in" }} rel="noopener noreferrer">
-                  <i className="fab fa-instagram hovereffins" style={{ color: "#4f4f4f " }} />
-                </Link>
-                <span> | </span>
-                <Link scroll={false} className="social_icon" target="_blank" href={{ pathname: "https://wa.me/912613560756" }} rel="noopener noreferrer">
-                  <i className="fab fa-whatsapp hovereffwat" style={{ color: "#4f4f4f " }} />
-                </Link>
-                <span> | </span>
-                <Link scroll={false} className="social_icon" target="_blank" href={{ pathname: "skype:softstorminfosys?chat" }} rel="noopener noreferrer">
-                  <i className="fab fa-skype hovereffsky" style={{ color: "#4f4f4f " }} />
-                </Link>
+                {fields.length > 0
+                  ? fields.map((e, index) => {
+                      return (
+                        <React.Fragment key={index}>
+                          <SocialLink href={{ pathname: e.link }} className="social_icon">
+                            <i className={`fab ${e.icon} ${e.class}`} style={{ color: "#4f4f4f" }} />
+                          </SocialLink>
+                          {index < fields.length - 1 && <span> | </span>}
+                        </React.Fragment>
+                      );
+                    })
+                  : socialMediaLinks.map((link, index) => (
+                      <React.Fragment key={index}>
+                        <SocialLink href={{ pathname: link.href }} className={link.className}>
+                          <i className={link.iconClass} style={{ color: link.color }} />
+                        </SocialLink>
+                        {index < socialMediaLinks.length - 1 && <span> | </span>}
+                      </React.Fragment>
+                    ))}
               </div>
               <div className="col-lg-12  mt-2">
                 <div
@@ -79,27 +88,23 @@ const CommonLowerFooter = () => {
                 align-items-center"
                 >
                   <div className="col-md-6 col-sm-6 align-items-center pr-0 handlemobilfooter handleview_footer">
-                    <Link scroll={false} className="footer_bottomLinks mr-2 ml-2" href="/about-us">
+                    <FooterLink className="footer_bottomLinks mr-2 ml-2" href="/about-us">
                       About Us
-                    </Link>
+                    </FooterLink>
                     <span> | </span>
-                    <Link scroll={false} className="footer_bottomLinks mr-2 ml-2" href="/our-work">
+                    <FooterLink className="footer_bottomLinks mr-2 ml-2" href="/our-work">
                       Our Work
-                    </Link>
-
+                    </FooterLink>
                     <span> | </span>
                   </div>
-                  <div
-                    className="col-md-6 col-sm-6 
-                align-items-center pl-0 handlemobilfooter"
-                  >
-                    <Link scroll={false} className="footer_bottomLinks mr-2 ml-2" href="/career">
+                  <div className="col-md-6 col-sm-6 align-items-center pl-0 handlemobilfooter">
+                    <FooterLink className="footer_bottomLinks mr-2 ml-2" href="/career">
                       Career
-                    </Link>
+                    </FooterLink>
                     <span> | </span>
-                    <Link scroll={false} className="footer_bottomLinks mr-2 ml-2" href="/contact-us">
+                    <FooterLink className="footer_bottomLinks mr-2 ml-2" href="/contact-us">
                       Contact us
-                    </Link>
+                    </FooterLink>
                   </div>
                 </div>
               </div>
@@ -109,17 +114,11 @@ const CommonLowerFooter = () => {
           <div className="row footer-copyright mt-2 pt-3  pb-2">
             <div className="col-lg-6 col-md-12 col-sm-12">
               <div>
-                <Link scroll={false} className="footer_conditions  mr-2 ml-2" href="/terms-and-conditions">
-                  Terms and Condition
-                </Link>
+                <PrivacyLink href="/terms-and-conditions">Terms and Condition</PrivacyLink>
                 <span> | </span>
-                <Link scroll={false} className="footer_conditions mr-2 ml-2" href="/privacy-policy">
-                  Privacy Policy
-                </Link>
+                <PrivacyLink href="/privacy-policy">Privacy Policy</PrivacyLink>
                 <span> | </span>
-                <Link scroll={false} className="footer_conditions mr-2 ml-2" href="/return-policy">
-                  Return Policy
-                </Link>
+                <PrivacyLink href="/return-policy">Return Policy</PrivacyLink>
               </div>
             </div>
             <div className="col-lg-6 col-md-12 col-sm-12">

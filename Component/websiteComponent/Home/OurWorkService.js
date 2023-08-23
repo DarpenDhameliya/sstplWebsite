@@ -7,7 +7,8 @@ import IconFive from "../../../assets/images/icon/quality-check.svg";
 import IconSix from "../../../assets/images/icon/start-up.svg";
 import IconSeven from "../../../assets/images/icon/customer-support.svg";
 import PropTypes from "prop-types";
-import OurWork_Service from "../SubComponent/homeSubComponent/OurWork_Service";
+import dynamic from "next/dynamic";
+const OurWork_Service = dynamic(() => import("../SubComponent/homeSubComponent/OurWork_Service"));
 
 export default function OurWorkService(className) {
   return (

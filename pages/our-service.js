@@ -1,7 +1,6 @@
 import Seo from "@/Component/Seo";
 import Loader from "@/Component/loader";
 import React, { Suspense, lazy } from "react";
-import axios from '../Component/Axios';
 import { Metaapicall } from "@/redux/Metaapicall";
 const Serviceindex = lazy(() => import("@/Component/websiteComponent/Services/Serviceindex"));
 

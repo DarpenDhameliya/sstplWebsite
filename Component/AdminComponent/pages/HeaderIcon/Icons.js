@@ -19,7 +19,7 @@ const Icons = () => {
 
   // Function to handle adding a new field
   const addField = () => {
-    setFields([...fields, {icon: "", link: ""}]);
+    setFields([...fields, {icon: "", link: "", class:""}]);
   };
 
   const removeField = (index) => {
@@ -120,7 +120,7 @@ const Icons = () => {
 
           <Paper className='setProductpaper' elevation={5}>
             <div className='setlistfiltericon'>
-              <Avatar className={`setavtarback mb-3`} onClick={addField} variant="rounded">
+              <Avatar className={`setavtarback mb-3 ml-3`} onClick={addField} variant="rounded">
                 <i className="fa fa-plus" style={{color:'black' , fontSize:"23px"}}  aria-hidden="true" />
               </Avatar>
             </div>
@@ -128,9 +128,9 @@ const Icons = () => {
             {updtaeError && <Typography className='seterrorlabel'>{updtaeError} </Typography>}
             {fields.map((field, index) => (
               <div key={index} className="d-flex align-items-center justify-content-around">
-                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "48%"}} placeholder="icon name" className={`$'settextfield' mt-1 mb-1`} multiline InputLabelProps={{shrink: false}} value={field.icon} onChange={(e) => handleChange(index, "icon", e.target.value)} />
-                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "48%"}} placeholder="Link" className={`$'settextfield' mt-1 mb-1 ml-2`} multiline InputLabelProps={{shrink: false}} value={field.link} onChange={(e) => handleChange(index, "link", e.target.value)} />
-
+                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "25%"}} placeholder="icon name" className={`$'settextfield' mt-1 mb-1`} multiline InputLabelProps={{shrink: false}} value={field.icon} onChange={(e) => handleChange(index, "icon", e.target.value)} />
+                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "50%"}} placeholder="Link" className={`$'settextfield' mt-1 mb-1 ml-2`} multiline InputLabelProps={{shrink: false}} value={field.link} onChange={(e) => handleChange(index, "link", e.target.value)} />
+                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "15%"}} placeholder="class" className={`$'settextfield' mt-1 mb-1 ml-2`} multiline InputLabelProps={{shrink: false}} value={field.class} onChange={(e) => handleChange(index, "class", e.target.value)} />
                 <i aria-hidden="true" className={` fa fa-trash`}  onClick={() => removeField(index)} />
               </div>
             ))}

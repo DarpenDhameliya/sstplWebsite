@@ -11,12 +11,19 @@ import bullet1 from "../../../assets/images/point100.webp";
 import counterIconOne from "../../../assets/images/icon/counter-icon-1.svg";
 import counterIconTwo from "../../../assets/images/icon/counter-icon-2.svg";
 import counterIconFour from "../../../assets/images/icon/counter-icon-4.svg";
+
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { IconSlice, Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
 import StickyMenu from "../SubComponent/lib/StickyMenu";
-import axios from "../../Axios";
 import { Logostate, LogoSlice, Logostatus } from "@/redux/slice/logoSlice";
+import { socialMediaLinks } from "../SubComponent/FooterLink";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import TopHeader from "./TopHeader";
+const HeadermainLink = dynamic(() => import("../SubComponent/FooterLink").then((module) => module.HeadermainLink));
+const SocialLink = dynamic(() => import("../SubComponent/FooterLink").then((module) => module.SocialLink));
+const DynamicHeaderService = dynamic(() => import("../SubComponent/FooterLink").then((module) => module.HeaderService));
 
 const Header = ({ action, cartToggle }) => {
   const [selectedLogo, setSelectedLogo] = useState("");
@@ -25,11 +32,15 @@ const Header = ({ action, cartToggle }) => {
   const dispatch = useDispatch();
   const states = useSelector(Iconstate);
   const logostates = useSelector(Logostate);
+  const router = useRouter();
+
+  const { pathname } = router;
+  const isNotFound = pathname === "/404";
 
   function getCurrentFormattedDate() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Add 1 to month because it's 0-indexed
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); 
     const day = String(currentDate.getDate()).padStart(2, "0");
     return `${month}-${day}`;
   }
@@ -38,6 +49,18 @@ const Header = ({ action, cartToggle }) => {
     StickyMenu();
     dispatch(LogoSlice());
   }, []);
+
+  useEffect(() => {
+    if(isNotFound){
+      document.querySelector('.softstormweb-header_1').style.display = 'none'
+      document.querySelector('.softstormweb-header_area').style.display = 'none'
+    } else {
+      document.querySelector('.softstormweb-header_1').style.display = 'flex'
+      document.querySelector('.softstormweb-header_area').style.display = 'block'
+
+    }
+  })
+  
 
   useEffect(() => {
     if (states.status === "loading") {
@@ -65,7 +88,6 @@ const Header = ({ action, cartToggle }) => {
     } else {
     }
   }, [states, logostates]);
-
   return (
     <>
       <header className="softstormweb-header_1 hidebtn">
@@ -73,34 +95,23 @@ const Header = ({ action, cartToggle }) => {
           <div className="row align-items-center">
             <div className="col-lg-6 col-md-6 col-sm-12 col-6">
               {fields.length > 0 ? (
-                fields.map((e) => {
+                fields.map((e, index) => {
                   return (
-                    <Link key={e.icon} rel="noreferrer" className="ml-15" href={{ pathname: e.link }} target="_blank">
-                      <i className={`fab ${e.icon}`} />
-                    </Link>
+                    <React.Fragment key={index}>
+                      <SocialLink href={{ pathname: e.link }} className="ml-15">
+                        <i className={`fab ${e.icon}`} />
+                      </SocialLink>
+                    </React.Fragment>
                   );
                 })
               ) : (
-                <>
-                  <Link rel="noreferrer" className="ml-15" href={{ pathname: "https://www.facebook.com/softstorm.in" }} target="_blank">
-                    <i className="fab fa-facebook-f" />
-                  </Link>
-                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://twitter.com/softstorm_in" }}>
-                    <i className="fab fa-twitter" />
-                  </Link>
-                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://www.linkedin.com/company/softstorm-in" }}>
-                    <i className="fab fa-linkedin-in" />
-                  </Link>
-                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://www.instagram.com/softstorm.in" }}>
-                    <i className="fab fa-instagram" />
-                  </Link>
-                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "https://wa.me/912613560756" }}>
-                    <i className="fab fa-whatsapp" />
-                  </Link>
-                  <Link rel="noreferrer" className="ml-15" target="_blank" href={{ pathname: "skype:softstorminfosys?chat" }}>
-                    <i className="fab fa-skype" />
-                  </Link>
-                </>
+                socialMediaLinks.map((link, index) => (
+                    <React.Fragment key={index}>
+                      <SocialLink href={{ pathname: link.href }} className={link.className}>
+                        <i className={link.iconClass} />
+                      </SocialLink>
+                    </React.Fragment>
+                  ))
               )}
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 order-3 order-sm-2 handlerightheader">
@@ -120,26 +131,23 @@ const Header = ({ action, cartToggle }) => {
           </div>
         </div>
       </header>
+      {/* <TopHeader fields={fields} /> */}
 
       <header className="softstormweb-header_area softstormweb-header_sticky">
         <div className="container">
           <div className="menu-header ">
             <div className="dskt-logo">
-              <Link scroll={false} className="nav-brand" href="/">
+              <Link className="nav-brand" href="/">
                 <Image src={selectedLogo ? selectedLogo : logo} alt="Logo" layout="responsive" className="max_width_web" width={250} height={100} />
               </Link>{" "}
             </div>
             <div className="softstrom_header  handlenavigation" role="navigation">
               <ul className="nav-list">
                 <li className={`megamenu `}>
-                  <Link scroll={false} href="/" className={`menu-links`}>
-                    Home
-                  </Link>
+                  <HeadermainLink href="/">Home</HeadermainLink>
                 </li>
                 <li className="megamenu">
-                  <Link scroll={false} href="/about-us" className={`menu-links `}>
-                    About Us
-                  </Link>
+                  <HeadermainLink href="/about-us">About Us</HeadermainLink>
                   <div className="menu-dropdown">
                     <div className="menu-block-set">
                       <div className="container submenuList ">
@@ -313,9 +321,7 @@ const Header = ({ action, cartToggle }) => {
                   </div>
                 </li>
                 <li className="megamenu">
-                  <Link scroll={false} href="/our-service" className={`menu-links `}>
-                    Our Service
-                  </Link>
+                  <HeadermainLink href="/our-service"> Our Service</HeadermainLink>
                   <div className="menu-dropdown">
                     <div className="menu-block-set">
                       <div className="container submenuList ">
@@ -330,153 +336,33 @@ const Header = ({ action, cartToggle }) => {
                               <div className="mega-menu-blocks1">
                                 <h6 className="mb-2 pl-1"> Web App</h6>
                                 <ul className="menu-li-link ">
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web-application-developement#nodejs" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Node.js</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web-application-developement#php" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">PHP</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web-application-developement#laravel" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Laravel</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web-application-developement#codeigniter" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Codeigniter</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web-application-developement#python" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Python</span>{" "}
-                                    </Link>
-                                  </li>
+                                  <DynamicHeaderService href="/web-application-developement#nodejs" leanguage="Node.js" />
+                                  <DynamicHeaderService href="/web-application-developement#php" leanguage="PHP" />
+                                  <DynamicHeaderService href="/web-application-developement#laravel" leanguage="Laravel" />
+                                  <DynamicHeaderService href="/web-application-developement#codeigniter" leanguage="Codeigniter" />
+                                  <DynamicHeaderService href="/web-application-developement#python" leanguage="Python" />
                                 </ul>
                               </div>
                               <div className="mega-menu-blocks1">
                                 <h6 className="mb-2 pl-1"> Desktop & Embeded</h6>
                                 <ul className="menu-li-link ">
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/desktop-software-developement#c" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">C#</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/desktop-software-developement#c++" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">C++</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/desktop-software-developement#mashinlerning" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Machine Learning</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/desktop-software-developement#controller" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Controller Based</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/desktop-software-developement#axistravelling" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Axis Traveling</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/desktop-software-developement#lasersource" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Laser Source</span>{" "}
-                                    </Link>
-                                  </li>
+                                  <DynamicHeaderService href="/desktop-software-developement#c" leanguage="C#" />
+                                  <DynamicHeaderService href="/desktop-software-developement#c++" leanguage="C++" />
+                                  <DynamicHeaderService href="/desktop-software-developement#mashinlerning" leanguage="Machine Learning" />
+                                  <DynamicHeaderService href="/desktop-software-developement#controller" leanguage="Controller Based" />
+                                  <DynamicHeaderService href="/desktop-software-developement#axistravelling" leanguage="Axis Traveling" />
+                                  <DynamicHeaderService href="/desktop-software-developement#lasersource" leanguage="Laser Source" />
                                 </ul>
                               </div>
                               <div className="mega-menu-blocks">
                                 <h6 className="mb-2 pl-1"> Web & Graphic</h6>
                                 <ul className="menu-li-link " style={{ marginRight: "12px" }}>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web_graphic-designing#webdesign" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Web Designing</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web_graphic-designing#uiux" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">UI/UX</span>{" "}
-                                    </Link>
-                                  </li>
-
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web_graphic-designing#reactjs" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">React.js</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web_graphic-designing#viewjs" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Vue.js</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web_graphic-designing#logo" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Logo & Banner</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/web_graphic-designing#brochur" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Brochure & Mokeup</span>{" "}
-                                    </Link>
-                                  </li>
+                                  <DynamicHeaderService href="/web_graphic-designing#webdesign" leanguage="Web Designing" />
+                                  <DynamicHeaderService href="/web_graphic-designing#uiux" leanguage="UI/UX" />
+                                  <DynamicHeaderService href="/web_graphic-designing#reactjs" leanguage="React.js" />
+                                  <DynamicHeaderService href="/web_graphic-designing#viewjs" leanguage="Vue.js" />
+                                  <DynamicHeaderService href="/web_graphic-designing#logo" leanguage="Logo & Banner" />
+                                  <DynamicHeaderService href="/web_graphic-designing#brochur" leanguage="Brochure & Mokeup" />
                                 </ul>
                               </div>
                             </div>
@@ -484,124 +370,44 @@ const Header = ({ action, cartToggle }) => {
                               <div className="mega-menu-blocks1">
                                 <h6 className="mb-2 pl-1"> Mobile App</h6>
                                 <ul className="menu-li-link ">
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/mobile-application-developement#flutter" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" style={{ width: "25px" }} />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Flutter</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/mobile-application-developement#android" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Android</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/mobile-application-developement#ios" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">iOS</span>{" "}
-                                    </Link>
-                                  </li>
+                                  <DynamicHeaderService href="/mobile-application-developement#flutter" leanguage="Flutter" />
+                                  <DynamicHeaderService href="/mobile-application-developement#android" leanguage="Android" />
+                                  <DynamicHeaderService href="/mobile-application-developement#ios" leanguage="iOS" />
                                 </ul>
                               </div>
                               <div className="mega-menu-blocks1">
                                 <h6 className="mb-2 pl-1"> Digital Marketing</h6>
                                 <ul className="menu-li-link ">
-                                  <li className="mb-1">
-                                    {" "}
-                                    <Link scroll={false} href="/digital-marketing#seo" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="ml-15 hoverLink" e={{ fontSize: "15px" }}>
-                                        SEO
-                                      </span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/digital-marketing#smm" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">SMM</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/digital-marketing#political" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Political Profile</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/digital-marketing#mobileapp" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Mobile App Promotion</span>{" "}
-                                    </Link>
-                                  </li>
+                                  <DynamicHeaderService href="/digital-marketing#seo" leanguage="SEO" />
+                                  <DynamicHeaderService href="/digital-marketing#smm" leanguage="SMM" />
+                                  <DynamicHeaderService href="/digital-marketing#political" leanguage="Political Profile" />
+                                  <DynamicHeaderService href="/digital-marketing#mobileapp" leanguage="Mobile App Promotion" />
                                 </ul>
                               </div>
                               <div className="mega-menu-blocks">
                                 <h6 className="mb-2 pl-1"> Enterprise Services</h6>
                                 <ul className="menu-li-link " style={{ marginRight: "12px" }}>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/enterprise-services#erp" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">ERP</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/enterprise-services#crm" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">CRM</span>{" "}
-                                    </Link>
-                                  </li>
-                                  <li className="mb-1">
-                                    <Link scroll={false} href="/enterprise-services#accounting" className=" p-1">
-                                      <div>
-                                        <Image height={50} width={50} src={bullet1} alt="symbol" className="header_icno" />
-                                      </div>{" "}
-                                      <span className="header_service_span ">Customized Accounting</span>{" "}
-                                    </Link>
-                                  </li>
+                                  <DynamicHeaderService href="/enterprise-services#erp" leanguage="ERP" />
+                                  <DynamicHeaderService href="/enterprise-services#crm" leanguage="CRM" />
+                                  <DynamicHeaderService href="/enterprise-services#accounting" leanguage="Customized Accounting" />
                                 </ul>
                               </div>
                             </div>
                           </div>
                           <Image height={500} width={1000} src={image} alt="sstpl" />
-                          {/* <h1>sstpl</h1> */}
                         </div>
                       </div>
                     </div>
                   </div>
                 </li>
                 <li className="megamenu">
-                  <Link scroll={false} href="/our-work" className={`menu-links `}>
-                    Our Work
-                  </Link>
+                  <HeadermainLink href="/our-work"> Our Work </HeadermainLink>
                 </li>
                 <li className="megamenu">
-                  <Link scroll={false} href="/career" className={`menu-links `}>
-                    Career
-                  </Link>
+                  <HeadermainLink href="/career">Career </HeadermainLink>
                 </li>
                 <li className="megamenu">
-                  <Link scroll={false} href="/contact-us" className={`menu-links `}>
-                    Contact Us
-                  </Link>
+                  <HeadermainLink href="/contact-us">Contact Us</HeadermainLink>
                 </li>
               </ul>
               <button type="button" onClick={cartToggle} className="main-btn hidebtn fs-17 fw-600" data-toggle="modal" data-target="#exampleModalCenter">

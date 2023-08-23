@@ -1,39 +1,47 @@
-import React from "react";
-import webLayout from "@/Component/websiteComponent/Layout/Layout";
-import AdminLayout from "@/Component/AdminComponent/Layout/Layout";
+//   {/* <Script src="https://www.googletagmanager.com/gtag/js?id=UA-142119303-1" />
+//   <Script strategy="lazyOnload">
+//     {`window.dataLayer = window.dataLayer || [];
+//     function gtag(){dataLayer.push(arguments);}
+//     gtag('js', new Date());
+//      gtag('config', 'UA-142119303-1');`}
+//   </Script> */}
+
+import React, { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 import "../assets/css/sstplmain.css";
 import "../assets/css/custom-animated.css";
 import "../assets/css/default.css";
 import "../assets/css/Fonts.css";
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/adminpanel.css";
-import AOSWrapper from "@/Component/websiteComponent/SubComponent/AosWrapper";
-import { store } from "@/redux/store";
-import { Provider } from "react-redux";
 import { useRouter } from "next/router";
-// import { ThemeProvider } from "@mui/styles";
-// import { theme } from "@/Component/AdminComponent/common/Theme";
+import dynamic from "next/dynamic";
+const AOSWrapper = dynamic(() => import("@/Component/websiteComponent/SubComponent/AosWrapper"), { ssr: false });
+const webLayout = dynamic(() => import("@/Component/websiteComponent/Layout/Layout"), { ssr: false });
+const AdminLayout = dynamic(() => import("@/Component/AdminComponent/Layout/Layout"), { ssr: false });
 
-const MyApp = ({ Component, pageProps }) => {
+function MyApp({ Component, pageProps }) {
   const router = useRouter();
 
   const { pathname } = router;
-  const  displaylayout = pathname.startsWith("/online-admin/dashboard")
+
+  const displaylayout = pathname.startsWith("/online-admin/dashboard");
   const Layout = pathname.startsWith("/online-admin") ? AdminLayout : webLayout;
 
+
   return (
-    // <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <div className={`${ displaylayout && 'setdisplay' }`}>
-          <Layout>
-            <AOSWrapper>
-              <Component {...pageProps} />
-            </AOSWrapper>
-          </Layout>
-        </div>
-      </Provider>
-    // </ThemeProvider>
+    <Provider store={store}>
+      <div className={`${displaylayout && "setdisplay"}`}>
+        {/* <div className={`${displaylayout} ${displaylayout && "setdisplay"} ${isNotFound && "no-header"}`}> */}
+        <Layout>
+          <AOSWrapper>
+            <Component {...pageProps} />
+          </AOSWrapper>
+        </Layout>
+      </div>
+    </Provider>
   );
-};
+}
 
 export default MyApp;

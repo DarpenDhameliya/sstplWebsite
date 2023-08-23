@@ -1,7 +1,6 @@
 import Seo from "@/Component/Seo";
 import TermandConditionIndex from "@/Component/websiteComponent/tems&consition/Index";
 import React from "react";
-import axios from '../Component/Axios';
 import { Metaapicall } from "@/redux/Metaapicall";
 
 const terms = ({initialPortfolioList}) => {

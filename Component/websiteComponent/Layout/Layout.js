@@ -1,72 +1,62 @@
-// import React from "react";
-// import Header from "./Header";
-// import Footer from "./Footer";
-// import CommonLowerFooter from "./CommonLowerFooter";
-// import useToggle from "../SubComponent/Hooks/useToggle";
-// import Hireus from "./Hireus";
-// import { useRouter } from "next/router";
-// import Drawer from "./Drawer";
-// import BackToTop from "./BackToTop";
-// import ScrollToSection from "./ScrollToTop";
-// // import "../../../assets/css/custom-animated.css";
-
-// const Layout = ({ children }) => {
-//   const [drawer, drawerAction] = useToggle(false);
-//   const [cart, cartAction] = useToggle(false);
-//   const router = useRouter();
-//   console.log('hi')
-//   return (
-//     <>
-//       <ScrollToSection>
-//         <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-//         <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-//         <Hireus value={cart} action={cartAction.toggle} />
-//         <main>{children}</main>
-//         {router.pathname === "/contact-us" ? "" : <Footer />}
-//         <CommonLowerFooter />
-//       </ScrollToSection>
-//       <BackToTop />
-//     </>
-//   );
-// };
-
-// export default Layout;
-
-import React from "react";
-import CommonLowerFooter from "./CommonLowerFooter";
+import React, { useEffect, useState } from "react";
 import useToggle from "../SubComponent/Hooks/useToggle";
 import { useRouter } from "next/router";
-import BackToTop from "./BackToTop";
-import ScrollToSection from "./ScrollToTop";
-import DynamicHeader from "./Header";
-import DynamicFooter from "./Footer";
-import DynamicHireus from "./Hireus";
-import DynamicDrawer from "./Drawer";
+import dynamic from "next/dynamic";
+const CommonLowerFooter = dynamic(() => import("./CommonLowerFooter"), { ssr: false });
 
-// const DynamicDrawer = dynamic(() => import("./Drawer"), { ssr: false });
-// const DynamicHeader = dynamic(() => import("./Header"), { ssr: false });
-// const DynamicHireus = dynamic(() => import("./Hireus"), { ssr: false });
-// const DynamicFooter = dynamic(() => import("./Footer"), { ssr: false });
+const BackToTop = dynamic(() => import("./BackToTop"), { ssr: false });
+const ScrollToSection = dynamic(() => import("./ScrollToTop"), { ssr: false });
+const DynamicDrawer = dynamic(() => import("./Drawer"), { ssr: false });
+const DynamicHeader = dynamic(() => import("./Header"), { ssr: false });
+const DynamicHireus = dynamic(() => import("./Hireus"), { ssr: false });
+const DynamicFooter = dynamic(() => import("./Footer"), { ssr: false });
 
 const Layout = ({ children }) => {
   const [drawer, drawerAction] = useToggle(false);
   const [cart, cartAction] = useToggle(false);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const [scrollAbove200, setScrollAbove200] = useState(false);
+  const [openHireus, setOpenHireus] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOpenHireus(true);
+    }, 2000);
+  }, []);
+
+  const handleScroll = () => {
+    if (window.scrollY > 180 && !scrollAbove200) {
+      setScrollAbove200(true);
+    }
+  };
+
+  const handleResize = () => {
+    setInnerWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [scrollAbove200]);
 
   return (
     <>
-      <ScrollToSection>
-        <DynamicDrawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <DynamicHeader action={drawerAction.toggle} cartToggle={cartAction.toggle} />
-        <DynamicHireus value={cart} action={cartAction.toggle} />
-        <main>{children}</main>
-        {router.pathname === "/contact-us" ? "" : <DynamicFooter />}
-        <CommonLowerFooter />
-      </ScrollToSection>
-      <BackToTop />
+      {innerWidth < 992 && <DynamicDrawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />}
+      <DynamicHeader action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+      {openHireus && <DynamicHireus value={cart} action={cartAction.toggle} />}
+      <main>{children}</main>
+      {router.pathname === "/contact-us" ? "" :  scrollAbove200 && <DynamicFooter />}
+      {scrollAbove200 && <CommonLowerFooter />}
+      {openHireus && <ScrollToSection />}
+      {scrollAbove200 && <BackToTop />}
     </>
   );
 };
 
 export default Layout;
-

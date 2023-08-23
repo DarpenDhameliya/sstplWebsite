@@ -29,7 +29,7 @@ const HomeIndex = ({apidata}) => {
           <OurWorkService />
           <Technology />
           <Industry />
-          <Portfoliyo data={apidata}/>
+          <Portfoliyo />
           <Testimonial />
         </Suspense>
       </div>

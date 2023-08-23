@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import axioss from "axios";
 import ReCAPTCHA from "react-google-recaptcha";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { ContactusSlice, Contactusstate, Contactusstatus } from "@/redux/slice/Contackus";
 import { Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
+import axioss from 'axios'
 
 export default function Footer(className) {
   const [fname, setFname] = useState("");

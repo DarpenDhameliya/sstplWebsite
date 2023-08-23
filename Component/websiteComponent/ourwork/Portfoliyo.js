@@ -4,11 +4,12 @@ import React, { useState, useEffect } from "react";
 import axios from "../../Axios";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import PortfolioItem from "./ViewImages";
-import PortfolioModal from "./portfolioModel";
-const Portfoliyo = ({loding , data}) => {
+import dynamic from "next/dynamic";
+const PortfolioItem = dynamic(() => import("./ViewImages"));
+const PortfolioModal = dynamic(() => import("./portfolioModel"));
+
+const Portfoliyo = ({ loding, data }) => {
   const [tab, setTab] = useState("all");
-  const [workdata, setWorkdata] = useState([]);
   const [portfolioList, setportfolioList] = useState([]);
   const [sendMsg, setSendMsg] = useState({
     id: "",
@@ -30,33 +31,28 @@ const Portfoliyo = ({loding , data}) => {
   };
 
   useEffect(() => {
-    // fetchHiredata();
-    
-    if(data.length > 0){
-      data = data.sort(() => Math.random() - 0.5);
-      setportfolioList(data)
-      loding();
-    }
-  }, [data]);
+    fetchHiredata();
+  }, []);
 
-  // const fetchHiredata = () => {
-  //   axios
-  //     .post("portfolio/portfolio_list", {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     })
-  //     .then((result) => {
-  //       setportfolioList(result.data.result);
-  //       setTimeout(() => {
-  //         loding();
-  //       }, 300);
-  //     })
-  //     .catch((err) => {
-  //       loding();
-  //       setFetchErr(err.response.data.error);
-  //     });
-  // };
+  const fetchHiredata = () => {
+    axios
+      .post("portfolio/portfolio_list", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((result) => {
+        data = result.data.result.sort(() => Math.random() - 0.5);
+        setportfolioList(data);
+        setTimeout(() => {
+          loding();
+        }, 300);
+      })
+      .catch((err) => {
+        loding();
+        setFetchErr(err.response.data.error);
+      });
+  };
 
   const handle_modal = (e, data) => {
     setOpen(true);
@@ -110,73 +106,45 @@ const Portfoliyo = ({loding , data}) => {
                 <div className={`tab-pane fade show ${tab === "all" ? "show active" : ""}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row">
                     {portfolioList.map((e, index) => {
-                        return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                      
+                      return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
                     })}
                   </div>
                 </div>
 
                 <div className={`tab-pane fade show ${tab === "desktopsoftware" ? "show active" : ""}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row">
-                    {portfolioList.length > 0
-                      ? portfolioList.map((e, index) => {
-                            let data = e.category.split(",");
-                            for (let i = 0; i < data.length; i++) {
-                              if (data[i] === "desktopsoftware") {
-                                return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                              }
-                            }
-                          
-                        })
-                      : workdata.map((e, index) => {
-                          return e.type.map((ea) => {
-                            if (ea === "desk") {
-                              return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                            }
-                          });
-                        })}
+                    {portfolioList.map((e, index) => {
+                      let data = e.category.split(",");
+                      for (let i = 0; i < data.length; i++) {
+                        if (data[i] === "desktopsoftware") {
+                          return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
+                        }
+                      }
+                    })}
                   </div>
                 </div>
                 <div className={`tab-pane fade show ${tab === "mobileapplication" ? "show active" : ""}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row">
-                    {portfolioList.length > 0
-                      ? portfolioList.map((e, index) => {
-                            let data = e.category.split(",");
-                            for (let i = 0; i < data.length; i++) {
-                              if (data[i] === "mobileapplication") {
-                                return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                              }
-                            }
-                          
-                        })
-                      : workdata.map((e, index) => {
-                          return e.type.map((ea) => {
-                            if (ea === "mob") {
-                              return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                            }
-                          });
-                        })}
+                    {portfolioList.map((e, index) => {
+                      let data = e.category.split(",");
+                      for (let i = 0; i < data.length; i++) {
+                        if (data[i] === "mobileapplication") {
+                          return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
+                        }
+                      }
+                    })}
                   </div>
                 </div>
                 <div className={`tab-pane fade show ${tab === "webapplication" ? "show active" : ""}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                   <div className="row">
-                    {portfolioList.length > 0
-                      ? portfolioList.map((e, index) => {
-                            let data = e.category.split(",");
-                            for (let i = 0; i < data.length; i++) {
-                              if (data[i] === "webapplication") {
-                                return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                              }
-                            }
-                          
-                        })
-                      : workdata.map((e) => {
-                          return e.type.map((ea, index) => {
-                            if (ea === "web") {
-                              return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
-                            }
-                          });
-                        })}
+                    {portfolioList.map((e, index) => {
+                      let data = e.category.split(",");
+                      for (let i = 0; i < data.length; i++) {
+                        if (data[i] === "webapplication") {
+                          return <PortfolioItem key={index} data={e} handleModal={handle_modal} />;
+                        }
+                      }
+                    })}
                   </div>
                 </div>
               </div>
@@ -194,6 +162,3 @@ const Portfoliyo = ({loding , data}) => {
 };
 
 export default Portfoliyo;
-
-
-

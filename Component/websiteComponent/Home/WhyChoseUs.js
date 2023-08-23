@@ -3,8 +3,10 @@ import image1 from "../../../assets/images/Group 16 (7).webp";
 import mob1 from "../../../assets/images/customize solution png.webp";
 import mob2 from "../../../assets/images/CUSTOMER SUPPORT.webp";
 import mob3 from "../../../assets/images/LATEST TECHNOLOGY.webp";
-import WhyChooseus_leftbox from "../SubComponent/homeSubComponent/whyChooseus_leftbox";
+// import WhyChooseus_leftbox from "../SubComponent/homeSubComponent/whyChooseus_leftbox";
+const WhyChooseus_leftbox = dynamic(() => import("../SubComponent/homeSubComponent/whyChooseus_leftbox"), { ssr: false });
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
 export default function WhyChoseUs() {
   return (

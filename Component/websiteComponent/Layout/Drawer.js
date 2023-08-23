@@ -1,16 +1,22 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../../assets/images/logo.webp";
 import Link from "next/link";
 import Image from "next/image";
+import { Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
+import { SocialLink, socialMediaLinks } from "../SubComponent/FooterLink";
+import { useDispatch, useSelector } from "react-redux";
 
-function Drawer({drawer, action, cartToggle}) {
+function Drawer({ drawer, action, cartToggle }) {
   const [size, setSize] = useState("0px");
   const [item, setItem] = useState("home");
+  const dispatch = useDispatch();
+  const [fields, setFields] = useState([]);
+  const states = useSelector(Iconstate);
 
   const handler = (e, value, sizes) => {
     e.preventDefault();
-    if (value === "about-us" || value === "testimoial" || value === "value_home" || value === 'value_home_img') {
+    if (value === "about-us" || value === "testimoial" || value === "value_home" || value === "value_home_img") {
       action(e);
     }
     if (value === "value_home_img") {
@@ -31,11 +37,19 @@ function Drawer({drawer, action, cartToggle}) {
         setItem(value);
       }
     }
-
   };
   const handleaction = (e) => {
     action(e);
   };
+  useEffect(() => {
+    if (states.status === "succeeded") {
+      setFields(states.response.result[0].data);
+      dispatch(Iconstatus());
+    } else if (states.status === "failed") {
+      dispatch(Iconstatus());
+    } else {
+    }
+  }, [states]);
   return (
     <>
       <div onClick={handleaction} className={`off_canvars_overlay ${drawer ? "active" : ""}`}></div>
@@ -50,13 +64,17 @@ function Drawer({drawer, action, cartToggle}) {
                 <div id="menu" className="text-left ">
                   <ul className="offcanvas_main_menu">
                     <li onClick={(e) => handler(e, "home", size)} id="home" className="menu-item-has-children active">
-                      <Link scroll={false} href="/">Home</Link>
+                      <Link scroll={false} href="/">
+                        Home
+                      </Link>
                     </li>
                     <li onClick={(e) => handler(e, "about", size)} id="about" className="menu-item-has-children active">
                       <span className="menu-expand">
                         <i className="fa fa-angle-down"></i>
                       </span>
-                      <Link scroll={false} href="#">ABOUT US</Link>
+                      <Link scroll={false} href="#">
+                        ABOUT US
+                      </Link>
                       <ul
                         className="sub-menu"
                         style={{
@@ -64,30 +82,46 @@ function Drawer({drawer, action, cartToggle}) {
                         }}
                       >
                         <li onClick={(e) => handler(e, "about-us", size)} id="about-us">
-                          <Link scroll={false} href="/about-us">About SSTPL</Link>
+                          <Link scroll={false} href="/about-us">
+                            About SSTPL
+                          </Link>
                         </li>
                         <li onClick={(e) => handler(e, "testimoial", size)} id="testimoial">
-                          <Link scroll={false} href="/testimonial">Testimonial</Link>
+                          <Link scroll={false} href="/testimonial">
+                            Testimonial
+                          </Link>
                         </li>
                         <li onClick={(e) => handler(e, "value_home", size)} id="value_home">
-                          <Link scroll={false} href="/">Blog</Link>
+                          <Link scroll={false} href="/">
+                            Blog
+                          </Link>
                         </li>
                         <li onClick={(e) => handler(e, "value_home_img", size)} id="value_home">
-                          <Link scroll={false} href="#">Life@SSTPL</Link>
+                          <Link scroll={false} href="#">
+                            Life@SSTPL
+                          </Link>
                         </li>
                       </ul>
                     </li>
                     <li onClick={(e) => handler(e, "ourservice", size)} id="ourservice" className="menu-item-has-children active">
-                      <Link scroll={false} href="/our-service">Our Service</Link>
+                      <Link scroll={false} href="/our-service">
+                        Our Service
+                      </Link>
                     </li>
                     <li onClick={(e) => handler(e, "OurWork", size)} id="OurWork" className="menu-item-has-children active">
-                      <Link scroll={false} href="/our-work">OUR WORK</Link>
+                      <Link scroll={false} href="/our-work">
+                        OUR WORK
+                      </Link>
                     </li>
                     <li onClick={(e) => handler(e, "careers", size)} id="home" className="menu-item-has-children active">
-                      <Link scroll={false} href="/career">CAREERS</Link>
+                      <Link scroll={false} href="/career">
+                        CAREERS
+                      </Link>
                     </li>
                     <li onClick={(e) => handler(e, "contact-us", size)} id="contactus" className="menu-item-has-children active">
-                      <Link scroll={false} href="/contact-us">CONTACT US</Link>
+                      <Link scroll={false} href="/contact-us">
+                        CONTACT US
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -98,36 +132,27 @@ function Drawer({drawer, action, cartToggle}) {
                 </div>
                 <div className="offcanvas-social">
                   <ul className="text-center">
-                    <li>
-                      <Link scroll={false} target="_blank" href="https://www.facebook.com/softstorm.in" rel="noopener noreferrer">
-                        <i className="fab fa-facebook-f hoverefffac" style={{color: "#4f4f4f "}} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link scroll={false} target="_blank" href="https://twitter.com/softstorm_in" rel="noopener noreferrer">
-                        <i className="fab fa-twitter hoverefftwi" style={{color: "#4f4f4f "}} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link scroll={false} target="_blank" href="https://www.linkedin.com/company/softstorm-in" rel="noopener noreferrer">
-                        <i className="fab fa-linkedin-in hoverefflin" style={{color: "#4f4f4f "}} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link scroll={false} target="_blank" href="https://www.instagram.com/softstorm.in" rel="noopener noreferrer">
-                        <i className="fab fa-instagram hovereffins" style={{color: "#4f4f4f "}} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link scroll={false} target="_blank" href="https://wa.me/912613560756" rel="noopener noreferrer">
-                        <i className="fab fa-whatsapp hovereffwat" style={{color: "#4f4f4f "}} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link scroll={false} target="_blank" href="https://www.softstorm.in/skype:softstorminfosys?chat" rel="noopener noreferrer">
-                        <i className="fab fa-skype hovereffsky" style={{color: "#4f4f4f "}} />
-                      </Link>
-                    </li>
+                    {fields.length > 0
+                      ? fields.map((e, index) => {
+                          return (
+                            <React.Fragment key={index}>
+                              <li>
+                                <SocialLink href={{ pathname: e.link }} className="ml-15">
+                                  <i className={`fab ${e.icon} ${e.class}`} style={{ color: "#4f4f4f " }} />
+                                </SocialLink>
+                              </li>
+                            </React.Fragment>
+                          );
+                        })
+                      : socialMediaLinks.map((link, index) => (
+                          <React.Fragment key={index}>
+                            <li>
+                              <SocialLink href={{ pathname: link.href }} className={link.className}>
+                                <i className={link.iconClass} style={{ color: "#4f4f4f " }} />
+                              </SocialLink>
+                            </li>
+                          </React.Fragment>
+                        ))}
                   </ul>
                 </div>
                 <div className="footer-widget-info">
@@ -152,7 +177,7 @@ function Drawer({drawer, action, cartToggle}) {
                     </li>
                     <li>
                       <a href="https://www.google.com/maps/dir/21.2369408,72.8629248/softstorm/@21.2356059,72.8587446,17z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3be04f50264611d1:0x76746ef930af1752!2m2!1d72.8590564!2d21.2349749?entry=ttu" target="_blank" className="pl-0">
-                        <i className="fa fa-location-dot mr-2" style={{fontSize: "20px", color: "#c20004"}} />
+                        <i className="fa fa-location-dot mr-2" style={{ fontSize: "20px", color: "#c20004" }} />
                         <div className="ml-30">305-306, Amby Valley Arcade, Opp. Santosa Height, Manisha Garnala. Uttran, Surat, Gujarat</div>
                       </a>
                     </li>

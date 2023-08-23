@@ -1,7 +1,8 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import SidePortion from "../SidePortion";
 import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../SubComponent/lib/ServiceSticky";
-import webimg from "../../../../assets/images/services/web-app-development.webp";
+const HomeImages = dynamic(() => import("./HomeImages"));
+
 import {Servicestate} from "../../../../redux/slice/Service";
 import {useDispatch, useSelector} from "react-redux";
 const WebService = ({images, serviceContents}) => {
@@ -141,7 +142,7 @@ const WebService = ({images, serviceContents}) => {
             <div className="col-lg-8 col-md-7 ">
               <div className="single-post-area">
                 <div className="post-thumb">
-                  <img src={image ? image : webimg} alt="" />
+                  <img src={image ? image : HomeImages.webimg} alt="" />
                 </div>
                 <span id="nodejs" style={{paddingTop: "15px"}}></span>
                 <h4 className="article-title mt-1">Web App</h4>

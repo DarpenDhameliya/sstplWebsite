@@ -1,6 +1,5 @@
 import Seo from '@/Component/Seo'
 import Loader from '@/Component/loader'
-import axios from '../Component/Axios';
 
 import React, { Suspense, lazy } from 'react'
 const Digitalserviceindex = lazy(() => import('@/Component/websiteComponent/Services/digital/Digitalserviceindex'));
