@@ -1,58 +1,26 @@
 {
-  "name": "sstplweb",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@material-ui/styles": "^4.11.5",
-    "@mui/material": "^5.13.5",
-    "@mui/styles": "^5.13.2",
-    "@reduxjs/toolkit": "^1.9.3",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "aos": "^2.3.4",
-    "axios": "^1.3.4",
-    "crypto-js": "^4.1.1",
-    "jodit-react": "^1.3.39",
-    "lottie-react": "^2.4.0",
-    "react": "^18.2.0",
-    "react-countup": "^6.0.0",
-    "react-dom": "^18.2.0",
-    "react-google-recaptcha": "^3.1.0",
-    "react-redux": "^8.0.5",
-    "react-router-dom": "^5.3.4",
-    "react-router-hash-link": "^2.4.3",
-    "react-scripts": "5.0.1",
-    "react-select": "^5.7.0",
-    "react-slick": "^0.29.0",
-    "react-toastify": "^9.1.3",
-    "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "sstpl-node",
+  "version": "1.0.0",
+  "description": "site",
+  "main": "index.js",
   "scripts": {
-    "start": "set PORT=3003 && react-scripts start",
-    "build": "react-scripts build --exclude sample.txt",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Index.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.21"
   }
 }
