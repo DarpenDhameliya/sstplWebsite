@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from "react";
-import SidePortion from "../SidePortion";
-import {servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6} from "../../SubComponent/lib/ServiceSticky";
-const HomeImages = dynamic(() => import("./HomeImages"));
-
-import {Servicestate} from "../../../../redux/slice/Service";
-import {useDispatch, useSelector} from "react-redux";
-const WebService = ({images, serviceContents}) => {
+import React, { useState, useEffect } from "react";
+import { servicesticky4, servicesticky1, servicesticky2, servicesticky3, servicesticky5, servicesticky6 } from "../../SubComponent/lib/ServiceSticky";
+import { Servicestate } from "../../../../redux/slice/Service";
+import { useDispatch, useSelector } from "react-redux";
+import style from "../service.module.css";
+import webimg from "../../../../assets/images/services/web-app-development.webp";
+import dynamic from "next/dynamic";
+const SidePortion = dynamic(() => import("../SidePortion.js"));
+const Staticdata = dynamic(() => import("./Staticdata"));
+const WebService = ({ images, serviceContents }) => {
   const [tab, setTab] = useState("");
   const [serviceContent, setServiceContent] = useState("");
   const [dbFetcherr, setDbFetcherr] = useState("");
@@ -33,7 +35,6 @@ const WebService = ({images, serviceContents}) => {
 
   // active header code
   useEffect(() => {
-
     const handleScroll = () => {
       const middle = window.innerHeight / 2;
 
@@ -75,8 +76,6 @@ const WebService = ({images, serviceContents}) => {
     };
   }, []);
 
-
-
   // header small big code
   useEffect(() => {
     if (window.innerWidth < 1200 && window.innerWidth > 992) {
@@ -95,39 +94,38 @@ const WebService = ({images, serviceContents}) => {
 
   return (
     <>
-      <section className="blogpage-section">
-        <header className="service-header haderhide">
-          {/* <div className="container"> */}
-          <div className="header-nav-box">
+      <section className={style.blogpage_section}>
+        <header className={`service-header ${style.haderhide} `}>
+          <div className={style.header_nav_box}>
             <div className="row align-items-center">
               <div className="col-lg-12">
                 <div className=" d-flex">
                   <div>
-                    <a className={`handleservice_header pl-3 pr-3 ${tab === "nodejs" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#nodejs">
+                    <a className={`${style.handleservice_header} pl-3 pr-3 white pt-12 ${tab === "nodejs" ? "subHadactive" : ""}`} href="#nodejs">
                       NODE JS
                     </a>
                   </div>
-                  <span style={{margin: "12px 5px 0 ", color: "white"}}>|</span>
+                  <span style={{ margin: "12px 5px 0 ", color: "white" }}>|</span>
                   <div>
-                    <a className={`handleservice_header   pl-3 pr-3 ${tab === "php" || tab === "php" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#php">
+                    <a className={`${style.handleservice_header}   pl-3 pr-3 white pt-12 ${tab === "php" || tab === "php" ? "subHadactive" : ""}`} href="#php">
                       PHP
                     </a>
                   </div>
-                  <span style={{margin: "12px 5px 0 ", color: "white"}}>|</span>
+                  <span style={{ margin: "12px 5px 0 ", color: "white" }}>|</span>
                   <div>
-                    <a className={`handleservice_header  pl-3 pr-3 ${tab === "laravel" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#laravel">
+                    <a className={`${style.handleservice_header}  pl-3 pr-3 white pt-12 ${tab === "laravel" ? "subHadactive" : ""}`} href="#laravel">
                       LARAVEL
                     </a>
                   </div>
-                  <span style={{margin: "12px 5px 0 ", color: "white"}}>|</span>
+                  <span style={{ margin: "12px 5px 0 ", color: "white" }}>|</span>
                   <div>
-                    <a className={`handleservice_header  pl-3 pr-3 ${tab === "codeigniter" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#codeigniter">
+                    <a className={`${style.handleservice_header}  pl-3 pr-3 white pt-12 ${tab === "codeigniter" ? "subHadactive" : ""}`} href="#codeigniter">
                       CODEIGNITER
                     </a>
                   </div>
-                  <span style={{margin: "12px 5px 0 ", color: "white"}}>|</span>
+                  <span style={{ margin: "12px 5px 0 ", color: "white" }}>|</span>
                   <div>
-                    <a className={`handleservice_header pl-3 pr-3 ${tab === "python" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#python">
+                    <a className={`${style.handleservice_header} pl-3 pr-3 white pt-12 ${tab === "python" ? "subHadactive" : ""}`} href="#python">
                       PYTHON
                     </a>
                   </div>
@@ -135,50 +133,49 @@ const WebService = ({images, serviceContents}) => {
               </div>
             </div>
           </div>
-          {/* </div> */}
         </header>
         <div className="container">
           <div className="row">
             <div className="col-lg-8 col-md-7 ">
-              <div className="single-post-area">
-                <div className="post-thumb">
-                  <img src={image ? image : HomeImages.webimg} alt="" />
+              <div className={style.single_post_area}>
+                <div className={style.post_thumb}>
+                  <img src={image ? image : webimg} alt="" />
                 </div>
-                <span id="nodejs" style={{paddingTop: "15px"}}></span>
-                <h4 className="article-title mt-1">Web App</h4>
-                <header className="service-header_small haderhide" id="service-header_id">
+                <span id="nodejs" className="pt-15"></span>
+                <h4 className={`${style.article_title} mt-1 mb-2`}>Web App</h4>
+                <header className={`service-header_small ${style.haderhide} `} id="service-header_id">
                   <div className="container">
-                    <div className="header-nav-box">
+                    <div className={style.header_nav_box}>
                       <div className="row align-items-center">
                         <div className="col-lg-12">
                           <div className=" d-flex">
                             <div>
-                              <a className={`handleservice_header pl-2 pr-2 ${tab === "nodejs" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#nodejs">
+                              <a className={`${style.handleservice_header} pl-2 pr-2 pt-12 white ${tab === "nodejs" ? "subHadactive" : ""}`} href="#nodejs">
                                 NODE JS
                               </a>
                             </div>
-                            <span className="handlespan"> | </span>
+                            <span className={style.handlespan}> | </span>
                             <div>
-                              <a className={`handleservice_header pl-2 pr-2 ${tab === "php" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#php">
+                              <a className={`${style.handleservice_header} pl-2 pr-2 pt-12 white ${tab === "php" ? "subHadactive" : ""}`} href="#php">
                                 PHP
                               </a>
                             </div>
-                            <span className="handlespan"> | </span>
+                            <span className={style.handlespan}> | </span>
                             <div>
-                              <a className={`handleservice_header pl-2 pr-2 ${tab === "laravel" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#laravel">
+                              <a className={`${style.handleservice_header} pl-2 pr-2 pt-12 white ${tab === "laravel" ? "subHadactive" : ""}`} href="#laravel">
                                 LARAVEL
                               </a>
                             </div>
-                            <span className="handlespan"> | </span>
+                            <span className={style.handlespan}> | </span>
                             <div>
-                              <a className={`handleservice_header  pl-2 pr-2 ${tab === "codeigniter" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#codeigniter">
+                              <a className={`${style.handleservice_header}  pl-2 pr-2 pt-12 white ${tab === "codeigniter" ? "subHadactive" : ""}`} href="#codeigniter">
                                 CODEIGNITER
                               </a>
                             </div>
-                            <span className="handlespan"> | </span>
+                            <span className={style.handlespan}> | </span>
 
                             <div>
-                              <a className={`handleservice_header pl-2 pr-2 ${tab === "python" ? "subHadactive" : ""}`} style={{color: "#fff", paddingTop: "12px"}} href="#python">
+                              <a className={`${style.handleservice_header} pl-2 pr-2 pt-12 white ${tab === "python" ? "subHadactive" : ""}`} href="#python">
                                 PYTHON
                               </a>
                             </div>
@@ -188,109 +185,7 @@ const WebService = ({images, serviceContents}) => {
                     </div>
                   </div>
                 </header>
-                {serviceContent.length > 0 ? (
-                  <div dangerouslySetInnerHTML={{__html: serviceContent}} />
-                ) : (
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <div className="softstormweb-web-service mt-25" id="div4">
-                        <div className="content">
-                          <h4 className="title">Node.js</h4>
-                          <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                          <h6>SoftStorm Provides:</h6>
-                          <ul className="ml-15 mt-2 handlelist">
-                            <li>Python Dynamic Website Development</li>
-                            <li>Web Application Development using Python</li>
-                            <li>Data Science Projects</li>
-                            <li>
-                              Python Active Directory integration services
-                              <span id="php"></span>
-                            </li>
-                            <li>Web Crawler Development</li>
-                            <li>Migration Services</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="softstormweb-web-service mt-25" id="div1">
-                        <div className="content">
-                          <h4 className="title">PHP Development</h4>
-                          <p>If your business demands a website which needs to gather information. Then PHP is the tool of choice. PHP gives web developers the ability to create dynamic web pages, which can collect data from visitors. Perfect for those business concerns which rely on capturing data. Travel Agents, Hospitals and similar concerns should go for PHP.</p>
-                          <h6>SoftStorm Provides:</h6>
-                          <ul className="ml-15 mt-2 handlelist">
-                            <li>Custom PHP Developmente</li>
-                            <li>SaaS using PHP</li>
-                            <li>E-Commerce Solutions using PHP</li>
-                            <li>
-                              Portal Development Solutions
-                              <span id="laravel"></span>
-                            </li>
-                            <li>PHP/MySql Development</li>
-                            <li>Web application and Social Networking Solution</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="softstormweb-web-service mt-25" id="div3">
-                        <div className="content">
-                          <h4 className="title">Laravel Website Development</h4>
-                          <p>A perfect tool for SME industry and their web Development needs. This framework gives the freedom of deploying highly multifunctional websites quickly. Department level, functional web Development, and data integration are possible with Laravel.</p>
-                          <h6>SoftStorm Provides:</h6>
-                          <ul className="ml-15 mt-2 handlelist">
-                            <li>Custom Development</li>
-                            <li>SaaS Development</li>
-                            <li>
-                              Custom Theme Development
-                              <span id="codeigniter"></span>
-                            </li>
-                            <li>Migration to Laravel</li>
-
-                            <li>Extension Development</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="softstormweb-web-service mt-25" id="div2">
-                        <div className="content">
-                          <h4 className="title">Codeigniter Development</h4>
-                          <p>Perhaps the most popular PHP Development framework of present times. Perfect for travel aggregators and similar business. It is light and flexible. Data and logic based services are constructed on this framework.</p>
-                          <h6>SoftStorm Provides:</h6>
-                          <ul className="ml-15 mt-2 handlelist">
-                            <li>Codeigniter Migration Service</li>
-                            <li>Fast Development using CI</li>
-                            <li>
-                              Application Development
-                              <span id="python"></span>
-                            </li>
-                            <li>Networking Solutions</li>
-                            <li>Templating Development using CI</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="col-lg-12">
-                      <div className="softstormweb-web-service mt-25" id="div5">
-                        <div className="content">
-                          <h4 className="title">Python Development</h4>
-                          <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                          <h6>SoftStorm Provides:</h6>
-                          <ul className="ml-15 mt-2 handlelist">
-                            <li>Python Dynamic Website Development</li>
-                            <li>Web Application Development using Python</li>
-                            <li>Data Science Projects</li>
-                            <li>Python Active Directory integration services</li>
-                            <li>Web Crawler Development</li>
-                            <li>Migration Services</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {serviceContent.length > 0 ? <div dangerouslySetInnerHTML={{ __html: serviceContent }} /> : <Staticdata />}
               </div>
             </div>
             <div className="col-lg-4 col-md-5">

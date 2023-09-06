@@ -1,0 +1,134 @@
+.softstormweb_testimoial {
+    background: #f8f9fa;
+  }
+  .fafaquatsstart {
+    margin: 0 8px 0 0;
+    color: #c50004;
+    font-size: 15px;
+    margin-right: 10px;
+  }
+  .fafaquatsend {
+    margin: 0 8px 0 0;
+    color: #c50004;
+    font-size: 15px;
+    margin-left: 10px;
+  }
+  .testimonialspan {
+    display: flex;
+    margin-left: 20px;
+    padding-top: 5px;
+    font-weight: 800;
+  }
+  /* .softstormweb-testimoial {
+    background: #f8f9fa;
+  } */
+  .testimonial_line {
+    display: none;
+  }
+  .mobiletitle_testimonial {
+    display: block;
+    margin-bottom: 10px;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .softstormweb_left_testimoial {
+      margin-bottom: 50px;
+    }
+  }
+  @media (max-width: 767px) {
+    .softstormweb_left_testimoial {
+      margin-bottom: 50px;
+    }
+    .mobiletitle_testimonial {
+      display: flex !important;
+      justify-content: center;
+      margin-bottom: 0 !important;
+    }
+    .testimonial_line {
+      display: block !important;
+    }
+    .handletestimnoal_teb {
+      text-align: center;
+    }
+    .award_testimonal {
+      display: none !important;
+    }
+  }
+  .handleview {
+    background-color: #fff;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 40px 50px 0px rgb(0 24 75 / 10%);
+    border-radius: 20px;
+    padding: 10px 10px 0;
+  }
+  .softstormweb_right_testimoial .slick_arrow {
+    position: absolute;
+    right: 0;
+    bottom: -45px;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 40px;
+    border: 2px solid #e3e5e8;
+    color: #0e1133;
+    border-radius: 50%;
+    z-index: 9;
+    cursor: pointer;
+    transition: all linear 0.1s !important;
+  }
+  .softstormweb_right_testimoial .slick_arrow:hover {
+    background: #d80000;
+    color: #fff;
+    border-color: #d80000;
+  }
+  .softstormweb_right_testimoial .slick_arrow.prev {
+    right: 55px;
+  }
+  .softstormweb_right_testimoial .slick_arrow.next {
+    right: 10px;
+  }
+  .softstormweb_right_testimoial .item img {
+    width: 100%;
+  }
+  .softstormweb_right_testimoial {
+    position: relative;
+    min-height: 200px;
+  }
+
+  .softstormweb_left_testimoial .content {
+    padding-left: 40px;
+    padding-top: 35px;
+  }
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .softstormweb_left_testimoial .content {
+      padding-left: 30px;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .softstormweb_left_testimoial .content {
+      padding-left: 0px;
+    }
+    .award_testimonal {
+      display: none !important;
+    }
+  }
+  .award_testimonal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  @media (max-width: 767px) {
+    .softstormweb_left_testimoial .content {
+      padding-left: 0px;
+    }
+  }
+  .softstormweb_left_testimoial .content .title {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  .handle_hometestimonialimg {
+    max-width: 75px;
+    border-radius: 50%;
+    margin-left: 15px;
+  }

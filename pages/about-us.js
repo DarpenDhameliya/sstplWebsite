@@ -20,11 +20,10 @@ let data = initialPortfolioList.find((e) => e.url === '/about-us')
 export default aboutus;
 
 
-
 export const getServerSideProps = async () => {
   try {
     const initialPortfolioList = await Metaapicall();
-    const initialAboutapiCall = await AboutapiCall(); 
+    const initialAboutapiCall = await AboutapiCall();
 
     return {
       props: {

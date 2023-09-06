@@ -1,11 +1,12 @@
 import React from "react";
-import Headers from "../../SubComponent/PageHeader";
-import WebService from "./WebService";
 import {useEffect, useState} from "react";
 import axios from "../../../Axios";
 import {Servicestate} from "../../../../redux/slice/Service";
 import {useSelector} from "react-redux";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
+import WebService from './WebService'
+const Headers = dynamic(() => import("../../SubComponent/PageHeader"))
 
 const WebserviceIndex = () => {
   const [loading, setLoading] = useState(true);

@@ -1,0 +1,248 @@
+@media (max-width: 576px) {
+    .softstormweb_title p {
+      font-size: 17px;
+    }
+
+  }
+@media (max-width: 767px) {
+    .softstormweb_discription .faq-play-box {
+        display: none;
+    }
+    .softstormweb_title .softstormweb {
+        font-size: 26px;
+        line-height: 36px;
+      }
+      .softstormweb-service .softstormweb_title {
+        text-align: center !important;
+      }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .softstormweb_title p {
+        font-size: 19px;
+    }
+    .softstormweb_title .softstormweb {
+        font-size: 36px;
+        line-height: 46px;
+    }
+
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .softstormweb_title p {
+      font-size: 18px;
+    }
+    .softstormweb_title .softstormweb {
+        font-size: 36px;
+        line-height: 46px;
+    }
+    .softstormweb_discription .faq-play-box {
+      display: none;
+    }
+
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .softstormweb_title .softstormweb {
+      font-size: 36px;
+      line-height: 46px;
+    }
+    .softstormweb_title p {
+      font-size: 19px;
+    }
+  }
+
+
+.softstormweb_discription {
+    background: #f8f9fab5;
+    position: relative;
+  }
+  .softstormweb_discription .faq-accordion .accrodion .accrodion-inner .accrodion-title::before {
+    background: #fcecef;
+    color: #db0f30;
+  }
+  .softstormweb_discription .faq-accordion .accrodion .accrodion-inner .accrodion-title::after {
+    background: #db0f30;
+    color: #fff;
+  }
+  .softstormweb_discription .faq-play-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    /* background-image: url(../images/battel.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; */
+  }
+  .softstormweb_discription .faq-play-box .play-btn {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .softstormweb_discription .faq-play-box .play-btn a {
+    height: 80px;
+    width: 80px;
+    text-align: center;
+    line-height: 80px;
+    background: #fff;
+    border-radius: 50%;
+    color: #2b70fa;
+    position: relative;
+  }
+  .softstormweb_discription .faq-play-box .play-btn a::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    animation: linear infinite popup 1.5s;
+  }
+  .softstormweb_discription .faq-play-box .faq-play-counter {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+  }
+  .softstormweb_discription .faq-play-box .faq-play-counter .box-1 {
+    background: rgba(42, 109, 245, 0.9);
+    padding: 50px 60px;
+  }
+  .softstormweb_discription .faq-play-box .faq-play-counter .box-1 .title {
+    font-size: 30px;
+    color: #fff;
+  }
+  .softstormweb_discription .faq-play-box .faq-play-counter .box-1 span {
+    font-size: 14px;
+    color: #d1dbfb;
+  }
+  .softstormweb_discription .faq-play-box .faq-play-counter .box-1.box-2 {
+    background: rgba(14, 17, 51, 0.9);
+  }
+  .softstormweb_title_discription {
+    font-weight: 600 !important;
+    font-size: 16px;
+    line-height: 30px !important;
+    display: block;
+    color: #c50004;
+    text-transform: uppercase;
+  }
+  .softstormweb_title {
+    padding-bottom: 25px;
+  }
+  .softstormweb_title .softstormweb {
+    font-size: 44px;
+    line-height: 54px;
+  }
+  .softstormweb_title p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 11px;
+}
+.softstormweb_title .main-btn {
+    border-radius: 30px;
+    border: 2px solid #e7eaef;
+    background: #fff;
+    color: #0e1133;
+  }
+  .softstormweb_title .main-btn:hover {
+    background: #ff3e66;
+    color: #fff;
+    border-color: #ff3e66;
+  }
+  .softstormweb_title.softstormweb_title-2 .softstormweb {
+    color: #fff;
+  }
+  .softstormweb_title.softstormweb_title-2 p {
+    color: #fff;
+  }
+  .softstormweb_title_discription {
+    font-weight: 600 !important;
+    font-size: 16px;
+    line-height: 30px !important;
+    display: block;
+    color: #c50004;
+    text-transform: uppercase;
+  }
+  .softstormweb_counter_discription {
+    padding: 30px;
+    position: relative;
+    background: #fff;
+    height: 130px;
+    background-image: -moz-linear-gradient(140deg, #ddf4fd 0%, #eaf9ff 100%);
+    background-image: -webkit-linear-gradient(140deg, #ddf4fd 0%, #eaf9ff 100%);
+    background-image: -ms-linear-gradient(140deg, #ddf4fd 0%, #eaf9ff 100%);
+    background-image: linear-gradient(140deg, #ddf4fd 0%, #eaf9ff 100%);
+    border-radius: 10px;
+  }
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .softstormweb_counter_discription {
+      padding: 20px;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .softstormweb_counter_discription {
+      margin-bottom: 90px;
+    }
+  }
+  @media (max-width: 767px) {
+    .softstormweb_counter_discription {
+      margin-bottom: 90px;
+    }
+  }
+  .handle_counter_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .softstormweb_counter_discription .counter_content {
+    background: #fff;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0px 30px 40px 0px rgba(0, 41, 57, 0.1);
+    /* padding-top: 37px;
+    padding-bottom: 40px; */
+    padding: 15px 10px;
+  }
+  .softstormweb_counter_discription .counter_content .title {
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: 5px;
+  }
+  .softstormweb_counter_discription .counter_content .title span {
+    font-weight: 700;
+  }
+  .softstormweb_counter_discription .counter_content p {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .softstormweb_counter_discription.item_2 {
+    background-image: -moz-linear-gradient(140deg, #fdead3 0%, #fff7ee 100%);
+    background-image: -webkit-linear-gradient(140deg, #fdead3 0%, #fff7ee 100%);
+    background-image: -ms-linear-gradient(140deg, #fdead3 0%, #fff7ee 100%);
+    background-image: linear-gradient(140deg, #fdead3 0%, #fff7ee 100%);
+  }
+  .softstormweb_counter_discription.item_2 .counter_content {
+    box-shadow: 0px 30px 40px 0px rgba(56, 31, 0, 0.1);
+  }
+  .softstormweb_counter_discription.item_3 {
+    background-image: -moz-linear-gradient(140deg, #dafedb 0%, #f0fcf0 100%);
+    background-image: -webkit-linear-gradient(140deg, #dafedb 0%, #f0fcf0 100%);
+    background-image: -ms-linear-gradient(140deg, #dafedb 0%, #f0fcf0 100%);
+    background-image: linear-gradient(140deg, #dafedb 0%, #f0fcf0 100%);
+  }
+  .softstormweb_counter_discription.item_3 .counter_content {
+    box-shadow: 0px 30px 40px 0px rgba(0, 74, 1, 0.1);
+  }
+  .softstormweb_counter_discription.item_4 {
+    background-image: -moz-linear-gradient(140deg, #fedaf4 0%, #fceff7 100%);
+    background-image: -webkit-linear-gradient(140deg, #fedaf4 0%, #fceff7 100%);
+    background-image: -ms-linear-gradient(140deg, #fedaf4 0%, #fceff7 100%);
+    background-image: linear-gradient(140deg, #fedaf4 0%, #fceff7 100%);
+  }
+  .softstormweb_counter_discription.item_4 .counter_content {
+    box-shadow: 0px 30px 40px 0px rgba(74, 0, 54, 0.1);
+  }

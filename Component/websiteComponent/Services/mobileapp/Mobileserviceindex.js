@@ -1,11 +1,12 @@
 import React from "react";
-import Headers from "../../SubComponent/PageHeader";
-import MobileService from "./MobileService";
 import { useEffect, useState } from "react";
 import { Servicestate } from "../../../../redux/slice/Service";
 import { useSelector } from "react-redux";
 import axios from "../../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
+import MobileService from "./MobileService"
+const Headers = dynamic(() => import("../../SubComponent/PageHeader"));
 
 const Mobileserviceindex = () => {
   const [loading, setLoading] = useState(true);

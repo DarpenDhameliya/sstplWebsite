@@ -1,7 +1,5 @@
 import React, { Suspense, lazy } from "react";
 import Seo from "@/Component/Seo";
-// import axios from '@/Component/Axios'
-// import HomeIndex from "@/Component/websiteComponent/Home";
 import { Metaapicall } from "@/redux/Metaapicall";
 import Loader from "@/Component/loader";
 const HomeIndex = lazy(() => import("@/Component/websiteComponent/Home"));

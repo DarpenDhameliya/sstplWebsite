@@ -15,8 +15,9 @@ import closeimg from "../../../assets/images/close.png";
 import CardContent from "@mui/material/CardContent";
 import Collapse from "@mui/material/Collapse";
 import Image from "next/image";
+import style from "./career.module.css";
 
-const style = {
+const styles = {
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -27,7 +28,7 @@ const style = {
   boxShadow: 24,
 };
 
-const Careerdata = ({ loding ,data}) => {
+const Careerdata = ({ loding, data }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -70,7 +71,6 @@ const Careerdata = ({ loding ,data}) => {
     });
   }, []);
 
-
   useEffect(() => {
     const importData = async () => {
       const TechnologyData = await import("./CareerStaticdata");
@@ -80,7 +80,7 @@ const Careerdata = ({ loding ,data}) => {
       setCareerListStatic(sortedData);
     };
     setTimeout(() => {
-      if(data.length === 10 ){
+      if (data.length === 10) {
         importData();
       }
     }, 2000);
@@ -132,12 +132,11 @@ const Careerdata = ({ loding ,data}) => {
       .catch((error) => {});
   }, []);
 
-
   useEffect(() => {
     // fetchHiredata();
-    if(typeof data !== 'string'){
+    if (typeof data !== "string") {
       let shortdata = data.sort((a, b) => a.contentpositionview - b.contentpositionview);
-      setCareerList(shortdata)
+      setCareerList(shortdata);
     }
     loding();
   }, [data]);
@@ -314,34 +313,34 @@ const Careerdata = ({ loding ,data}) => {
         ? careerList.map((res) => {
             if (res.contentview === true) {
               return (
-                <div className="card mt-3 mb-3 grey">
+                <div className={` ${style.card} card mt-3 mb-3 grey`}>
                   <div className="card-body grey">
-                    <h4 className="handlecareerhireinghead">{res.title}</h4>
+                    <h4 className={style.handlecareerhireinghead}>{res.title}</h4>
                     <div className="d-flex justify-content-between mt-1">
                       <div className="d-flex justify-content-center align-items-center">
-                        <Image wid src={career1} alt="car1" className="handlecareermain_img" />
+                        <Image wid src={career1} alt="car1" className={style.handlecareermain_img} />
                         <div className="ml-1">
-                          <p className="handelmobilep"> Location</p>
-                          <h6 className="handelmobileh6">{res.location}</h6>
+                          <p className={style.handelmobilep}> Location</p>
+                          <h6 className={style.handelmobileh6}>{res.location}</h6>
                         </div>
                       </div>
                       <div className="d-flex justify-content-center align-items-center ">
-                        <Image width={20} height={20} src={career2} alt="car1" className="handlecareermain_img" />
+                        <Image width={20} height={20} src={career2} alt="car1" className={style.handlecareermain_img} />
 
                         <div className="ml-2">
-                          <p className="handelmobilep"> Experience</p>
-                          <h6 className="handelmobileh6">{res.experience}</h6>
+                          <p className={style.handelmobilep}> Experience</p>
+                          <h6 className={style.handelmobileh6}>{res.experience}</h6>
                         </div>
                       </div>
-                      <div className=" tabrequirement">
-                        <Image width={20} height={20} src={career3} alt="car1" className="handlecareermain_img" />
+                      <div className={style.tabrequirement}>
+                        <Image width={20} height={20} src={career3} alt="car1" className={style.handlecareermain_img} />
                         <div className="ml-2">
-                          <p className="handelmobilep"> Position</p>
-                          <h6 className="handelmobileh6">{res.position}</h6>
+                          <p className={style.handelmobilep}> Position</p>
+                          <h6 className={style.handelmobileh6}>{res.position}</h6>
                         </div>
                       </div>
                       <div className="d-flex justify-content-center align-items-center">
-                        <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
+                        <button className={` ${style.main_btn_carrer} tab3`} type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
                           View Details
                         </button>
                       </div>
@@ -350,28 +349,28 @@ const Careerdata = ({ loding ,data}) => {
 
                   <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
                     <CardContent>
-                      <div className="card-body_collpas">
+                      <div className={style.card_body_collpas}>
                         <p style={{ color: "#000000" }}>{res.description}</p>
-                        <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
+                        <h6 className={style.handlecareerrespon}>Responsibilities and Duties :</h6>
                         <ul className="skill">
                           {res.responsibility.map((e) => {
                             return (
-                              <div className="handlediv">
-                                <Image width={20} height={20} src={bullet} alt="symbol" className="handlecarrericon " />
-                                <li className="handlecareerli">{e}</li>
+                              <div className={style.handlediv}>
+                                <Image width={20} height={20} src={bullet} alt="symbol" className={style.handlecarrericon} />
+                                <li className={style.handlecareerli}>{e}</li>
                               </div>
                             );
                           })}
                         </ul>
-                        <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-                        <div className="handlediv">
-                          <Image width={20} height={20} src={bullet} alt="symbol" className="handlecarrericon " />
-                          <p className="handlecareerli" style={{ lineHeight: "20px" }}>
+                        <h6 className={` ${style.handlecareerrespon} mt-2`}>Qualification :</h6>
+                        <div className={style.handlediv}>
+                          <Image width={20} height={20} src={bullet} alt="symbol" className={style.handlecarrericon} />
+                          <p className={style.handlecareerli} style={{ lineHeight: "20px" }}>
                             {res.qualification}
                           </p>
                         </div>
                         <div className="d-flex justify-content-end pt-3">
-                          <button className="main-btn_carrer_apply" type="button" onClick={handlemodalOpen}>
+                          <button className={style.main_btn_carrer_apply} type="button" onClick={handlemodalOpen}>
                             Apply
                           </button>
                         </div>
@@ -387,32 +386,32 @@ const Careerdata = ({ loding ,data}) => {
               return (
                 <div className="card mt-3 mb-3 grey">
                   <div className="card-body grey">
-                    <h4 className="handlecareerhireinghead">{res.title}</h4>
+                    <h4 className={style.handlecareerhireinghead}>{res.title}</h4>
                     <div className="d-flex justify-content-between mt-1">
                       <div className="d-flex justify-content-center align-items-center">
-                        <Image width={20} height={20} src={career1} alt="car1" className="handlecareermain_img" />
+                        <Image width={20} height={20} src={career1} alt="car1" className={style.handlecareermain_img} />
                         <div className="ml-1">
-                          <p className="handelmobilep"> Location</p>
-                          <h6 className="handelmobileh6">{res.location}</h6>
+                          <p className={style.handelmobilep}> Location</p>
+                          <h6 className={style.handelmobileh6}>{res.location}</h6>
                         </div>
                       </div>
                       <div className="d-flex justify-content-center align-items-center ">
-                        <Image width={20} height={20} src={career2} alt="car1" className="handlecareermain_img" />
+                        <Image width={20} height={20} src={career2} alt="car1" className={style.handlecareermain_img} />
 
                         <div className="ml-2">
-                          <p className="handelmobilep"> Experience</p>
-                          <h6 className="handelmobileh6">{res.experience}</h6>
+                          <p className={style.handelmobilep}> Experience</p>
+                          <h6 className={style.handelmobileh6}>{res.experience}</h6>
                         </div>
                       </div>
-                      <div className=" tabrequirement">
-                        <Image width={20} height={20} src={career3} alt="car1" className="handlecareermain_img" />
+                      <div className={style.tabrequirement}>
+                        <Image width={20} height={20} src={career3} alt="car1" className={style.handlecareermain_img} />
                         <div className="ml-2">
-                          <p className="handelmobilep"> Position</p>
-                          <h6 className="handelmobileh6">{res.position}</h6>
+                          <p className={style.handelmobilep}> Position</p>
+                          <h6 className={style.handelmobileh6}>{res.position}</h6>
                         </div>
                       </div>
                       <div className="d-flex justify-content-center align-items-center">
-                        <button className="main-btn_carrer tab3" type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
+                        <button className={` ${style.main_btn_carrer} tab3`} type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
                           View Details
                         </button>
                       </div>
@@ -421,28 +420,28 @@ const Careerdata = ({ loding ,data}) => {
 
                   <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
                     <CardContent>
-                      <div className="card-body_collpas">
+                      <div className={style.card_body_collpas}>
                         <p style={{ color: "#000000" }}>{res.description}</p>
-                        <h6 className="handlecareerrespon">Responsibilities and Duties :</h6>
+                        <h6 className={style.handlecareerrespon}>Responsibilities and Duties :</h6>
                         <ul className="skill">
                           {res.responsibility.map((e) => {
                             return (
-                              <div className="handlediv">
-                                <Image width={15} height={15} src={bullet} alt="symbol" className="handlecarrericon " />
-                                <li className="handlecareerli">{e}</li>
+                              <div className={style.handlediv}>
+                                <Image width={15} height={15} src={bullet} alt="symbol" className={style.handlecarrericon} />
+                                <li className={style.handlecareerli}>{e}</li>
                               </div>
                             );
                           })}
                         </ul>
-                        <h6 className="handlecareerrespon mt-2">Qualification :</h6>
-                        <div className="handlediv">
-                          <Image width={20} height={20} src={bullet} alt="symbol" className="handlecarrericon " />
-                          <p className="handlecareerli" style={{ lineHeight: "20px" }}>
+                        <h6 className={` ${style.handlecareerrespon} mt-2`}>Qualification :</h6>
+                        <div className={style.handlediv}>
+                          <Image width={20} height={20} src={bullet} alt="symbol" className={style.handlecarrericon} />
+                          <p className={style.handlecareerli} style={{ lineHeight: "20px" }}>
                             {res.qualification}
                           </p>
                         </div>
                         <div className="d-flex justify-content-end pt-3">
-                          <button className="main-btn_carrer_apply" type="button" onClick={handlemodalOpen}>
+                          <button className={style.main_btn_carrer_apply} type="button" onClick={handlemodalOpen}>
                             Apply
                           </button>
                         </div>
@@ -454,8 +453,9 @@ const Careerdata = ({ loding ,data}) => {
             }
           })}
 
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box sx={style}>
+
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >
+        <Box sx={styles}>
           <div className="modal-header">
             <h5 className="modal-title" id="staticBackdropLabel">
               {formapplyview}
@@ -495,7 +495,7 @@ const Careerdata = ({ loding ,data}) => {
               <div className="col-md-12 ">
                 <div>
                   <input
-                    className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes 
+                    className={`${error.file ? "handleinput_error" : ""}  ${dberr.file ? "error_padding" : ""} mt-15 typefiledes
                     `}
                     type="text"
                     value={filename}
@@ -515,8 +515,8 @@ const Careerdata = ({ loding ,data}) => {
               </div>
             </form>
           </div>
-          <div className="career-footer">
-            <button className="main-btn_carrer_apply" disabled={dbsubmit} type="button" onClick={handlesubmit}>
+          <div className={style.career_footer}>
+            <button className={style.main_btn_carrer_apply} disabled={dbsubmit} type="button" onClick={handlesubmit}>
               APPLY NOW
             </button>
           </div>

@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReCAPTCHA from "react-google-recaptcha";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
 import { ContactusSlice, Contactusstate, Contactusstatus } from "@/redux/slice/Contackus";
-
+import style from "./contact.module.css";
 const Contactus = () => {
   const [lname, setLname] = useState("");
   const [fname, setFname] = useState("");
@@ -38,7 +37,6 @@ const Contactus = () => {
     const d = new Date();
     let year = d.getFullYear();
     setRecentYear(year);
-
   }, []);
 
   const notifycon = useCallback(() => {
@@ -281,12 +279,11 @@ const Contactus = () => {
               {/* 3 cards */}
               <div className="row justify-content-center pb-50">
                 <div className="col-lg-4 col-md-6 col-sm-6">
-                  <div className="sstpl_contact-card r-bg-c mt-40 ">
-                    <div className="sstpl_contact-card-img shadows" style={{ border: "2px solid #005889" }}>
-                      {/* <img src={e.image} alt="services" />{" "} */}
-                      <i className="fa fa-location-dot contectus_icon" style={{ fontSize: "40px", color: "#4f4f4f" }} aria-hidden="true"></i>
+                  <div className={` ${style.sstpl_contact_card} r-bg-c mt-40 `}>
+                    <div className={` ${style.sstpl_contact_card_img}`} style={{ border: "2px solid #005889" }}>
+                      <i className={`fa fa-location-dot ${style.contectus_icon}`} aria-hidden="true"></i>
                     </div>
-                    <div className="ree-card-content mt40 d-flex align-items-center flex-column">
+                    <div className=" mt40 d-flex align-items-center flex-column">
                       <h4 className=" mb-2" style={{ color: "#005889" }}>
                         Address
                       </h4>
@@ -295,17 +292,17 @@ const Contactus = () => {
                           305-306, Amby Valley Arcade, Opp. Santosa Height, Manisha Garnala. Uttran, Surat, Gujarat.
                         </div>
                       </a>
-                      {/* <p style={{color: "#005889"}}></p> */}
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-6">
-                  <div className="sstpl_contact-card1 r-bg-c mt-40 ">
-                    <div className="sstpl_contact-card-img shadows" style={{ border: "2px solid #006308" }}>
+                    <div className={` ${style.sstpl_contact_card1} r-bg-c mt-40 `}>
+
+                    <div className={` ${style.sstpl_contact_card_img} shadows`} style={{ border: "2px solid #006308" }}>
                       {/* <img src={e.image} alt="services" />{" "} */}
-                      <i className="fa fa-phone contectus_icon" style={{ fontSize: "40px", color: "#4f4f4f" }} aria-hidden="true"></i>
+                      <i className={`fa fa-phone ${style.contectus_icon}`} aria-hidden="true"></i>
                     </div>
-                    <div className="ree-card-content mt40 d-flex align-items-center flex-column">
+                    <div className=" mt40 d-flex align-items-center flex-column">
                       <h4 className="mb-2" style={{ color: "#006308" }}>
                         Phone Number
                       </h4>
@@ -323,12 +320,12 @@ const Contactus = () => {
                   </div>
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-6">
-                  <div className="sstpl_contact-card2 r-bg-c mt-40 ">
-                    <div className="sstpl_contact-card-img shadows" style={{ border: "2px solid #a10404" }}>
+                  <div className={` ${style.sstpl_contact_card2} r-bg-c mt-40 `}>
+                    <div className={` ${style.sstpl_contact_card_img} shadows`} style={{ border: "2px solid #a10404" }}>
                       {/* <img src={e.image} alt="services" />{" "} */}
-                      <i className="fa fa-envelope contectus_icon" style={{ fontSize: "40px", color: "#4f4f4f" }} aria-hidden="true"></i>
+                      <i className={`fa fa-envelope ${style.contectus_icon}`} aria-hidden="true"></i>
                     </div>
-                    <div className="ree-card-content mt40 d-flex align-items-center flex-column">
+                    <div className=" mt40 d-flex align-items-center flex-column">
                       <h4 className=" mb-2" style={{ color: "#a10404" }}>
                         Email Address
                       </h4>
@@ -342,7 +339,6 @@ const Contactus = () => {
                           hr.softstorm@gmail.com
                         </div>
                       </a>
-                      {/* <p style={{color: "#a10404"}}>contact@softstorm.in</p> */}
                     </div>
                   </div>
                 </div>
@@ -350,8 +346,8 @@ const Contactus = () => {
 
               {/* contact form */}
               <div className="row">
-                <div className="col-md-12 handlemobile">
-                  <div className="contact-form">
+                <div className={`col-md-12 ${style.handlemobile}`}>
+                  <div className='contact-form'>
                     <h4>Let’s Connect</h4>
                     <p>Reach out today to spark innovation and unleash digital solutions in collaboration with us.</p>
                     <div className="row">
@@ -397,7 +393,7 @@ const Contactus = () => {
                         {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-end align-items-center">
-                        <button className="main-btn_footer main-btn-footer" disabled={dbsubmit} name="submit" value="Send Message" onClick={handlesendDATA}>
+                        <button className={` ${style.main_btn_footer}  ${style.main_btn_footer}`} disabled={dbsubmit} name="submit" value="Send Message" onClick={handlesendDATA}>
                           Send Message
                         </button>
                       </div>
@@ -411,7 +407,7 @@ const Contactus = () => {
       </section>
 
       {/* map */}
-      <div className="bisylms-map">
+      <div className={style.bisylms_map}>
         <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.2511780843033!2d72.83197811493592!3d21.2218860858941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04f50264611d1%3A0x76746ef930af1752!2sSoftStorm%20Technosys%20Pvt.%20Ltd.!5e0!3m2!1sen!2sin!4v1585860623345!5m2!1sen!2sin"></iframe>
       </div>
     </>

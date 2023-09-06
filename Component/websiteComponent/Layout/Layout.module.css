@@ -1,0 +1,306 @@
+.softstormweb_header_1 {
+    padding-top: 0px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 45px;
+    z-index: 1000;
+    background: var(--sstpltheme);
+  }
+
+  .hidebtn {
+    height: 45px;
+    display: flex;
+    align-items: center;
+  }
+  @media (max-width: 576px) {
+    .handlemobilfooter {
+      display: flex;
+      padding: 0px;
+      justify-content: center !important;
+    }
+    .handlebredcrumb {
+      display: none;
+    }
+    .softstorm_insidepage_titleitem {
+      margin-top: 90px !important;
+      position: relative;
+    }
+    .handlebg {
+      padding: 0px 10px !important ;
+    }
+    .maintainformhw {
+      padding: 25px !important;
+    }
+  }
+
+  @media (min-width: 576px) {
+    .handleview_footer {
+      display: flex;
+      justify-content: end !important;
+    }
+  }
+  @media (max-width: 992px) {
+    .hidebtn {
+      display: none !important;
+    }
+    .softstormweb_header_area {
+      padding-top: 0px !important;
+    }
+    .handlenavigation {
+      display: none !important;
+    }
+  }
+  @media (min-width: 992px) {
+    .copyright_text {
+      display: flex;
+      justify-content: end;
+    }
+
+  }
+  @media (max-width: 767px) {
+    .footer_copyright {
+      display: block !important;
+      text-align: center;
+    }
+    .handlemobileset {
+      padding-right: 0px !important;
+    }
+    .main_btn_footer {
+      margin-top: 15px;
+    }
+    .hireform input[type="number"],
+    .hireform input[type="email"],
+    .hireform input[type="text"],
+    .hireform textarea {
+      width: 100%;
+      height: 40px;
+      font-size: 14px;
+      line-height: 56px;
+      font-weight: 400;
+      border-radius: 3px;
+      border: none;
+      color: #7e7c87;
+      outline: none;
+      border: 1px solid #00000026;
+      padding: 0 15px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .footer_copyright {
+      text-align: center;
+    }
+
+
+  }
+
+  @media only screen and (min-width: 992px) and (max-width: 1400px) {
+    .maintainformhw {
+      padding: 30px 35px 5px !important;
+    }
+  }
+  .softstormweb_header_area {
+    padding-top: 45px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 999;
+  }
+  .menu_header {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+  }
+  .dskt_logo {
+    float: left;
+    line-height: 75px;
+  }
+  .dskt_logo .nav_brand img {
+    max-height: 75px;
+  }
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+
+    .max_width_web {
+      max-width: 200px;
+    }
+  }
+  .max_width_web {
+    min-width: 180px;
+  }
+  .social_icon {
+    margin-left: 7px;
+    margin-right: 7px;
+  }
+  .footer_bottomLinks {
+    color: #0e1133;
+    font-weight: 600;
+  }
+  .footer_bottomLinks:hover {
+    color: #c20004;
+  }
+  .footer_copyright {
+    border-top: 1px solid #e1e5ec;
+    margin-top: 10px;
+  }
+  .handleimage {
+    background-image: url(../../../assets//images//conatcus-bg.webp);
+    box-shadow: 0px 40px 50px 0px rgba(0, 24, 72, 0.3);
+    height: 100%;
+    width: 100%;
+    object-fit: scale-down;
+  }
+  .footer_bg {
+    background: rgb(0 0 0 / 64%);
+    padding: 40px 0;
+  }
+  .softstormweb_footer_signupbox {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+  .handlebg {
+    background: #fff;
+  }
+  .handlecontactimg {
+    padding: 0px !important;
+    background-image: url(../../../assets/images/contact\ us.webp);
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 2;
+  }
+  .contact__info_area {
+    position: relative;
+    /* margin-right: 40px; */
+  }
+
+  .contact__info_area h3 {
+    font-size: 30px;
+    color: #f1f1f1;
+    font-weight: 800;
+    line-height: 0.8;
+    margin-bottom: 16px;
+  }
+  .maintainformhw {
+    padding: 30px 35px;
+    min-height: 100% !important;
+    background: rgb(194 0 4 / 86%) !important;
+  }
+  .single_info {
+    position: relative;
+    margin-bottom: 18px;
+  }
+
+  .single_info h5 {
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #f1f1f1;
+  }
+
+  .single_info a {
+    color: #f1f1f1;
+  }
+  .single_info i {
+    color: #f1f1f1;
+    font-size: 20px;
+  }
+
+  .single_info p i {
+    font-size: 16px;
+    line-height: 22px;
+    color: #2b70fa;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .main-btn_footers {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #c20004;
+    padding: 0 30px;
+    font-size: 15px;
+    line-height: 45px;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 5;
+    -webkit-transition: all 0.4s ease-out 0s;
+    -moz-transition: all 0.4s ease-out 0s;
+    -ms-transition: all 0.4s ease-out 0s;
+    -o-transition: all 0.4s ease-out 0s;
+    transition: all 0.4s ease-out 0s;
+    background-color: #c20004;
+  }
+  .hireform input[type="number"],
+  .hireform input[type="email"],
+  .hireform input[type="text"],
+  .hireform textarea {
+    width: 100%;
+    height: 45px;
+    font-size: 14px;
+    line-height: 56px;
+    font-weight: 400;
+    border-radius: 3px;
+    border: none;
+    background: #fff;
+    color: #7e7c87;
+    outline: none;
+    border: 1px solid #00000026;
+    padding: 0 15px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+  .hireform textarea::-moz-placeholder,
+  .hireform input[type="text"]::-moz-placeholder,
+  .hireform input[type="number"]::-moz-placeholder,
+  .hireform input[type="email"]::-moz-placeholder {
+    color: #7e7c87;
+    opacity: 1;
+  }
+
+  .hireform textarea::-ms-input-placeholder,
+  .hireform input[type="text"]::-ms-input-placeholder,
+  .hireform input[type="number"]::-ms-input-placeholder,
+  .hireform input[type="email"]::-ms-input-placeholder {
+    color: #7e7c87;
+    opacity: 1;
+  }
+
+  .hireform textarea::-webkit-input-placeholder,
+  .hireform input[type="text"]::-webkit-input-placeholder,
+  .hireform input[type="number"]::-webkit-input-placeholder,
+  .hireform input[type="email"]::-webkit-input-placeholder {
+    color: #7e7c87;
+    opacity: 1;
+  }
+
+  .hireform textarea:focus,
+  .hireform input[type="text"]:focus,
+  .hireform input[type="number"]:focus,
+  .hireform input[type="email"]:focus {
+    background: transparent;
+    border: 2px solid #2684ff;
+
+    -webkit-box-shadow: 0px 14px 16px 0px rgba(11, 2, 55, 0.1);
+    -moz-box-shadow: 0px 14px 16px 0px rgba(11, 2, 55, 0.1);
+    box-shadow: 0px 14px 16px 0px rgba(11, 2, 55, 0.1);
+  }
+
+  .handlespaces {
+    padding: 20px;
+  }

@@ -1,0 +1,199 @@
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .handle_portfolio_modal_mui {
+    width: 700px !important;
+  }
+  .handle_portfolio_modal_img {
+    max-height: 400px !important;
+    min-height: 300px !important;
+  }
+  .handleHeading_portfoliyo {
+    font-size: 15px !important;
+  }
+  .maintaint_pd_portfoliyo {
+    margin-top: 15px !important;
+  }
+  .handlehr {
+    margin-top: 10px !important;
+  }
+  .softstormweb_ourwork_main_teb .content .title {
+    font-size: 16px !important;
+  }
+  .handlecareermain_img_portfoliyo {
+    width: 35px !important;
+  }
+  .handelmobileh6 {
+    font-size: 14px !important;
+  }
+
+}
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .handle_portfolio_modal_mui {
+    width: 1100px !important;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .handle_portfolio_modal_mui {
+    width: 900px !important;
+  }
+  .handleHeading_portfoliyo {
+    font-size: 16px !important;
+  }
+  .softstormweb_ourwork_main_teb .thumb img {
+    height: 180px !important;
+  }
+  .handle_portfolio_modal_img {
+    max-height: 400px !important;
+    min-height: 300px !important;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .handle_portfolio_modal_mui {
+    width: 500px !important;
+  }
+  .softstormweb_ourwork_main_teb .thumb img {
+    height: 180px !important;
+  }
+  .maintaint_pd_portfoliyo {
+    margin-top: 10px !important;
+  }
+  .mob_portfolio_part2 {
+    margin-top: 10px;
+  }
+  .handleHeading_portfoliyo {
+    font-size: 15px !important;
+  }
+  .handle_portfolio_modal_img {
+    max-height: 280px !important;
+    min-height: 280px !important;
+  }
+}
+@media (max-width: 576px) {
+  .handle_portfolio_modal_mui {
+    width: 400px !important;
+  }
+  .maintaint_pd_portfoliyo {
+    margin-top: 10px !important;
+  }
+  .handlehr {
+    margin-top: 10px !important;
+  }
+  .mob_portfolio_part2 {
+    margin-top: 10px;
+  }
+  .handle_portfolio_modal_img {
+    max-height: 225px !important;
+    min-height: 225px !important;
+  }
+  .mob_portfolio_img {
+    padding: 0 !important;
+  }
+  .handleHeading_portfoliyo {
+    font-size: 14px !important;
+  }
+}
+@media (max-width: 450px) {
+  .handle_portfolio_modal_mui {
+    width: 300px !important;
+  }
+  .softstormweb_ourwork_main_teb .thumb img {
+    height: 180px !important;
+  }
+}
+@media only screen and (min-width: 450px) and (max-width: 567px) {
+  .handlehr {
+    margin-top: 10px !important;
+  }
+}
+.softstormweb_ourwork_main_teb .thumb {
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+  }
+.softstormweb_ourwork_main_teb .thumb img {
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+    width: 100%;
+    height: 240px;
+  }
+.softstormweb_ourwork_main_teb .thumb ul li a {
+  display: contents;
+  height: 36px;
+  width: 36px;
+  /* border: 2px solid rgba(255, 255, 255, 0.5); */
+  text-align: center;
+  line-height: 36px;
+  font-weight: 600;
+  /* border-radius: 50px; */
+  color: #fff;
+}
+.softstormweb_ourwork_main_teb .thumb ul li {
+  display: inline-block;
+  margin: 0 3px;
+}
+.softstormweb_ourwork_main_teb .thumb ul li:hover a {
+  color: #fff !important;
+}
+.maintaint_pd_portfoliyo {
+  margin-top: 15px;
+}
+.handle_portfolio_modal_mui {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  background-color: #fff;
+}
+.handle_portfolio_modal_img {
+  max-height: 500px;
+  width: 100%;
+  min-height: 415px;
+}
+.handlecareermain_img_portfoliyo {
+  width: 40px;
+}
+.handleHeading_portfoliyo {
+  font-size: 18px;
+}
+.handlehr {
+  margin-top: 15px;
+}
+.softstormweb_ourwork_main_teb .thumb ul {
+
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    z-index: 11;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+  }
+  .softstormweb_ourwork_main_teb:hover .thumb::before {
+    opacity: 0.5;
+  }
+  .softstormweb_ourwork_main_teb:hover .thumb img {
+    transform: scale(1.1);
+  }
+  .softstormweb_ourwork_main_teb:hover .thumb ul {
+    opacity: 1;
+    visibility: visible;
+  }
+  .softstormweb_ourwork_main_teb .content {
+    padding-top: 27px;
+  }
+  .softstormweb_ourwork_main_teb .content .title {
+    font-size: 18px;
+    font-weight: 700;
+    padding-bottom: 8px;
+  }

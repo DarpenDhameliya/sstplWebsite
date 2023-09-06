@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Contactus from './Home'
-const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 import Loader from "@/Component/loader";
+import dynamic from 'next/dynamic';
+const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 
 const Contactindex = () => {
   const [loading, setLoading] = useState(true);

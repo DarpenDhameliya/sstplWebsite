@@ -1,0 +1,70 @@
+@media (max-width: 576px) {
+    .whychoosebox {
+      padding: 10px 10px 10px 0 !important;
+    }
+    .icon_whychoos {
+      font-size: 30px !important;
+    }
+    .handleh4_whycgoos {
+      font-size: 21px;
+    }
+    .websitecssarea {
+      padding-top: 150px !important;
+    }
+    .handle_home_animat {
+      font-size: 30px !important;
+    }
+  }
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .handle_home_animat {
+      font-size: 27px !important;
+    }
+  }
+  @media (max-width: 767px) {
+    .softstorm_home_tebview {
+      flex-direction: column !important;
+    }
+    .home_effect_p {
+      border: none !important;
+      padding-top: 60px;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .maintain_mobview {
+      display: flex !important;
+      flex-direction: column !important;
+      padding-top: 60px !important;
+    }
+    .softstorm_home_tebview {
+      flex-direction: column !important;
+    }
+    .home_effect_p {
+      border: none !important;
+      padding-top: 60px;
+    }
+  }
+.websitecssarea {
+    /* padding-top: 170px;
+    padding-bottom: 80px; */
+    padding-top: 130px;
+    padding-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .handle_home_animat {
+    font-size: 35px !important;
+  }
+
+  .home_effect_p {
+    border-left: 4px solid #4f4f4f;
+    padding-left: 10px;
+  }
+  .website_css_thumb {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+  }

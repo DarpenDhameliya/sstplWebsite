@@ -1,13 +1,13 @@
 import React from "react";
-
-import Headers from "../../SubComponent/PageHeader";
-import Digitalservice from "./Digitalservice";
-import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import { useEffect, useState } from "react";
 import { Servicestate } from "../../../../redux/slice/Service";
 import { useSelector } from "react-redux";
 import axios from "../../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
+import Digitalservice from "./Digitalservice"
+const Headers = dynamic(() => import("../../SubComponent/PageHeader"));
+
 const Digitalserviceindex = () => {
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");

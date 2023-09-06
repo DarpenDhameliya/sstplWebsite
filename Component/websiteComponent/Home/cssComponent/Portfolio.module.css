@@ -1,0 +1,168 @@
+.softstormweb_portfoliyo_about_area {
+    background-image: url(../../../../assets//images/map-bg.png);
+    background-size: auto;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+  }
+  .webportfoliyo {
+    display: block;
+  }
+  .testimonial-about-slider-active {
+    position: relative;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .displayporttab {
+      display: block !important;
+    }
+    .webportfoliyo {
+      display: none !important;
+    }
+    .testimonial-about-slider-active .testimonial-box {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .testimonial-about-slider-active .testimonial-box {
+      margin-left: 0px;
+      margin-right: 0px;
+      padding: 30px 30px 50px;
+    }
+    .displayport {
+      display: block !important;
+    }
+    .webportfoliyo {
+      display: none !important;
+    }
+  }
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .testimonial-about-slider-active .testimonial-box {
+      padding: 40px 20px;
+    }
+    .handleportfoliyohomeweb {
+      border-radius: 15px;
+      width: 270px !important;
+      height: 154px !important;
+    }
+  }
+  .testimonial-about-slider-active .testimonial-box {
+    padding: 30px;
+    text-align: center;
+    position: relative;
+  }
+  .testimonial-about-slider-active .testimonial-box .icon i {
+    font-size: 32px;
+    color: #4985ff;
+  }
+  .testimonial-about-slider-active .testimonial-box .ratings-icon {
+    padding-top: 25px;
+    padding-bottom: 20px;
+  }
+  .testimonial-about-slider-active .testimonial-box .ratings-icon ul li {
+    display: inline-block;
+  }
+  .testimonial-about-slider-active .testimonial-box .ratings-icon ul li i {
+    color: #faa116;
+    font-size: 14px;
+  }
+  .testimonial-about-slider-active .testimonial-box p {
+    font-size: 20px;
+    color: #0e1133;
+    line-height: 30px;
+  }
+  .testimonial-about-slider-active .slick-arrow {
+    position: absolute;
+    top: 43%;
+    transform: translateY(-50%);
+    z-index: 9;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 36px;
+    color: #db0f30 !important;
+    transition: all linear 0.3s;
+    background: transparent;
+  }
+  .testimonial-about-slider-active .slick-arrow:hover {
+    background: transparent;
+    color: #fff;
+  }
+  .testimonial-about-slider-active .slick-arrow.prev {
+    left: 40px;
+  }
+  .handlemobview {
+    padding: 0;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .testimonial-about-slider-active .slick-arrow.prev {
+      left: 0;
+    }
+    .testimonial-about-slider-active .slick-arrow.next {
+      right: 0;
+    }
+  }
+  @media (max-width: 767px) {
+    .testimonial-about-slider-active .slick-arrow.prev {
+      left: -10px;
+    }
+    .testimonial-about-slider-active .slick-arrow.next {
+      right: -10px;
+    }
+    .testimonial-about-slider-active .testimonial-box p {
+      font-size: 16px;
+      line-height: 26px;
+    }
+  }
+  .testimonial-about-slider-active .slick-arrow.next {
+    right: 40px;
+  }
+
+  @media only screen and (min-width: 576px) and (max-width: 768px) {
+    .handlemobview {
+      padding: 0 40px !important;
+    }
+  }
+  .handleportfoliyohomeweb {
+    border-radius: 15px;
+    width: 344px;
+    height: 196px;
+  }
+  .slick-prev:before {
+    color: red !important;
+  }
+  .slick-next:before {
+    color: red !important;
+  }
+
+  .slick-next {
+    right: 0px !important;
+  }
+  .slick-prev {
+    left: 0px !important;
+  }
+  .displayport {
+    display: none;
+  }
+  .displayporttab {
+    display: none;
+  }
+  @media only screen and (min-width: 300px) and (max-width: 1024px) {
+    .testimonial-about-slider-active .testimonial-box {
+      box-shadow: none;
+      background: none;
+    }
+  }
+  @media only screen and (min-width: 770px) and (max-width: 1024px) {
+    .testimonial-about-slider-active .slick-arrow.next {
+      right: 15px;
+    }
+    .testimonial-about-slider-active .slick-arrow.prev {
+      left: 15px;
+    }
+  }
+  .testimonial-about-slider-active .testimonial_parent_item {
+    display: flex !important;
+    justify-content: center;
+  }

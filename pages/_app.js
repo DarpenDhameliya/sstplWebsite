@@ -17,6 +17,7 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/css/adminpanel.css";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+const ErrorBoundary = dynamic(() => import("@/Component/websiteComponent/ErrorBoundary"), { ssr: false });
 const AOSWrapper = dynamic(() => import("@/Component/websiteComponent/SubComponent/AosWrapper"), { ssr: false });
 const webLayout = dynamic(() => import("@/Component/websiteComponent/Layout/Layout"), { ssr: false });
 const AdminLayout = dynamic(() => import("@/Component/AdminComponent/Layout/Layout"), { ssr: false });
@@ -29,18 +30,18 @@ function MyApp({ Component, pageProps }) {
   const displaylayout = pathname.startsWith("/online-admin/dashboard");
   const Layout = pathname.startsWith("/online-admin") ? AdminLayout : webLayout;
 
-
   return (
-    <Provider store={store}>
-      <div className={`${displaylayout && "setdisplay"}`}>
-        {/* <div className={`${displaylayout} ${displaylayout && "setdisplay"} ${isNotFound && "no-header"}`}> */}
-        <Layout>
-          <AOSWrapper>
-            <Component {...pageProps} />
-          </AOSWrapper>
-        </Layout>
-      </div>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <div className={`${displaylayout && "setdisplay"}`}>
+          <Layout>
+            <AOSWrapper>
+              <Component {...pageProps} />
+            </AOSWrapper>
+          </Layout>
+        </div>
+      </Provider>
+    </ErrorBoundary>
   );
 }
 

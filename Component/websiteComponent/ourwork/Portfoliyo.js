@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import dynamic from "next/dynamic";
+import style from './ourwork.module.css'
 const PortfolioItem = dynamic(() => import("./ViewImages"));
 const PortfolioModal = dynamic(() => import("./portfolioModel"));
 
@@ -57,7 +58,7 @@ const Portfoliyo = ({ loding, data }) => {
 
   return (
     <>
-      <section className="shop-details-info-area pt-70 pb-80 ">
+      <section className="white pt-70 pb-80 ">
         <div className="container">
           <div className="row justify-content-center">
             {fetchErr && <p className={`handledberror mb-0 `}>{fetchErr}</p>}
@@ -136,7 +137,7 @@ const Portfoliyo = ({ loding, data }) => {
             </div>
           </div>
           <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-            <Box className="handle_portfolio_modal_mui">
+            <Box className={style.handle_portfolio_modal_mui}>
               <PortfolioModal sendMsg={sendMsg} handleClose={handleClose} />
             </Box>
           </Modal>

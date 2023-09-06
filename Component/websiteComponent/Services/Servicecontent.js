@@ -10,8 +10,10 @@ import entimg from "../../../assets/images/services/enterprise-services.webp";
 import {Servicestate} from "../../../redux/slice/Service";
 import {useSelector} from "react-redux";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import style from './service.module.css'
+const FooterLink = dynamic(() => import("../SubComponent/FooterLink").then((module) => module.FooterLink));
 
 const Servicecontent = ({className, list}) => {
   const [dbFetcherr, setDbFetcherr] = useState("");
@@ -68,259 +70,260 @@ const Servicecontent = ({className, list}) => {
 
   return (
     <>
-      <section className={`softstormweb-service-detail pt-70 pb-80 ${className}`} id="service">
+      <section className={`pt-70 pb-80 ${className}`} id="service">
         <div className="container">
-         
+
           <div className="row">
-            <div className="col-md-12 col-sm-12 " style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row maintainpd_service">
-                <div className="col-lg-5 col-md-6 handlefor_mob_img">
+            <div className={`col-md-12 col-sm-12 ${style.service_box}`} >
+              {/* line no 78 has issu of scrool in mobile for only this page  */}
+              <div className={`row ${style.maintainpd_service}`}>
+                <div className={`col-lg-5 col-md-6 ${style.handlefor_mob_img}`}>
                   {" "}
                   <div onClick={() => handlepagechange("web-application-developement")}>
-                    <Image width={500} height={500} src={webappimg ? webappimg : webimg} alt="webimg" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
+                    <Image width={800} height={500} src={webappimg ? webappimg : webimg} alt="webimg" className={style.maintainleft_img}  />
                   </div>
                 </div>
-                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
+                <div className={`col-lg-7 col-md-6 d-flex align-items-center ${style.handlemobileview_service} ${style.handlefor_mob_con}`}>
                   <div>
                     <h4 className="mb-3">{webapptitle ? webapptitle : "Web Application Developement"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                    <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
-                      <ul className="handleul_servicetechno">
-                        <Link scroll={false} className="maintain_link  " href="/web-application-developement#nodejs">
-                          <li className="handleul_servicetechno_list border1" >
+                    <div className=" d-flex justify-content-center pt-4">
+                      <ul className={style.handleul_servicetechno}>
+                        <FooterLink className={style.maintain_link } href="/web-application-developement#nodejs">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border1}`} >
                             NODE JS
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link " href="/web-application-developement#php">
-                          <li className="handleul_servicetechno_list border1" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link } href="/web-application-developement#php">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border1}`} >
                             PHP
                           </li>
-                        </Link>
-                        <Link scroll={false} className="maintain_link " href="/web-application-developement#laravel">
-                          <li className="handleul_servicetechno_list border1" >
+                        </FooterLink>
+                        <FooterLink className={style.maintain_link } href="/web-application-developement#laravel">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border1}`} >
                             LARAVEL
                           </li>
-                        </Link>
-                        <Link scroll={false} className="maintain_link  " href="/web-application-developement#codeigniter">
-                          <li className="handleul_servicetechno_list border1" >
+                        </FooterLink>
+                        <FooterLink className={style.maintain_link } href="/web-application-developement#codeigniter">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border1}`} >
                             CODEIGNITER
                           </li>
-                        </Link>
-                        <Link scroll={false} className="maintain_link  " exact href="/web-application-developement#python">
-                          <li className="handleul_servicetechno_list border1" >
+                        </FooterLink>
+                        <FooterLink className={style.maintain_link } exact href="/web-application-developement#python">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border1}`} >
                             PYTHON
                           </li>
-                        </Link>
+                        </FooterLink>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row maintainpd_service">
-                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
+            <div className={`col-md-12 col-sm-12 ${style.service_box} mt-5`} >
+              <div className={`row ${style.maintainpd_service}`}>
+                <div className={`col-lg-7 col-md-6 d-flex align-items-center ${style.maintain_space_box} ${style.handlefor_mob_con}`}>
                   <div>
                     <h4 className="mb-3">{mobapptitle ? mobapptitle : "Mobile Application Developer"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                    <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
-                      <ul className="handleul_servicetechno">
-                        <Link scroll={false} smooth className="maintain_link1 " href="/mobile-application-developement#flutter">
-                          <li className="handleul_servicetechno_list border2" >
+                    <div className=" d-flex justify-content-center pt-4">
+                      <ul className={style.handleul_servicetechno}>
+                        <FooterLink smooth className={style.maintain_link1} href="/mobile-application-developement#flutter">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border2}`} >
                             FLUTTER
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link1 " href="/mobile-application-developement#android">
-                          <li className="handleul_servicetechno_list border2" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link1} href="/mobile-application-developement#android">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border2}`} >
                             ANDROID
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link1 " href="/mobile-application-developement#ios">
-                          <li className="handleul_servicetechno_list border2" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link1} href="/mobile-application-developement#ios">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border2}`} >
                             IOS
                           </li>
-                        </Link>
+                        </FooterLink>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   <div onClick={() => handlepagechange("mobile-application-developement")}>
-                    <Image width={500} height={500} src={mobappimg ? mobappimg : mobimg} alt="webimg" className="maintainright_img" />
+                    <Image width={800} height={500} src={mobappimg ? mobappimg : mobimg} alt="webimg" className={style.maintainright_img} />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row maintainpd_service">
+            <div className={`col-md-12 col-sm-12 ${style.service_box} mt-5`} >
+              <div className={`row ${style.maintainpd_service}`}>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
                   <div onClick={() => handlepagechange("desktop-software-developement")}>
-                    <Image width={500} height={500} src={deskappimg ? deskappimg : deskimg}  alt="Desktop" className="maintainleft_img" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
+                    <Image width={800} height={500} src={deskappimg ? deskappimg : deskimg}  alt="Desktop" className={style.maintainleft_img} style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
-                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
+                <div className={`col-lg-7 col-md-6 d-flex align-items-center ${style.handlemobileview_service} ${style.handlefor_mob_con}`}>
                   <div>
                     <h4 className="mb-3">{deskapptitle ? deskapptitle : "Desktop Software Developement"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                    <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
-                      <ul className="handleul_servicetechno">
-                        <Link scroll={false} smooth className="maintain_link2 " href="/desktop-software-developement#c">
-                          <li className="handleul_servicetechno_list border3" >
+                    <div className=" d-flex justify-content-center pt-4">
+                      <ul className={style.handleul_servicetechno}>
+                        <FooterLink smooth className={style.maintain_link2} href="/desktop-software-developement#c">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border3}`} >
                             C#
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link2 " href="/desktop-software-developement#c++">
-                          <li className="handleul_servicetechno_list border3" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link2} href="/desktop-software-developement#c++">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border3}`} >
                             C++
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link2 " href="/desktop-software-developement#mashinlerning">
-                          <li className="handleul_servicetechno_list border3" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link2} href="/desktop-software-developement#mashinlerning">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border3}`} >
                             MASHINE LEARNING
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link2" href="/desktop-software-developement#controller">
-                          <li className="handleul_servicetechno_list border3" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link2} href="/desktop-software-developement#controller">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border3}`} >
                             CONTEROLLER BASED
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link2 ml-10" href="/desktop-software-developement#axistravelling">
-                          <li className="handleul_servicetechno_list border3" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link2} href="/desktop-software-developement#axistravelling">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border3}`} >
                             AXIS TRAVELLING
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link2 ml-10" href="/desktop-software-developement#lasersource">
-                          <li className="handleul_servicetechno_list border3" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link2} href="/desktop-software-developement#lasersource">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border3}`} >
                             LASER SOURCE
                           </li>
-                        </Link>
+                        </FooterLink>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row maintainpd_service">
-                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
+            <div className={`col-md-12 col-sm-12 ${style.service_box} mt-5`} >
+              <div className={`row ${style.maintainpd_service}`}>
+                <div className={`col-lg-7 col-md-6 d-flex align-items-center ${style.maintain_space_box} ${style.handlefor_mob_con}`}>
                   <div>
                     <h4 className="mb-3">{digitalapptitle ? digitalapptitle : "Digital Marketing"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                    <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
-                      <ul className="handleul_servicetechno">
-                        <Link scroll={false} smooth className="maintain_link3 " href="/digital-marketing#seo" >
-                          <li className="handleul_servicetechno_list border4" >
+                    <div className=" d-flex justify-content-center pt-4">
+                      <ul className={style.handleul_servicetechno}>
+                        <FooterLink smooth className={style.maintain_link3} href="/digital-marketing#seo" >
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border4}`} >
                             SEO
                           </li>
-                        </Link>
-                        <Link scroll={false} className="maintain_link3 " href="/digital-marketing#smm">
-                          <li className="handleul_servicetechno_list border4" >
+                        </FooterLink>
+                        <FooterLink className={style.maintain_link3} href="/digital-marketing#smm">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border4}`} >
                             SMM
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link3 " href="/digital-marketing#political">
-                          <li className="handleul_servicetechno_list border4" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link3} href="/digital-marketing#political">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border4}`} >
                             POLITICAL PROFILE
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link3" href="/digital-marketing#mobileapp">
-                          <li className="handleul_servicetechno_list border4" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link3} href="/digital-marketing#mobileapp">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border4}`} >
                             MOBILE APP PROMOTION
                           </li>
-                        </Link>
+                        </FooterLink>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   <div onClick={() => handlepagechange("digital-marketing")}>
-                    <Image width={500} height={500} src={digitalappimg ? digitalappimg : digimg} alt="webimg" className="maintainright_img" />
+                    <Image width={800} height={500} src={digitalappimg ? digitalappimg : digimg} alt="webimg" className={style.maintainright_img} />
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row maintainpd_service">
+            <div className={`col-md-12 col-sm-12 ${style.service_box} mt-5`} >
+              <div className={`row ${style.maintainpd_service}`}>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   {" "}
                   <div onClick={() => handlepagechange("web_graphic-designing")}>
-                    <Image width={550} height={500} src={webgraappimg ? webgraappimg : graimg} className="maintainleft_img" alt="graphic poster" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
+                    <Image width={800} height={500} src={webgraappimg ? webgraappimg : graimg} className={style.maintainleft_img} alt="graphic poster" style={{borderRadius: "10px", position: "relative", right: "8%"}} />
                   </div>
                 </div>
-                <div className="col-lg-7 col-md-6 d-flex align-items-center handlemobileview_service handlefor_mob_con">
+                <div className={`col-lg-7 col-md-6 d-flex align-items-center ${style.handlemobileview_service} ${style.handlefor_mob_con}`}>
                   <div>
                     <h4 className="mb-3">{webgraapptitle ? webgraapptitle : "Web & Graphic Designing"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                    <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
-                      <ul className="handleul_servicetechno">
-                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#webdesign">
-                          <li className="handleul_servicetechno_list border5" >
+                    <div className=" d-flex justify-content-center pt-4">
+                      <ul className={style.handleul_servicetechno}>
+                        <FooterLink smooth className={style.maintain_link4} href="/web_graphic-designing#webdesign">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border5}`} >
                             WEB DESIGN
                           </li>
-                        </Link>
+                        </FooterLink>
 
-                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#uiux">
-                          <li className="handleul_servicetechno_list border5" >
+                        <FooterLink smooth className={style.maintain_link4} href="/web_graphic-designing#uiux">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border5}`} >
                             UI & UX DESIGN
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#reactjs">
-                          <li className="handleul_servicetechno_list border5" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link4} href="/web_graphic-designing#reactjs">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border5}`} >
                             REACT JS
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#viewjs">
-                          <li className="handleul_servicetechno_list border5" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link4} href="/web_graphic-designing#viewjs">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border5}`} >
                             VUE JS
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#logo">
-                          <li className="handleul_servicetechno_list border5" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link4} href="/web_graphic-designing#logo">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border5}`} >
                             LOGO BANNER
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link4 " href="/web_graphic-designing#brochur">
-                          <li className="handleul_servicetechno_list border5" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link4} href="/web_graphic-designing#brochur">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border5}`} >
                             BROCHUR & MOKEUP
                           </li>
-                        </Link>
+                        </FooterLink>
                       </ul>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-md-12 col-sm-12 mt-5" style={{padding: "25px 10px", background: "#fafbfb"}}>
-              <div className="row maintainpd_service">
-                <div className="col-lg-7 col-md-6 d-flex align-items-center maintain_space_box handlefor_mob_con">
+            <div className={`col-md-12 col-sm-12 ${style.service_box} mt-5`} >
+              <div className={`row ${style.maintainpd_service}`}>
+                <div className={`col-lg-7 col-md-6 d-flex align-items-center ${style.maintain_space_box} ${style.handlefor_mob_con}`}>
                   <div>
                     <h4 className="mb-3">{erpapptitle ? erpapptitle : "Enterprice Services"}</h4>
                     <p>Need to build a smart web service. Cloud computing based solutions are built on Python. Smart applications with the ability to analyze data is what python all about. Perfect for those looking to develop simple web solutions to complex real-life problems. Companies like health record keepers and taxi aggregators should choose this framework.</p>
-                    <div className="softstormweb-box-technology d-flex justify-content-center pt-4">
-                      <ul className="handleul_servicetechno">
-                        <Link scroll={false} smooth className="maintain_link5" href="/enterprise-services#erp">
-                          <li className="handleul_servicetechno_list border6" >
+                    <div className=" d-flex justify-content-center pt-4">
+                      <ul className={style.handleul_servicetechno}>
+                        <FooterLink smooth className={style.maintain_link5} href="/enterprise-services#erp">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border6}`} >
                             ERP
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link5" href="/enterprise-services#crm">
-                          <li className="handleul_servicetechno_list border6" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link5} href="/enterprise-services#crm">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border6}`} >
                             CRM
                           </li>
-                        </Link>
-                        <Link scroll={false} smooth className="maintain_link5" href="/enterprise-services#accounting">
-                          <li className="handleul_servicetechno_list border6" >
+                        </FooterLink>
+                        <FooterLink smooth className={style.maintain_link5} href="/enterprise-services#accounting">
+                          <li className={` ${style.handleul_servicetechno_list} ${style.border6}`} >
                             CUSTOMIZED ACCOUNTING
                           </li>
-                        </Link>
+                        </FooterLink>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-5 col-md-6 handlefor_mob_img">
                   <div onClick={() => handlepagechange("enterprise-services")}>
-                    <Image width={500} height={500} src={erpappimg ? erpappimg : entimg} alt="webimg" className="maintainright_img" />
+                    <Image width={800} height={500} src={erpappimg ? erpappimg : entimg} alt="webimg" className={style.maintainright_img} />
                   </div>
                 </div>
               </div>

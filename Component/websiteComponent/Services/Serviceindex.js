@@ -1,11 +1,12 @@
 import React from "react";
-const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 import Servicecontent from "./Servicecontent";
 import { useEffect, useState } from "react";
 import { Servicestate } from "../../../redux/slice/Service";
 import { useSelector } from "react-redux";
 import axios from "../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
+const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 const Serviceindex = () => {
   const [loading, setLoading] = useState(true);
   const states = useSelector(Servicestate);

@@ -3,7 +3,6 @@ import useToggle from "../SubComponent/Hooks/useToggle";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 const CommonLowerFooter = dynamic(() => import("./CommonLowerFooter"), { ssr: false });
-
 const BackToTop = dynamic(() => import("./BackToTop"), { ssr: false });
 const ScrollToSection = dynamic(() => import("./ScrollToTop"), { ssr: false });
 const DynamicDrawer = dynamic(() => import("./Drawer"), { ssr: false });
@@ -22,7 +21,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       setOpenHireus(true);
-    }, 2000);
+    }, 1500);
   }, []);
 
   const handleScroll = () => {
@@ -51,7 +50,7 @@ const Layout = ({ children }) => {
       <DynamicHeader action={drawerAction.toggle} cartToggle={cartAction.toggle} />
       {openHireus && <DynamicHireus value={cart} action={cartAction.toggle} />}
       <main>{children}</main>
-      {router.pathname === "/contact-us" ? "" :  scrollAbove200 && <DynamicFooter />}
+      {router.pathname === "/contact-us" ? "" :  openHireus && <DynamicFooter />}
       {scrollAbove200 && <CommonLowerFooter />}
       {openHireus && <ScrollToSection />}
       {scrollAbove200 && <BackToTop />}

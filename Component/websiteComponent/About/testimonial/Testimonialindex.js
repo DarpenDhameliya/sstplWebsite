@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Testimonial from "./Testimonial";
 import Headers from "../../SubComponent/PageHeader";
 import Loader from "@/Component/loader";

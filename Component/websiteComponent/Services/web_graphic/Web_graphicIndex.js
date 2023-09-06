@@ -1,14 +1,11 @@
-import React, {useState, useEffect} from "react";
-
-import Headers from "../../SubComponent/PageHeader";
-import Web_graphicservice from "./Web_graphicservice";
-
-import logo from "../../../../assets/images/logo-removebg-preview.webp";
-import {Servicestate} from "../../../../redux/slice/Service";
-import {useSelector} from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Servicestate } from "../../../../redux/slice/Service";
+import { useSelector } from "react-redux";
 import axios from "../../../Axios";
 import Loader from "@/Component/loader";
-
+import dynamic from "next/dynamic";
+import Web_graphicservice from "./Web_graphicservice";
+const Headers = dynamic(() => import("../../SubComponent/PageHeader"));
 const Web_graphicIndex = () => {
   const [loading, setLoading] = useState(true);
   const states = useSelector(Servicestate);
@@ -52,14 +49,14 @@ const Web_graphicIndex = () => {
   }, []);
   return (
     <>
-{loading && <Loader />}
+      {loading && <Loader />}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <Headers
           title="WEB & GRAPHIC DESIGNING"
           breadcrumb={[
-            {link: "/", title: "Home"},
-            {link: "/our-service", title: "Our Service"},
-            {link: "/web_graphic-designing", title: "Web & Graphic"},
+            { link: "/", title: "Home" },
+            { link: "/our-service", title: "Our Service" },
+            { link: "/web_graphic-designing", title: "Web & Graphic" },
           ]}
         />
         <Web_graphicservice images={image} serviceContents={serviceContent} />

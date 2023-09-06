@@ -1,8 +1,8 @@
-import battel from "../../../assets/images/testimonial/battel.webp";
-import sk from "../../../assets/images/testimonial/sk.webp";
-import macswin from "../../../assets/images/testimonial/macswin.webp";
-import mectech from "../../../assets/images/testimonial/mectech.webp";
-import redient from "../../../assets/images/testimonial/redient.webp";
+import battel from "../../../../assets/images/testimonial/battel.webp";
+import sk from "../../../../assets/images/testimonial/sk.webp";
+import macswin from "../../../../assets/images/testimonial/macswin.webp";
+import mectech from "../../../../assets/images/testimonial/mectech.webp";
+import redient from "../../../../assets/images/testimonial/redient.webp";
 
 const TestimonialStaticData = [
   {

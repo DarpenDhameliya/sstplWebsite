@@ -1,10 +1,13 @@
-import {useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 import React from "react";
-import Link from "next/link";
 import ReCAPTCHA from "react-google-recaptcha";
-import {useDispatch, useSelector} from "react-redux";
-import {Contactusstatus, Contactusstate, ContactusSlice} from "../../../redux/slice/Contackus";
+import { useDispatch, useSelector } from "react-redux";
+import { Contactusstatus, Contactusstate, ContactusSlice } from "../../../redux/slice/Contackus";
 import axios from "../../Axios";
+import style from "./service.module.css";
+import dynamic from "next/dynamic";
+const SidePortionUppser = dynamic(() => import("./SidePortionUppser"));
+
 const SidePortion = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -142,13 +145,13 @@ const SidePortion = () => {
           error.captcha = "";
         }
 
-        setError({...error, [e.target.name]: e.target.value});
+        setError({ ...error, [e.target.name]: e.target.value });
         setTimeout(() => {
           setError([]);
         }, 3000);
       } else {
-        const json1 = {fname: name, email, phone, lname: textarea};
-        const json2 = {ipAddress, captchres};
+        const json1 = { fname: name, email, phone, lname: textarea };
+        const json2 = { ipAddress, captchres };
         setDbsubmit(true);
         dispatch(
           ContactusSlice({
@@ -216,52 +219,12 @@ const SidePortion = () => {
   };
   return (
     <>
-      <div className="blog-sidebar demo">
-        <aside className="widget widget-categories">
-          <h3 className="widget-title">OUR SERVICES</h3>
-          <ul>
-            <li>
-              <Link scroll={false} href="/web-application-developement" className="handlesideportion">
-                <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
-                Web Application Development
-              </Link>
-            </li>
-            <li>
-              <Link scroll={false} href="/mobile-application-developement" className="handlesideportion">
-                <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
-                Mobile Application Development
-              </Link>
-            </li>
-            <li>
-              <Link scroll={false} href="/desktop-software-developement" className="handlesideportion">
-                <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
-                Desktop Software Development
-              </Link>
-            </li>
-            <li>
-              <Link scroll={false} href="/digital-marketing" className="handlesideportion">
-                <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
-                Digital Marketing
-              </Link>
-            </li>
-            <li>
-              <Link scroll={false} href="/web_graphic-designing" className="handlesideportion">
-                <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
-                Web & Graphic Designing
-              </Link>
-            </li>
-            <li>
-              <Link scroll={false} href="/enterprise-services" className="handlesideportion">
-                <i className="fa fa-angle-right" aria-hidden="true" style={{marginRight: "5px"}}></i>
-                Enterprise Services
-              </Link>
-            </li>
-          </ul>
-        </aside>
-        <aside className="widget widget-search">
+      <div className={` ${style.blog_sidebar} blog-sidebar demo`}>
+        <SidePortionUppser />
+        <aside className="widget widget-search p-0">
           <div className="row">
             <div className="col-md-12 ">
-              <div className="contact-form maintian_quick_contact" style={{border: "1px solid #d5d5d5", borderRadius: "10px"}}>
+              <div className={` contact-form ${style.maintian_quick_contact}`}>
                 <h4>QUICK CONTACT</h4>
                 <div className="row">
                   <div className="col-md-12">
@@ -290,7 +253,7 @@ const SidePortion = () => {
                     {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                   </div>
                   <div className="col-md-12 text-right mt-3">
-                    <button type="button" className="main-btn" disabled={dbsubmit === true} style={{width: "100%"}} onClick={handlemessapi}>
+                    <button type="button" className="main-btn" disabled={dbsubmit === true} style={{ width: "100%" }} onClick={handlemessapi}>
                       LET'S CONNECT
                     </button>
                   </div>

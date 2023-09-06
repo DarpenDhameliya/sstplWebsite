@@ -1,11 +1,12 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false });
 import Temsandconsition from "./Tems&consition";
 import axios from "../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
 
 const TermandConditionIndex = () => {
-  const [content, setContent] = useState('')
+  const [content, setContent] = useState("");
 
   const [loading, setLoading] = useState(true);
 
@@ -28,17 +29,17 @@ const TermandConditionIndex = () => {
   }, []);
   return (
     <>
-     {loading && <Loader />}
+      {loading && <Loader />}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
         <Headers
           title="TERMS & CONDITIONS"
           breadcrumb={[
-            {link: "/", title: "Home"},
-            {link: "/terms-and-conditions", title: "TERMS & CONDITIONS"},
+            { link: "/", title: "Home" },
+            { link: "/terms-and-conditions", title: "TERMS & CONDITIONS" },
           ]}
           className={"handlebredcrumb"}
         />
-        <Temsandconsition content={content}/>
+        <Temsandconsition content={content} />
       </div>
     </>
   );

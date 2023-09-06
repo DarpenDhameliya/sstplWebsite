@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
-
+import style from './Layout.module.css'
 const Hireus = ({ value, action }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -287,7 +287,7 @@ const Hireus = ({ value, action }) => {
                 <i className="fas fa-times white" />
               </button>
             </div>
-            <div className="row hireform mt-3 handlespaces">
+            <div className={`row ${style.hireform} mt-3 ${style.handlespaces}`}>
               <div className="col-md-12 ">
                 <label>Full Name</label>
                 <input type="text" className={`${error.name ? "handleinput_error" : ""} ${dberr.name ? "mb-0" : ""}  ${error.name_verify ? "error_padding" : ""}`} name="f-name" placeholder="" onBlur={handlefnameBlur} onFocus={() => setNameFocused(true)} value={name} onChange={handlefirstname} />

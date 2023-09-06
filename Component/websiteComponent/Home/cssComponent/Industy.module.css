@@ -1,0 +1,155 @@
+@media (max-width: 576px) {
+  .rightimage {
+    bottom: 0% !important;
+  }
+  .leftimage {
+    top: 4% !important;
+  }
+  .softstormweb_name_industry .content .title {
+    font-size: 16px !important;
+    line-height: 28px;
+  }
+  .softstormweb_name_industry:hover .thumb img {
+    transform: scale(1.2) !important;
+  }
+}
+@media (max-width: 767px) {
+  .softstormweb_name_industry .content {
+    padding-right: 0;
+    margin-top: 20px;
+  }
+  .softstormweb_name_industry {
+    padding: 13px;
+    display: flex;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .rightimage {
+    bottom: 0% !important;
+    width: 300px !important;
+  }
+  .leftimage {
+    top: 4% !important;
+    width: 300px !important;
+  }
+  .softstormweb_name_industry .thumb {
+    max-width: 120px;
+    min-width: 50px;
+  }
+  .softstormweb_name_industry .content {
+    margin-top: 0;
+  }
+  .softstormweb_name_industry {
+    display: flex;
+  }
+  .softstormweb_name_industry .content .title {
+    font-size: 16px !important;
+    line-height: 28px;
+  }
+  .softstormweb_name_industry:hover .thumb img {
+    transform: scale(1.2) !important;
+  }
+}
+@media only screen and (min-width: 767px) and (max-width: 992px) {
+  .rightimage {
+    width: 300px !important;
+    bottom: 0% !important;
+  }
+  .leftimage {
+    width: 300px !important;
+    top: 4% !important;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .softstormweb_name_industry {
+    padding: 15px;
+  }
+  .softstormweb_name_industry .content {
+    padding-right: 0;
+  }
+  .softstormweb_name_industry .content .title {
+    font-size: 17px !important;
+    line-height: 28px;
+  }
+  .softstormweb_name_industry:hover .thumb img {
+    transform: scale(1.2) !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .softstormweb_name_industry .content .title {
+    font-size: 15px !important;
+    line-height: 32px;
+    margin-bottom: 8px;
+  }
+  .softstormweb_name_industry:hover .thumb img {
+    transform: scale(1.2) !important;
+  }
+}
+.softstormweb_industry {
+  position: relative;
+}
+.leftimage {
+  position: absolute;
+  width: 350px;
+  top: 0;
+}
+.rightimage {
+  width: 350px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.softstormweb_name_industry .thumb img {
+  width: 45px;
+  transition: all linear 0.3s;
+}
+.softstormweb_name_industry .content .title {
+  font-size: 17px;
+  line-height: 32px;
+  margin-bottom: 8px;
+}
+.softstormweb_name_industry {
+  box-shadow: 0px 15px 50px 0px rgba(14, 17, 51, 0.1);
+  border-radius: 10px;
+  padding: 17px;
+  display: flex;
+  align-items: center;
+}
+
+.softstormweb_name_industry .thumb {
+  max-width: 70px;
+  min-width: 50px;
+  border-radius: 6px;
+  /* overflow: hidden; */
+  margin-right: 5px;
+}
+
+
+
+.softstormweb_name_industry .thumb {
+  max-width: 70px;
+  min-width: 50px;
+  border-radius: 6px;
+  margin-right: 5px;
+}
+
+.softstormweb_name_industry .thumb img {
+  width: 45px;
+  transition: all linear 0.3s;
+}
+
+.softstormweb_name_industry .content .title {
+  font-size: 18px;
+  line-height: 32px;
+  margin-bottom: 8px;
+}
+
+.element {
+  animation: infiniteScale 2s infinite;
+}
+
+.softstormweb_name_industry:hover .thumb img {
+  transform: scale(1.3);
+}

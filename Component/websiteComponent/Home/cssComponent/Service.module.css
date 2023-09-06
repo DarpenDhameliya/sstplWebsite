@@ -1,0 +1,179 @@
+@media (max-width: 767px) {
+  .softstormweb_techno_service {
+    text-align: center;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .softstormweb_techno_service:hover {
+    min-height: 325px !important;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .softstormweb_techno_service:hover {
+    min-height: 315px !important;
+  }
+}
+@media (min-width: 992px) {
+
+  .softstormweb_techno_service:hover .servicedisplay {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 1s ease;
+  }
+
+  .softstormweb_techno_service:hover .imagedisplay {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  .softstormweb_techno_service:hover .servicedisplay {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .softstormweb_techno_service:hover .imagedisplay {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+    .servicedisplay {
+      display: flex !important;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+.softstormweb_service {
+    background: #f8f9fab5;
+    position: relative;
+  }
+  .softstormweb_service_detail {
+    position: relative;
+  }
+  .softstormweb_techno_service {
+    border: 1px solid #eef0f4;
+    background-color: #fff;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+  }
+
+
+  .softstormweb_techno_service .title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* opacity: 0; */
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .softstormweb_techno_service:hover .title {
+    opacity: 1;
+  }
+
+  .softstormweb_techno_service a {
+    font-size: 14px;
+    font-weight: 500;
+    color: #505056;
+    margin-top: 15px;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .softstormweb_techno_service {
+    box-shadow: 0px -3px 0px 0px rgba(234, 76, 137, 0.004), 0px 40px 40px 0px rgba(14, 17, 51, 0.1);
+    background-color: #fff;
+    transform: translateY(0);
+    padding-bottom: 10px;
+    min-height: 315px;
+    /* transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out, padding-bottom 0.3s ease-in-out; */
+    transition: box-shadow 1s ease-in-out, transform 1s ease-in-out, padding-bottom 1s ease-in-out;
+  }
+  .imagedisplay {
+    display: flex;
+    min-height: 240px;
+    background: rgb(221, 244, 253);
+    border-radius: 10px 10px 0 0;
+  }
+  .servicedisplay {
+      display: none;
+    }
+  .main_btn_about {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #2b70fa;
+    padding: 0 30px;
+    font-size: 15px;
+    line-height: 45px;
+    border-radius: 6px;
+    color: #505056;
+    cursor: pointer;
+    z-index: 5;
+    -webkit-transition: all 0.4s ease-out 0s;
+    -moz-transition: all 0.4s ease-out 0s;
+    -ms-transition: all 0.4s ease-out 0s;
+    -o-transition: all 0.4s ease-out 0s;
+    transition: all 0.4s ease-out 0s;
+    background-color: #fff;
+  }
+  .main_btn_about:hover {
+    background: #2b70fa;
+    color: #fff;
+  }
+  .mob1 {
+    border: 1px solid #2eacfc;
+  }
+  .mob1:hover {
+    background: #2eacfc;
+    color: #fff !important;
+  }
+  .mob2 {
+    border: 1px solid #ea4c89;
+  }
+  .mob2:hover {
+    background: #ea4c89;
+    color: #fff !important;
+  }
+  .mob3 {
+    border: 1px solid #3578ff;
+  }
+  .mob3:hover {
+    background: #3578ff;
+    color: #fff !important;
+  }
+  .mob4 {
+    border: 1px solid #f67741;
+  }
+  .mob4:hover {
+    background: #f67741;
+    color: #fff !important;
+  }
+  .mob5 {
+    border: 1px solid #6a88f7;
+  }
+  .mob5:hover {
+    background: #6a88f7;
+    color: #fff !important;
+  }
+  .mob6 {
+    border: 1px solid #3ab094;
+  }
+  .mob6:hover {
+    background: #3ab094;
+    color: #fff !important;
+  }

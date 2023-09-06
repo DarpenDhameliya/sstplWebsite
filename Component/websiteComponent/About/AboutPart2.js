@@ -13,6 +13,7 @@ import about9 from "../../../assets/images/aboutus/1689848130410-targeting (2).w
 import about10 from "../../../assets/images/aboutus/1690518948178-products and task features.webp";
 import about11 from "../../../assets/images/aboutus/1689847960129-innovation.webp";
 import about12 from "../../../assets/images/aboutus/1689847969138-productivity.webp";
+import style from './About.module.css';
 import axios from "../../Axios";
 import Image from "next/image";
 const AboutPart2 = ({list, loding}) => {
@@ -143,16 +144,16 @@ const AboutPart2 = ({list, loding}) => {
   }, []);
   return (
     <>
-      <div className={`softstormweb-about-concept extradata_aboyt_sstpl pt-70 pb-80 `}>
+      <div className={`${style.softstormweb_about_concept} ${style.extradata_aboyt_sstpl} pt-70 pb-80 `}>
         <div className="container">
-          <div className="text-center  handelmobileview_about ">
+          <div className={`text-center  ${style.handelmobileview_about} `}>
             <h3>Our Stories</h3>
-            <div className="abour_line">
+            <div className={style.abour_line}>
               <span className="main-header-line_choos"></span>
             </div>
           </div>
           <div className="row evenly maintain_mobile_about">
-            <div className="col-sm-6 col-lg-4 mt-4 maintain_mobile_about maintain_uperteb_about ">
+            <div className={`col-sm-6 col-lg-4 mt-4  ${style.maintain_uperteb_about} `}>
               <div className="sstpl_about-card r-bg-c ">
                 <div className="sstpl_about-card-img shadows">
                   <Image width={70} height={20}    src={vission} alt="services" />{" "}

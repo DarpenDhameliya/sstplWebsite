@@ -1,0 +1,75 @@
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .softstormweb_boc_service-2.softstormweb_boc_service-about {
+      padding-right: 30px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .softstormweb_boc_service-2.softstormweb_boc_service-about {
+      padding-right: 50px;
+      padding-left: 50px;
+    }
+  }
+
+  /* right */
+  .softstormweb_boc_service {
+    padding: 30px 25px 30px;
+    background: #f0f8ff;
+    border-radius: 6px;
+    transition: all linear 0.3s;
+  }
+  @media (max-width: 576px) {
+    .softstormweb_boc_service {
+      padding: 30px 10px !important;
+    }
+  }
+  @media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .softstormweb_boc_service {
+      padding: 50px 15px 43px;
+    }
+  }
+  .softstormweb_boc_service .icon {
+    display: inline-block;
+    height: 70px;
+    width: 70px;
+    text-align: center;
+    line-height: 70px;
+    position: relative;
+  }
+  .softstormweb_boc_service .icon > span {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    height: 30px;
+    width: 30px;
+    background: #2b70fa;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0px 3px 6px 0px rgba(14, 17, 51, 0.1);
+    line-height: 28px;
+    color: #fff;
+  }
+  .softstormweb_boc_service .softstormweb {
+    font-size: 20px;
+    font-weight: 700;
+    padding-top: 33px;
+    padding-bottom: 10px;
+  }
+
+  .softstormweb_boc_service:hover {
+    box-shadow: 0px 40px 40px 0px rgba(14, 17, 51, 0.1);
+    transform: translateY(-15px);
+    background-color: #ffe7c8;
+  }
+
+  .softstormweb_boc_service.item_2 .icon span {
+    background: #f8452d;
+  }
+
+  .softstormweb_boc_service.item_3 .icon span {
+    background: #31c369;
+  }
+
+  .softstormweb_boc_service.item_4 .icon span {
+    background: #9b2cfa;
+  }

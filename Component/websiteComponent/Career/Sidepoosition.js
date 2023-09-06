@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {CareerSlice, Careerstate, Careerstatus} from "../../../redux/slice/MailSlice";
 import ReCAPTCHA from "react-google-recaptcha";
 import {useRef} from "react";
+import style from './career.module.css'
 import axios from "../../Axios";
 
 const Sidepoosition = () => {
@@ -157,7 +158,7 @@ const Sidepoosition = () => {
             error.apply = "Required !!";
           }
         }
-  
+
         setError({...error, [e.target.name]: e.target.value});
         setTimeout(() => {
           setError([]);
@@ -238,23 +239,23 @@ const Sidepoosition = () => {
   };
   return (
     <>
-      <div className="blog-sidebar demo mt-3">
-        <aside className="widget widget-search">
+      <div className={` ${style.blog_sidebar} demo mt-3`}>
+        <aside className={` ${style.widget} ${style.widget_search}`}>
           <div className="row">
-            <div className="col-md-12 contectformtebview">
+            <div className="col-md-12">
               <div className="contact-form">
                 <h4 className="contect-form_header mb-2">Apply Now</h4>
-                <div className="col-md-12 handlecontact_form mb-2">
+                <div className={`col-md-12 ${style.handlecontact_form}  mb-2`}>
                   <input type="text" name="side_name" placeholder="Name" value={name} onBlur={handlefnameBlur} onFocus={() => setNameFocused(true)} className={`${error.name ? "handleinput_error" : ""} ${error.name_verify ? "error_padding" : ""} ${dberr.name ? "error_padding" : ""}`} onChange={handlefirstname} />
                   {dberr.name && <p className={`handledberror mb-0 ${dberr.name ? "error_padding_add" : ""}`}>{dberr.name}</p>}
                   {error.name_verify && <p className={`handledberror mb-0  ${error.name_verify ? "error_padding_add" : ""}`}>{error.name_verify}</p>}
                 </div>
-                <div className="col-md-12 handlecontact_form mb-2">
+                <div className={`col-md-12 ${style.handlecontact_form}  mb-2`}>
                   <input type="email" name="side_email" onBlur={handleemailBlur} onFocus={() => setEmailFocused(true)} placeholder="Email Address" className={`${error.email ? "handleinput_error" : ""} ${error.em_verify ? "handleinput_error" : ""} ${dberr.email || error.em_verify ? "error_padding" : ""}`} value={email} onChange={handleemail} />
                   {dberr.email && <p className={`handledberror mb-0 ${dberr.email ? "error_padding_add" : ""}`}>{dberr.email}</p>}
                   {error.em_verify && <p className={`handledberror mb-0  ${error.em_verify ? "error_padding_add" : ""}`}>{error.em_verify}</p>}
                 </div>
-                <div className="col-md-12 handlecontact_form mb-2">
+                <div className={`col-md-12 ${style.handlecontact_form}  mb-2`}>
                   <input
                     type="text"
                     name="side_phone"
@@ -269,25 +270,25 @@ const Sidepoosition = () => {
                   {dberr.phone && <p className={`handledberror mb-0 ${dberr.phone ? "error_padding_add" : ""}`}>{dberr.phone}</p>}
                   {error.num_verify && <p className={`handledberror mb-0  ${error.num_verify ? "error_padding_add" : ""}`}>{error.num_verify}</p>}
                 </div>
-                <div className="col-md-12 handlecontact_form mb-2">
+                <div className={`col-md-12 ${style.handlecontact_form}  mb-2`}>
                   {/* <label className="mb-0">Apply For</label> */}
                   <input className={`${error.apply ? "handleinput_error" : ""}`} onBlur={handleappyBlur} onFocus={() => setApplyFocused(true)} type="text" name="side_app-for" placeholder="Apply For" value={apply} onChange={handleappy} />
                 </div>
-                <div className="col-md-12 handlecontact_form">
+                <div className={`col-md-12 ${style.handlecontact_form} `}>
                   <div>
                     <input className={`${error.file ? "handleinput_error" : ""} ${dberr.file ? "error_padding" : ""} typefiledes`} type="text" value={filename} onClick={() => fileInputRef.current.click()} onKeyDown={handleTextKeyPress} />
                     <input type="file" ref={fileInputRef} style={{display: "none"}} onChange={handleFileChange} />
                   </div>
                 </div>
                 {dberr.file && <p className={`handledberror mb-0 ${dberr.file ? "error_padding_add" : ""}`}>{dberr.file}</p>}
-                <div className=" col-md-12  handlecontact_form">
+                 <div className={`col-md-12 ${style.handlecontact_form} `}>
                   <div className="recaptcha-container">
                     <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_SITE_KEY} ref={recaptchaRef} onChange={handleVerify} theme="light" size="normal" />
                   </div>
                   {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                 </div>
-                <div className="col-md-12 text-right handlecontact_form mb-2 mt-3">
-                  <button className={`main-btn_carrer_side ${dbsubmit ? "disabled" : ""}`} style={{width: "100%"}} onClick={handlesubmit}>
+                <div className={`col-md-12 text-right ${style.handlecontact_form} mb-2 mt-3`}>
+                  <button className={`${style.main_btn_carrer_side} ${dbsubmit ? "disabled" : ""}`} style={{width: "100%"}} onClick={handlesubmit}>
                     SEND RESUME
                   </button>
                 </div>

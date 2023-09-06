@@ -6,7 +6,7 @@ export const Metaapicall = async () => {
     const initialPortfolioList = response.data.result;
     return initialPortfolioList;
   } catch (error) {
-    return error.response.data; 
+    return error.response; 
   }
 };
 

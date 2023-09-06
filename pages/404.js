@@ -10,7 +10,7 @@ const NotFound = () => {
       <h2 className="mt-3 pb-10" style={{color: "#c20004", borderBottom: "2px solid"}}>
         Page Not Found
       </h2>
-      <Link href="/" className="footer_bottomLinks pt-10 " >
+      <Link href="/" className="footer_bottomLinks pt-10 black" >
         <i className="fa fa-arrow-left-long mr-3" />
         Home
       </Link>

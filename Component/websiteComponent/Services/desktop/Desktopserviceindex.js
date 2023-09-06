@@ -1,13 +1,13 @@
 import React from "react";
-
-import Headers from "../../SubComponent/PageHeader";
-import Desktipservice from "./Desktipservice";
-import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import { useEffect, useState } from "react";
 import { Servicestate } from "../../../../redux/slice/Service";
 import { useSelector } from "react-redux";
 import axios from "../../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
+import Desktipservice from "./Desktipservice"
+const Headers = dynamic(() => import("../../SubComponent/PageHeader"));
+
 const Desktopserviceindex = () => {
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");

@@ -1,0 +1,178 @@
+@media (max-width: 767px) {
+  .softstormweb_about {
+    padding: 30px 20px !important;
+  }
+  .softstormweb_about_main_title {
+    margin-bottom: 40px !important;
+  }
+  .softstormweb_about_main_title {
+    padding-right: 0;
+  }
+  .softstormweb_about_main_title .title {
+    font-size: 25px;
+    line-height: 40px;
+  }
+  .softstorm_testimonial_icon {
+    width: 90px !important;
+  }
+  .softstorm_testimonial_img {
+    min-width: 95px !important;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .softstormweb_about_main_title .title {
+    font-size: 33px;
+    line-height: 46px;
+  }
+  .maintain_uperteb_about {
+    padding: 0 !important;
+  }
+}
+@media only screen and (min-width: 767px) and (max-width: 992px) {
+
+  .softstormweb_about_main_title .title {
+    font-size: 36px;
+    line-height: 46px;
+  }
+}
+@media (max-width: 576px) {
+    .handelmobileview_about {
+        margin-bottom: 0px !important;
+      }
+      .abour_line {
+        display: inline-block !important;
+      }
+      .sstpl_about_card_img {
+        background: #fff;
+        padding: 12px !important;
+        top: -30px;
+        left: 38% !important;
+      }
+    /* .softstormweb_about_main_title .title {
+      font-size: 25px;
+      line-height: 40px;
+    } */
+}
+.softstormweb_about_main_title {
+  padding-right: 0px !important;
+  margin-bottom: 0px;
+}
+.softstormweb_about_main_title span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2b70fa;
+}
+.softstormweb_about_main_title .title {
+  font-size: 44px;
+  line-height: 54px;
+}
+.about_tab {
+    position: relative;
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .about_tab:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 98%;
+    background: #000000 !important;
+    opacity: 0.15;
+    border-radius: 30px;
+  }
+  .softstormweb_about_concept {
+    background-color: #f8f9fab5;
+  }
+  .extradata_aboyt_sstpl {
+    position: relative;
+  }
+  .handelmobileview_about {
+    margin-bottom: 30px;
+  }
+  .abour_line {
+    display: none;
+  }
+  /* .sstpl_about_card {
+    background: #fff;
+    position: relative;
+    place-items: start;
+    display: grid;
+    border-radius: 10px;
+    padding: 70px 30px 30px;
+    -webkit-box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+    box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+  }
+  .sstpl_about_card_img {
+    background: #fff;
+    box-shadow: 0 15px 30px -10px rgb(0 0 0/14%);
+    padding: 15px;
+    border-radius: 14px;
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: -30px;
+    left: 6%;
+  }
+  .sstpl_about_card:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 0%;
+    bottom: 0;
+    height: 4px;
+    background: var(--hover-color);
+    /* background-repeat: no-repeat; *
+    transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+  }
+  .sstpl_about_card:hover:after {
+    width: 100%;
+  } */
+  .softstormweb_testimonial {
+    background: #fff;
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 80px;
+    /* background-image: url(../images/shape/shape-1.png); */
+    background-position: 92% 100%;
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
+  .softstorm_testimonialPage {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 6px;
+    transition: all linear 0.3s;
+  }
+  .softstorm_testimonialPage:hover {
+    box-shadow: 0px 40px 40px 0px rgba(14, 17, 51, 0.1);
+    transform: translateY(-15px);
+  }
+  .softstorm_testimonialPage:hover .displayspan {
+    display: block;
+  }
+  .softstorm_testimonialPage:hover setps {
+    opacity: 1;
+  }
+  .softstorm_testimonial_icon {
+    width: 110px;
+  }
+  .softstorm_testimonial_img {
+    min-width: 110px;
+  }
+  .handleline::before {
+    position: absolute;
+    content: "";
+    width: 120px;
+    height: 3px;
+    left: 50%;
+    margin-left: -60px;
+    background: #c20004;
+  }

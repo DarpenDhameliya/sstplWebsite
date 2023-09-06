@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
 import { SocialLink, socialMediaLinks } from "../SubComponent/FooterLink";
 import { useDispatch, useSelector } from "react-redux";
-
+import style from './drawer.module.css'
 function Drawer({ drawer, action, cartToggle }) {
   const [size, setSize] = useState("0px");
   const [item, setItem] = useState("home");
@@ -53,11 +53,11 @@ function Drawer({ drawer, action, cartToggle }) {
   return (
     <>
       <div onClick={handleaction} className={`off_canvars_overlay ${drawer ? "active" : ""}`}></div>
-      <div className="offcanvas_menu">
+      <div className={style.offcanvas_menu}>
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <div className={`offcanvas_menu_wrapper ${drawer ? "active" : ""}`}>
+              <div className={`${style.offcanvas_menu_wrapper} ${drawer ? `${style.active}` : ""}`}>
                 <div className="offcanvas-brand text-center mb-40">
                   <Image src={logo} alt="" />
                 </div>

@@ -3,6 +3,7 @@ const Headers = dynamic(() => import("../SubComponent/PageHeader"), { ssr: false
 import Privacy from "./Privacy";
 import axios from "../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
 
 const PrivacyIndex = () => {
   const [content, setContent] = useState('')

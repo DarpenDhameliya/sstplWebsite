@@ -1,0 +1,195 @@
+.sstpl_contact_card {
+  min-height: 200px;
+  background: #00588915;
+  position: relative;
+  place-items: start;
+  display: grid;
+  text-align: center;
+  border-radius: 10px;
+  padding: 60px 30px 30px;
+  -webkit-box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+  box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+  transition: all linear 0.3s;
+  justify-content: center;
+  border: 2px solid #005889;
+}
+.sstpl_contact_card_img {
+  background: #fff;
+  box-shadow: 0 15px 30px -10px rgb(0 0 0/14%);
+  padding: 15px;
+  border-radius: 30%;
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: -30px;
+  left: 38%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .sstpl_contact_card_img {
+    background: #fff;
+    padding: 12px !important;
+    top: -30px;
+    left: 38% !important;
+  }
+  .sstpl_contact-card1 {
+    margin-top: 50px !important;
+  }
+  .sstpl_contact-card2 {
+    margin-top: 50px !important;
+  }
+
+  .sstpl_contact-card {
+    margin-top: 50px !important;
+  }
+}
+.sstpl_contact_card .contectus_icon {
+  font-size: 40px;
+  color: #4f4f4f;
+}
+.sstpl_contact_card1 .contectus_icon {
+  font-size: 40px;
+  color: #4f4f4f;
+}
+.sstpl_contact_card2 .contectus_icon {
+  font-size: 40px;
+  color: #4f4f4f;
+}
+.sstpl_contact_card:hover .contectus_icon {
+  color: #005889 !important;
+}
+.sstpl_contact_card1:hover .contectus_icon {
+  color: #006308 !important;
+}
+.sstpl_contact_card2:hover .contectus_icon {
+  color: #a10404 !important;
+}
+.sstpl_contact_card:hover {
+  box-shadow: 0px 40px 40px 0px rgba(14, 17, 51, 0.1);
+  transform: translateY(-15px);
+}
+.sstpl_contact_card1:hover {
+  box-shadow: 0px 40px 40px 0px rgba(14, 17, 51, 0.1);
+  transform: translateY(-15px);
+}
+.sstpl_contact_card2:hover {
+  box-shadow: 0px 40px 40px 0px rgba(14, 17, 51, 0.1);
+  transform: translateY(-15px);
+}
+.sstpl_contact_card1 {
+  min-height: 200px !important;
+  background: #00630815;
+  /* background: #fff; */
+  position: relative;
+  place-items: start;
+  display: grid;
+  text-align: center;
+  border-radius: 10px;
+  padding: 60px 30px 30px;
+  -webkit-box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+  box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+  transition: all linear 0.3s;
+  justify-content: center;
+  border: 2px solid #006308;
+}
+.sstpl_contact_card2 {
+  min-height: 200px !important;
+  background: #a1040415;
+  /* background: #fff; */
+  position: relative;
+  place-items: start;
+  display: grid;
+  text-align: center;
+  border-radius: 10px;
+  padding: 60px 30px 30px;
+  -webkit-box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+  box-shadow: 0 10px 15px -2px rgb(82 0 57/8%);
+  transition: all linear 0.3s;
+  justify-content: center;
+  border: 2px solid #a10404;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .handlemobile {
+    margin-top: 50px;
+  }
+}
+@media (max-width: 767px) {
+  .handlemobile {
+    margin-top: 50px;
+  }
+}
+  .main_btn_footer {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #c20004;
+    padding: 0 30px;
+    font-size: 15px;
+    line-height: 45px;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 5;
+    -webkit-transition: all 0.4s ease-out 0s;
+    -moz-transition: all 0.4s ease-out 0s;
+    -ms-transition: all 0.4s ease-out 0s;
+    -o-transition: all 0.4s ease-out 0s;
+    transition: all 0.4s ease-out 0s;
+    background-color: #c20004;
+  }
+  .main_btn_footer:hover {
+    background-color: #fff;
+    color: #c20004;
+    border-color: #c20004;
+  }
+  @media (max-width: 767px) {
+    .footer-copyright {
+      display: block !important;
+      text-align: center;
+    }
+    .main_btn_footer {
+      margin-top: 15px !important;
+      width: 100% !important;
+    }
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    .footer-copyright {
+      text-align: center;
+    }
+    .softstorm_insidepage_titleitem .title {
+      font-size: 35px !important;
+    }
+    .main_btn_footer {
+      height: 47px !important;
+    }
+  }
+  @media (min-width: 992px) {
+    .copyright-text {
+      display: flex;
+      justify-content: end;
+    }
+    .main_btn_footer {
+      width: 200px !important;
+      height: 47px !important;
+    }
+  }
+  .bisylms_map {
+    position: relative;
+    line-height: 0.8;
+    overflow: hidden;
+  }
+
+  .bisylms_map iframe {
+    width: 100%;
+    height: 480px;
+    border: none;
+  }

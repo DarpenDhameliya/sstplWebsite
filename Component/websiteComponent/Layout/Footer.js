@@ -6,8 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { ContactusSlice, Contactusstate, Contactusstatus } from "@/redux/slice/Contackus";
 import { Iconstate, Iconstatus } from "@/redux/slice/IconSlice";
-import axioss from 'axios'
-
+import axioss from "axios";
+import style from "./Layout.module.css";
+import { useRouter } from "next/router";
 export default function Footer(className) {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
@@ -33,6 +34,9 @@ export default function Footer(className) {
   const dispatch = useDispatch();
   const states = useSelector(Contactusstate);
   const iconstate = useSelector(Iconstate);
+  const router = useRouter();
+  const { pathname } = router;
+  const isNotFound = pathname === "/404";
 
   const notify = useCallback(() => {
     toast.success("Apply Successfully..", {
@@ -46,9 +50,6 @@ export default function Footer(className) {
       closeOnClick: false,
     });
   }, []);
-
-
-
 
   useEffect(() => {
     axioss
@@ -96,7 +97,13 @@ export default function Footer(className) {
       } else {
       }
     }
+    if (isNotFound) {
+      document.querySelector(`.softstormweb-footer`).style.display = "none";
+    } else {
 
+        // document.querySelector(`.softstormweb-footer}`).style.display = "block";
+        document.querySelector(`.softstormweb-footer`).style.display = "block";
+    }
   });
 
   useEffect(() => {
@@ -110,9 +117,7 @@ export default function Footer(className) {
       dispatch(Iconstatus());
     } else {
     }
-
-  }, [ iconstate])
-  
+  }, [iconstate]);
 
   const handlecontectform = (e) => {
     e.preventDefault();
@@ -171,7 +176,7 @@ export default function Footer(className) {
         if (!phone) {
           error.phone = "Required !";
         } else {
-          error.phone = ""; 
+          error.phone = "";
           if (!number_verify) {
             error.num_verify = "Add Correct number";
           } else {
@@ -283,16 +288,16 @@ export default function Footer(className) {
   return (
     <>
       <ToastContainer position="top-right" closeOnClick={false} style={{ marginTop: "55px" }} />
-      <div className={`softstormweb-footer ${className || ""}`} style={{ backgroundColor: "#f8f9fa" }}>
-        <div className="handleimage">
-          <div className="footer_bg">
+      <div className={`softstormweb-footer ${className || ""}`}>
+        <div className={style.handleimage}>
+          <div className={style.footer_bg}>
             <div className="container">
-              <div className="softstormweb-footer-signupbox">
-                <div className="row handlebg">
-                  <div className="col-lg-4  handlecontactimg">
-                    <div className={`contact--info-area maintainformhw handlefootertab `}>
+              <div className={style.softstormweb_footer_signupbox}>
+                <div className={`row ${style.handlebg}`}>
+                  <div className={`col-lg-4  ${style.handlecontactimg}`}>
+                    <div className={`${style.contact__info_area} ${style.maintainformhw} handlefootertab `}>
                       <h3>CONTACT US</h3>
-                      <div className="single-info">
+                      <div className={style.single_info}>
                         <h5>ADDRESS</h5>
                         <Link
                           href={{
@@ -306,7 +311,7 @@ export default function Footer(className) {
                           <div className="ml-1">305-306, Amby Valley Arcade, Opp. Santosa Height, Manisha Garnala. Uttran, Surat, Gujarat</div>
                         </Link>
                       </div>
-                      <div className="single-info">
+                      <div className={style.single_info}>
                         <h5>Phone</h5>
                         <a href="tel:+91261-3560756" className="pl-0 pb-1 d-flex align-items-center">
                           <i className="fa fa-phone mr-2" />
@@ -317,7 +322,7 @@ export default function Footer(className) {
                           <div className="ml-1">+91 90999 19947</div>
                         </a>
                       </div>
-                      <div className="single-info">
+                      <div className={style.single_info}>
                         <h5>Support</h5>
                         <a href="mailto:contact@softstorm.in" rel="noopener noreferrer" className="pl-0 d-flex align-items-center">
                           <i className="fa fa-envelope mr-2" />
@@ -326,7 +331,7 @@ export default function Footer(className) {
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-8 pl-0 handlemobileset">
+                  <div className={`col-lg-8 pl-0 ${style.handlemobileset}`}>
                     <div className="contact-form">
                       <h4>Let’s Connect</h4>
                       <p>Reach out today to spark innovation and unleash digital solutions in collaboration with us.</p>
@@ -382,7 +387,7 @@ export default function Footer(className) {
                           {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12 d-flex justify-content-end align-items-center">
-                          <button className="main-btn_footers main-btn-footer" name="submit" disabled={dbsubmit} onClick={handlecontectform}>
+                          <button className={`main-btn_footers ${style.main_btn_footer}`} name="submit" disabled={dbsubmit} onClick={handlecontectform}>
                             Send Message
                           </button>
                         </div>

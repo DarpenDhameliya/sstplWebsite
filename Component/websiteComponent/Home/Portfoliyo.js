@@ -41,8 +41,8 @@ export default function Portfoliyo({ data }) {
   const settingsForArticle = {
     autoplay: true,
     arrows: false,
-    dots: true,
-    speed: 800,
+    dots: false,
+    speed: 200,
     swipeToSlide: true,
     slidesToShow: 3,
   };
@@ -88,7 +88,7 @@ export default function Portfoliyo({ data }) {
                               <div className="icon">
                                 <Image src={e.uploadimg} className="handleportfoliyohomeweb" height={230} width={350} alt="logo" style={{ borderRadius: "15px" }} />
                               </div>
-                              <h4 className="pt-4">{e.name}</h4>
+                              <h4 className="pt-4 fs-20">{e.name}</h4>
                             </div>
                           </div>
                         );

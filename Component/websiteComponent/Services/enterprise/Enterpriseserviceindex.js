@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Headers from "../../SubComponent/PageHeader";
-import Enterpriseservice from "./Enterpriseservice";
-import logo from "../../../../assets/images/logo-removebg-preview.webp";
 import { Servicestate } from "../../../../redux/slice/Service";
 import { useSelector } from "react-redux";
 import axios from "../../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
+import Enterpriseservice from "./Enterpriseservice"
+const Headers = dynamic(() => import("../../SubComponent/PageHeader"));
 const Enterpriseserviceindex = () => {
   const [loading, setLoading] = useState(true);
   const [serviceContent, setServiceContent] = useState("");

@@ -4,11 +4,12 @@ import ReturnPolicy from "./ReturnPolicy";
 import {useEffect, useState} from "react";
 import axios from "../../Axios";
 import Loader from "@/Component/loader";
+import dynamic from "next/dynamic";
 
 const ReturnPolicyIndex = () => {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     fetchHiredata();
   }, []);
