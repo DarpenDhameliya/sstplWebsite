@@ -1,0 +1,64 @@
+running 5000
+connect
+else 
+C:\Users\admin\react\sstplsite\backend\files\careerInquiry\1694843118136-dk dha-Screenshot (3).png
+{
+  to: 'hr.softstorm@gmail.com',
+  subject: 'react js - dk dha',
+  html: '<table>\n' +
+    '          <tr>\n' +
+    '          <th>name</th>\n' +
+    '          <td>dk dha</td>\n' +
+    '          </tr>\n' +
+    '          <tr>\n' +
+    '           <th>email</th>\n' +
+    '           <td>darpen.sstpl@gmail.com</td>\n' +
+    '          </tr>\n' +
+    '          <tr>\n' +
+    '            <th>phone</th>\n' +
+    '            <td>9574339144</td>\n' +
+    '          </tr>\n' +
+    '          <tr>\n' +
+    '            <th>Apply for</th>\n' +
+    '            <td>react js</td>\n' +
+    '          </tr>\n' +
+    '          </table>',
+  attachments: [
+    {
+      filename: '1694843118136-dk dha-Screenshot (3).png',
+      path: 'C:\\Users\\admin\\react\\sstplsite\\backend\\files\\careerInquiry\\1694843118136-dk dha-Screenshot (3).png'
+    }
+  ]
+}
+suuccess data {
+  name: 'dk dha',
+  email: 'darpen.sstpl@gmail.com',
+  contact: '9574339144',
+  apply_for: 'react js',
+  resume: '1694843118136-dk dha-Screenshot (3).png',
+  ip: '49.36.90.105',
+  browsernm_browsever: 'Chrome',
+  mobile: false,
+  _id: new ObjectId("650540eee0d7d731e43b433a"),
+  date: 2023-09-16T05:45:18.156Z,
+  __v: 0
+}
+success mail {
+  accepted: [ 'hr.softstorm@gmail.com' ],
+  rejected: [],
+  ehlo: [
+    'SIZE 35882577',
+    '8BITMIME',
+    'AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH',
+    'ENHANCEDSTATUSCODES',
+    'PIPELINING',
+    'CHUNKING',
+    'SMTPUTF8'
+  ],
+  envelopeTime: 1069,
+  messageTime: 3117,
+  messageSize: 348231,
+  response: '250 2.0.0 OK  1694843124 k24-20020a63ff18000000b00565e96d9874sm3274485pgi.89 - gsmtp',
+  envelope: { from: '', to: [ 'hr.softstorm@gmail.com' ] },
+  messageId: '<d3f43c73-e374-64b7-e92c-10e49da7bdc2@localhost>'
+}

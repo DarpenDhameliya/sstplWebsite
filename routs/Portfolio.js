@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
-const {errormessage, successmessage , successmessageValidate} = require("../response/Response");
+const { errormessage, successmessage, successmessageValidate } = require("../response/Response");
 const portfolio = require("../Model/Portfolio");
 const portfoliocategorylist = require("../Model/PortfolioCategoryList");
 const multer = require("multer");
@@ -23,7 +23,7 @@ var upload = multer({
 }).single("uploadimg");
 
 router.get("/portfoliocategory_list", async (req, res) => {
-  let value = portfoliocategorylist.schema.paths.category.defaultValue
+  let value = portfoliocategorylist.schema.paths.category.defaultValue;
   const defaultValues = value();
 });
 
@@ -31,13 +31,13 @@ router.post("/portfolio_list", async (req, res) => {
   try {
     let senddata = [];
     const ID = process.env.BASEURL;
-    let {page_size, pageNumber} = req.body;
+    let { page_size, pageNumber } = req.body;
     const skip = (pageNumber - 1) * page_size;
     const totalRecords = await portfolio.countDocuments({});
     const totalPages = Math.ceil(totalRecords / page_size);
 
     portfolio
-      .find({}, {__v: 0})
+      .find({}, { __v: 0 })
       .skip(skip)
       .sort({ date: -1 })
       .limit(page_size) // per page_size
@@ -56,7 +56,7 @@ router.post("/portfolio_list", async (req, res) => {
           single["team"] = result.team;
           single["technology"] = result.technology;
           single["uploadimg"] = url;
-          senddata.push({...single});
+          senddata.push({ ...single });
         });
         return res.status(200).send(successmessageValidate(senddata, totalPages));
       })
@@ -70,7 +70,7 @@ router.post("/portfolio_list", async (req, res) => {
 
 router.post("/portfolio_add", Authenticate, upload, async (req, res) => {
   try {
-    let {name, industry, team, duration, country, uploadimg, contentview, category, contentpositionview, technology} = req.body;
+    let { name, industry, team, duration, country, uploadimg, contentview, category, contentpositionview, technology } = req.body;
     let error = [];
     if (!name || !industry || !team || !duration || !country || !technology || !category || !req.file || !contentview || !contentpositionview) {
       if (!name) {
@@ -137,7 +137,7 @@ router.get("/portfolio_update_detail/:id", Authenticate, async (req, res) => {
     const ID = process.env.BASEURL;
 
     portfolio
-      .findById(id, {__v: 0})
+      .findById(id, { __v: 0 })
       .then((result) => {
         // data.map((result) => {
         let url = `${ID}/portfolio/${result.uploadimg}`;
@@ -153,7 +153,7 @@ router.get("/portfolio_update_detail/:id", Authenticate, async (req, res) => {
         single["team"] = result.team;
         single["technology"] = result.technology;
         single["uploadimg"] = url;
-        senddata.push({...single});
+        senddata.push({ ...single });
         return res.status(200).send(successmessage(single));
         // });
       })
@@ -167,36 +167,36 @@ router.get("/portfolio_update_detail/:id", Authenticate, async (req, res) => {
 
 router.post("/portfolio_update/:id", upload, Authenticate, async (req, res) => {
   try {
-    let {name, industry, team, duration, country, uploadimg, contentview, category, contentpositionview, technology} = req.body;
+    let { name, industry, team, duration, country, uploadimg, contentview, category, contentpositionview, technology } = req.body;
     let id = req.params.id;
     let error = [];
     if (!name || !industry || !team || !duration || !country || !technology || !category || !contentview || !contentpositionview) {
       if (!name) {
-        error.push("Required1");
+        error.push("Required");
       }
       if (!industry) {
-        error.push("Required2");
+        error.push("Required");
       }
       if (!team) {
-        error.push("Required3");
+        error.push("Required");
       }
       if (!duration) {
-        error.push("Required4");
+        error.push("Required");
       }
       if (!country) {
-        error.push("Required5");
+        error.push("Required");
       }
       if (!technology) {
-        error.push("Required6");
+        error.push("Required");
       }
       if (!contentview) {
-        error.push("Required7");
+        error.push("Required");
       }
       if (!contentpositionview) {
-        error.push("Required8");
+        error.push("Required");
       }
       if (!category) {
-        error.push("Required9");
+        error.push("Required");
       }
 
       return res.status(402).json(errormessage(error));
@@ -247,9 +247,8 @@ router.post("/portfolio_update/:id", upload, Authenticate, async (req, res) => {
           }
         });
       }
-
       portfolio
-        .findByIdAndUpdate(id, {$set: new_data}, {new: true})
+        .findByIdAndUpdate(id, { $set: new_data }, { new: true })
         .then((result) => {
           return res.status(200).send(successmessage(result));
         })

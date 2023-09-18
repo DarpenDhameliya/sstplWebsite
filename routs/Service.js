@@ -103,7 +103,7 @@
 //   var newfile = req.files;
 
 
-  
+
 //   let id = req.params.id;
 //   let error = [];
 //   if (!heading || !content) {
@@ -259,6 +259,7 @@ router.get("/service_list", (req, res) => {
 });
 router.post("/service_add", upload.array("image", 2), Authenticate, (req, res) => {
   try {
+    console.log('==========>',req.body)
     let {heading, content} = req.body;
 
     let error = [];
@@ -279,6 +280,8 @@ router.post("/service_add", upload.array("image", 2), Authenticate, (req, res) =
           servicepageimg: req.files[1].filename,
           heading,
           content,
+          contentview,
+          contentpositionview,
         })
         .then((result) => {
           return res.status(200).send(successmessage(["Add Successfully"]));
@@ -288,6 +291,7 @@ router.post("/service_add", upload.array("image", 2), Authenticate, (req, res) =
         });
     }
   } catch (error) {
+    console.log('error',error)
     return res.status(500).json(errormessage(error));
   }
 });
@@ -321,6 +325,7 @@ router.get("/service_update_detail/:id", Authenticate, async (req, res) => {
 router.put("/service_update/:id", upload.array("image", 2), Authenticate, async (req, res) => {
   try {
     let {heading, content , contentpositionview , contentview} = req.body;
+    console.log(req.files)
     var newfile = req.files;
 
     let id = req.params.id;

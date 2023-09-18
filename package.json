@@ -4,8 +4,9 @@
   "description": "site",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node Index.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "",
   "license": "ISC",
@@ -17,10 +18,11 @@
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "forever": "^4.0.3",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",
     "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.1",
+    "nodemailer": "^6.9.5",
     "nodemon": "^2.0.21"
   }
 }
