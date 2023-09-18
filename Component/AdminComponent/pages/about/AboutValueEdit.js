@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 import LeftButton from "../../common/LeftButton";
 import Loader from "@/Component/loader";
+import styles from '../../common/common.module.css'
+
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
 });
@@ -126,20 +128,20 @@ const AboutValueEdit = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className="setcontainer">
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <LeftButton link="/online-admin/dashboard/aboutvalue" value="About Value Edit" />
-        <Paper className="setProductpaper" elevation={5}>
-          {dbFetcherr && <Typography className="seterrorlabel">{dbFetcherr} </Typography>}
-          {dbAdderr && <Typography className="seterrorlabel">{dbAdderr} </Typography>}
+        <Paper className={styles.setProductpaper} elevation={5}>
+          {dbFetcherr && <Typography className={styles.seterrorlabel}>{dbFetcherr} </Typography>}
+          {dbAdderr && <Typography className={styles.seterrorlabel}>{dbAdderr} </Typography>}
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4} className="setinputlayout">
-              <Typography className="setlabel">vision heading :</Typography>
+              <Typography className={styles.setlabel}>vision heading :</Typography>
               <TextField id="outlined-basic" size="small" variant="outlined" style={{ width: "100%" }} className="settextfield" placeholder="heading" InputLabelProps={{ shrink: false }} value={titleheading} onChange={(e) => setTitleheading(e.target.value)} />
-              {error.head && <Typography className="seterrorlabel">{error.head} </Typography>}
-              <Typography className="setlabel">image :</Typography>
+              {error.head && <Typography className={styles.seterrorlabel}>{error.head} </Typography>}
+              <Typography className={styles.setlabel}>image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle} type="file" className="settextfield" style={{ width: "100%" }} placeholder="image" value={slectImage} />
-              {error.file && <Typography className="seterrorlabel">{error.file} </Typography>}
+              {error.file && <Typography className={styles.seterrorlabel}>{error.file} </Typography>}
               {imgpre && (
                 <Card sx={{ maxWidth: "250px" }} className="mt-3">
                   <CardMedia component="img" src={imgdisplay.length > 0 ? imgdisplay : image} className="setdisimage" />
@@ -155,8 +157,8 @@ const AboutValueEdit = () => {
               </div>
             </Grid>
           </Grid>
-          <div className={`$'setsendbutton' mt-3`}>
-            <Button variant="contained" size="medium" className="setsendbtninside" onClick={handlesenddata}>
+          <div className={`${styles.setsendbutton} mt-3`}>
+            <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
               update
             </Button>
           </div>

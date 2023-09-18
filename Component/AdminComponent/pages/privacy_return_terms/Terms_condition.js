@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 import {api} from "../../../Axios";
 import dynamic from "next/dynamic";
+import styles from '../../common/common.module.css'
+
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
 });
@@ -116,24 +118,24 @@ const Terms_condition = () => {
 
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer_return'>
+      <Container component="main" maxWidth="xl" className={styles.setcontainer_return}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className='setpageheading'>
-            <Typography variant="h4" gutterBottom className='setheading'>
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Terms & Condition
             </Typography>
           </div>
-          <Paper className='setProductpaper' elevation={5}>
-            {dpneResponce && <Typography className='seterrorlabel'>{dpneResponce} </Typography>}
-            {dberr && <Typography className='seterrorlabel'>{dberr} </Typography>}
-            {dbAdderr && <Typography className='seterrorlabel'>{dbAdderr} </Typography>}
+          <Paper className={styles.setProductpaper} elevation={5}>
+            {dpneResponce && <Typography className={styles.setProductpaper}>{dpneResponce} </Typography>}
+            {dberr && <Typography className={styles.setProductpaper}>{dberr} </Typography>}
+            {dbAdderr && <Typography className={styles.setProductpaper}>{dbAdderr} </Typography>}
             <div style={{maxHeight: "500px", overflow: "overlay"}}>
               <JoditEditor value={aboutcontent} onChange={(newContent) => contentabout(newContent)} />
-              {aboutError && <Typography className='seterrorlabel'>{aboutError} </Typography>}
+              {aboutError && <Typography className={styles.setProductpaper}>{aboutError} </Typography>}
             </div>
             <div className="d-flex justify-content-end mt-3">
-              <Button variant="contained" size="medium" className='setsendbtninside' onClick={handleeditdata}>
+              <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handleeditdata}>
                 update
               </Button>
             </div>

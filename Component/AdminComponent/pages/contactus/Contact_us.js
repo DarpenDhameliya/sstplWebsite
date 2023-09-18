@@ -14,6 +14,8 @@ import { api } from "../../../Axios";
 import Loader from "@/Component/loader";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import styles from '../../common/common.module.css'
+
 const CommonPagination = dynamic(() => import("../../common/pagination"), { ssr: false });
 const Model = dynamic(() => import(`./Model`));
 
@@ -121,50 +123,50 @@ const Contact_us = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className="setcontainer">
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className="setpageheading">
-            <Typography variant="h4" gutterBottom className="setheading">
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Contact
             </Typography>
           </div>
-          <Paper className="setProductpaper" elevation={5}>
-            {dbDeleteerr && <Typography className="seterrorlabel">{dbDeleteerr} </Typography>}
-            {fetcherr && <Typography className="seterrorlabel">{fetcherr} </Typography>}
+          <Paper className={styles.setProductpaper} elevation={5}>
+            {dbDeleteerr && <Typography className={styles.seterrorlabel}>{dbDeleteerr} </Typography>}
+            {fetcherr && <Typography className={styles.seterrorlabel}>{fetcherr} </Typography>}
 
             <TableContainer>
               <Table className="settable" aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       No.
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Date.
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Name
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Email
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Phone
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Subject
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Ip Address
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Operater
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Browser & version
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Action
                     </TableCell>
                   </TableRow>
@@ -173,43 +175,43 @@ const Contact_us = () => {
                   {contactList.map((e, index) => {
                     return (
                       <StyledTableRow>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {page == 1 ? index + 1 : page * rowperpage - rowperpage + (index + 1)}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {new Date(e.date).toLocaleDateString("en-GB")}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.name}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.email}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.contact}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.subject}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.ip}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.mobile === true ? "Mobile" : "Desktop"}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.browsernm_browsever}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           <div className="seticondiv">
                             <div>
                               <Tooltip title="Edit">
-                                <i aria-hidden="true" className={`seteditincon fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
+                                <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
                               </Tooltip>
                             </div>
                             <div>
                               <Tooltip title="Remove">
-                                <i aria-hidden="true" className={`'setdeleteincon' fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
+                                <i aria-hidden="true" className={`${styles.setdeleteincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
                               </Tooltip>
                             </div>
                           </div>

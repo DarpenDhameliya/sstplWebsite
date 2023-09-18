@@ -15,6 +15,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Loader from "@/Component/loader";
 import Link from "next/link";
+import styles from '../../common/common.module.css'
 
 const PortfolioAdd = () => {
   const [name, setName] = useState("");
@@ -136,54 +137,54 @@ const PortfolioAdd = () => {
   return (
     <>
         {loading.toString() === "true" && <Loader />}
-      <Container component="main" maxWidth="xl" className="setcontainer">
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
           <div className="setpageheading_withback">
-            <Link scroll={false} href="/online-admin/dashboard/portfolio" className="handlebackbutton">
+            <Link scroll={false} href="/online-admin/dashboard/portfolio" className={styles.handlebackbutton}>
               <i className="fa fa-arrow-left black fs-25" aria-hidden="true"></i>
             </Link>
-            <Typography variant="h4" gutterBottom className="setheading ml-3">
+            <Typography variant="h4" gutterBottom className={` ${styles.setheading} ml-3`}>
               Add Portfolio Details
             </Typography>
           </div>
 
-          <Paper className="setProductpaper" elevation={5}>
-            {dbAdderr && <Typography className="seterrorlabel">{dbAdderr} </Typography>}
+          <Paper className={styles.setProductpaper} elevation={5}>
+            {dbAdderr && <Typography className={styles.seterrorlabel}>{dbAdderr} </Typography>}
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6} className="setinputlayout">
-                <Typography className="setlabel">Name :</Typography>
+                <Typography className={styles.setlabel}>Name :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" style={{ width: "100%" }} placeholder="name" InputLabelProps={{ shrink: false }} value={name} onChange={(e) => setName(e.target.value)} />
-                {error.title && <Typography className="seterrorlabel">{error.title} </Typography>}
-                <Typography className="setlabel">Industry :</Typography>
+                {error.title && <Typography className={styles.seterrorlabel}>{error.title} </Typography>}
+                <Typography className={styles.setlabel}>Industry :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" style={{ width: "100%" }} placeholder="industry" InputLabelProps={{ shrink: false }} value={industry} onChange={(e) => setIndustry(e.target.value)} />
-                {error.location && <Typography className="seterrorlabel">{error.location} </Typography>}
-                <Typography className="setlabel">Team :</Typography>
+                {error.location && <Typography className={styles.seterrorlabel}>{error.location} </Typography>}
+                <Typography className={styles.setlabel}>Team :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" style={{ width: "100%" }} placeholder="team" InputLabelProps={{ shrink: false }} value={team} onChange={(e) => setTeam(e.target.value)} />
-                {error.team && <Typography className="seterrorlabel">{error.team} </Typography>}
-                <Typography className="setlabel">Duration :</Typography>
+                {error.team && <Typography className={styles.seterrorlabel}>{error.team} </Typography>}
+                <Typography className={styles.setlabel}>Duration :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" style={{ width: "100%" }} placeholder="duration" InputLabelProps={{ shrink: false }} value={duration} onChange={(e) => setDuration(e.target.value)} />
-                {error.technology && <Typography className="seterrorlabel">{error.technology} </Typography>}
-                <Typography className="setlabel">Country :</Typography>
+                {error.technology && <Typography className={styles.seterrorlabel}>{error.technology} </Typography>}
+                <Typography className={styles.setlabel}>Country :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" style={{ width: "100%" }} placeholder="country" multiline InputLabelProps={{ shrink: false }} value={country} onChange={(e) => setCountry(e.target.value)} />
-                {error.duration && <Typography className="seterrorlabel">{error.duration} </Typography>}
-                <Typography className="setlabel">Technology :</Typography>
+                {error.duration && <Typography className={styles.seterrorlabel}>{error.duration} </Typography>}
+                <Typography className={styles.setlabel}>Technology :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" style={{ width: "100%" }} multiline placeholder="Technology" InputLabelProps={{ shrink: false }} value={technology} onChange={(e) => setTechnology(e.target.value)} />
-                {error.technology && <Typography className="seterrorlabel">{error.technology} </Typography>}
-                <Typography className="setlabel">Category :</Typography>
+                {error.technology && <Typography className={styles.seterrorlabel}>{error.technology} </Typography>}
+                <Typography className={styles.setlabel}>Category :</Typography>
                 <Select isMulti maxMenuHeight={"200px"} classNamePrefix="select" name="category" styles={{ background: "white", color: "#000", border: "1px solid #000", borderRadius: "5px", padding: "5px" }} value={options.filter((obj) => category.includes(obj.value))} onChange={handleChange} options={options} />
-                {error.category && <Typography className="seterrorlabel">{error.category} </Typography>}
+                {error.category && <Typography className={styles.seterrorlabel}>{error.category} </Typography>}
               </Grid>
               <Grid item xs={12} sm={6} className="setinputlayout">
                 <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
                   <FormControlLabel value="true" control={<Radio />} label="true" />
                   <FormControlLabel value="false" control={<Radio />} label="false" />
                 </RadioGroup>
-                <Typography className="setlabel">Position in Homepage :</Typography>
+                <Typography className={styles.setlabel}>Position in Homepage :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" style={{ width: "100%" }} placeholder="position in front" InputLabelProps={{ shrink: false }} value={contentpositionview} onChange={(e) => setContentpositionview(e.target.value)} />
-                {error.containPositionView && <Typography className="seterrorlabel">{error.containPositionView} </Typography>}
-                <Typography className="setlabel">image :</Typography>
+                {error.containPositionView && <Typography className={styles.seterrorlabel}>{error.containPositionView} </Typography>}
+                <Typography className={styles.setlabel}>image :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" onChange={imagehandle} type="file" className="settextfield" style={{ width: "100%" }} placeholder="image" value={image} />
-                {error.containView && <Typography className="seterrorlabel">{error.containView} </Typography>}
+                {error.containView && <Typography className={styles.seterrorlabel}>{error.containView} </Typography>}
                 {imgpre && (
                   <Card sx={{ maxWidth: "250px" }}>
                     <CardMedia component="img" src={imgdisplay} className="setdisimage" />
@@ -194,8 +195,8 @@ const PortfolioAdd = () => {
                 )}
               </Grid>
             </Grid>
-            <div className="setsendbutton">
-              <Button variant="contained" size="medium" className="setsendbtninside" onClick={handlesenddata}>
+            <div className={styles.setsendbutton}>
+              <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                 Add
               </Button>
             </div>

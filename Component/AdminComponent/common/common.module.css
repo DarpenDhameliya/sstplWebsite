@@ -1,0 +1,184 @@
+.seterrorlabel {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 15px !important;
+  line-height: 21px !important;
+  margin-top: 7px !important;
+  margin-right: 10px;
+  color: #7f2121;
+  margin-bottom: 20px !important;
+  font-weight: 600 !important;
+  display: flex;
+}
+.setlabel {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 15px !important;
+  line-height: 21px !important;
+  margin-top: 7px !important;
+  margin-right: 10px !important;
+  margin-bottom: 2px !important;
+  font-weight: 600 !important;
+}
+.setcontainer {
+  max-width: 100% !important;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #f9fafc;
+  padding-top: 80px;
+  padding-bottom: 30px !important;
+}
+.setcontainer_return {
+    max-width: 100% !important;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #f9fafc;
+    padding-top: 80px;
+    padding-bottom: 30px !important;
+  }
+.setpageheading {
+  max-width: 100% !important;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9fafc;
+}
+.setheading {
+  padding: 5px;
+  margin: 0;
+  color: #202223;
+  font-weight: 600 !important;
+  font-size: 35px !important;
+  line-height: 32px;
+  font-family: "Poppins", sans-serif !important;
+}
+.setProductpaper {
+  text-align: left;
+  /* background-color: ${theme.palette.background.paper}; */
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  color: #c20004;
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+.setsendbtninside {
+  height: 40px;
+  font-weight: 600 !important;
+  text-transform: none;
+  padding: 0px 15px;
+  background-color: #3c8dbc !important;
+  color: white;
+}
+.setsendbtninside:hover {
+  background-color: #3c8dbccc !important;
+}
+.tableth,
+.tablethaction {
+  padding: 8px !important;
+  font-weight: 600 !important;
+  color: #353535 !important;
+  font-family: "Poppins", sans-serif !important;
+}
+.tabletd {
+  font-family: "Poppins", sans-serif !important;
+  padding: 8px !important;
+  color: #202223 !important;
+  font-size: 16px !important;
+}
+.seteditincon,
+.setdeleteincon {
+  color: #353535e0;
+}
+.seteditincon:hover {
+  color: #3c8dbc !important;
+  background-color: #d6efef6e;
+}
+.setdeleteincon:hover {
+  color: #7f2121 !important;
+  background-color: antiquewhite;
+}
+.setsendbutton {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 7px;
+}
+.handle_portfolio_modal_mui {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  background-color: #fff;
+}
+@media (max-width: 450px) {
+  .handle_portfolio_modal_mui {
+    width: 300px !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .handle_portfolio_modal_mui {
+    width: 700px !important;
+  }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  .handle_portfolio_modal_mui {
+    width: 1100px !important;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .handle_portfolio_modal_mui {
+    width: 900px !important;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .handle_portfolio_modal_mui {
+    width: 500px !important;
+  }
+}
+@media (max-width: 576px) {
+  .handle_portfolio_modal_mui {
+    width: 400px !important;
+  }
+}
+
+.handleContactmodel {
+    display: flex !important;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .setstateclear {
+    height: 40px;
+    font-weight: 600 !important;
+    text-transform: none;
+    padding: 0px 15px;
+    background-color: #367fa9 !important;
+    color: white !important;
+    margin-right: 15px !important;
+  }
+  .handlebackbutton {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid #000;
+  }
+  .selectedindex {
+    padding-top: 65px !important;
+  }
+
+  .selectedindex .Mui-selected {
+    background-color: rgb(43 123 203 / 45%) !important;
+    border-radius: 0 25px 25px 0;
+    border-left: 4px solid #00BFA5;
+  }
+  .SidebarImg {
+    font-size:25px;
+    color:white
+  }

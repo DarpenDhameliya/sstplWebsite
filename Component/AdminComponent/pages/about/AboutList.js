@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { api } from "../../../Axios";
 import Loader from "@/Component/loader";
 import dynamic from "next/dynamic";
+import styles from '../../common/common.module.css'
 const JoditEditor = dynamic(() => import('jodit-react'), {
   ssr: false
 });
@@ -96,7 +97,7 @@ const AboutList = () => {
       formData.append("missioncontent", missioncontent);
       formData.append("valheading", valheading);
       formData.append("valuecontent", emptydata);
-      
+
       if (!abouthead || !aboutcontent || !visionheading || !visioncontent || !missionheading || !missioncontent || !valheading) {
         if (!abouthead) {
           error.abheading = "Require !";
@@ -119,7 +120,7 @@ const AboutList = () => {
         if (!valheading) {
           error.containView = "Require !";
         }
-        
+
         setError({...error, [e.target.name]: e.target.value});
         setTimeout(() => {
           setError([]);
@@ -150,7 +151,7 @@ const AboutList = () => {
           });
       }
     } else {
-      
+
       let emptydata = valuecontent;
       let formData = new FormData();
       formData.append("abouthead", abouthead);
@@ -161,7 +162,7 @@ const AboutList = () => {
       formData.append("missioncontent", missioncontent);
       formData.append("valheading", valheading);
       formData.append("valuecontent", emptydata);
-      
+
       if (!abouthead || !aboutcontent || !visionheading || !visioncontent || !missionheading || !missioncontent || !valheading) {
         if (!abouthead) {
           error.abheading = "Require !";
@@ -218,24 +219,24 @@ const AboutList = () => {
 
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer'>
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className='setpageheading'>
-            <Typography variant="h4" gutterBottom className='setheading'>
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               About List
             </Typography>
           </div>
-           <Paper className='setProductpaper' elevation={5}>
-            {doneResponce && <Typography className='seterrorlabel'>{doneResponce} </Typography>}
+           <Paper className={styles.setProductpaper} elevation={5}>
+            {doneResponce && <Typography className={styles.setProductpaper}>{doneResponce} </Typography>}
 
-            {dberr && <Typography className='seterrorlabel'>{dberr} </Typography>}
-            {dbAdderr && <Typography className='seterrorlabel'>{dbAdderr} </Typography>}
+            {dberr && <Typography className={styles.setProductpaper}>{dberr} </Typography>}
+            {dbAdderr && <Typography className={styles.setProductpaper}>{dbAdderr} </Typography>}
             <Grid container spacing={2}>
               <Grid item xs={12} sm={3} className='setinputlayout'>
-                <Typography className='setlabel'>about main heading :</Typography>
+                <Typography className={styles.setlabel}>about main heading :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "100%"}} className='settextfield' placeholder="heading" InputLabelProps={{shrink: false}} value={abouthead} onChange={(e) => setAbouthead(e.target.value)} />
-                {error.abheading && <Typography className='seterrorlabel'>{error.abheading} </Typography>}
+                {error.abheading && <Typography className={styles.setProductpaper}>{error.abheading} </Typography>}
               </Grid>
               <Grid item xs={12} sm={9} className='setinputlayout'>
                 <div style={{maxHeight: "300px", overflow: "overlay"}}>
@@ -244,12 +245,12 @@ const AboutList = () => {
               </Grid>
             </Grid>
           </Paper>
-          <Paper className='setProductpaper' elevation={5}>
+          <Paper className={styles.setProductpaper} elevation={5}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={3} className='setinputlayout'>
-                <Typography className='setlabel'>vision heading :</Typography>
+                <Typography className={styles.setlabel}>vision heading :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "100%"}} className='settextfield' placeholder="heading" InputLabelProps={{shrink: false}} value={visionheading} onChange={(e) => setVisionheading(e.target.value)} />
-                {error.viheading && <Typography className='seterrorlabel'>{error.viheading} </Typography>}
+                {error.viheading && <Typography className={styles.setProductpaper}>{error.viheading} </Typography>}
               </Grid>
               <Grid item xs={12} sm={9} className='setinputlayout'>
                 <div style={{maxHeight: "300px", overflow: "overlay"}}>
@@ -258,12 +259,12 @@ const AboutList = () => {
               </Grid>
             </Grid>
           </Paper>
-          <Paper className='setProductpaper' elevation={5}>
+          <Paper className={styles.setProductpaper} elevation={5}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={3} className='setinputlayout'>
-                <Typography className='setlabel'>mission heading :</Typography>
+                <Typography className={styles.setlabel}>mission heading :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "100%"}} className='settextfield' placeholder="heading" InputLabelProps={{shrink: false}} value={missionheading} onChange={(e) => setMissionheading(e.target.value)} />
-                {error.miheading && <Typography className='seterrorlabel'>{error.miheading} </Typography>}
+                {error.miheading && <Typography className={styles.setProductpaper}>{error.miheading} </Typography>}
               </Grid>
               <Grid item xs={12} sm={9} className='setinputlayout'>
                 <div style={{maxHeight: "300px", overflow: "overlay"}}>
@@ -272,12 +273,12 @@ const AboutList = () => {
               </Grid>
             </Grid>
           </Paper>
-          <Paper className='setProductpaper' elevation={5}>
+          <Paper className={styles.setProductpaper} elevation={5}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={3} className='setinputlayout'>
-                <Typography className='setlabel'>value heading :</Typography>
+                <Typography className={styles.setlabel}>value heading :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "100%"}} className='settextfield' placeholder="heading" InputLabelProps={{shrink: false}} value={valheading} onChange={(e) => setValheading(e.target.value)} />
-                {error.miheading && <Typography className='seterrorlabel'>{error.miheading} </Typography>}
+                {error.miheading && <Typography className={styles.setProductpaper}>{error.miheading} </Typography>}
               </Grid>
               <Grid item xs={12} sm={9} className='setinputlayout'>
                 <div style={{maxHeight: "300px", overflow: "overlay"}}>
@@ -288,7 +289,7 @@ const AboutList = () => {
           </Paper>
 
           <div className="d-flex justify-content-end mt-3">
-            <Button variant="contained" size="medium" className='setsendbtninside' onClick={handleeditdata}>
+            <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handleeditdata}>
               update
             </Button>
           </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import sponserShape from "../../../assets/images/icon/SSTPL-500.webp";
+// import sponserShape from "../../../assets/images/icon/sstpl404.webp";
 import Image from "next/image";
 
 const Temsandconsition = ({ className, content }) => {

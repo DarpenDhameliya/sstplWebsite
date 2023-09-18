@@ -22,7 +22,7 @@ const Contactindex = () => {
           title="Contact Us"
           breadcrumb={[
             {link: "/", title: "Home"},
-            {link: "/contact-us", title: "Contact"},
+            {link: "/contact-us", title: "Contact Us"},
           ]}
         />
     <Contactus />

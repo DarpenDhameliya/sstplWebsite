@@ -11,6 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { apiimg } from "../../../Axios";
 import dynamic from "next/dynamic";
 import Loader from "@/Component/loader";
+import styles from '../../common/common.module.css'
 const LeftButton = dynamic(() => import("../../common/LeftButton"), {
   ssr: false,
 });
@@ -86,6 +87,7 @@ const AboutValueAdd = () => {
         })
         .catch((err) => {
           setLoading(false);
+          console.log(err)
           setDbAdderr(err.response.data.error);
           setTimeout(() => {
             setDbAdderr("");
@@ -95,20 +97,20 @@ const AboutValueAdd = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className="setcontainer">
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
           <LeftButton link="/online-admin/dashboard/aboutvalue" value="About Value Add" />
-          <Paper className="setProductpaper" elevation={5}>
-            {dbAdderr && <Typography className="seterrorlabel">{dbAdderr} </Typography>}
+          <Paper className={styles.setProductpaper} elevation={5}>
+            {dbAdderr && <Typography className={styles.seterrorlabel}>{dbAdderr} </Typography>}
             <Grid container spacing={2}>
               <Grid item xs={12} sm={4} className="setinputlayout">
-                <Typography className="setlabel">Value heading :</Typography>
+                <Typography className={styles.setlabel}>Value heading :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{ width: "100%" }} className="settextfield" placeholder="heading" InputLabelProps={{ shrink: false }} value={titleheading} onChange={(e) => setTitleheading(e.target.value)} />
-                {error.head && <Typography className="seterrorlabel">{error.head} </Typography>}
-                <Typography className="setlabel">image :</Typography>
+                {error.head && <Typography className={styles.seterrorlabel}>{error.head} </Typography>}
+                <Typography className={styles.setlabel}>image :</Typography>
                 <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle} type="file" className="settextfield" style={{ width: "100%" }} placeholder="image" value={slectImage} />
-                {error.file && <Typography className="seterrorlabel">{error.file} </Typography>}
+                {error.file && <Typography className={styles.seterrorlabel}>{error.file} </Typography>}
                 {imgpre && (
                   <Card sx={{ maxWidth: "350px" }} className="mt-3">
                     <CardMedia component="img" src={imgdisplay} className="setdisimage" />
@@ -124,8 +126,8 @@ const AboutValueAdd = () => {
                 </div>
               </Grid>
             </Grid>
-            <div className={`$'setsendbutton' mt-3`}>
-              <Button variant="contained" size="medium" className="setsendbtninside" onClick={handlesenddata}>
+            <div className={`${styles.setsendbutton} mt-3`}>
+              <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                 Add
               </Button>
             </div>

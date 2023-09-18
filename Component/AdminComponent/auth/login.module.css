@@ -1,0 +1,58 @@
+.setheading {
+    display: flex;
+    padding: 5px;
+    color: #495057;
+    align-items: center;
+    font-size: 30px !important;
+    line-height: 32px;
+  }
+  .setpageheading_login {
+    max-width: 100% !important;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .setheading {
+    padding: 5px;
+    margin: 0 ;
+    color: #202223;
+    font-size: 35px !important;
+    line-height: 32px;
+    font-family: "Poppins", sans-serif !important;
+  }
+
+  .setheadingfront {
+    padding: 5px;
+    margin: 0 !important;
+    color: #202223;
+    padding-right: 0 !important;
+    font-weight: 600 !important;
+    font-size: 30px !important;
+    line-height: 32px;
+  }
+  .setcontainerLogin {
+    max-width: 100% !important;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    background-color: aliceblue;
+    padding-top: 70px;
+  }
+  .setloginbackpaperLogin {
+    text-align: center ;
+    background-color: #fff ;
+    padding: 16px ;
+    display: flex ;
+    justify-content: center ;
+    flex-direction: column ;
+    margin: auto ;
+    max-width: 510px ;
+    border-radius: 10px ;
+  }
+  .setloginbutton {
+    margin-top: 20px !important;
+    background-color: #367fa9 !important;
+  }
+  .setinput {
+    display: grid;
+  }

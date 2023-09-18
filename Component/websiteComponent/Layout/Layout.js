@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       setOpenHireus(true);
-    }, 1500);
+    }, 1000);
   }, []);
 
   const handleScroll = () => {

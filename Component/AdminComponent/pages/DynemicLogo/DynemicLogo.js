@@ -20,6 +20,8 @@ import CardMedia from "@mui/material/CardMedia";
 import { useRouter } from "next/router";
 import Loader from "@/Component/loader";
 import dynamic from "next/dynamic";
+import styles from '../../common/common.module.css'
+
 const CommonPagination = dynamic(() => import("../../common/pagination"), { ssr: false });
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -246,28 +248,28 @@ const DynemicLogo = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer'>
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className='setpageheading'>
-            <Typography variant="h4" gutterBottom className='setheading'>
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Festval Details
             </Typography>
           </div>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4} className='setinputlayout'>
-              <Paper className='setProductpaper' elevation={5}>
-                {dberr && <Typography className='seterrorlabel'>{dberr} </Typography>}
-                {fetcherr && <Typography className='seterrorlabel'>{fetcherr} </Typography>}
-                {dbAdderr && <Typography className='seterrorlabel'>{dbAdderr} </Typography>}
-                {deleterr && <Typography className='seterrorlabel'>{deleterr} </Typography>}
-                <Typography className='setlabel'>Date :</Typography>
-                <input type="date" value={selectedDate} style={{ height: "45px" }} className='settextfielddate' onChange={handleDateChange} /> {error.name && <Typography className='seterrorlabel'>{error.name} </Typography>}
-                <Typography className='setlabel'>image :</Typography>
+              <Paper className={styles.setProductpaper} elevation={5}>
+                {dberr && <Typography className={styles.setProductpaper}>{dberr} </Typography>}
+                {fetcherr && <Typography className={styles.setProductpaper}>{fetcherr} </Typography>}
+                {dbAdderr && <Typography className={styles.setProductpaper}>{dbAdderr} </Typography>}
+                {deleterr && <Typography className={styles.setProductpaper}>{deleterr} </Typography>}
+                <Typography className={styles.setlabel}>Date :</Typography>
+                <input type="date" value={selectedDate} style={{ height: "45px" }} className='settextfielddate' onChange={handleDateChange} /> {error.name && <Typography className={styles.setProductpaper}>{error.name} </Typography>}
+                <Typography className={styles.setlabel}>image :</Typography>
                 {upid ? (
                   <>
                     <TextField id="outlined-basic" size="small" variant="outlined" onChange={imageuphandle} type="file" className='settextfield' style={{ width: "100%" }} placeholder="image" value={selectedImage} />
-                    {error.containView && <Typography className='seterrorlabel'>{error.containView} </Typography>}
+                    {error.containView && <Typography className={styles.setProductpaper}>{error.containView} </Typography>}
                     {upimgpre && (
                       <Card sx={{ maxWidth: "250px" }}>
                         <CardMedia component="img" src={upImgdisplay.length > 0 ? upImgdisplay : upImage} className='setdisimage' />
@@ -280,7 +282,7 @@ const DynemicLogo = () => {
                 ) : (
                   <>
                     <TextField id="outlined-basic" size="small" variant="outlined" onChange={imagehandle} type="file" className='settextfield' style={{ width: "100%" }} placeholder="image" value={image} />
-                    {error.containView && <Typography className='seterrorlabel'>{error.containView} </Typography>}
+                    {error.containView && <Typography className={styles.setProductpaper}>{error.containView} </Typography>}
                     {imgpre && (
                       <Card sx={{ maxWidth: "250px" }}>
                         <CardMedia component="img" src={imgdisplay} className='setdisimage' />
@@ -295,18 +297,18 @@ const DynemicLogo = () => {
                     )}
                   </>
                 )}
-                <div className='setsendbutton'>
+                <div className={styles.setsendbutton}>
                   {upid && (
-                    <Button className='setstateclear' onClick={handleeditdataremove}>
+                    <Button className={styles.setstateclear} onClick={handleeditdataremove}>
                       clear
                     </Button>
                   )}
                   {upid ? (
-                    <Button variant="contained" size="medium" className='setsendbtninside' onClick={handlesenddata}>
+                    <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                       update
                     </Button>
                   ) : (
-                    <Button variant="contained" size="medium" className='setsendbtninside' onClick={handlesenddata}>
+                    <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                       Add
                     </Button>
                   )}
@@ -314,23 +316,23 @@ const DynemicLogo = () => {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8} className='setinputlayout'>
-              <Paper className='setProductpaper' elevation={5}>
-                {fetcherr && <Typography className='seterrorlabel'>{fetcherr} </Typography>}
+              <Paper className={styles.setProductpaper} elevation={5}>
+                {fetcherr && <Typography className={styles.setProductpaper}>{fetcherr} </Typography>}
 
                 <TableContainer>
                   <Table className='settable' aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           No.
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           Date
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           Image
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           Action
                         </TableCell>
                       </TableRow>
@@ -339,20 +341,20 @@ const DynemicLogo = () => {
                       {logoList.map((e, index) => {
                         return (
                           <StyledTableRow>
-                            <StyledTableCell align="center" component="th" scope="row" className='tabletd'>
+                            <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                               {index + 1}
                             </StyledTableCell>
-                            <StyledTableCell className='tabletd' align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.date.slice(0, 10)}
                             </StyledTableCell>
-                            <StyledTableCell className='tabletd' align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               <img src={e.image} alt="logo" />
                             </StyledTableCell>
                             <StyledTableCell className='tabletdicon' align="center">
                               <div className='seticondiv'>
                                 <div>
                                   <Tooltip title="Edit">
-                                    <i aria-hidden="true" className={`seteditincon fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
+                                    <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
                                   </Tooltip>
                                 </div>
                                 <div>

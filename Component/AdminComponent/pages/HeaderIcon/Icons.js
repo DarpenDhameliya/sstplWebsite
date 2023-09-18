@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
 import axios ,{ api } from "@/Component/Axios";
 import Loader from "@/Component/loader";
+import styles from '../../common/common.module.css'
 
 const Icons = () => {
   const [fields, setFields] = useState([]);
@@ -109,23 +110,23 @@ const Icons = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer'>
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className='setpageheading'>
-            <Typography variant="h4" gutterBottom className='setheading'>
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Icons
             </Typography>
           </div>
 
-          <Paper className='setProductpaper' elevation={5}>
+          <Paper className={styles.setProductpaper} elevation={5}>
             <div className='setlistfiltericon'>
               <Avatar className={`setavtarback mb-3 ml-3`} onClick={addField} variant="rounded">
                 <i className="fa fa-plus" style={{color:'black' , fontSize:"23px"}}  aria-hidden="true" />
               </Avatar>
             </div>
-            {addError && <Typography className='seterrorlabel'>{addError} </Typography>}
-            {updtaeError && <Typography className='seterrorlabel'>{updtaeError} </Typography>}
+            {addError && <Typography className={styles.setProductpaper}>{addError} </Typography>}
+            {updtaeError && <Typography className={styles.setProductpaper}>{updtaeError} </Typography>}
             {fields.map((field, index) => (
               <div key={index} className="d-flex align-items-center justify-content-around">
                 <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "25%"}} placeholder="icon name" className={`$'settextfield' mt-1 mb-1`} multiline InputLabelProps={{shrink: false}} value={field.icon} onChange={(e) => handleChange(index, "icon", e.target.value)} />
@@ -135,7 +136,7 @@ const Icons = () => {
               </div>
             ))}
 
-            <Button variant="contained" size="medium" className={`setsendbtninside mt-3`} onClick={handleadd}>
+            <Button variant="contained" size="medium" className={`${styles.setsendbtninside} mt-3`} onClick={handleadd}>
               update
             </Button>
           </Paper>

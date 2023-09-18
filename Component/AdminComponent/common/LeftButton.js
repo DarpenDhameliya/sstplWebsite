@@ -6,7 +6,7 @@ const LeftButton = ({link , value}) => {
   return (
     <>
         <div className='setpageheading_withback'>
-          <Link scroll={false} href={link} className="handlebackbutton" >
+          <Link scroll={false} href={link} className={styles.handlebackbutton} >
             <i className="fa fa-arrow-left black fs-25" aria-hidden="true"></i>
             </Link>
             <Typography variant="h4" gutterBottom className='setheading ml-3'>

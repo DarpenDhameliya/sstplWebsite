@@ -69,8 +69,7 @@ export default function Footer(className) {
 
   useEffect(() => {
     if (footerClick) {
-      if (states.status === "loading") {
-      } else if (states.status === "succeeded") {
+      if (states.status === "succeeded") {
         setFname("");
         setLname("");
         setEmail("");
@@ -100,9 +99,8 @@ export default function Footer(className) {
     if (isNotFound) {
       document.querySelector(`.softstormweb-footer`).style.display = "none";
     } else {
-
-        // document.querySelector(`.softstormweb-footer}`).style.display = "block";
-        document.querySelector(`.softstormweb-footer`).style.display = "block";
+      // document.querySelector(`.softstormweb-footer}`).style.display = "block";
+      document.querySelector(`.softstormweb-footer`).style.display = "block";
     }
   });
 

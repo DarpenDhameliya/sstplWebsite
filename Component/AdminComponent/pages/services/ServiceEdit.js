@@ -15,6 +15,8 @@ import { useRouter } from "next/router";
 import Loader from "@/Component/loader";
 import dynamic from "next/dynamic";
 import LeftButton from "../../common/LeftButton";
+import styles from '../../common/common.module.css'
+
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
 });
@@ -159,19 +161,19 @@ let {id} = router.query
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer'>
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
       {loading.toString() === "true" && <Loader />}
       <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
 
         <LeftButton link='/online-admin/dashboard/service' value='Edit Service Details' />
-        <Paper className='setProductpaper' elevation={5}>
-          {dbAdderr && <Typography className='seterrorlabel'>{dbAdderr} </Typography>}
-          {dbFetcherr && <Typography className='seterrorlabel'>{dbFetcherr} </Typography>}
+        <Paper className={styles.setProductpaper} elevation={5}>
+          {dbAdderr && <Typography className={styles.setProductpaper}>{dbAdderr} </Typography>}
+          {dbFetcherr && <Typography className={styles.setProductpaper}>{dbFetcherr} </Typography>}
 
           <h4 className="mb-3">{titleheading}</h4>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} className='setinputlayout'>
-              <Typography className='setlabel'>image :</Typography>
+            <Typography className={styles.setlabel}>Home page image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle} type="file" className='settextfield' style={{width: "100%"}} placeholder="image" value={slectImage} />
               {imgpre && (
                 <Card sx={{maxWidth: "250px" }} className="mt-3">
@@ -183,10 +185,10 @@ let {id} = router.query
               )}
             </Grid>
             <Grid item xs={12} sm={6} className='setinputlayout'>
-              <Typography className='setlabel'>image :</Typography>
+            <Typography className={styles.setlabel}>service page image :</Typography>
               <TextField id="handleimagetext" size="small" variant="outlined" onChange={imagehandle1} type="file" className='settextfield' style={{width: "100%"}} placeholder="image" value={slectImage1} />
               {imgpre1 && (
-                <Card sx={{maxWidth: "250px"}} className="mt-3"> 
+                <Card sx={{maxWidth: "250px"}} className="mt-3">
                   <CardMedia component="img" src={imgdisplay1.length > 0 ? imgdisplay1 : image1} className='setdisimage' />
                   <Button className='setdelbtn' onClick={handlemodel1}>
                     Delete
@@ -197,30 +199,30 @@ let {id} = router.query
           </Grid>
           <Grid container spacing={2} className="mt-2">
               <Grid item xs={12} sm={6} className='setinputlayout'>
-                <Typography className='setlabel'>View position in home :</Typography>
+                <Typography className={styles.setlabel}>View position in home :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className='settextfield' style={{width: "100%"}} placeholder="position for homr" InputLabelProps={{shrink: false}} value={viewpo} onChange={handleviewpo} />
-                {error.upviewpo && <Typography className='seterrorlabel'>{error.upviewpo} </Typography>}
-                {error.viewpo && <Typography className='seterrorlabel'>{error.viewpo} </Typography>}
+                {error.upviewpo && <Typography className={styles.setProductpaper}>{error.upviewpo} </Typography>}
+                {error.viewpo && <Typography className={styles.setProductpaper}>{error.viewpo} </Typography>}
               </Grid>
               <Grid item xs={12} sm={6} className='setinputlayout'>
-                <Typography className='setlabel'>view in home :</Typography>
+                <Typography className={styles.setlabel}>view in home :</Typography>
                 <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" sty value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
                   <FormControlLabel value="true" control={<Radio />} label="true" />
                   <FormControlLabel value="false" control={<Radio />} label="false" />
                 </RadioGroup>
-                {error.upimage && <Typography className='seterrorlabel'>{error.upimage} </Typography>}
-                {error.addimage && <Typography className='seterrorlabel'>{error.addimage} </Typography>}
+                {error.upimage && <Typography className={styles.setProductpaper}>{error.upimage} </Typography>}
+                {error.addimage && <Typography className={styles.setProductpaper}>{error.addimage} </Typography>}
               </Grid>
             </Grid>
         </Paper>
 
-        <Paper className='setProductpaper' elevation={5}>
+        <Paper className={styles.setProductpaper} elevation={5}>
           <div style={{maxHeight: "600px", overflow: "overlay"}}>
             <JoditEditor value={content} onChange={(newContent) => contentvision(newContent)} />
           </div>
 
-          <div className={`$'setsendbutton' mt-3`}>
-            <Button variant="contained" size="medium" className='setsendbtninside' onClick={handlesenddata}>
+          <div className={`${styles.setsendbutton} mt-3`}>
+            <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
               update
             </Button>
           </div>

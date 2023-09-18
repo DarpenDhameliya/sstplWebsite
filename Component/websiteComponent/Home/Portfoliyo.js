@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Slider from "react-slick";
+import image from "../../../assets/images/logo.jpg";
 import Image from "next/image";
 import { api } from "../../Axios";
 
@@ -8,7 +9,6 @@ export default function Portfoliyo({ data }) {
   const [innerWidth, setInnerWidth] = useState(window.innerWidth);
   const [portfolioList, setPortfolioList] = useState([]);
   const [fetchErr, setFetchErr] = useState("");
-
 
   const fetchHiredata = () => {
     api
@@ -61,6 +61,7 @@ export default function Portfoliyo({ data }) {
     slidesToShow: 2,
   };
 
+
   return (
     <>
       <div className="softstormweb-portfoliyo-about-area pb-80 pt-80">
@@ -77,6 +78,7 @@ export default function Portfoliyo({ data }) {
           </div>
           <div className="row justify-content-center ">
             <div className="col-lg-12">
+
               <div className="testimonial-about-slider-active ">
                 {innerWidth > 992 && (
                   <Slider {...settingsForArticle} ref={articleCarosel}>
@@ -133,6 +135,7 @@ export default function Portfoliyo({ data }) {
           </div>
         </div>
       </div>
+
     </>
   );
 }

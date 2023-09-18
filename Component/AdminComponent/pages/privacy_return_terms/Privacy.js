@@ -9,7 +9,7 @@ import ReturnPolicy from "./ReturnPolicy";
 import Terms_condirion from "./Terms_condition";
 import dynamic from "next/dynamic";
 import Loader from "@/Component/loader";
-// import JoditEditor from 'jodit-react';
+import styles from '../../common/common.module.css'
 
 const JoditEditor = dynamic(() => import("jodit-react"), {
   ssr: false,
@@ -128,24 +128,24 @@ const Privacy = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      <Container component="main" maxWidth="xl" className="setcontainer_return">
+      <Container component="main" maxWidth="xl" className={styles.setcontainer_return}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className="setpageheading">
-            <Typography variant="h4" gutterBottom className="setheading">
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Privacy Policy
             </Typography>
           </div>
-          <Paper className="setProductpaper" elevation={5}>
-            {dpneResponce && <Typography className="seterrorlabel">{dpneResponce} </Typography>}
-            {dberr && <Typography className="seterrorlabel">{dberr} </Typography>}
-            {dbAdderr && <Typography className="seterrorlabel">{dbAdderr} </Typography>}
+          <Paper className={styles.setProductpaper} elevation={5}>
+            {dpneResponce && <Typography className={styles.seterrorlabel}>{dpneResponce} </Typography>}
+            {dberr && <Typography className={styles.seterrorlabel}>{dberr} </Typography>}
+            {dbAdderr && <Typography className={styles.seterrorlabel}>{dbAdderr} </Typography>}
             <div style={{ maxHeight: "500px", overflow: "overlay" }}>
               <JoditEditor value={aboutcontent} onChange={(newContent) => contentabout(newContent)} />
-              {aboutError && <Typography className="seterrorlabel">{aboutError} </Typography>}
+              {aboutError && <Typography className={styles.seterrorlabel}>{aboutError} </Typography>}
             </div>
             <div className="d-flex justify-content-end mt-3">
-              <Button variant="contained" size="medium" className="setsendbtninside" onClick={handleeditdata}>
+              <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handleeditdata}>
                 update
               </Button>
             </div>

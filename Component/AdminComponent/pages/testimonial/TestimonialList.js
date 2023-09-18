@@ -21,10 +21,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { useRouter } from "next/router";
-import MenuItem from "@mui/material/MenuItem";
-import Pagination from "@mui/material/Pagination";
 import Loader from "@/Component/loader";
 import dynamic from "next/dynamic";
+import styles from '../../common/common.module.css'
+
 const CommonPagination = dynamic(() => import("../../common/pagination"), { ssr: false });
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -323,49 +323,49 @@ const TestimonialList = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className="setcontainer">
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className="setpageheading">
-            <Typography variant="h4" gutterBottom className="setheading">
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Testimonial
             </Typography>
           </div>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4} className="setinputlayout">
-              <Paper className="setProductpaper" elevation={5}>
-                {dberr && <Typography className="seterrorlabel">{dberr} </Typography>}
-                {fetcherr && <Typography className="seterrorlabel">{fetcherr} </Typography>}
-                {dbAdderr && <Typography className="seterrorlabel">{dbAdderr} </Typography>}
-                {deleterr && <Typography className="seterrorlabel">{deleterr} </Typography>}
-                <Typography className="setlabel">Name :</Typography>
+              <Paper className={styles.setProductpaper} elevation={5}>
+                {dberr && <Typography className={styles.seterrorlabel}>{dberr} </Typography>}
+                {fetcherr && <Typography className={styles.seterrorlabel}>{fetcherr} </Typography>}
+                {dbAdderr && <Typography className={styles.seterrorlabel}>{dbAdderr} </Typography>}
+                {deleterr && <Typography className={styles.seterrorlabel}>{deleterr} </Typography>}
+                <Typography className={styles.setlabel}>Name :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="name" InputLabelProps={{ shrink: false }} value={upid ? upname : name} onChange={upid ? handleupname : handlename} />
-                {error.upname && <Typography className="seterrorlabel">{error.upname} </Typography>}
-                {error.name && <Typography className="seterrorlabel">{error.name} </Typography>}
-                <Typography className="setlabel">position :</Typography>
+                {error.upname && <Typography className={styles.seterrorlabel}>{error.upname} </Typography>}
+                {error.name && <Typography className={styles.seterrorlabel}>{error.name} </Typography>}
+                <Typography className={styles.setlabel}>position :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="position" InputLabelProps={{ shrink: false }} value={upid ? upposition : position} onChange={upid ? handleupposition : handleposition} />
-                {error.position && <Typography className="seterrorlabel">{error.position} </Typography>}
-                {error.upposition && <Typography className="seterrorlabel">{error.upposition} </Typography>}
-                <Typography className="setlabel">Discription :</Typography>
+                {error.position && <Typography className={styles.seterrorlabel}>{error.position} </Typography>}
+                {error.upposition && <Typography className={styles.seterrorlabel}>{error.upposition} </Typography>}
+                <Typography className={styles.setlabel}>Discription :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="discription" multiline InputLabelProps={{ shrink: false }} value={upid ? updiscription : discription} onChange={upid ? handlepupdiscription : handlepdiscription} />
-                {error.updiscription && <Typography className="seterrorlabel">{error.updiscription} </Typography>}
-                {error.discription && <Typography className="seterrorlabel">{error.discription} </Typography>}
-                <Typography className="setlabel">view in home :</Typography>
+                {error.updiscription && <Typography className={styles.seterrorlabel}>{error.updiscription} </Typography>}
+                {error.discription && <Typography className={styles.seterrorlabel}>{error.discription} </Typography>}
+                <Typography className={styles.setlabel}>view in home :</Typography>
                 <RadioGroup aria-labelledby="demo-radio-buttons-group-label" row name="radio-buttons-group" value={selectedValue} onChange={(event) => setSelectedValue(event.target.value)}>
                   <FormControlLabel value="true" control={<Radio />} label="true" />
                   <FormControlLabel value="false" control={<Radio />} label="false" />
                 </RadioGroup>
-                {error.upimage && <Typography className="seterrorlabel">{error.upimage} </Typography>}
-                {error.addimage && <Typography className="seterrorlabel">{error.addimage} </Typography>}
-                <Typography className="setlabel">View position in home :</Typography>
+                {error.upimage && <Typography className={styles.seterrorlabel}>{error.upimage} </Typography>}
+                {error.addimage && <Typography className={styles.seterrorlabel}>{error.addimage} </Typography>}
+                <Typography className={styles.setlabel}>View position in home :</Typography>
                 <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="position for homr" InputLabelProps={{ shrink: false }} value={upid ? upviewpo : viewpo} onChange={upid ? handleupviewpo : handleviewpo} />
-                {error.upviewpo && <Typography className="seterrorlabel">{error.upviewpo} </Typography>}
-                {error.viewpo && <Typography className="seterrorlabel">{error.viewpo} </Typography>}
-                <Typography className="setlabel">image :</Typography>
+                {error.upviewpo && <Typography className={styles.seterrorlabel}>{error.upviewpo} </Typography>}
+                {error.viewpo && <Typography className={styles.seterrorlabel}>{error.viewpo} </Typography>}
+                <Typography className={styles.setlabel}>image :</Typography>
                 {upid ? (
                   <>
                     <TextField id="outlined-basic" size="small" variant="outlined" onChange={imageuphandle} type="file" className="settextfield" style={{ width: "100%" }} placeholder="image" value={selectedImage} />
-                    {error.containView && <Typography className="seterrorlabel">{error.containView} </Typography>}
+                    {error.containView && <Typography className={styles.seterrorlabel}>{error.containView} </Typography>}
                     {upimgpre && (
                       <Card sx={{ maxWidth: "250px" }}>
                         <CardMedia component="img" src={upImgdisplay.length > 0 ? upImgdisplay : upImage} className="setdisimage" />
@@ -378,7 +378,7 @@ const TestimonialList = () => {
                 ) : (
                   <>
                     <TextField id="outlined-basic" size="small" variant="outlined" onChange={imagehandle} type="file" className="settextfield" style={{ width: "100%" }} placeholder="image" value={image} />
-                    {error.containView && <Typography className="seterrorlabel">{error.containView} </Typography>}
+                    {error.containView && <Typography className={styles.seterrorlabel}>{error.containView} </Typography>}
                     {imgpre && (
                       <Card sx={{ maxWidth: "250px" }}>
                         <CardMedia component="img" src={imgdisplay} className="setdisimage" />
@@ -393,18 +393,18 @@ const TestimonialList = () => {
                     )}
                   </>
                 )}
-                <div className="setsendbutton">
+                <div className={styles.setsendbutton}>
                   {upid && (
                     <Button className="setstateclear" onClick={handleeditdataremove}>
                       clear
                     </Button>
                   )}
                   {upid ? (
-                    <Button variant="contained" size="medium" className="setsendbtninside" onClick={handlesenddata}>
+                    <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                       update
                     </Button>
                   ) : (
-                    <Button variant="contained" size="medium" className="setsendbtninside" onClick={handlesenddata}>
+                    <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                       Add
                     </Button>
                   )}
@@ -412,29 +412,29 @@ const TestimonialList = () => {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8} className="setinputlayout">
-              <Paper className="setProductpaper" elevation={5}>
-                {fetcherr && <Typography className="seterrorlabel">{fetcherr} </Typography>}
+              <Paper className={styles.setProductpaper} elevation={5}>
+                {fetcherr && <Typography className={styles.seterrorlabel}>{fetcherr} </Typography>}
 
                 <TableContainer>
                   <Table className="settable" aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align="center" className="tableth">
+                        <TableCell align="center" className={styles.tableth}>
                           No.
                         </TableCell>
-                        <TableCell align="center" className="tableth">
+                        <TableCell align="center" className={styles.tableth}>
                           Name
                         </TableCell>
-                        <TableCell align="center" className="tableth">
+                        <TableCell align="center" className={styles.tableth}>
                           position
                         </TableCell>
-                        <TableCell align="center" className="tableth">
+                        <TableCell align="center" className={styles.tableth}>
                           contentview
                         </TableCell>
-                        <TableCell align="center" className="tableth">
+                        <TableCell align="center" className={styles.tableth}>
                           View position
                         </TableCell>
-                        <TableCell align="center" className="tableth">
+                        <TableCell align="center" className={styles.tableth}>
                           Action
                         </TableCell>
                       </TableRow>
@@ -443,19 +443,19 @@ const TestimonialList = () => {
                       {portfolioList.map((e, index) => {
                         return (
                           <StyledTableRow>
-                            <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                            <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                             {page == 1 ? index + 1 : page * rowperpage - rowperpage + (index + 1)}
                             </StyledTableCell>
-                            <StyledTableCell className="tabletd" align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.name}
                             </StyledTableCell>
-                            <StyledTableCell className="tabletd" align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.position}
                             </StyledTableCell>
-                            <StyledTableCell className="tabletd" align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.contentview === true ? "Yes" : "No"}
                             </StyledTableCell>
-                            <StyledTableCell className="tabletd" align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.contentpositionview}
                             </StyledTableCell>
 
@@ -463,12 +463,12 @@ const TestimonialList = () => {
                               <div className="seticondiv">
                                 <div>
                                   <Tooltip title="Edit">
-                                    <i aria-hidden="true" className={`seteditincon fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
+                                    <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
                                   </Tooltip>
                                 </div>
                                 <div>
                                   <Tooltip title="Remove">
-                                    <i aria-hidden="true" className={`'setdeleteincon' fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
+                                    <i aria-hidden="true" className={`${styles.setdeleteincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
                                   </Tooltip>
                                 </div>
                               </div>

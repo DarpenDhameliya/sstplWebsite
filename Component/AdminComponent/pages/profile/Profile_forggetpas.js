@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import styles from '../../common/common.module.css'
 
 import TextField from "@mui/material/TextField";
 import  { api } from "../../../Axios";
@@ -66,29 +67,29 @@ const Profile_forggetpas = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer'>
-        <div className='setpageheading'>
-          <Typography variant="h4" gutterBottom className='setheading'>
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
+        <div className={styles.setpageheading}>
+          <Typography variant="h4" gutterBottom className={styles.setheading}>
             Profile
           </Typography>
         </div>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={5} className='setinputlayout'>
-            <Paper className='setProductpaper' elevation={5}>
-              {dbresponce && <Typography className='seterrorlabel'>{dbresponce} </Typography>}
-              {dberr && <Typography className='seterrorlabel'>{dberr} </Typography>}
-              <Typography className='setlabel'>Current Password :</Typography>
+            <Paper className={styles.setProductpaper} elevation={5}>
+              {dbresponce && <Typography className={styles.setProductpaper}>{dbresponce} </Typography>}
+              {dberr && <Typography className={styles.setProductpaper}>{dberr} </Typography>}
+              <Typography className={styles.setlabel}>Current Password :</Typography>
               <TextField id="outlined-basic" type="password" size="small" variant="outlined" className='settextfield' placeholder="current password" InputLabelProps={{shrink: false}} value={currentpass} onChange={(e) => setCurrentpass(e.target.value)} />
-              {error.currentpass && <Typography className='seterrorlabel'>{error.currentpass} </Typography>}
-              <Typography className='setlabel'>New Password :</Typography>
+              {error.currentpass && <Typography className={styles.setProductpaper}>{error.currentpass} </Typography>}
+              <Typography className={styles.setlabel}>New Password :</Typography>
               <TextField id="outlined-basic" type="password" size="small" variant="outlined" className='settextfield' placeholder="current password" InputLabelProps={{shrink: false}} value={newPass} onChange={(e) => setNewPass(e.target.value)} />
-              {error.newPass && <Typography className='seterrorlabel'>{error.newPass} </Typography>}
-              <Typography className='setlabel'>Conform NewPassword :</Typography>
+              {error.newPass && <Typography className={styles.setProductpaper}>{error.newPass} </Typography>}
+              <Typography className={styles.setlabel}>Conform NewPassword :</Typography>
               <TextField id="outlined-basic" type="password" size="small" variant="outlined" className='settextfield' placeholder="current password" InputLabelProps={{shrink: false}} value={conformPass} onChange={(e) => setConformPass(e.target.value)} />
-              {error.conformPass && <Typography className='seterrorlabel'>{error.conformPass} </Typography>}
-              {error.passmismatch && <Typography className='seterrorlabel'>{error.passmismatch} </Typography>}
+              {error.conformPass && <Typography className={styles.setProductpaper}>{error.conformPass} </Typography>}
+              {error.passmismatch && <Typography className={styles.setProductpaper}>{error.passmismatch} </Typography>}
               <div className="mt-2 d-flex justify-content-end">
-                <Button variant="contained" size="medium" className='setsendbtninside' onClick={handlesenddata}>
+                <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                   update
                 </Button>
               </div>

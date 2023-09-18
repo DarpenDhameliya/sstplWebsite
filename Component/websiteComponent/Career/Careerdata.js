@@ -39,7 +39,6 @@ const Careerdata = ({ loding, data }) => {
   const [dberr, setDberr] = useState([]);
   const [filename, setFilename] = useState("Upload Resume");
   const [careerList, setCareerList] = useState([]);
-  const [careerListStatic, setCareerListStatic] = useState([]);
   const [dbFetcherr, setDbFetcherr] = useState([]);
   const mailstate = useSelector(Careerstate);
   const [collaspsOpen, setCollaspsOpen] = useState(false);
@@ -47,7 +46,6 @@ const Careerdata = ({ loding, data }) => {
   const [isVerified, setIsVerified] = useState(false);
   const [careerBtnClick, setCareerBtnClick] = useState(false);
   const [open, setOpen] = useState(false);
-  const handleClose = () => setOpen(false);
   const [captchres, setCaptchres] = useState("");
   const [dbsubmit, setDbsubmit] = useState(false);
   const [nameFocused, setNameFocused] = useState(false);
@@ -56,6 +54,7 @@ const Careerdata = ({ loding, data }) => {
   const [file, setFile] = useState("");
   const recaptchaRef = useRef();
   const fileInputRef = useRef(null);
+  const handleClose = () => setOpen(false);
 
   const notify = useCallback(() => {
     toast.success(" Apply Successfully..", {
@@ -71,20 +70,7 @@ const Careerdata = ({ loding, data }) => {
     });
   }, []);
 
-  useEffect(() => {
-    const importData = async () => {
-      const TechnologyData = await import("./CareerStaticdata");
-      const sortedData = TechnologyData.default;
-      sortedData.sort((a, b) => a.contentpositionview - b.contentpositionview);
 
-      setCareerListStatic(sortedData);
-    };
-    setTimeout(() => {
-      if (data.length === 10) {
-        importData();
-      }
-    }, 2000);
-  }, []);
 
   useEffect(() => {
     if (mailstate.status === "succeeded") {
@@ -310,7 +296,7 @@ const Careerdata = ({ loding, data }) => {
 
       {dbFetcherr && <p className="handledberror ">{dbFetcherr}</p>}
       {careerList.length > 0
-        ? careerList.map((res) => {
+        && careerList.map((res) => {
             if (res.contentview === true) {
               return (
                 <div className={` ${style.card} card mt-3 mb-3 grey`}>
@@ -381,77 +367,7 @@ const Careerdata = ({ loding, data }) => {
               );
             }
           })
-        : careerListStatic.map((res) => {
-            if (res.contentview === true) {
-              return (
-                <div className="card mt-3 mb-3 grey">
-                  <div className="card-body grey">
-                    <h4 className={style.handlecareerhireinghead}>{res.title}</h4>
-                    <div className="d-flex justify-content-between mt-1">
-                      <div className="d-flex justify-content-center align-items-center">
-                        <Image width={20} height={20} src={career1} alt="car1" className={style.handlecareermain_img} />
-                        <div className="ml-1">
-                          <p className={style.handelmobilep}> Location</p>
-                          <h6 className={style.handelmobileh6}>{res.location}</h6>
-                        </div>
-                      </div>
-                      <div className="d-flex justify-content-center align-items-center ">
-                        <Image width={20} height={20} src={career2} alt="car1" className={style.handlecareermain_img} />
-
-                        <div className="ml-2">
-                          <p className={style.handelmobilep}> Experience</p>
-                          <h6 className={style.handelmobileh6}>{res.experience}</h6>
-                        </div>
-                      </div>
-                      <div className={style.tabrequirement}>
-                        <Image width={20} height={20} src={career3} alt="car1" className={style.handlecareermain_img} />
-                        <div className="ml-2">
-                          <p className={style.handelmobilep}> Position</p>
-                          <h6 className={style.handelmobileh6}>{res.position}</h6>
-                        </div>
-                      </div>
-                      <div className="d-flex justify-content-center align-items-center">
-                        <button className={` ${style.main_btn_carrer} tab3`} type="button" data-bs-toggle="collapse" href={`#${res._id}`} onClick={() => handlecollaps(res)}>
-                          View Details
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Collapse in={collaspsOpen === res._id} timeout="auto" unmountOnExit>
-                    <CardContent>
-                      <div className={style.card_body_collpas}>
-                        <p style={{ color: "#000000" }}>{res.description}</p>
-                        <h6 className={style.handlecareerrespon}>Responsibilities and Duties :</h6>
-                        <ul className="skill">
-                          {res.responsibility.map((e) => {
-                            return (
-                              <div className={style.handlediv}>
-                                <Image width={15} height={15} src={bullet} alt="symbol" className={style.handlecarrericon} />
-                                <li className={style.handlecareerli}>{e}</li>
-                              </div>
-                            );
-                          })}
-                        </ul>
-                        <h6 className={` ${style.handlecareerrespon} mt-2`}>Qualification :</h6>
-                        <div className={style.handlediv}>
-                          <Image width={20} height={20} src={bullet} alt="symbol" className={style.handlecarrericon} />
-                          <p className={style.handlecareerli} style={{ lineHeight: "20px" }}>
-                            {res.qualification}
-                          </p>
-                        </div>
-                        <div className="d-flex justify-content-end pt-3">
-                          <button className={style.main_btn_carrer_apply} type="button" onClick={handlemodalOpen}>
-                            Apply
-                          </button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Collapse>
-                </div>
-              );
-            }
-          })}
+        }
 
 
       <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description" >

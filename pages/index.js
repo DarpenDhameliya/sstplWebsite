@@ -5,6 +5,7 @@ import Loader from "@/Component/loader";
 const HomeIndex = lazy(() => import("@/Component/websiteComponent/Home"));
 
 const index = ({ initialPortfolioList }) => {
+  console.log(initialPortfolioList)
   let data = initialPortfolioList.find((e) => e.url === "/");
   return (
     <>

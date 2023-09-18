@@ -49,6 +49,7 @@ export const Careerslice = createSlice({
       .addCase(CareerSlice.rejected, (state, action) => {
         state.status = "failed";
         state.response = "";
+        console.log(action.payload)
         state.error = action.payload.response.data;
       });
   },

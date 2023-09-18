@@ -23,7 +23,6 @@ export default function Testimonial(className) {
   const sliderPrev = () => {
     sliderRef.current.slickPrev();
   };
-  const [staticdata, setStaticdata] = useState([]);
   const [workdata, setWorkdata] = useState([]);
   const [fetcherr, setFetcherr] = useState("");
 
@@ -43,18 +42,7 @@ export default function Testimonial(className) {
     fetchHiredata();
   }, []);
 
-  useEffect(() => {
-    const importData = async () => {
-      const TechnologyData = await import("./component/TestimonialStaticData");
-      const sortedData = TechnologyData.default;
-      setStaticdata(sortedData);
-    };
-    setTimeout(() => {
-      if (workdata.length === 0) {
-        importData();
-      }
-    }, 2000);
-  }, []);
+
   return (
     <>
       <section className={`${style.softstormweb_testimoial} pt-70 pb-80 ${className || ""}`}>
@@ -78,7 +66,7 @@ export default function Testimonial(className) {
               <div className={` ${style.softstormweb_right_testimoial} ${style.handleview} `}>
                 <Slider ref={sliderRef} {...settings}>
                   {workdata.length > 0
-                    ? workdata.map((e, index) => {
+                    && workdata.map((e, index) => {
                         return (
                           <div className={` ${style.item}  ${style.doublequate} `} key={index}>
                             <p className="pb-3 pl-10">
@@ -99,27 +87,7 @@ export default function Testimonial(className) {
                           </div>
                         );
                       })
-                    : staticdata.map((e, index) => {
-                        return (
-                          <div className={` ${style.item}  ${style.doublequate} `} key={index}>
-                            <p className="pb-3 pl-10">
-                              <sup>
-                                {" "}
-                                <i className={`fa fa-quote-left ${style.fafaquatsstart} `} aria-hidden="true"></i>
-                              </sup>
-                              {e.title}
-                              <i className={`fa fa-quote-right ${style.fafaquatsend} `} aria-hidden="true"></i>
-                            </p>
-                            <div className="d-flex justify-content-start">
-                              <Image src={e.image} alt="" className={style.handle_hometestimonialimg} />
-                              <div>
-                                <span className={style.testimonialspan}>{e.owner}</span>
-                                <span className="d-flex ml-3">{e.title1}</span>
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
+                    }
                 </Slider>
                 <span onClick={sliderPrev} className={` ${style.prev} ${style.slick_arrow} d-block`}>
                   <i className="fa fa-arrow-left" />

@@ -14,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { api } from "../../../Axios";
 import { useRouter } from "next/router";
 import Loader from "@/Component/loader";
+import styles from '../../common/common.module.css'
 
 const StyledTableCell = styled(TableCell)(({theme}) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -101,38 +102,38 @@ const ServiceList = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer'>
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className='setpageheading'>
-            <Typography variant="h4" gutterBottom className='setheading'>
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Service List
             </Typography>
-            <Button variant="contained" size="medium" className='setsendbtninside' onClick={handlesenddata}>
+            <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
               Add
             </Button>
           </div>
 
-          <Paper className='setProductpaper' elevation={5}>
-            {deleterr && <Typography className='seterrorlabel'>{deleterr} </Typography>}
-            {dbFetcherr && <Typography className='seterrorlabel'>{dbFetcherr} </Typography>}
+          <Paper className={styles.setProductpaper} elevation={5}>
+            {deleterr && <Typography className={styles.setProductpaper}>{deleterr} </Typography>}
+            {dbFetcherr && <Typography className={styles.setProductpaper}>{dbFetcherr} </Typography>}
             <TableContainer>
               <Table className='settable' aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" className='tableth'>
+                    <TableCell align="center" className={styles.tableth}>
                       No.
                     </TableCell>
-                    <TableCell align="center" className='tableth'>
+                    <TableCell align="center" className={styles.tableth}>
                       Title
                     </TableCell>
-                    <TableCell align="center" className='tableth'>
+                    <TableCell align="center" className={styles.tableth}>
                       contentview
                     </TableCell>
-                    <TableCell align="center" className='tableth'>
+                    <TableCell align="center" className={styles.tableth}>
                       View position
                     </TableCell>
-                    <TableCell align="center" className='tableth'>
+                    <TableCell align="center" className={styles.tableth}>
                       Action
                     </TableCell>
                   </TableRow>
@@ -141,28 +142,28 @@ const ServiceList = () => {
                   {careerList.map((e, index) => {
                     return (
                       <StyledTableRow>
-                        <StyledTableCell align="center" component="th" scope="row" className='tabletd'>
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {index + 1}
                         </StyledTableCell>
-                        <StyledTableCell className='tabletd' align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.heading}
                         </StyledTableCell>
-                        <StyledTableCell className='tabletd' align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.contentview === true ? 'true' : "false"}
                         </StyledTableCell>
-                        <StyledTableCell className='tabletd' align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.contentpositionview}
                         </StyledTableCell>
                         <StyledTableCell className='tabletdicon' align="center">
                           <div className='seticondiv'>
                             <div>
                               <Tooltip title="Edit">
-                                <i aria-hidden="true" className={`seteditincon fa fa-pencil fs-17`} onClick={() => handleedit(e._id)} />
+                                <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e._id)} />
                               </Tooltip>
                             </div>
                             <div>
                               <Tooltip title="Remove">
-                                <i aria-hidden="true" className={`'setdeleteincon' fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
+                                <i aria-hidden="true" className={`${styles.setdeleteincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
                               </Tooltip>
                             </div>
                           </div>

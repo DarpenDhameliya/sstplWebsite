@@ -12,7 +12,7 @@ import { store } from "@/redux/store";
 import "../assets/css/sstplmain.css";
 import "../assets/css/custom-animated.css";
 import "../assets/css/default.css";
-import "../assets/css/Fonts.css";
+import '../assets/css/FontCopy.css'
 import "../assets/css/bootstrap.min.css";
 import "../assets/css/adminpanel.css";
 import { useRouter } from "next/router";

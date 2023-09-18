@@ -116,8 +116,7 @@
 }
 .fa-border {
   border-radius: var(--fa-border-radius, 0.1em);
-  border: var(--fa-border-width, 0.08em) var(--fa-border-style, solid)
-    var(--fa-border-color, #eee);
+  border: var(--fa-border-width, 0.08em) var(--fa-border-style, solid) var(--fa-border-color, #eee);
   padding: var(--fa-border-padding, 0.2em 0.25em 0.15em);
 }
 .fa-pull-left {
@@ -128,120 +127,7 @@
   float: right;
   margin-left: var(--fa-pull-margin, 0.3em);
 }
-.fa-beat {
-  -webkit-animation-name: fa-beat;
-  animation-name: fa-beat;
-  -webkit-animation-delay: var(--fa-animation-delay, 0s);
-  animation-delay: var(--fa-animation-delay, 0s);
-  -webkit-animation-direction: var(--fa-animation-direction, normal);
-  animation-direction: var(--fa-animation-direction, normal);
-  -webkit-animation-duration: var(--fa-animation-duration, 1s);
-  animation-duration: var(--fa-animation-duration, 1s);
-  -webkit-animation-iteration-count: var(
-    --fa-animation-iteration-count,
-    infinite
-  );
-  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
-  -webkit-animation-timing-function: var(--fa-animation-timing, ease-in-out);
-  animation-timing-function: var(--fa-animation-timing, ease-in-out);
-}
 
-.fa-fade {
-  -webkit-animation-name: fa-fade;
-  animation-name: fa-fade;
-  -webkit-animation-iteration-count: var(
-    --fa-animation-iteration-count,
-    infinite
-  );
-  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
-  -webkit-animation-timing-function: var(
-    --fa-animation-timing,
-    cubic-bezier(0.4, 0, 0.6, 1)
-  );
-  animation-timing-function: var(
-    --fa-animation-timing,
-    cubic-bezier(0.4, 0, 0.6, 1)
-  );
-}
-.fa-beat-fade,
-.fa-fade {
-  -webkit-animation-delay: var(--fa-animation-delay, 0s);
-  animation-delay: var(--fa-animation-delay, 0s);
-  -webkit-animation-direction: var(--fa-animation-direction, normal);
-  animation-direction: var(--fa-animation-direction, normal);
-  -webkit-animation-duration: var(--fa-animation-duration, 1s);
-  animation-duration: var(--fa-animation-duration, 1s);
-}
-.fa-beat-fade {
-  -webkit-animation-name: fa-beat-fade;
-  animation-name: fa-beat-fade;
-  -webkit-animation-iteration-count: var(
-    --fa-animation-iteration-count,
-    infinite
-  );
-  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
-  -webkit-animation-timing-function: var(
-    --fa-animation-timing,
-    cubic-bezier(0.4, 0, 0.6, 1)
-  );
-  animation-timing-function: var(
-    --fa-animation-timing,
-    cubic-bezier(0.4, 0, 0.6, 1)
-  );
-}
-.fa-flip {
-  -webkit-animation-name: fa-flip;
-  animation-name: fa-flip;
-  -webkit-animation-delay: var(--fa-animation-delay, 0s);
-  animation-delay: var(--fa-animation-delay, 0s);
-  -webkit-animation-direction: var(--fa-animation-direction, normal);
-  animation-direction: var(--fa-animation-direction, normal);
-  -webkit-animation-duration: var(--fa-animation-duration, 1s);
-  animation-duration: var(--fa-animation-duration, 1s);
-  -webkit-animation-iteration-count: var(
-    --fa-animation-iteration-count,
-    infinite
-  );
-  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
-  -webkit-animation-timing-function: var(--fa-animation-timing, ease-in-out);
-  animation-timing-function: var(--fa-animation-timing, ease-in-out);
-}
-.fa-shake {
-  -webkit-animation-name: fa-shake;
-  animation-name: fa-shake;
-  -webkit-animation-duration: var(--fa-animation-duration, 1s);
-  animation-duration: var(--fa-animation-duration, 1s);
-  -webkit-animation-iteration-count: var(
-    --fa-animation-iteration-count,
-    infinite
-  );
-  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
-  -webkit-animation-timing-function: var(--fa-animation-timing, linear);
-  animation-timing-function: var(--fa-animation-timing, linear);
-}
-.fa-shake,
-.fa-spin {
-  -webkit-animation-delay: var(--fa-animation-delay, 0s);
-  animation-delay: var(--fa-animation-delay, 0s);
-  -webkit-animation-direction: var(--fa-animation-direction, normal);
-  animation-direction: var(--fa-animation-direction, normal);
-}
-.fa-spin {
-  -webkit-animation-name: fa-spin;
-  animation-name: fa-spin;
-  -webkit-animation-duration: var(--fa-animation-duration, 2s);
-  animation-duration: var(--fa-animation-duration, 2s);
-  -webkit-animation-iteration-count: var(
-    --fa-animation-iteration-count,
-    infinite
-  );
-  animation-iteration-count: var(--fa-animation-iteration-count, infinite);
-  -webkit-animation-timing-function: var(--fa-animation-timing, linear);
-  animation-timing-function: var(--fa-animation-timing, linear);
-}
-.fa-spin-reverse {
-  --fa-animation-direction: reverse;
-}
 .fa-pulse,
 .fa-spin-pulse {
   -webkit-animation-name: fa-spin;
@@ -250,229 +136,12 @@
   animation-direction: var(--fa-animation-direction, normal);
   -webkit-animation-duration: var(--fa-animation-duration, 1s);
   animation-duration: var(--fa-animation-duration, 1s);
-  -webkit-animation-iteration-count: var(
-    --fa-animation-iteration-count,
-    infinite
-  );
+  -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
   animation-iteration-count: var(--fa-animation-iteration-count, infinite);
   -webkit-animation-timing-function: var(--fa-animation-timing, steps(8));
   animation-timing-function: var(--fa-animation-timing, steps(8));
 }
-@media (prefers-reduced-motion: reduce) {
-  .fa-beat,
-  .fa-beat-fade,
-  .fa-bounce,
-  .fa-fade,
-  .fa-flip,
-  .fa-pulse,
-  .fa-shake,
-  .fa-spin,
-  .fa-spin-pulse {
-    -webkit-animation-delay: -1ms;
-    animation-delay: -1ms;
-    -webkit-animation-duration: 1ms;
-    animation-duration: 1ms;
-    -webkit-animation-iteration-count: 1;
-    animation-iteration-count: 1;
-    -webkit-transition-delay: 0s;
-    transition-delay: 0s;
-    -webkit-transition-duration: 0s;
-    transition-duration: 0s;
-  }
-}
-@-webkit-keyframes fa-beat {
-  0%,
-  90% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-  45% {
-    -webkit-transform: scale(var(--fa-beat-scale, 1.25));
-    transform: scale(var(--fa-beat-scale, 1.25));
-  }
-}
-@keyframes fa-beat {
-  0%,
-  90% {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-  45% {
-    -webkit-transform: scale(var(--fa-beat-scale, 1.25));
-    transform: scale(var(--fa-beat-scale, 1.25));
-  }
-}
 
-@-webkit-keyframes fa-fade {
-  50% {
-    opacity: var(--fa-fade-opacity, 0.4);
-  }
-}
-@keyframes fa-fade {
-  50% {
-    opacity: var(--fa-fade-opacity, 0.4);
-  }
-}
-@-webkit-keyframes fa-beat-fade {
-  0%,
-  to {
-    opacity: var(--fa-beat-fade-opacity, 0.4);
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
-    transform: scale(var(--fa-beat-fade-scale, 1.125));
-  }
-}
-@keyframes fa-beat-fade {
-  0%,
-  to {
-    opacity: var(--fa-beat-fade-opacity, 0.4);
-    -webkit-transform: scale(1);
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
-    transform: scale(var(--fa-beat-fade-scale, 1.125));
-  }
-}
-@-webkit-keyframes fa-flip {
-  50% {
-    -webkit-transform: rotate3d(
-      var(--fa-flip-x, 0),
-      var(--fa-flip-y, 1),
-      var(--fa-flip-z, 0),
-      var(--fa-flip-angle, -180deg)
-    );
-    transform: rotate3d(
-      var(--fa-flip-x, 0),
-      var(--fa-flip-y, 1),
-      var(--fa-flip-z, 0),
-      var(--fa-flip-angle, -180deg)
-    );
-  }
-}
-@keyframes fa-flip {
-  50% {
-    -webkit-transform: rotate3d(
-      var(--fa-flip-x, 0),
-      var(--fa-flip-y, 1),
-      var(--fa-flip-z, 0),
-      var(--fa-flip-angle, -180deg)
-    );
-    transform: rotate3d(
-      var(--fa-flip-x, 0),
-      var(--fa-flip-y, 1),
-      var(--fa-flip-z, 0),
-      var(--fa-flip-angle, -180deg)
-    );
-  }
-}
-@-webkit-keyframes fa-shake {
-  0% {
-    -webkit-transform: rotate(-15deg);
-    transform: rotate(-15deg);
-  }
-  4% {
-    -webkit-transform: rotate(15deg);
-    transform: rotate(15deg);
-  }
-  8%,
-  24% {
-    -webkit-transform: rotate(-18deg);
-    transform: rotate(-18deg);
-  }
-  12%,
-  28% {
-    -webkit-transform: rotate(18deg);
-    transform: rotate(18deg);
-  }
-  16% {
-    -webkit-transform: rotate(-22deg);
-    transform: rotate(-22deg);
-  }
-  20% {
-    -webkit-transform: rotate(22deg);
-    transform: rotate(22deg);
-  }
-  32% {
-    -webkit-transform: rotate(-12deg);
-    transform: rotate(-12deg);
-  }
-  36% {
-    -webkit-transform: rotate(12deg);
-    transform: rotate(12deg);
-  }
-  40%,
-  to {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-}
-@keyframes fa-shake {
-  0% {
-    -webkit-transform: rotate(-15deg);
-    transform: rotate(-15deg);
-  }
-  4% {
-    -webkit-transform: rotate(15deg);
-    transform: rotate(15deg);
-  }
-  8%,
-  24% {
-    -webkit-transform: rotate(-18deg);
-    transform: rotate(-18deg);
-  }
-  12%,
-  28% {
-    -webkit-transform: rotate(18deg);
-    transform: rotate(18deg);
-  }
-  16% {
-    -webkit-transform: rotate(-22deg);
-    transform: rotate(-22deg);
-  }
-  20% {
-    -webkit-transform: rotate(22deg);
-    transform: rotate(22deg);
-  }
-  32% {
-    -webkit-transform: rotate(-12deg);
-    transform: rotate(-12deg);
-  }
-  36% {
-    -webkit-transform: rotate(12deg);
-    transform: rotate(12deg);
-  }
-  40%,
-  to {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-}
-@-webkit-keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(1turn);
-    transform: rotate(1turn);
-  }
-}
-@keyframes fa-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(1turn);
-    transform: rotate(1turn);
-  }
-}
 .fa-rotate-90 {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
@@ -5281,8 +4950,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url(../Font/fa-brands-400.woff2) format("woff2"),
-    url(../Font/fa-brands-400.ttf) format("truetype");
+  src: url(../Font/fa-brands-400.woff2) format("woff2"), url(../Font/fa-brands-400.ttf) format("truetype");
 }
 .fa-brands,
 .fab {
@@ -6039,9 +5707,7 @@
 .fa-bimobject:before {
   content: "\f378";
 }
-.fa-facebook-f:before {
-  content: "\f39e";
-}
+
 .fa-google-plus-square:before,
 .fa-square-google-plus:before {
   content: "\f0d4";
@@ -6560,9 +6226,7 @@
 .fa-jenkins:before {
   content: "\f3b6";
 }
-.fa-twitter:before {
-  content: "\f099";
-}
+
 .fa-rockrms:before {
   content: "\f3e9";
 }
@@ -6751,8 +6415,7 @@
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url(../Font/fa-solid-900.woff2) format("woff2"),
-    url(../Font/fa-solid-900.ttf) format("truetype");
+  src: url(../Font/fa-solid-900.woff2) format("woff2"), url(../Font/fa-solid-900.ttf) format("truetype");
 }
 .fa-solid,
 .fas {
@@ -6816,3 +6479,98 @@
     u+f0ec, u+f10a-f10b, u+f123, u+f13e, u+f148-f149, u+f14c, u+f156, u+f15e,
     u+f160-f161, u+f163, u+f175-f178, u+f195, u+f1f8, u+f219, u+f27a;
 } */
+
+.fa-facebook-f:before {
+  content: "\f39e";
+}
+.fa-twitter:before {
+  content: "\f099";
+}
+.fa-linkedin-in:before {
+  content: "\f0e1";
+}
+.fa-instagram:before {
+  content: "\f16d";
+}
+.fa-whatsapp:before {
+  content: "\f232";
+}
+.fa-skype:before {
+  content: "\f17e";
+}
+.fa-eye:before {
+  content: "\f06e";
+}
+.fa-eye-slash:before {
+  content: "\f070";
+}
+.fa-arrow-left:before {
+  content: "\f060";
+}
+.fa-bars:before,
+.fa-navicon:before {
+  content: "\f0c9";
+}
+
+.fa-circle-user:before,
+.fa-user-circle:before {
+  content: "\f2bd";
+}
+.fa-pencil-alt:before,
+.fa-pencil:before {
+  content: "\f303";
+}
+.fa-trash:before {
+  content: "\f1f8";
+}
+.fa-add:before,
+.fa-plus:before {
+  content: "\2b";
+}
+.fa-arrows-rotate:before,
+.fa-refresh:before,
+.fa-sync:before {
+  content: "\f021";
+}
+.fa-location-dot:before,
+.fa-map-marker-alt:before {
+  content: "\f3c5";
+}
+.fa-phone:before {
+  content: "\f095";
+}
+.fa-envelope:before {
+  content: "\f0e0";
+}
+.fa-quote-left-alt:before,
+.fa-quote-left:before {
+  content: "\f10d";
+}
+.fa-quote-right-alt:before,
+.fa-quote-right:before {
+  content: "\f10e";
+}
+.fa-arrow-up:before {
+  content: "\f062";
+}
+.fa-angle-down:before {
+  content: "\f107";
+}
+.fa-home-lg:before,
+.fa-house-chimney:before {
+  content: "\e3af";
+}
+.fa-close:before,
+.fa-multiply:before,
+.fa-remove:before,
+.fa-times:before,
+.fa-xmark:before {
+  content: "\f00d";
+}
+.fa-angle-right:before {
+  content: "\f105";
+}
+.fa-arrow-left-long:before,
+.fa-long-arrow-left:before {
+  content: "\f177";
+}

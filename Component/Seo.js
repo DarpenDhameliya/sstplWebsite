@@ -7,8 +7,6 @@ const Seo = ({ title, pagedescription, keywords }) => {
   let lasttitle = "SoftStorm - Custom Software Development Service Provider Company in Surat, India";
   let defaultpagedescription = "Trusted Service Provider for AI Tool & iOT Service | Web Application | Mobile Application | Enterprise Solution | Digital Marketing ";
   let defaultKey = "It Company";
-  console.log(keywords);
-  console.log(pagedescription);
   return (
     <>
       <Head>

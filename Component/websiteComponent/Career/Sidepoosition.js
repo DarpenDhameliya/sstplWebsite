@@ -59,9 +59,7 @@ const Sidepoosition = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setDbsubmit(false);
-    }, 2000);
+
     if (btnclick === true) {
       if (mailstate.status === "loading") {
       } else if (mailstate.status === "succeeded") {
@@ -288,7 +286,7 @@ const Sidepoosition = () => {
                   {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                 </div>
                 <div className={`col-md-12 text-right ${style.handlecontact_form} mb-2 mt-3`}>
-                  <button className={`${style.main_btn_carrer_side} ${dbsubmit ? "disabled" : ""}`} style={{width: "100%"}} onClick={handlesubmit}>
+                  <button className={`${style.main_btn_carrer_side} ${dbsubmit ? `${style.disabled}` : ""}`} style={{width: "100%"}} onClick={handlesubmit}>
                     SEND RESUME
                   </button>
                 </div>

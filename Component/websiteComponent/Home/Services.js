@@ -10,7 +10,7 @@ import deskimg from "../../../assets/images/services/desktop-software-developmen
 import digimg from "../../../assets/images/services/digital-marketing.webp";
 import graimg from "../../../assets/images/services/web-graphic-designing.webp";
 import entimg from "../../../assets/images/services/enterprise-services.webp";
-import style from './cssComponent/Service.module.css'
+import style from "./cssComponent/Service.module.css";
 const FooterLink = dynamic(() => import("../SubComponent/FooterLink").then((module) => module.FooterLink));
 
 export default function Services(className) {
@@ -37,8 +37,7 @@ export default function Services(className) {
   }, []);
 
   useEffect(() => {
-    if (states.status === "loading") {
-    } else if (states.status === "succeeded") {
+    if (states.status === "succeeded") {
       if (states.response.length > 0) {
         setState({
           ...state,
@@ -90,12 +89,10 @@ export default function Services(className) {
               <div className="row">
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className={`${style.softstormweb_techno_service} mt-30 wow animated fadeInUp`} data-aos="fade-right" data-aos-duration="400">
-                    <div className={style.imagedisplay} onClick={() => handlepagechange("web-application-developement")} >
+                    <div className={style.imagedisplay} onClick={() => handlepagechange("web-application-developement")}>
                       <Image src={state.webappimg ? state.webappimg : webimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
-                    <h4 className={`${style.title} text-center`} >
-                      {state.webapptitle ? state.webapptitle : "Web Application Developement"}
-                    </h4>
+                    <h4 className={`${style.title} text-center`}>{state.webapptitle ? state.webapptitle : "Web Application Developement"}</h4>
                     <div className={style.servicedisplay}>
                       <FooterLink className={` ${style.main_btn_about} ${style.mob1} m-1`} href="/web-application-developement#nodejs">
                         NODE JS
@@ -117,12 +114,10 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className={`${style.softstormweb_techno_service} item-2 mt-30 wow animated fadeInUp`} data-aos="fade-right" data-aos-duration="800">
-                    <div className={style.imagedisplay} onClick={() => handlepagechange("mobile-application-developement")} >
+                    <div className={style.imagedisplay} onClick={() => handlepagechange("mobile-application-developement")}>
                       <Image src={state.mobappimg ? state.mobappimg : mobimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
-                    <h4 className={`${style.title} text-center`} >
-                      {state.mobapptitle ? state.mobapptitle : "Mobile Application Developer"}
-                    </h4>
+                    <h4 className={`${style.title} text-center`}>{state.mobapptitle ? state.mobapptitle : "Mobile Application Developer"}</h4>
                     <div className={style.servicedisplay}>
                       <FooterLink className={` ${style.main_btn_about} ${style.mob2} m-1`} href="/mobile-application-developement#flutter">
                         FLUTTER
@@ -138,12 +133,10 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className={`${style.softstormweb_techno_service} item-3 mt-30 wow animated fadeInUp `} data-aos="fade-right" data-aos-duration="1000">
-                    <div className={style.imagedisplay} onClick={() => handlepagechange("desktop-software-developement")} >
+                    <div className={style.imagedisplay} onClick={() => handlepagechange("desktop-software-developement")}>
                       <Image src={state.deskappimg ? state.deskappimg : deskimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
-                    <h4 className={`${style.title} text-center`} >
-                      {state.deskapptitle ? state.deskapptitle : "Desktop Software Developement"}
-                    </h4>
+                    <h4 className={`${style.title} text-center`}>{state.deskapptitle ? state.deskapptitle : "Desktop Software Developement"}</h4>
                     <div className={style.servicedisplay}>
                       <FooterLink className={` ${style.main_btn_about} ${style.mob3} m-1`} href="/desktop-software-developement#c">
                         C#
@@ -168,12 +161,10 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className={`${style.softstormweb_techno_service} item-4 mt-30 wow animated fadeInUp `} data-aos="fade-right" data-aos-duration="400">
-                    <div className={style.imagedisplay} onClick={() => handlepagechange("digital-marketing")} >
+                    <div className={style.imagedisplay} onClick={() => handlepagechange("digital-marketing")}>
                       <Image src={state.digitalappimg ? state.digitalappimg : digimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
-                    <h4 className={`${style.title} text-center`} >
-                      {state.digitalapptitle ? state.digitalapptitle : "Digital Marketing"}
-                    </h4>
+                    <h4 className={`${style.title} text-center`}>{state.digitalapptitle ? state.digitalapptitle : "Digital Marketing"}</h4>
                     <div className={style.servicedisplay}>
                       <FooterLink className={` ${style.main_btn_about} ${style.mob4} m-1`} href="/digital-marketing#seo">
                         SEO
@@ -192,12 +183,10 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className={`${style.softstormweb_techno_service} item-5 mt-30 wow animated fadeInUp`} data-aos="fade-right" data-aos-duration="800">
-                    <div className={style.imagedisplay} onClick={() => handlepagechange("web_graphic-designing")} >
+                    <div className={style.imagedisplay} onClick={() => handlepagechange("web_graphic-designing")}>
                       <Image src={state.webgraappimg ? state.webgraappimg : graimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
-                    <h4 className={`${style.title} text-center`} >
-                      {state.webgraapptitle ? state.webgraapptitle : "Web & Graphic Designing"}
-                    </h4>
+                    <h4 className={`${style.title} text-center`}>{state.webgraapptitle ? state.webgraapptitle : "Web & Graphic Designing"}</h4>
                     <div className={style.servicedisplay}>
                       <FooterLink className={` ${style.main_btn_about} ${style.mob5} m-1`} href="/web_graphic-designing#webdesign">
                         WEB DESIGN
@@ -222,12 +211,10 @@ export default function Services(className) {
                 </div>
                 <div className="col-xl-4 col-lg-6 col-md-6 col-sm-6">
                   <div className={`${style.softstormweb_techno_service} item-6 mt-30 wow animated fadeInUp`} data-aos="fade-right" data-aos-duration="1000">
-                    <div className={style.imagedisplay} onClick={() => handlepagechange("enterprise-services")} >
+                    <div className={style.imagedisplay} onClick={() => handlepagechange("enterprise-services")}>
                       <Image src={state.erpappimg ? state.erpappimg : entimg} width={600} height={300} alt="webimg" style={{ borderRadius: "10px" }} />
                     </div>
-                    <h4 className={`${style.title} text-center`} >
-                      {state.erpapptitle ? state.erpapptitle : "Enterprice Services"}
-                    </h4>
+                    <h4 className={`${style.title} text-center`}>{state.erpapptitle ? state.erpapptitle : "Enterprice Services"}</h4>
                     <div className={style.servicedisplay}>
                       <FooterLink className={` ${style.main_btn_about} ${style.mob6} m-1`} href="/enterprise-services#erp">
                         ERP

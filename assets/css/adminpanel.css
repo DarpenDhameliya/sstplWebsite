@@ -1,24 +1,3 @@
-.setloginbackpaperLogin {
-    text-align: center ;
-    background-color: #fff ;
-    padding: 16px ;
-    display: flex ;
-    justify-content: center ;
-    flex-direction: column ;
-    margin: auto ;
-    max-width: 510px ;
-    border-radius: 10px ;
-  }
-  
-  .setcontainerLogin {
-    max-width: 100% !important;
-    min-height: 100vh;
-    position: relative;
-    z-index: 1;
-    background-color: aliceblue;
-    padding-top: 70px;
-  }
-  
   .setcontainerprofile {
     max-width: 100% !important;
     min-height: 100vh;
@@ -27,40 +6,14 @@
     background-color: #f9fafc;
     padding-top: 70px;
   }
-  
-  .setpageheading_login {
-    max-width: 100% !important;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .setheading {
-    display: flex;
-    padding: 5px;
-    color: #495057;
-    align-items: center;
-    font-size: 30px !important;
-    line-height: 32px;
-  }
-  
-  .setheadingfront {
-    padding: 5px;
-    margin: 0 !important;
-    color: #202223;
-    padding-right: 0 !important;
-    font-weight: 600 !important;
-    font-size: 30px !important;
-    line-height: 32px;
-  }
-  
+
   .setloginheadset {
     font-size: 15px !important;
     color: #524c4c;
     font-family: "Poppins", sans-serif !important;
     font-weight: 600 !important;
   }
-  
+
   .settextfield {
     font-family: "Poppins", sans-serif !important;
   }
@@ -71,21 +24,31 @@
     box-shadow: var(--shadows-3);
     border: 0;
   }
-  
-  .seterrorlabel {
-    margin: 0;
-    display: flex;
-    color: #7f2121;
+  .settextfield:hover
+   {
+    border: 0;
   }
-  
-  .setinput {
-    display: grid;
+  .settextfield .MuiInputBase-root,
+  .settextfielddate .MuiInputBase-root {
+    font-family: "Poppins", sans-serif !important;
   }
-  
+  .settextfielddate {
+    padding: 0 10px;
+    border: 1px solid #0000003b;
+  }
+  .settextfielddate:hover {
+    border: 1px solid;
+  }
+  .settextfield .MuiTextField-root,
+  .settextfielddate .MuiTextField-root {
+    width: 100% !important;
+  }
+
+
   .setinputFirst {
     display: grid;
   }
-  
+
   .setHeadingpass {
     display: flex;
     font-family: "Poppins", sans-serif !important;
@@ -94,16 +57,8 @@
     font-weight: 600 !important;
     line-height: 25px !important;
   }
-  
-  .setlabel {
-    display: flex;
-    font-size: 15px !important;
-    line-height: 21px !important;
-    margin-top: 7px !important;
-    margin-right: 10px !important;
-    margin-bottom: 2px !important;
-  }
-  
+
+
   .setlabelprofile {
     display: flex;
     align-items: center;
@@ -115,12 +70,7 @@
     margin-bottom: 2px !important;
     font-weight: 600 !important;
   }
-  .setloginbutton {
-    margin-top: 20px !important;
-    background-color: #367fa9 !important;
-  }
-  
-  /* setProductpaperdisplay */
+
   .setProductpaperdisplay {
     text-align: left;
     background-color: #f9fafc;
@@ -132,30 +82,16 @@
     width: 100% !important;
     border-radius: 10px;
     margin-top: 20px;
-    /* [theme.breakpoints.only('sm')]:{
-              minWidth:'340px'
-            } */
   }
-  .setsendbtninside {
-    height: 40px;
-    font-weight: 600 !important;
-    text-transform: none;
-    padding: 0px 15px;
-    background-color: #3c8dbc !important;
-    color: white;
-  }
-  .setsendbtninside:hover {
-    background-color: #3c8dbccc !important;
-  }
-  
+
+
   /* setBtnrow */
   .setBtnrow {
     display: flex;
     justify-content: flex-end;
     margin-top: 10px !important;
   }
-  
-  /* setmodeldisplay */
+
   .setmodeldisplay {
     position: absolute;
     top: 45%;
@@ -167,24 +103,19 @@
     box-shadow: var(--shadows-8);
     border-radius: 9px !important;
     padding: 10px;
-    /* [theme.breakpoints.down("xs")]: {
-          width: '200px !important',
-          heigth: "200px !important",
-        }, */
+
   }
-  
+
   .setmodeltypo {
       font-family: "Poppins", sans-serif !important;
     }
-    
-    /* setbtndeldiv */
+
     .setbtndeldiv {
       display: flex;
       justify-content: flex-end;
       padding-top: 5px;
     }
-    
-    /* canclebtn */
+
     .canclebtn {
       font-weight: 600;
       height: 35px;
@@ -197,14 +128,13 @@
     .canclebtn:hover {
       background-color: #3c8dbc !important;
     }
-    
-    /* setbottomtypography */
+
     .setbottomtypography {
       display: flex;
       justify-content: space-between;
       margin-top: 12px;
     }
-    
+
     /* listitemeffect */
     .listitemeffect:hover {
       color: rgba(31, 38, 31, 0.50);
@@ -218,72 +148,72 @@
       min-width: 100% !important;
       display: flex;
     }
-    
+
     @media (max-width: 992px) {
       .setdisplay {
         display: block;
       }
     }
-    
+
     .setsidebaricon,
     .setmenusetting {
       color: #b8c7ce;
     }
-    
+
     .setsidebaricon:hover,
     .setmenusetting:hover {
       color: white;
     }
-    
+
     .customBadgemail {
       background-color: #00a65a;
       color: white;
     }
-    
+
     .custombadgeicon,
     .custombadgeMobileicon {
       color: white;
     }
-    
+
     .custombadgeicon:hover,
     .custombadgeMobileicon:hover {
       color: rgba(31, 38, 31, 0.50);
     }
-    
+
     .customBadgenoty {
       background-color: #f39c12;
       color: white;
     }
-    
+
     .seticonbtn {
       padding: 12px !important;
     }
-    
+
     .settypo {
       font-size: 25px !important;
       font-family: "Poppins", sans-serif !important;
     }
-    
+
     .settypomobile {
       font-size: 20px !important;
       font-family: "Poppins", sans-serif !important;
     }
-    
+
     .setnotyfication {
       display: flex;
     }
-    
+
     .mobilerightmenu,
     .hideiconformobile,
     .sidebarmobile,
     .mobiledrawer {
       display: none;
     }
-    
+
     .listitemeffect:hover {
       color: rgba(31, 38, 31, 0.50);
     }
-    
+
     .setsidebaricon:hover {
       color: white;
     }
@@ -295,7 +225,7 @@
       padding: 0 8px;
       color: #b8c7ce;
     }
-    
+
     .setsidebarheader {
       display: flex !important;
       padding-left: 10px !important;
@@ -303,14 +233,14 @@
       z-index: 1;
       width: 100% !important;
     }
-    
+
     .setheadertypo {
       font-family: "Poppins", sans-serif !important;
       padding-left: 16px !important;
       font-size: 22px !important;
       color: white !important;
     }
-    
+
     .setheadertypomobile {
       font-family: "Poppins", sans-serif !important;
       font-size: 22px !important;
@@ -318,7 +248,7 @@
       display: flex !important;
       justify-content: center !important;
     }
-    
+
     .setheadertypoweb {
       font-family: "Poppins", sans-serif !important;
       font-size: 18px !important;
@@ -328,13 +258,13 @@
       align-items: center !important;
       margin-left: 10px !important;
     }
-    
+
     .setheaderavtar {
       height: 75px !important;
       margin-top: 15px !important;
       margin-bottom: 15px !important;
     }
-    
+
     .setheaderavtarweb {
       margin-top: 5px !important;
       margin-bottom: 5px !important;
@@ -342,59 +272,59 @@
       background-color: transparent !important;
       border: 1px solid #c2c7d0 !important;
     }
-    
+
     .setavatrhandle {
       display: flex !important;
       justify-content: center !important;
     }
-    
+
     .seticonwithname {
       display: flex !important;
       justify-content: flex-start !important;
       width: 100%;
     }
-    
+
     .setviewforweb {
       display: flex !important;
       justify-content: flex-start !important;
       height: 50px;
     }
-    
+
     .setviewforwebdivider {
       display: none !important;
     }
-    
+
     .setsidebaricon {
       color: #c2c7d0;
     }
-    
+
     .selectedindex {
       padding-top: 65px !important;
     }
-    
+
     .selectedindex .Mui-selected {
       background-color: rgb(43 123 203 / 45%) !important;
       border-radius: 0 25px 25px 0;
       border-left: 4px solid #00BFA5;
     }
-    
+
     .selectedsubindex .Mui-selected {
       background-color: #ffffff1a !important;
       border-radius: 0 25px 25px 0;
       border-left: 4px solid #fff;
     }
-    
+
     .effectlist:hover {
       background-color: rgba(255, 255, 255, 0.1) !important;
       border-radius: 0 25px 25px 0;
     }
-    
+
     .setbox {
       margin-left: 10px;
       font-size: 18px;
       font-family: "Poppins", sans-serif !important;
     }
-    
+
     @media (max-width: 600px) {
       .setbox {
         margin-left: 7px !important;
@@ -402,145 +332,49 @@
         font-family: "Poppins", sans-serif !important;
       }
     }
-    
+
     .setmobileicon {
       font-size: 25px !important;
     }
-    
-    .setboxwallet {
-      display: flex;
-      align-items: center;
-    }
-    
-    .setwallet {
-      display: flex;
-      align-items: center;
-    }
-    
-    .setsercharrow {
-      justify-content: space-around !important;
-      display: flex;
-      border: 1px solid white;
-      background-color: transparent !important;
-      width: 150px !important;
-    }
-    
+
+
     .setlabelbal {
       font-size: 12px;
       font-family: "Poppins", sans-serif !important;
     }
-    
-    .setmobilewallet {
-      display: none !important;
-    }
-    
-    .spin {
-      animation: spin 1s 1;
-    }
-    
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
+
     .drawerimg {
       width: 45px;
       border-radius: 50%;
     }
-    .SidebarImg {
-      font-size:25px;
-      color:white
-    }
+
     /* =====================================================================================================================page css */
 
 
-    .setcontainer {
-      max-width: 100% !important;
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      background-color: #f9fafc;
-      padding-top: 80px;
-      padding-bottom: 30px !important;
-    }
-    
-    .setcontainer_return {
-      max-width: 100% !important;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-      background-color: #f9fafc;
-      padding-top: 80px;
-      padding-bottom: 30px !important;
-    }
-    
+
     .setloginbutton {
       background-color: #367fa9 !important;
     }
-    
-    .setloginbackpaper {
-      text-align: left;
-      /* background-color: ${theme.palette.background.paper}; */
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      margin: auto;
-      max-width: 1250px;
-      border-radius: 10px;
-      margin-top: 50px;
-    }
-    
+
+
+
     .setlistfiltericon {
       display: flex;
       justify-content: flex-start;
     }
-    
+
     .setavtarback {
       background-color: transparent !important;
       margin-top: 16px !important;
       border: 1px solid #202223;
     }
-    
-    .setheading {
-      padding: 5px;
-      margin: 0 ;
-      color: #202223;
-      font-weight: 600 !important;
-      font-size: 35px !important;
-      line-height: 32px;
-      font-family: "Poppins", sans-serif !important;
-    }
-    
-    .handleContactmodel {
-      display: flex !important;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    
+
+
+
     .handlep {
       margin-left: 10px;
     }
-    .handlebackbutton {
-      display: flex;
-      align-items: center;
-      padding: 5px 10px;
-      border-radius: 10px;
-      background-color: transparent;
-      border: 2px solid #000;
-    }
-    
-    .setpageheading {
-      max-width: 100% !important;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #f9fafc;
-    }
+
     .setpageheading_withback {
       max-width: 100% !important;
       margin: auto;
@@ -549,7 +383,7 @@
       justify-content: start;
       background-color: #f9fafc;
     }
-    
+
     .setproductbtn {
       font-weight: 600;
       text-transform: none;
@@ -559,109 +393,21 @@
       background-color: #3c8dbc;
       color: white;
     }
-    
-    .setProductpaper {
-      text-align: left;
-      /* background-color: ${theme.palette.background.paper}; */
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      margin: auto;
-      max-width: 100%;
-      border-radius: 10px;
-      margin-top: 30px;
-    }
-    
-    .setlabel {
-      font-family: "Poppins", sans-serif !important;
-      font-size: 15px !important;
-      line-height: 21px !important;
-      margin-top: 7px !important;
-      margin-right: 10px !important;
-      margin-bottom: 2px !important;
-      font-weight: 600 !important;
-    }
-    
+
+
+
     .textField {
       margin: 0 !important;
       &:hover {
-        /* box-shadow: ${theme.shadows[3]}; */
         border: 0;
       }
       & .MuiInputBase-root {
         font-family: "Poppins", sans-serif !important;
       }
     }
-    
-    /* settextfield and settextfielddate styles */
-    .settextfield .MuiInputBase-root,
-    .settextfielddate .MuiInputBase-root {
-      font-family: "Poppins", sans-serif !important;
-    }
-    .settextfield:hover
-     {
-      /* box-shadow: ${theme.shadows[3]}; */
-      border: 0;
-    }
-    .settextfielddate {
-      padding: 0 10px;
-      border: 1px solid #0000003b;
-    }
-    .settextfielddate:hover {
-      border: 1px solid;
-    }
-    .settextfield .MuiTextField-root,
-    .settextfielddate .MuiTextField-root {
-      width: 100% !important;
-    }
-    
-    /* setsendbutton styles */
-    .setsendbutton {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 7px;
-    }
-    .setsendbtninside {
-      height: 40px;
-      font-weight: 600 !important;
-      text-transform: none;
-      padding: 0px 15px;
-      background-color: #3c8dbc !important;
-      color: white;
-    }
-    .setsendbtninside:hover {
-      background-color: #3c8dbccc  !important;
-    }
-    
-    /* Table styles */
-    .tableth,
-    .tablethaction {
-      padding: 8px !important;
-      font-weight: 600 !important;
-      color: #353535 !important;
-      font-family: "Poppins", sans-serif !important;
-    }
-    .tabletd {
-      font-family: "Poppins", sans-serif !important;
-      padding: 8px !important;
-      color: #202223 !important;
-      font-size: 16px !important;
-    }
-    .seteditincon,
-    .setdeleteincon {
-      color: #353535e0;
-    }
-    .seteditincon:hover {
-      color: #3c8dbc !important;
-      background-color: #d6efef6e;
-    }
-    .setdeleteincon:hover {
-      color: #7f2121 !important;
-      background-color: antiquewhite;
-    }
-    
-    /* setmodeldisplay and setmodeldisplayerr styles */
+
+
+
     .setmodeldisplay,
     .setmodeldisplayerr {
       position: absolute;
@@ -671,12 +417,10 @@
       transform: translate(-50%, -50%);
       width: 400px;
       background-color: white !important;
-      /* box-shadow: ${theme.shadows[8]}; */
       border-radius: 9px !important;
       padding: 10px;
     }
-    
-    /* deletebtn and canclebtn styles */
+
     .deletebtn,
     .canclebtn {
       font-weight: 600;
@@ -699,63 +443,35 @@
     .canclebtn:hover {
       background-color: #3c8dbc !important;
     }
-    /* setbtndeldiv style */
     .setbtndeldiv {
       display: flex;
       justify-content: flex-end;
       padding-top: 5px;
     }
-    
-    /* seterrorlabel style */
-    .seterrorlabel {
-      font-family: "Poppins", sans-serif !important;
-      font-size: 15px !important;
-      line-height: 21px !important;
-      margin-top: 7px !important;
-      margin-right: 10px;
-      color: #7f2121;
-      margin-bottom: 20px !important;
-      font-weight: 600 !important;
-    }
-    
-    /* setstateclear style */
-    .setstateclear {
-      height: 40px;
-      font-weight: 600 !important;
-      text-transform: none;
-      padding: 0px 15px;
-      background-color: #367fa9 !important;
-      color: white !important;
-      margin-right: 15px !important;
-    }
-    
-    /* seticondiv style */
+
+
+
     .seticondiv {
       display: flex;
       justify-content: center;
     }
-    
-    /* tabletdicon style */
+
     .tabletdicon {
       font-family: "Poppins", sans-serif !important;
       justify-content: center;
       padding: 8px !important;
       color: #202223 !important;
     }
-    
-    /* setcarddiv style */
+
     .setcarddiv {
       display: flex;
     }
-    
-    /* setImage style */
+
     .setImage {
       height: 180px;
       width: 100%;
-      /* box-shadow: ${theme.shadows[5]}; */
     }
-    
-    /* setGridcard style */
+
     .setGridcard {
       column-spacing: 3 !important;
     }
@@ -764,31 +480,7 @@
         column-spacing: 1 !important;
       }
     }
-    
-    /* setonegried style */
-    .setonegried {
-      /* padding: ${theme.spacing(1)}; */
-    }
-    @media (min-width: 600px) {
-      .setonegried {
-        /* padding: ${theme.spacing(1)}; */
-      }
-    }
-    
-    /* settypo style */
-    /* .settypo {
-      font-family: "Poppins", sans-serif !important;
-      font-weight: 500 !important;
-      font-size: 15px !important;
-      margin-left: 10px !important;
-    }
-    @media (max-width: 600px) {
-      .settypo {
-        font-size: 16px !important;
-      }
-    }
-    
-    /* settypohead style */
+
     .settypohead {
       font-family: "Poppins", sans-serif !important;
       font-weight: 600 !important;
@@ -799,23 +491,20 @@
         font-size: 16px !important;
       }
     } */
-    
-    /* setpaginationdiv style */
+
     .setpaginationdiv {
       display: flex;
       justify-content: space-between;
       margin-top: 7px !important;
       align-items: center;
     }
-    
-    /* setrowperpage style */
+
     .setrowperpage {
       display: flex;
       justify-content: start;
       align-items: center;
     }
-    
-    /* setlabelrow style */
+
     .setlabelrow {
       font-family: "Poppins", sans-serif !important;
       font-size: 15px !important;
@@ -825,8 +514,7 @@
       font-weight: 600 !important;
       min-width: 122px !important;
     }
-    
-    /* setbtn style */
+
     .setbtn {
       justify-content: left;
       padding: 8px 0px !important;
@@ -836,8 +524,7 @@
         justify-content: space-around !important;
       }
     }
-    
-    /* seteditbtn style */
+
     .seteditbtn {
       width: 20%;
       font-weight: 800;
@@ -846,8 +533,7 @@
       color: #3c8dbc !important;
       background-color: #d6efef;
     }
-    
-    /* setbtndisplay style */
+
     .setbtndisplay {
       display: flex;
       width: 100%;

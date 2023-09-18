@@ -9,6 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Typography from "@mui/material/Typography";
 import axios from "../../Axios";
+import style from './login.module.css'
+import styles from '../common/common.module.css'
 import { useRouter } from "next/router";
 const ariaLabel = { "aria-label": "description" };
 
@@ -66,36 +68,36 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xl" className="setcontainerLogin">
-      <div className="setpageheading_login">
-        <Typography gutterBottom className="setheading">
-          <span gutterBottom className="setheadingfront">
+    <Container component="main" maxWidth="xl" className={style.setcontainerLogin}>
+      <div className={style.setpageheading_login}>
+        <Typography gutterBottom className={style.setheading}>
+          <span gutterBottom className={style.setheadingfront}>
             SSTPL - A
           </span>
           dmin
         </Typography>
       </div>
 
-      <Paper className="setloginbackpaperLogin" elevation={5}>
-        <Typography variant="h6" gutterBottom>
+      <Paper className={style.setloginbackpaperLogin} elevation={5}>
+        <Typography variant="h6" gutterBottom className="mb-2">
           Sign in to start your session
         </Typography>
         {dberror && (
           <>
-            <Typography className="seterrorlabel">{dberror}</Typography>
+            <Typography className={styles.seterrorlabel}>{dberror}</Typography>
           </>
         )}
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <div className="setinput">
-              <label className="setlabel">Email :</label>
+            <div className={style.setinput} >
+              <label className={`${styles.setlabel} d-flex`}>Email :</label>
               <TextField id="outlined-basic" size="small" type="email" placeholder="email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)} onKeyPress={handleEnter} />
             </div>
-            {error.email && <Typography className="seterrorlabel">{error.email}</Typography>}
+            {error.email && <Typography className={styles.seterrorlabel}>{error.email}</Typography>}
           </Grid>
           <Grid item xs={12}>
-            <div className="setinput">
-              <label className="setlabel">Password :</label>
+            <div className={style.setinput}>
+              <label className={`${styles.setlabel} d-flex`}>Password :</label>
               <OutlinedInput
                 id="outlined-adornment-password"
                 type={passvisible ? "text" : "password"}
@@ -115,13 +117,13 @@ const Login = () => {
             </div>
             {error.password && (
               <>
-                <Typography className="seterrorlabel">{error.password}</Typography>
+                <Typography className={styles.seterrorlabel}>{error.password}</Typography>
               </>
             )}
           </Grid>
         </Grid>
 
-        <Button variant="contained" className="setloginbutton" onClick={handlesenddata}>
+        <Button variant="contained" className={style.setloginbutton} onClick={handlesenddata}>
           Login
         </Button>
       </Paper>

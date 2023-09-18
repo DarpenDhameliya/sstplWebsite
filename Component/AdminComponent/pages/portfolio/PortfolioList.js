@@ -15,6 +15,7 @@ import { api } from "../../../Axios";
 import { useRouter } from "next/router";
 import Loader from "@/Component/loader";
 import dynamic from "next/dynamic";
+import styles from '../../common/common.module.css'
 const CommonPagination = dynamic(() => import("../../common/pagination"), { ssr: false });
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -116,54 +117,54 @@ const PortfolioList = () => {
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className="setcontainer">
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
         {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className="setpageheading">
-            <Typography variant="h4" gutterBottom className="setheading">
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Portfolio List
             </Typography>
-            <Button variant="contained" size="medium" className="setsendbtninside" onClick={handlesenddata}>
+            <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
               Add
             </Button>
           </div>
 
-          <Paper className="setProductpaper" elevation={5}>
-            {deleterr && <Typography className="seterrorlabel">{deleterr} </Typography>}
-            {fetcherr && <Typography className="seterrorlabel">{fetcherr} </Typography>}
+          <Paper className={styles.setProductpaper} elevation={5}>
+            {deleterr && <Typography className={styles.seterrorlabel}>{deleterr} </Typography>}
+            {fetcherr && <Typography className={styles.seterrorlabel}>{fetcherr} </Typography>}
 
             <TableContainer>
               <Table className="settable" aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       No.
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Name
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Industry
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Team
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Duration
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Country
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Technology
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Category
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       HomePage View
                     </TableCell>
-                    <TableCell align="center" className="tableth">
+                    <TableCell align="center" className={styles.tableth}>
                       Action
                     </TableCell>
                   </TableRow>
@@ -172,32 +173,32 @@ const PortfolioList = () => {
                   {portfolioList.map((e, index) => {
                     return (
                       <StyledTableRow>
-                        <StyledTableCell align="center" component="th" scope="row" className="tabletd">
+                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {page == 1 ? index + 1 : page * rowperpage - rowperpage + (index + 1)}
                         </StyledTableCell>
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.name}
                         </StyledTableCell>
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.industry}
                         </StyledTableCell>
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.team}
                         </StyledTableCell>
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.duration}
                         </StyledTableCell>
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.country}
                         </StyledTableCell>
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.technology}
                         </StyledTableCell>
 
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.contentview === true ? "Yes" : "No"}
                         </StyledTableCell>
-                        <StyledTableCell className="tabletd" align="center">
+                        <StyledTableCell className={styles.tabletd} align="center">
                           {e.contentpositionview}
                         </StyledTableCell>
 
@@ -205,7 +206,7 @@ const PortfolioList = () => {
                           <div className="seticondiv">
                             <div>
                               <Tooltip title="Edit">
-                                <i aria-hidden="true" className={`seteditincon fa fa-pencil fs-17`} onClick={() => handleedit(e._id)} />
+                                <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e._id)} />
                               </Tooltip>
                             </div>
                             <div>

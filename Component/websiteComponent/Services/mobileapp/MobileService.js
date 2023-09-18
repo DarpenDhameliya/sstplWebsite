@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import dynamic from "next/dynamic";
 import style from "../service.module.css";
 const SidePortion = dynamic(() => import("../SidePortion.js"));
-const Staticdata = dynamic(() => import("./Staticdata"));
 
 const MobileService = ({ images, serviceContents }) => {
   const [tab, setTab] = useState("");
@@ -151,7 +150,7 @@ const MobileService = ({ images, serviceContents }) => {
                     </div>
                   </div>
                 </header>
-                {serviceContent.length > 0 ? <div dangerouslySetInnerHTML={{ __html: serviceContent }} /> : <Staticdata />}
+                {serviceContent.length > 0 && <div dangerouslySetInnerHTML={{ __html: serviceContent }} /> }
               </div>
             </div>
             <div className="col-lg-4 col-md-5">

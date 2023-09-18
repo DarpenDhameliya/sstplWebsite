@@ -2,12 +2,13 @@ import { Box, Modal } from '@mui/material'
 import Image from 'next/image'
 import React from 'react'
 import closeimg from "../../../../assets/images/close.png";
+import styles from '../../common/common.module.css'
 
 const Model = ({open , handleClose , viewData}) => {
   return (
     <>
      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-          <Box className="handle_portfolio_modal_mui contact_modal">
+          <Box className={`${styles.handle_portfolio_modal_mui} contact_moda`}>
             <div className="modal-header">
               <h5 className="modal-title" id="staticBackdropLabel">
                 {viewData.name}
@@ -17,22 +18,22 @@ const Model = ({open , handleClose , viewData}) => {
               </div>
             </div>{" "}
             <div className="modal-body" style={{ border: "none", boxShadow: "none" }}>
-              <div className="handleContactmodel">
+              <div className={styles.handleContactmodel}>
                 <h6 style={{ minWidth: "120px" }}>Date : </h6>
                 <p className="handlep">{new Date(viewData.date).toLocaleDateString("en-GB")}</p>
               </div>
               <hr />
-              <div className="handleContactmodel">
+              <div className={styles.handleContactmodel}>
                 <h6 style={{ minWidth: "120px" }}>Email : </h6>
                 <p className="handlep">{viewData.email}</p>
               </div>
               <hr />
-              <div className="handleContactmodel">
+              <div className={styles.handleContactmodel}>
                 <h6 style={{ minWidth: "120px" }}>Subject : </h6>
                 <p className="handlep">{viewData.subject}</p>
               </div>
               <hr />
-              <div className="handleContactmodel">
+              <div className={styles.handleContactmodel}>
                 <h6 style={{ minWidth: "120px" }}>Work Detail : </h6>
                 <p className="handlep">{viewData.help}</p>
               </div>

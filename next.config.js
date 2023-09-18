@@ -5,7 +5,7 @@
 
 // module.exports = {
 //     images: {
-//       domains: ['websiteapi.softstorm.in'], 
+//       domains: ['websiteapi.softstorm.in'],
 //     },
 //   };
 
@@ -65,7 +65,7 @@
 // };
 module.exports = {
   images: {
-    domains: ['websiteapi.softstorm.in', 'localhost', '192.168.0.238'],
+    domains: ['websiteapi.softstorm.in', 'localhost', '192.168.0.238','161.97.169.41'],
   },
   webpack: (config) => {
     config.module.rules.push({

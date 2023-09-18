@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -7,19 +7,20 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import {TableContainer} from "@mui/material";
-import {styled} from "@mui/material/styles";
+import { TableContainer } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
-import  { api } from "../../../Axios";
+import { api } from "../../../Axios";
 import Loader from "@/Component/loader";
 import { useRouter } from "next/router";
+import styles from "../../common/common.module.css";
 
 // import Textarea from '@mui/joy/Textarea';
 
-const StyledTableCell = styled(TableCell)(({theme}) => ({
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
@@ -29,7 +30,7 @@ const StyledTableCell = styled(TableCell)(({theme}) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({theme}) => ({
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
@@ -56,10 +57,8 @@ const MetaList = () => {
   const [dbAdderr, setDbAdderr] = useState("");
   const [dbDeleteerr, setDbDeleteerr] = useState("");
   const [loading, setLoading] = useState(true);
-
   const [fetcherr, setFetcherr] = useState("");
-const router = useRouter();
-
+  const router = useRouter();
   const fetchHiredata = () => {
     api
       .get("meta/meta_list")
@@ -75,7 +74,7 @@ const router = useRouter();
         }
         setFetcherr(err.response.data.error);
         setTimeout(() => {
-          setFetcherr('')
+          setFetcherr("");
         }, 3000);
       });
   };
@@ -83,7 +82,7 @@ const router = useRouter();
   useEffect(() => {
     fetchHiredata();
   }, []);
-  
+
   const handleurl = (e) => {
     setUrl(e.target.value);
   };
@@ -115,7 +114,7 @@ const router = useRouter();
     setUpSchema(e.target.value);
   };
   const handleedit = (e) => {
-    setError([])
+    setError([]);
     setUpid(e._id);
     setUpUrl(e.url);
     setUpTitle(e.title);
@@ -131,7 +130,7 @@ const router = useRouter();
     setUpDescription("");
     setUpKey("");
     setUpSchema([]);
-    setError([])
+    setError([]);
   };
   const handlesenddata = (e) => {
     if (upid) {
@@ -156,10 +155,10 @@ const router = useRouter();
         } else {
           error.upkey = "";
         }
-        
-        setError({...error, [e.target.name]: e.target.value});
+
+        setError({ ...error, [e.target.name]: e.target.value });
         setTimeout(() => {
-          setError([])
+          setError([]);
         }, 3000);
       } else {
         setLoading(true);
@@ -172,7 +171,7 @@ const router = useRouter();
         formData.append("schema", upschema);
 
         api
-          .put(`meta/meta_update/${upid}`, formData , {
+          .put(`meta/meta_update/${upid}`, formData, {
             headers: {
               Authorization: localStorage.getItem("ssAdmin"),
             },
@@ -190,8 +189,7 @@ const router = useRouter();
           });
       }
     } else {
-      console.log(url)
-      if (!url || !title || !description || !key ) {
+      if (!url || !title || !description || !key) {
         if (!url) {
           error.url = "Required !!";
         } else {
@@ -212,10 +210,10 @@ const router = useRouter();
         } else {
           error.key = "";
         }
-       
-        setError({...error, [e.target.name]: e.target.value});
+
+        setError({ ...error, [e.target.name]: e.target.value });
         setTimeout(() => {
-          setError([])
+          setError([]);
         }, 3000);
       } else {
         setLoading(true);
@@ -228,7 +226,7 @@ const router = useRouter();
         formData.append("schema", schema);
 
         api
-          .post("meta/meta_add", formData , {
+          .post("meta/meta_add", formData, {
             headers: {
               Authorization: localStorage.getItem("ssAdmin"),
             },
@@ -241,7 +239,7 @@ const router = useRouter();
             setLoading(false);
             setDbAdderr(err.response.data.error);
             setTimeout(() => {
-              setDbAdderr('')
+              setDbAdderr("");
             }, 3000);
           });
       }
@@ -252,7 +250,7 @@ const router = useRouter();
     setLoading(true);
 
     api
-      .delete(`meta/meta_delete/${e}`,{
+      .delete(`meta/meta_delete/${e}`, {
         headers: {
           Authorization: localStorage.getItem("ssAdmin"),
         },
@@ -265,83 +263,82 @@ const router = useRouter();
         setLoading(false);
         setDbDeleteerr(err.response.data.error);
         setTimeout(() => {
-          setDbDeleteerr('')
+          setDbDeleteerr("");
         }, 3000);
       });
   };
   return (
     <>
-      <Container component="main" maxWidth="xl" className='setcontainer'>
-      {loading.toString() === "true" && <Loader />}
+      <Container component="main" maxWidth="xl" className={styles.setcontainer}>
+        {loading.toString() === "true" && <Loader />}
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
-          <div className='setpageheading'>
-            <Typography variant="h4" gutterBottom className='setheading'>
+          <div className={styles.setpageheading}>
+            <Typography variant="h4" gutterBottom className={styles.setheading}>
               Meta
             </Typography>
           </div>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={4} className='setinputlayout'>
-              <Paper className='setProductpaper' elevation={5}>
-                {dberr && <Typography className='seterrorlabel'>{dberr} </Typography>}
-                {fetcherr && <Typography className='seterrorlabel'>{fetcherr} </Typography>}
-                {dbAdderr && <Typography className='seterrorlabel'>{dbAdderr} </Typography>}
-                {dbDeleteerr && <Typography className='seterrorlabel'>{dbDeleteerr} </Typography>}
-                <Typography className='setlabel'>URL :</Typography>
-                <TextField id="outlined-basic" size="small" variant="outlined" className='settextfield' placeholder="url" InputLabelProps={{shrink: false}} value={upid ? upurl : url} onChange={upid ? handleupurl : handleurl} />
-                {error.upurl && <Typography className='seterrorlabel'>{error.upurl} </Typography>} {error.url && <Typography className='seterrorlabel'>{error.url} </Typography>} 
-                <Typography className='setlabel'>Title :</Typography>
-                <TextField id="outlined-basic" size="small" variant="outlined" className='settextfield' placeholder="title" InputLabelProps={{shrink: false}} value={upid ? uptitle : title} onChange={upid ? handleuptitle : handletitle} />
-                {error.uptitle && <Typography className='seterrorlabel'>{error.uptitle} </Typography>} {error.title && <Typography className='seterrorlabel'>{error.title} </Typography>}
-                 <Typography className='setlabel'>Description :</Typography>
-                <TextField id="outlined-basic" size="small" variant="outlined" className='settextfield' placeholder="description" InputLabelProps={{shrink: false}} value={upid ? updescription : description} onChange={upid ? handleupdescription : handledescription} />
-                {error.updescription && <Typography className='seterrorlabel'>{error.updescription} </Typography>} {error.description && <Typography className='seterrorlabel'>{error.description} </Typography>}
-                 <Typography className='setlabel'>Key :</Typography>
-                <TextField id="outlined-basic" size="small" variant="outlined" className='settextfield' placeholder="key" InputLabelProps={{shrink: false}} value={upid ? upkey : key} onChange={upid ? handleupkey : handlekey} />
-                {error.upkey && <Typography className='seterrorlabel'>{error.upkey} </Typography>} {error.key && <Typography className='seterrorlabel'>{error.key} </Typography>} 
-                <Typography className='setlabel'>Schema :</Typography>
-                <TextField id="outlined-basic" size="small" variant="outlined" className='settextfield' multiline placeholder="sc" rows={3} rowsMax={5} InputLabelProps={{shrink: false}} value={upid ? upschema : schema} onChange={upid ? handleupschema : handleschema} />
-                {error.upschema && <Typography className='seterrorlabel'>{error.upschema} </Typography>} {error.schema && <Typography className='seterrorlabel'>{error.schema} </Typography>}{" "}
-                <div className='setsendbutton'>
+            <Grid item xs={12} sm={4} className="setinputlayout">
+              <Paper className={styles.setProductpaper} elevation={5}>
+                {dberr && <Typography className={styles.setProductpaper}>{dberr} </Typography>}
+                {fetcherr && <Typography className={styles.setProductpaper}>{fetcherr} </Typography>}
+                {dbAdderr && <Typography className={styles.setProductpaper}>{dbAdderr} </Typography>}
+                {dbDeleteerr && <Typography className={styles.setProductpaper}>{dbDeleteerr} </Typography>}
+                <Typography className={styles.setlabel}>URL :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="url" InputLabelProps={{ shrink: false }} value={upid ? upurl : url} onChange={upid ? handleupurl : handleurl} />
+                {error.upurl && <Typography className={styles.setProductpaper}>{error.upurl} </Typography>} {error.url && <Typography className={styles.setProductpaper}>{error.url} </Typography>}
+                <Typography className={styles.setlabel}>Title :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="title" InputLabelProps={{ shrink: false }} value={upid ? uptitle : title} onChange={upid ? handleuptitle : handletitle} />
+                {error.uptitle && <Typography className={styles.setProductpaper}>{error.uptitle} </Typography>} {error.title && <Typography className={styles.setProductpaper}>{error.title} </Typography>}
+                <Typography className={styles.setlabel}>Description :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="description" InputLabelProps={{ shrink: false }} value={upid ? updescription : description} onChange={upid ? handleupdescription : handledescription} />
+                {error.updescription && <Typography className={styles.setProductpaper}>{error.updescription} </Typography>} {error.description && <Typography className={styles.setProductpaper}>{error.description} </Typography>}
+                <Typography className={styles.setlabel}>Key :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" placeholder="key" InputLabelProps={{ shrink: false }} value={upid ? upkey : key} onChange={upid ? handleupkey : handlekey} />
+                {error.upkey && <Typography className={styles.setProductpaper}>{error.upkey} </Typography>} {error.key && <Typography className={styles.setProductpaper}>{error.key} </Typography>}
+                <Typography className={styles.setlabel}>Schema :</Typography>
+                <TextField id="outlined-basic" size="small" variant="outlined" className="settextfield" multiline placeholder="sc" rows={3} rowsMax={5} InputLabelProps={{ shrink: false }} value={upid ? upschema : schema} onChange={upid ? handleupschema : handleschema} />
+                {error.upschema && <Typography className={styles.setProductpaper}>{error.upschema} </Typography>} {error.schema && <Typography className={styles.setProductpaper}>{error.schema} </Typography>}{" "}
+                <div className={styles.setsendbutton}>
                   {upid && (
-                    <Button className='setstateclear' onClick={handleeditdataremove}>
+                    <Button className={styles.setstateclear} onClick={handleeditdataremove}>
                       clear
                     </Button>
                   )}
                   {upid ? (
-                    <Button variant="contained" size="medium" className='setsendbtninside' onClick={handlesenddata}>
+                    <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                       update
                     </Button>
                   ) : (
-                    <Button variant="contained" size="medium" className='setsendbtninside' onClick={handlesenddata}>
+                    <Button variant="contained" size="medium" className={styles.setsendbtninside} onClick={handlesenddata}>
                       Add
                     </Button>
                   )}
                 </div>
               </Paper>
             </Grid>
-            <Grid item xs={12} sm={8} className='setinputlayout'>
-              <Paper className='setProductpaper' elevation={5}>
-               
+            <Grid item xs={12} sm={8} className="setinputlayout">
+              <Paper className={styles.setProductpaper} elevation={5}>
                 <TableContainer>
-                  <Table className='settable' aria-label="simple table">
+                  <Table className="settable" aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           No.
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           URL
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           Title
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           Description
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           Key
                         </TableCell>
-                        <TableCell align="center" className='tableth'>
+                        <TableCell align="center" className={styles.tableth}>
                           Action
                         </TableCell>
                       </TableRow>
@@ -350,39 +347,31 @@ const router = useRouter();
                       {metaList.map((e, index) => {
                         return (
                           <StyledTableRow>
-                            <StyledTableCell align="center" component="th" scope="row" className='tabletd'>
+                            <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                               {index + 1}
                             </StyledTableCell>
-                            <StyledTableCell className='tabletd' align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.url}
                             </StyledTableCell>
-                            <StyledTableCell className='tabletd' align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.title}
                             </StyledTableCell>
-                            <StyledTableCell className='tabletd' align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.description}
                             </StyledTableCell>
-                            <StyledTableCell className='tabletd' align="center">
+                            <StyledTableCell className={styles.tabletd} align="center">
                               {e.key}
                             </StyledTableCell>
-                            <StyledTableCell className='tabletdicon' align="center">
-                              <div className='seticondiv'>
+                            <StyledTableCell className="tabletdicon" align="center">
+                              <div className="seticondiv">
                                 <div>
                                   <Tooltip title="Edit">
-                                    <i
-                                      className="fa fa-pencil"
-                                      aria-hidden="true"
-                                      onClick={() => handleedit(e)}
-                                    />
+                                    <i className="fa fa-pencil" aria-hidden="true" onClick={() => handleedit(e)} />
                                   </Tooltip>
                                 </div>
                                 <div>
                                   <Tooltip title="Remove">
-                                    <i
-                                      className="fa fa-trash"
-                                      aria-hidden="true"
-                                      onClick={() => handledelete(e._id)}
-                                    />
+                                    <i className="fa fa-trash" aria-hidden="true" onClick={() => handledelete(e._id)} />
                                   </Tooltip>
                                 </div>
                               </div>
