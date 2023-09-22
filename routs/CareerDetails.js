@@ -15,6 +15,16 @@ router.get("/careerdetails_list", async (req, res) => {
       return res.status(500).send(errormessage(error));
     });
 });
+router.get("/careerdetails_list_server",Authenticate, async (req, res) => {
+  careerdetails
+    .find({}, {__v: 0})
+    .then((result) => {
+      return res.status(200).json(successmessage(result));
+    })
+    .catch((error) => {
+      return res.status(500).send(errormessage(error));
+    });
+});
 
 router.post("/careerdetails_add", Authenticate, async (req, res) => {
   let {title, location, experience, position, description, responsibility, qualification, contentview, contentpositionview} = req.body;
@@ -107,7 +117,7 @@ router.put("/careerdetails_update/:id", async (req, res) => {
     if (!qualification) {
       error.push("Required  ");
     }
-   
+
     if (!contentpositionview) {
       error.push("Required ");
     }

@@ -47,6 +47,31 @@ router.get("/aboutvalue_list", (req, res) => {
   }
 });
 
+router.get("/aboutvalue_list_server", Authenticate ,(req, res) => {
+  try {
+    let senddata = [];
+    const ID = process.env.BASEURL;
+
+    aboutValue
+      .find({}, {__v: 0})
+      .then((data) => {
+        data.map((result) => {
+          let single = {};
+          single["_id"] = result._id;
+          single["heading"] = result.heading;
+
+          senddata.push({...single});
+        });
+        return res.status(200).send(successmessage(senddata));
+      })
+      .catch((error) => {
+        return res.status(500).send(errormessage(error));
+      });
+  } catch (error) {
+    return res.status(500).send(errormessage(error));
+  }
+});
+
 router.post("/aboutvalue_add", upload, Authenticate, (req, res) => {
   try {
     let {heading, value} = req.body;

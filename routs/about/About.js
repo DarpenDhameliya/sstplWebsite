@@ -21,6 +21,21 @@ router.get("/about_list", (req, res) => {
     return res.status(500).send(errormessage(error));
   }
 });
+
+router.get("/about_list_server",Authenticate, (req, res) => {
+  try {
+    commoncomponent
+      .find({}, {__v: 0})
+      .then((result) => {
+        return res.status(200).send(successmessage(result));
+      })
+      .catch((error) => {
+        return res.status(500).send(errormessage(error));
+      });
+  } catch (error) {
+    return res.status(500).send(errormessage(error));
+  }
+});
 router.post("/about_add", Authenticate, (req, res) => {
   try {
     let {abouthead, aboutcontent, visionheading, visioncontent, missionheading, missioncontent, valheading, valuecontent} = req.body;
@@ -63,7 +78,7 @@ router.post("/about_add", Authenticate, (req, res) => {
           corevalueconten: valuecontent,
         })
         .then((result) => {
-          
+
           return res.status(200).send(successmessage(["Add Successfully"]));
         })
         .catch((error) => {

@@ -14,6 +14,16 @@ router.get("/icon_list", async (req, res) => {
       return res.status(500).json(errormessage(error));
     });
 });
+router.get("/icon_list_server",Authenticate, async (req, res) => {
+  icon
+    .find({}, {__v: 0})
+    .then((data) => {
+      return res.status(200).json(successmessage(data));
+    })
+    .catch((error) => {
+      return res.status(500).json(errormessage(error));
+    });
+});
 
 router.post("/icon_add", Authenticate, async (req, res) => {
   try {
@@ -35,22 +45,6 @@ router.post("/icon_add", Authenticate, async (req, res) => {
     return res.status(500).json(errormessage(error));
   }
 });
-
-// router.get("/careerdetails_update_detail/:id", Authenticate, async (req, res) => {
-//   try {
-//     let id = req.params.id;
-//     careerdetails
-//       .findById(id, {__v: 0})
-//       .then((result) => {
-//         return res.status(200).send(successmessage(result));
-//       })
-//       .catch((error) => {
-//         return res.status(500).send(errormessage(error));
-//       });
-//   } catch (error) {
-//     return res.status(500).send(errormessage(error));
-//   }
-// });
 
 router.put("/icon_update/:id", Authenticate, async (req, res) => {
   try {

@@ -17,6 +17,19 @@ router.get("/return_list", (req, res) => {
     return res.status(500).send(errormessage(error));
   }
 });
+router.get("/return_list_server",Authenticate, (req, res) => {
+  try {
+    Return.find({}, {__v: 0})
+      .then((result) => {
+        return res.status(200).send(successmessage(result));
+      })
+      .catch((error) => {
+        return res.status(500).send(errormessage(error));
+      });
+  } catch (error) {
+    return res.status(500).send(errormessage(error));
+  }
+});
 router.post("/return_add", Authenticate, async (req, res) => {
   try {
     let {returnpolicycontent} = req.body;
@@ -51,7 +64,7 @@ router.put("/return_update/:id", Authenticate, async (req, res) => {
       let new_data = {};
       if (returnpolicycontent) {
         new_data.returnpolicycontent = returnpolicycontent;
-      } 
+      }
 
       Return.findByIdAndUpdate(id, {$set: new_data}, {new: true})
         .then((result) => {

@@ -49,6 +49,34 @@ router.post("/testimonial_list", async (req, res) => {
       return res.status(500).json(errormessage(error));
     });
 });
+router.post("/testimonial_list_server",Authenticate, async (req, res) => {
+  let senddata = [];
+  const ID = process.env.BASEURL;
+  let {page_size, pageNumber} = req.body;
+  const skip = (pageNumber - 1) * page_size;
+  const totalRecords = await Testimonial.countDocuments({});
+  const totalPages = Math.ceil(totalRecords / page_size);
+  Testimonial.find({}, {__v: 0,discription:0,image:0})
+  .skip(skip)
+  .limit(page_size)
+    .then((data) => {
+      data.map((result) => {
+        let url = `${ID}/testimonial/${result.image}`;
+        let single = {};
+        single["_id"] = result._id;
+        single["name"] = result.name;
+        single["position"] = result.position;
+        single["contentview"] = result.contentview;
+        single["contentpositionview"] = result.contentpositionview;
+        senddata.push({...single});
+      });
+      return res.status(200).send(successmessageValidate(senddata, totalPages));
+    })
+    .catch((error) => {
+      return res.status(500).json(errormessage(error));
+    });
+});
+
 
 router.post("/testimonial_add", Authenticate, upload, async (req, res) => {
   try {

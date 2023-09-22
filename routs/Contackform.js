@@ -11,7 +11,7 @@ const Captchacheck = require("../Middleware/CaptchCheck");
 
 router.post("/contackusform" ,Captchacheck, async (req, res) => {
   const {fname, lname, email, phone, textarea} = req.body;
-  
+
   var PASS = process.env.MAIL_PASS;
   var ID = process.env.MAIL_ID;
   let error = {};
@@ -20,7 +20,7 @@ router.post("/contackusform" ,Captchacheck, async (req, res) => {
   var userid = req.header("Userdetails");
   const userAgent = req.headers["user-agent"];
   var browserName = "Unknown";
-  
+
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
   if (userAgent.includes("MSIE")) {
     browserName = "Internet Explorer";
@@ -36,8 +36,8 @@ router.post("/contackusform" ,Captchacheck, async (req, res) => {
   var formattedContent = textarea.replace(/\n/g,' ');
   try {
     if (!fname || !email || !phone || !lname) {
-      if (!fname) {  
-        error.fname = "Name require";  
+      if (!fname) {
+        error.fname = "Name require";
       }
       if (!lname) {
         error.sub = "Subject require";
@@ -106,13 +106,13 @@ router.post("/contackusform" ,Captchacheck, async (req, res) => {
 
       let mailOptionsUser = {
         to: email,
-        subject: "Conformation of your inquiry",
+        subject: "Thank you for Inquiry at SoftStorm",
         html: html,
       };
 
       transporter.sendMail(mailOptionsUser);
 
-     
+
     }
   } catch (error) {
     return res.status(500).json(errormessage(error));

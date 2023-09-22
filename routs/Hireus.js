@@ -72,11 +72,11 @@ router.post("/hireus", Captchacheck, async (req, res) => {
              <td>${email}</td>
             </tr>
             <tr>
-              <th>phone :</th>  
+              <th>phone :</th>
               <td>${phone}</td>
             </tr>
             <tr>
-              <th>Technology :</th>  
+              <th>Technology :</th>
               <td>${selectval}</td>
             </tr>
             <tr>
@@ -98,7 +98,7 @@ router.post("/hireus", Captchacheck, async (req, res) => {
         });
         let mailOptionsUser = {
           to: email,
-          subject: "Conformation of your inquiry",
+          subject: "Thank you for Inquiry at SoftStorm",
           html: html,
         };
 

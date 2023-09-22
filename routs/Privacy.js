@@ -17,6 +17,19 @@ router.get("/privacy_list", (req, res) => {
     return res.status(500).send(errormessage(error));
   }
 });
+router.get("/privacy_list_server",Authenticate, (req, res) => {
+  try {
+    Privacy.find({}, {__v: 0})
+      .then((result) => {
+        return res.status(200).send(successmessage(result));
+      })
+      .catch((error) => {
+        return res.status(500).send(errormessage(error));
+      });
+  } catch (error) {
+    return res.status(500).send(errormessage(error));
+  }
+});
 router.post("/privacy_add", Authenticate, (req, res) => {
   try {
     let {privacycontent} = req.body;

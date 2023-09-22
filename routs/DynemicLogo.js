@@ -26,6 +26,30 @@ router.post("/logo_list", async (req, res) => {
   try {
     let senddata = [];
     const ID = process.env.BASEURL;
+    Logo.find({}, { __v: 0 })
+      .then((data) => {
+        data.map((result) => {
+          let url = `${ID}/festivallogo/${result.logoimage}`;
+          let single = {};
+          single["_id"] = result._id;
+          single["date"] = result.festivaldate;
+          single["image"] = url;
+          senddata.push({ ...single });
+        });
+        return res.status(200).send(successmessageValidate(senddata));
+      })
+      .catch((error) => {
+        return res.status(500).json(errormessage(error));
+      });
+  } catch (error) {
+    return res.status(500).json(errormessage(error));
+  }
+});
+
+router.post("/logo_list_server", Authenticate,async (req, res) => {
+  try {
+    let senddata = [];
+    const ID = process.env.BASEURL;
     let { page_size, pageNumber } = req.body;
     const skip = (pageNumber - 1) * page_size;
     const totalRecords = await Logo.countDocuments({});

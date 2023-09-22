@@ -13,6 +13,15 @@ router.get("/meta_list", (req, res) => {
       return res.status(500).json(errormessage(error));
     });
 });
+router.get("/meta_list_server",Authenticate, (req, res) => {
+  Meta.find({}, {__v: 0,date:0 , _id:0})
+    .then((result) => {
+      return res.status(200).send(successmessage(result));
+    })
+    .catch((error) => {
+      return res.status(500).json(errormessage(error));
+    });
+});
 
 router.post("/meta_add", Authenticate, (req, res) => {
   try {

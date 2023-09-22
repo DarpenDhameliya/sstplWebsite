@@ -31,6 +31,39 @@ router.post("/portfolio_list", async (req, res) => {
   try {
     let senddata = [];
     const ID = process.env.BASEURL;
+
+    portfolio
+      .find({}, { __v: 0 })
+      .then((data) => {
+        data.map((result) => {
+          let url = `${ID}/portfolio/${result.uploadimg}`;
+          let single = {};
+          single["_id"] = result._id;
+          single["category"] = result.category;
+          single["contentpositionview"] = result.contentpositionview;
+          single["contentview"] = result.contentview;
+          single["country"] = result.country;
+          single["duration"] = result.duration;
+          single["industry"] = result.industry;
+          single["name"] = result.name;
+          single["team"] = result.team;
+          single["technology"] = result.technology;
+          single["uploadimg"] = url;
+          senddata.push({ ...single });
+        });
+        return res.status(200).send(successmessageValidate(senddata));
+      })
+      .catch((error) => {
+        return res.status(500).json(errormessage(error));
+      });
+  } catch (error) {
+    return res.status(500).json(errormessage(error));
+  }
+});
+router.post("/portfolio_list_server",Authenticate, async (req, res) => {
+  try {
+    let senddata = [];
+    const ID = process.env.BASEURL;
     let { page_size, pageNumber } = req.body;
     const skip = (pageNumber - 1) * page_size;
     const totalRecords = await portfolio.countDocuments({});
