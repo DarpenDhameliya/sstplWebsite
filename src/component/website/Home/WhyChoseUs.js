@@ -3,6 +3,7 @@ import image1 from "../../../assets/images/Group 16 (7).webp";
 import mob1 from "../../../assets/images/customize solution png.webp";
 import mob2 from "../../../assets/images/CUSTOMER SUPPORT.webp";
 import mob3 from "../../../assets/images/LATEST TECHNOLOGY.webp";
+import WhyChooseus_leftbox from "./Component/whyChooseus_leftbox";
 
 export default function WhyChoseUs() {
   return (
@@ -22,44 +23,20 @@ export default function WhyChoseUs() {
           <div className="row mt-30 align-items-center justify-content-center">
             <div className="col-lg-6 col-md-11 col-sm-11 col">
               <div>
-                <div className="softstormweb-left-chooseus softstormweb-left-chooseus-l1 maintaincooseus" data-aos="fade-right" data-aos-duration="400">
-                  <div className="whychoosebox">
-                    <img src={mob1} alt="imagheader" style={{maxWidth:"67px"}}/>
-                  </div>
-                  <div>
-                    <h4 className="handleh4_whycgoos">Customize Solution</h4>
-                    <p>We always understand your need and provide you exact what you want.</p>
-                  </div>
-                </div>
-                <div className="softstormweb-left-chooseus item-2 softstormweb-left-chooseus-l1" data-aos="fade-right" data-aos-duration="600">
-                  <div className="whychoosebox">
-                    <img src={mob2} alt="imagheader" draggable="false" style={{maxWidth:"67px"}}/>
-                  </div>
-                  <div>
-                    <h4 className="handleh4_whycgoos">Customer Support</h4>
-                    <p>We always become a solution for any need of our esteem client.</p>
-                  </div>
-                </div>
-                <div className="softstormweb-left-chooseus item-3 softstormweb-left-chooseus-l1" data-aos="fade-right" data-aos-duration="800">
-                  <div className="whychoosebox">
-                    <img src={mob3} alt="imagheader" style={{maxWidth:"67px"}}/>
-                  </div>
-                  <div>
-                    <h4 className="handleh4_whycgoos">Latest Technologies</h4>
-                    <p>We are always updating our products with latest technologies.</p>
-                  </div>
-                </div>
+                <WhyChooseus_leftbox image={mob1} title="Customize Solution" discription="We always understand your need and provide you exact what you want." />
+
+                <WhyChooseus_leftbox image={mob2} title="Customer Support" discription="We always become a solution for any need of our esteem client." style={"item-2"} />
+
+                <WhyChooseus_leftbox image={mob3} title="Latest Technologies" discription="We are always updating our products with latest technologies." style={"item-3"} />
               </div>
             </div>
             <div className="col-lg-6 col-md-11 col-sm-11">
-              <div className="image-container wow animated fadeInRight image-container d-flex justify-content-center" data-aos="zoom-out-up" data-aos-duration="800" >
-                <img src={image1} alt=""  className="handlewcu" />
+              <div className="image-container wow animated fadeInRight image-container d-flex justify-content-center" data-aos="zoom-out-up" data-aos-duration="800">
+                <img src={image1} alt="" className="handlewcu" />
               </div>
             </div>
           </div>
         </div>
-      
-       
       </section>
     </>
   );

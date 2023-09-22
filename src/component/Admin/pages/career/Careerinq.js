@@ -63,10 +63,10 @@ const Career = () => {
       })
       .catch((err) => {
         setLoading(false);
-        if (err.response.status === 402) {
-          localStorage.removeItem("ssAdmin");
-          history.push("/online-admin");
-        }
+        // if (err.response.status === 402) {
+        //   localStorage.removeItem("ssAdmin");
+        //   history.push("/online-admin");
+        // }
         setDberror(err.response.data.error);
         setTimeout(() => {
           setDberror('')

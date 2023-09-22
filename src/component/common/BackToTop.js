@@ -14,7 +14,7 @@ function BackToTop({className}) {
   return (
     <>
       <div className={`back-to-top ${className}`}>
-        <Link to="#" onClick={handleClick} className="backToTopLink">
+        <Link onClick={handleClick} className="backToTopLink">
           <i className="fa fa-arrow-up" />
         </Link>
       </div>

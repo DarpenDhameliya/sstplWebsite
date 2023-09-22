@@ -123,6 +123,15 @@ const useMuiStyle = makeStyles((theme) => ({
       width: "100% !important",
     },
   },
+  settextfielddate: {
+    "& .MuiInputBase-root": {
+      fontFamily: ["Poppins", "sans-serif", "!important"],
+    },
+    "&:hover": {boxShadow: `${theme.shadows[3]}`},
+    "& .MuiTextField-root": {
+      width: "100% !important",
+    },
+  },
 
   setsendbutton: {
     display: "flex",

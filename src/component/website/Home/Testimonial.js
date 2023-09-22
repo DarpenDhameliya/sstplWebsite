@@ -14,10 +14,43 @@ import aboutheader4 from "../../../assets/images/aboutus_header/goodfirms.webp";
 import aboutheader5 from "../../../assets/images/aboutus_header/upwork.webp";
 import axios from "../../common/Axios";
 
+
+const data = [
+  {
+    image: battel,
+    title: "Team has a Expert of technical knowledge and SoftStorm can work any thing which is hard in technology, I have experienced solving any difficult problem with very carefully.",
+    owner: "Rakesh Patil",
+    title1: "Owner, Battle Village",
+  },
+  {
+    image: sk,
+    title: "Softstrom has Convert our complex business process to very easy and calculative. if we talk about the support of the team then i am giving 100% performance. Thank you softstorm.",
+    owner: "Keyur Sukhadiya",
+    title1: "Owner, SK Air Conditioner",
+  },
+  {
+    image: macswin,
+    title: "The SSTPL team has a unique strength that easily understands our Ideas and implements it with Application.",
+    owner: "Kartik Donda",
+    title1: "Owner, MacSwin Technology",
+  },
+  {
+    image: mectech,
+    title: "Looking at the knowledge that both partner of Softstorm, I would say that they are the new Tony Stark of the world of technology.",
+    owner: "Anil Tarpara",
+    title1: "Owner, MAK Tech",
+  },
+  {
+    image: redient,
+    title: "Looking at the technical knowledge and innovative ideas of Softstorm, everyone can say that the company will make great strides in the future.",
+    owner: "Kishan Mangukiya",
+    title1: "Trustee, The Radiant International School",
+  },
+];
 export default function Testimonial(className) {
   const sliderRef = useRef();
   const settings = {
-    // autoplay: true,
+    autoplay: true,
     arrows: false,
     dots: false,
   };
@@ -49,40 +82,6 @@ export default function Testimonial(className) {
 
   useEffect(() => {
     fetchHiredata();
-  }, []);
-  useEffect(() => {
-    let data = [
-      {
-        image: battel,
-        title: "Team has a Expert of technical knowledge and SoftStorm can work any thing which is hard in technology, I have experienced solving any difficult problem with very carefully.",
-        owner: "Rakesh Patil",
-        title1: "Owner, Battle Village",
-      },
-      {
-        image: sk,
-        title: "Softstrom has Convert our complex business process to very easy and calculative. if we talk about the support of the team then i am giving 100% performance. Thank you softstorm.",
-        owner: "Keyur Sukhadiya",
-        title1: "Owner, SK Air Conditioner",
-      },
-      {
-        image: macswin,
-        title: "The SSTPL team has a unique strength that easily understands our Ideas and implements it with Application.",
-        owner: "Kartik Donda",
-        title1: "Owner, MacSwin Technology",
-      },
-      {
-        image: mectech,
-        title: "Looking at the knowledge that both partner of Softstorm, I would say that they are the new Tony Stark of the world of technology.",
-        owner: "Anil Tarpara",
-        title1: "Owner, MAK Tech",
-      },
-      {
-        image: redient,
-        title: "Looking at the technical knowledge and innovative ideas of Softstorm, everyone can say that the company will make great strides in the future.",
-        owner: "Kishan Mangukiya",
-        title1: "Trustee, The Radiant International School",
-      },
-    ];
     setStaticdata(data);
   }, []);
   return (
@@ -121,7 +120,7 @@ export default function Testimonial(className) {
               </div>
             </div>
             <div className="col-lg-5 col-md-6">
-              <div className="softstormweb-right-testimoial handleview" style={{position: "relative", minHeight: "200px"}}>
+              <div className="softstormweb-right-testimoial handleview" >
                 <Slider ref={sliderRef} {...settings}>
                   {workdata.length > 0
                     ? workdata.map((e, index) => {

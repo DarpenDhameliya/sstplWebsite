@@ -8,7 +8,7 @@ import {Contactusstatus, Contactusstate, ContactusSlice} from "../slice/Contacku
 import {Link} from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
-import {Iconstatus} from "../slice/IconSlice";
+import {Iconstate, Iconstatus} from "../slice/IconSlice";
 
 const ContactForm = () => {
   const [lname, setLname] = useState("");
@@ -33,6 +33,8 @@ const ContactForm = () => {
   const [ipAddress, setIpAddress] = useState("");
   const dispatch = useDispatch();
   const states = useSelector(Contactusstate);
+  const iconstate = useSelector(Iconstate)
+
   const nameRef = useRef(null);
   const recaptchaRef = useRef();
 
@@ -52,7 +54,6 @@ const ContactForm = () => {
   }, []);
 
   const notifyerrcon = useCallback(() => {
-    console.log('er')
     toast.error("Internal Server ..", {
       autoClose: 1000,
       closeOnClick: false,
@@ -95,7 +96,7 @@ const ContactForm = () => {
       } else {
         email_verify = true;
       }
-      if (!fname || !lname || !email || !phone || !textarea || number_verify === false || email_verify === false || name_verify === false || !isVerified) {
+      if (!fname || !lname || !email || !phone || !textarea || number_verify === false || email_verify === false || name_verify === false) {
         if (!fname) {
           error.fname = "Required !!";
         } else {
@@ -140,11 +141,11 @@ const ContactForm = () => {
             error.num_verify = "";
           }
         }
-        if (!isVerified) {
-          error.captcha = "Required !!";
-        } else {
-          error.captcha = "";
-        }
+        // if (!isVerified) {
+        //   error.captcha = "Required !!";
+        // } else {
+        //   error.captcha = "";
+        // }
 
         setError({...error, [e.target.name]: e.target.value});
         setTimeout(() => {
@@ -163,17 +164,19 @@ const ContactForm = () => {
       }
     }
   };
+
   useEffect(() => {
-    if (states.status === "loading") {
-    } else if (states.status === "succeeded") {
-      setFields(states.response.result[0].data);
-      setDataLength(states.response.result[0].data.length);
-      dispatch(Iconstatus());
-    } else if (states.status === "failed") {
-      dispatch(Iconstatus());
-    } else {
-    }
-  });
+  if (iconstate.status === "loading") {
+  } else if (iconstate.status === "succeeded") {
+    setFields(iconstate.response.result[0].data);
+    setDataLength(iconstate.response.result[0].data.length);
+    dispatch(Iconstatus());
+  } else if (iconstate.status === "failed") {
+    notifyerrcon();
+    dispatch(Iconstatus());
+  } else {
+  }
+});
 
   useEffect(() => {
     if (contactClick === true) {

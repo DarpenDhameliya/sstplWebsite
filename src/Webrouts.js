@@ -1,8 +1,9 @@
-import React, {Suspense, useEffect, useState, lazy} from "react";
-import {Redirect, Route, Switch} from "react-router-dom";
+import React, { Suspense, useEffect, useState, lazy } from "react";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import useToggle from "./component/common/Hooks/useToggle.js";
 import AOS from "aos";
 import logo from "./assets/images/logo-removebg-preview.webp";
+import { useLayoutEffect } from "react";
 
 const ScrollToTop = lazy(() => import("./component/website/Helper/ScrollToTop.js"));
 const Drawer = lazy(() => import("./component/website/Mobile/Drawer.js"));
@@ -33,15 +34,16 @@ function Webrouts() {
   const [cart, cartAction] = useToggle(false);
   const [errorPageActive, setErrorPageActive] = useState(false);
   const [urlfetch, setUrlfetch] = useState("");
+  const location = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     AOS.init({
       duration: 10,
     });
   }, []);
 
   useEffect(() => {
-    let geturl = window.location.pathname.split("/")[1];
+    const geturl = location.pathname.split("/")[1];
     setUrlfetch(geturl);
   });
 
@@ -55,7 +57,7 @@ function Webrouts() {
           <div className="onloadpage" id="page-load">
             <div className="loader-div d-flex justify-content-center ">
               <div className="on-img">
-                <img src={logo} alt="loader" style={{width: "100px"}} />
+                <img src={logo} alt="loader" style={{ width: "100px" }} />
                 <div className="loader">Loading ...</div>
               </div>
             </div>
@@ -64,9 +66,9 @@ function Webrouts() {
       >
         {urlfetch === "" ? "" : <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />}
         {urlfetch === "" ? "" : errorPageActive === false && <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />}
-        <Hireus value={cart} action={cartAction.toggle} />
-        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} /> */}
-        {/* {errorPageActive === false && <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />} */}
+        {urlfetch === "" ? "" : <Hireus value={cart} action={cartAction.toggle} />}
+        {/* <Drawer drawer={drawer} action={drawerAction.toggle} cartToggle={cartAction.toggle} />
+        {errorPageActive === false && <Header action={drawerAction.toggle} cartToggle={cartAction.toggle} />} */}
         <ScrollToTop>
           <Switch>
             <Route exact path="/" render={(props) => <Sstpl {...props} addheader={addheader} action={drawerAction.toggle} />} />

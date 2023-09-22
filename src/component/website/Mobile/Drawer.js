@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import logo from "../../../assets/images/logo.webp";
 
-function Drawer({drawer, action, cartToggle, closetoggle}) {
+function Drawer({drawer, action, cartToggle}) {
   const [size, setSize] = useState("0px");
   const [item, setItem] = useState("home");
 

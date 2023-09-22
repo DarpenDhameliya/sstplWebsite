@@ -8,7 +8,6 @@ const initialState = {
 
 export const ContactusSlice = createAsyncThunk("ContactusSlice", async (payload, thunkAPI) => {
   try {
-    
     const response = await axios({
       method: "post",
       url: "contactus/contackusform",

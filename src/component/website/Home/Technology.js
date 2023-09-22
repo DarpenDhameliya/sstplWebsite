@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import sponserShape from "../../../assets/images/sponser-shape.png";
 import mob1 from "../../../assets/images/technology/android.webp";
 import mob2 from "../../../assets/images/technology/aws_services.webp";
 import mob3 from "../../../assets/images/technology/cshp.webp";
@@ -27,7 +28,6 @@ import mob25 from "../../../assets/images/technology/vue_js.webp";
 import mob26 from "../../../assets/images/technology/angular.webp";
 import mob27 from "../../../assets/images/technology/typescript.webp";
 import mob28 from "../../../assets/images/technology/cloudservices.webp";
-import sponserShape from "../../../assets/images/sponser-shape.png";
 
 export default function Technology() {
   const [workdata, setWorkdata] = useState([]);

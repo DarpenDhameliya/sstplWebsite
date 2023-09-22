@@ -112,6 +112,14 @@ export default function Sidebardata() {
             <ListItemText primary="Policys" className={classes.setsidebaricon} />
           </ListItemButton>
         </Tooltip>
+        <Tooltip title={"Festival Logo"} placement="right">
+          <ListItemButton button component={Link} to="/online-admin/dashboard/festival" selected={"/online-admin/dashboard/festival" === location.pathname} className={classes.effectlist}>
+            <ListItemIcon style={{minWidth: "45px"}}>
+              <i className={`fa fa-circle-user  ${classes.SidebarImg}`}></i>
+            </ListItemIcon>
+            <ListItemText primary="Festival Logo" className={classes.setsidebaricon} />
+          </ListItemButton>
+        </Tooltip>
         
       </List>
     </>

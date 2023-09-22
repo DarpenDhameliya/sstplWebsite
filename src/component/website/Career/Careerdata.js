@@ -360,7 +360,6 @@ const Careerdata = ({loding}) => {
   return (
     <>
       <ToastContainer position="top-right" closeOnClick={false} style={{marginTop: "55px"}} />
-
       {dbFetcherr && <p className="handledberror ">{dbFetcherr}</p>}
       {careerList.length > 0
         ? careerList.map((res) => {

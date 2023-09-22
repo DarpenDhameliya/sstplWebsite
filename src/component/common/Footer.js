@@ -61,13 +61,10 @@ export default function Footer(className) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
 
-
-  useEffect(() => {
-    const d = new Date();
-    let year = d.getFullYear();
-    setRecentYear(year);
+      const d = new Date();
+      let year = d.getFullYear();
+      setRecentYear(year);
   }, []);
 
   useEffect(() => {
@@ -100,9 +97,7 @@ export default function Footer(className) {
       } else {
       }
     }
-  });
 
-  useEffect(() => {
     if (iconstate.status === "loading") {
     } else if (iconstate.status === "succeeded") {
       setFields(iconstate.response.result[0].data);
@@ -114,6 +109,8 @@ export default function Footer(className) {
     } else {
     }
   });
+
+
 
   const handleVerify = (response) => {
     setCaptchres(response);

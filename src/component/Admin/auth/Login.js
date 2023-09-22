@@ -58,8 +58,6 @@ useEffect(() => {
         .then((result) => {
           const secretKey = process.env.REACT_APP_DECRYPT_KEY;
           localStorage.setItem("ssAdmin", result.data.result);
-          const ciphertext = CryptoJS.AES.encrypt(result.data.result, secretKey).toString();
-          localStorage.setItem("ssAdminen", ciphertext);
           history.push("/online-admin/dashboard/career");
         })
         .catch((error) => {

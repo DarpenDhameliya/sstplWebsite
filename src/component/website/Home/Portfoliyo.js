@@ -5,24 +5,24 @@ import "slick-carousel/slick/slick-theme.css";
 import axios from "../../common/Axios";
 import images from "../../common/Images";
 
+const data = [
+  {image: images.roop, title: "Roop Label", type: ["all", "web"]},
+  {image: images.red, title: "Red Chilli Fast Food", type: ["all", "mob", "web"]},
+  {image: images.food, title: "Food Book", type: ["all", "mob", "web"]},
+  {image: images.dimond, title: "Diamond Inventory Software", type: ["all", "desk"]},
+  {image: images.dalali, title: "DalaliBook", type: ["all", "mob"]},
+  {image: images.sk, title: "S.K. Enterprise", type: ["all", "mob", "web"]},
+  {image: images.battle, title: "Battle Village", type: ["all", "mob", "web"]},
+  {image: images.maktech, title: "MakTech Laser", type: ["all", "desk", "mob", "web"]},
+  {image: images.macswin, title: "MacSwin Technology", type: ["all", "desk", "mob", "web"]},
+  {image: images.redient, title: "The Radiant International School", type: ["all", "web"]},
+];
 export default function Portfoliyo() {
   const [workdata, setWorkdata] = useState([]);
   const [portfolioList, setPortfolioList] = useState([]);
   const [fetchErr, setFetchErr] = useState("");
 
   useEffect(() => {
-    let data = [
-      {image: images.roop, title: "Roop Label", type: ["all", "web"]},
-      {image: images.red, title: "Red Chilli Fast Food", type: ["all", "mob", "web"]},
-      {image: images.food, title: "Food Book", type: ["all", "mob", "web"]},
-      {image: images.dimond, title: "Diamond Inventory Software", type: ["all", "desk"]},
-      {image: images.dalali, title: "DalaliBook", type: ["all", "mob"]},
-      {image: images.sk, title: "S.K. Enterprise", type: ["all", "mob", "web"]},
-      {image: images.battle, title: "Battle Village", type: ["all", "mob", "web"]},
-      {image: images.maktech, title: "MakTech Laser", type: ["all", "desk", "mob", "web"]},
-      {image: images.macswin, title: "MacSwin Technology", type: ["all", "desk", "mob", "web"]},
-      {image: images.redient, title: "The Radiant International School", type: ["all", "web"]},
-    ];
     setWorkdata(data);
   }, []);
 
@@ -47,7 +47,7 @@ export default function Portfoliyo() {
 
   const articleCarosel = useRef();
   const settingsForArticle = {
-    autoplay: true,
+    autoplay: false,
     arrows: false,
     dots: true,
     speed: 800,
@@ -95,7 +95,7 @@ export default function Portfoliyo() {
                             <div className="testimonial-parent-item" key={index}>
                               <div className="testimonial-box">
                                 <div className="icon">
-                                  <img src={e.uploadimg} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px", height: "230px", width: "350px"}} />
+                                  <img src={e.uploadimg} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px", height: "230px", width: "350px"}} loading="lazy" />
                                 </div>
                                 <h4 className="pt-4">{e.name}</h4>
                               </div>
@@ -103,7 +103,8 @@ export default function Portfoliyo() {
                           );
                         }
                       })
-                    : workdata.map((e, index) => {
+                    : 
+                    workdata.map((e, index) => {
                         return (
                           <div className="testimonial-parent-item" key={index}>
                             <div className="testimonial-box">
@@ -114,7 +115,8 @@ export default function Portfoliyo() {
                             </div>
                           </div>
                         );
-                      })}
+                      })
+                     }
                 </Slider>
               </div>
             </div>
@@ -142,7 +144,7 @@ export default function Portfoliyo() {
                       <div key={index}>
                         <div className="testimonial-box ">
                           <div className="icon d-flex justify-content-center">
-                            <img src={e.uploadimg} className="handleportfoliyohomeweb" alt="logo" style={{borderRadius: "15px"}} />
+                            <img src={e.uploadimg} className="handleportfoliyohomeweb" alt="logo"  />
                           </div>
                           <p>{e.name}</p>
                         </div>

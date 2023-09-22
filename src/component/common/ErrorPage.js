@@ -2,7 +2,6 @@ import React from "react";
 import errorimg from "../../assets/images/error.png";
 import {Link} from "react-router-dom";
 const ErrorPage = () => {
-  // localStorage
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100 flex-column">
       <img src={errorimg} alt="error" />

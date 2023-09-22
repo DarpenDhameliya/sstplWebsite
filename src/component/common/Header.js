@@ -23,13 +23,8 @@ const Header = ({action, cartToggle}) => {
   const states = useSelector(Iconstate);
   useEffect(() => {
     StickyMenu();
-  }, []);
-
-  useEffect(() => {
     dispatch(IconSlice());
-  }, []);
 
-  useEffect(() => {
     if (states.status === "loading") {
     } else if (states.status === "succeeded") {
       setFields(states.response.result[0].data);
@@ -38,7 +33,8 @@ const Header = ({action, cartToggle}) => {
       dispatch(Iconstatus());
     } else {
     }
-  });
+  }, [states.states]);
+
 
   return (
     <>

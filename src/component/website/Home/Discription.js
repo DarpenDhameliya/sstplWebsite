@@ -27,7 +27,7 @@ export default function Discription() {
               >
                 <div className="counter-content">
                   <div className="icon">
-                    <img src={counterIconOne} alt="" />
+                    <img src={counterIconOne} alt="Global clients" />
                   </div>
                   <h3 className="title">
                     <span className="counter-item">
@@ -47,7 +47,7 @@ export default function Discription() {
               >
                 <div className="counter-content">
                   <div className="icon">
-                    <img src={counterIconTwo} alt="" />
+                    <img src={counterIconTwo} alt="Success Project" />
                   </div>
                   <h3 className="title">
                     <span className="counter-item">
@@ -67,7 +67,7 @@ export default function Discription() {
               >
                 <div className="counter-content">
                   <div className="icon">
-                    <img src={counterIconThree} alt="" />
+                    <img src={counterIconThree} alt="Client Satisfaction" />
                   </div>
                   <h3 className="title">
                     <span className="counter-item">
@@ -87,7 +87,7 @@ export default function Discription() {
               >
                 <div className="counter-content">
                   <div className="icon">
-                    <img src={counterIconFour} alt="" />
+                    <img src={counterIconFour} alt="Tech Experts Team" />
                   </div>
                   <h3 className="title">
                     <span className="counter-item">

@@ -1,13 +1,13 @@
-import React, {useState, useRef, useEffect, useCallback} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import {HireusSlice, Hireusslicestate, Hireusslicestatus} from "../website/slice/HireusSlice";
-import {ToastContainer, toast} from "react-toastify";
+import { HireusSlice, Hireusslicestate, Hireusslicestatus } from "../website/slice/HireusSlice";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 
-const Hireus = ({value, action}) => {
+const Hireus = ({ value, action }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -61,6 +61,16 @@ const Hireus = ({value, action}) => {
 
     myButton.addEventListener("click", handleClick);
 
+    axios
+      .get("https://api.ipify.org/?format=json")
+      .then((response) => {
+        const ipAddress = response.data.ip;
+        setIpAddress(ipAddress);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    setDbsubmit(false);
     return () => {
       myButton.removeEventListener("click", handleClick);
     };
@@ -94,40 +104,28 @@ const Hireus = ({value, action}) => {
       dispatch(Hireusslicestatus());
     } else {
     }
-  }, [ state]);
+  }, [state]);
 
   const colourOptions = [
-    {value: "nodejs", label: "Node.js"},
-    {value: "php", label: "PHP"},
-    {value: "laravel", label: "Laravel"},
-    {value: "codegniter", label: "Codegniter"},
-    {value: "python", label: "Python"},
-    {value: "c#", label: "C#"},
-    {value: "ios", label: "iOS"},
-    {value: "reactjs", label: "React.js"},
-    {value: "angular", label: "Angular"},
-    {value: "flutter", label: "Flutter"},
-    {value: "vuejs", label: "Vue.js"},
-    {value: "salesforce", label: "Salesforce"},
-    {value: "android", label: "Android"},
-    {value: "oddo", label: "Odoo"},
+    { value: "nodejs", label: "Node.js" },
+    { value: "php", label: "PHP" },
+    { value: "laravel", label: "Laravel" },
+    { value: "codegniter", label: "Codegniter" },
+    { value: "python", label: "Python" },
+    { value: "c#", label: "C#" },
+    { value: "ios", label: "iOS" },
+    { value: "reactjs", label: "React.js" },
+    { value: "angular", label: "Angular" },
+    { value: "flutter", label: "Flutter" },
+    { value: "vuejs", label: "Vue.js" },
+    { value: "salesforce", label: "Salesforce" },
+    { value: "android", label: "Android" },
+    { value: "oddo", label: "Odoo" },
   ];
+
   const handleChange = (e) => {
     setSelectval(Array.isArray(e) ? e.map((x) => x.value) : []);
   };
-
-  useEffect(() => {
-    axios
-      .get("https://api.ipify.org/?format=json")
-      .then((response) => {
-        const ipAddress = response.data.ip;
-        setIpAddress(ipAddress);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    setDbsubmit(false);
-  }, []);
 
   const handlehiresubmit = (e) => {
     if (dbsubmit === false) {
@@ -200,23 +198,24 @@ const Hireus = ({value, action}) => {
         if (!isVerified) {
           error.captcha = "Required !";
         }
-        setError({...error, [e.target.name]: e.target.value});
+        setError({ ...error, [e.target.name]: e.target.value });
         setTimeout(() => {
           setError([]);
         }, 2000);
       } else {
-      const json1 = {name, email, phone, selectval, skype, work};
-      const json2 = {ipAddress, captchres};
-      setDbsubmit(true);
-      dispatch(
-        HireusSlice({
-          json1,
-          json2,
-        })
-      );
+        const json1 = { name, email, phone, selectval, skype, work };
+        const json2 = { ipAddress, captchres };
+        setDbsubmit(true);
+        dispatch(
+          HireusSlice({
+            json1,
+            json2,
+          })
+        );
       }
     }
   };
+
   const handleVerify = (response) => {
     setCaptchres(response);
     setIsVerified(true);
@@ -229,14 +228,14 @@ const Hireus = ({value, action}) => {
       error.name = "";
     }
   };
-  const handlefnameBlur = () => {
+  const handlefnameBlur  = () => {
     setNameFocused(false);
     if (name.length < 4) {
       error.name = "Required !!";
     }
   };
 
-  const handleemail = (e) => {
+  const handleemail =(e) => {
     let data = e.target.value;
     setEmail(e.target.value);
     if (data) {
@@ -250,7 +249,7 @@ const Hireus = ({value, action}) => {
     }
   };
 
-  const handlephone = (e) => {
+  const handlephone =(e) => {
     let data = e.target.value;
     setPhone(e.target.value);
     if (data.length > 9) {
@@ -263,7 +262,7 @@ const Hireus = ({value, action}) => {
       error.phone = "Required !!";
     }
   };
-  const handletextarea = (e) => {
+  const handletextarea =(e) => {
     let data = e.target.value;
     setWork(e.target.value);
     if (data.length > 10) {
@@ -279,7 +278,7 @@ const Hireus = ({value, action}) => {
 
   return (
     <>
-      <ToastContainer position="top-right" closeOnClick={false} style={{marginTop: "55px"}} />
+      <ToastContainer position="top-right" closeOnClick={false} style={{ marginTop: "55px" }} />
       <div className="amm-shopping-cart-wrapper">
         <div className={`amm-shopping-cart-canvas ${value ? "open" : ""}`}>
           <div className="amm-shopping_cart">
@@ -310,14 +309,14 @@ const Hireus = ({value, action}) => {
                 <label className="mt-3">Skype Id</label>
                 <input type="text" name="skype" value={skype} onChange={(e) => setSkype(e.target.value)} />
                 <label>Wrok Details</label>
-                <textarea style={{lineHeight: "25px", minHeight: "70px"}} onBlur={handletextBlur} onFocus={() => setTextFocused(true)} name="message" rows="3" className={` ${error.work ? "handleinput_error" : ""} ${dberr.work ? "mb-0" : ""}`} value={work} onChange={handletextarea} />
+                <textarea style={{ lineHeight: "25px", minHeight: "70px" }} onBlur={handletextBlur} onFocus={() => setTextFocused(true)} name="message" rows="3" className={` ${error.work ? "handleinput_error" : ""} ${dberr.work ? "mb-0" : ""}`} value={work} onChange={handletextarea} />
                 {dberr.work && <p className="handledberror mb-2">{dberr.work}</p>}
                 <div className="recaptcha-container">
                   <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} ref={recaptchaRef} onChange={handleVerify} theme="light" size="normal" />
                 </div>
                 {error.captcha && <p className="handledberror mb-0">{error.captcha}</p>}
                 <div className="cart-btn mt-3">
-                  <button className="main_submit_btn" disabled={dbsubmit === true} style={{width: "100%", marginTop: "0px"}} onClick={handlehiresubmit}>
+                  <button className="main_submit_btn" disabled={dbsubmit === true} style={{ width: "100%", marginTop: "0px" }} onClick={handlehiresubmit}>
                     INQUIRE NOW
                   </button>
                 </div>

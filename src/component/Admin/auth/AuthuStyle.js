@@ -197,9 +197,6 @@ const useStyleAuth = makeStyles((theme) => ({
   // ------------------------------------------------------------------------------------------ sidebar
   setdisplay: {
     display: "flex",
-    // [theme.breakpoints.down("sm")]: {
-    //   display: "block",
-    // },
   },
   "@media (max-width: 992px)": {
     ".setdisplay": {

@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import shapeTwo from "../../../assets/images/code (3).webp";
-import shape15 from "../../../assets/images/PERSANTAGE (3).png";
-import shapeThree from "../../../assets/images/curly brecket (1).png";
+// import shape15 from "../../../assets/images/PERSANTAGE (3).png";
+// import shapeThree from "../../../assets/images/curly brecket (1).png";
 import Lottie from "lottie-react";
 import homedata from "../../common/fM1Ya2VfEr.json";
 import {Link} from "react-router-dom";
@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="website-css-area">                                   
+      <section className="website-css-area">
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div className="col-lg-6 col-md-11">
@@ -64,7 +64,7 @@ export default function Home() {
               </div>
             </div>
             <div className="col-lg-6 col-md-11">
-              <div className="website-css-thumb" data-aos-duration="2000" data-aos="fade-up">
+              <div className="website-css-thumb" activeClassName="active-link" data-aos-duration="2000" data-aos="fade-up">
                 <div className="thumb wow animated fadeInUp" data-wow-duration="1500ms" data-wow-delay="200ms">
                   <Lottie animationData={homedata} />
                 </div>
@@ -73,15 +73,14 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-shape-1 ">
-          <img src={shapeTwo} alt="" />
+          <img src={shapeTwo} alt="shap" />
         </div>
-        <div className="hero-shape-2">
-          <img src={shapeThree} alt="" style={{width:"25px"}}/>
+        {/* <div className="hero-shape-2">
+          <img src={shapeThree} alt="shap" className="width-25"/>
         </div>
         <div className="service-shape-2">
-          <img src={shape15} alt="" style={{width:"25px"}}/>
-        </div>
-
+          <img src={shape15} alt="shap" className="width-25"/>
+        </div> */}
       </section>
     </>
   );

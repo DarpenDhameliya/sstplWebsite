@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState, useEffect, useRef} from "react";
-import aboutvodeo from "../../../assets/images/about_video.mp4";
+// import aboutvodeo from "../../../assets/images/about_video.mp4";
 import aboutvodeo1 from "../../../assets/images/about_video.webm";
 
 
@@ -55,11 +55,10 @@ const About = ({className, list, error}) => {
                       onClick={handleclick}
                       autoPlay
                       style={{borderRadius: "30px"}}
-                      // controls
                       loop
                     >
                       <source src={aboutvodeo1} type="video/webm" />
-                      <source src={aboutvodeo} type="video/mp4" />
+                      <source src={aboutvodeo1} type="video/mp4" />
                     </video>
                   </div>
                 </div>

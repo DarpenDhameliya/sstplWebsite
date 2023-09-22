@@ -15,7 +15,7 @@ function Routes() {
             <div className="onloadpage" id="page-load">
               <div className="loader-div d-flex justify-content-center ">
                 <div className="on-img">
-                  <img src={logo} alt="loader" style={{width: "100px"}} />
+                  <img src={logo} alt="loader" className="loader-image" />
                   <div className="loader">Loading ...</div>
                 </div>
               </div>
@@ -24,7 +24,7 @@ function Routes() {
         <Switch>
           <Route path="/online-admin" component={AdminRouts} />
           <Route path="/" component={Webrouts} />
-          <Route component={ErrorPage} />
+          <Route path='*' component={ErrorPage} />
         </Switch>
         </Suspense>
       </Router>
