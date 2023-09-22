@@ -204,7 +204,11 @@ const TestimonialList = () => {
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", rowperpage);
     api
-      .post("testimonial/testimonial_list", formData)
+      .post("testimonial/testimonial_list_server", formData , {
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         setLoading(false);
         setCount(result.data.totalPages);

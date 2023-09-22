@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+// import aboutvodeo1 from "../../../.next/static/videos/about_video.webm";
 import aboutvodeo1 from "../../../public/about_video.webm";
-import about from "../../../public/about.mp4";
-import style from './About.module.css'
+
+// import about from "../../../.next/static/videos/about.mp4";
+import style from "./About.module.css";
 
 const About = ({ list }) => {
   const [aboutheading, setAboutheading] = useState("");
@@ -46,7 +48,7 @@ const About = ({ list }) => {
                   <div className={style.about_tab}>
                     <video ref={videoRef} id="video" width="100%" muted onClick={handleclick} autoPlay style={{ borderRadius: "30px" }} loop>
                       <source src={aboutvodeo1} type="video/webm" />
-                      <source src={about} type="video/mp4" />
+                      {/* <source src={about} type="video/mp4" /> */}
                     </video>
                   </div>
                 </div>

@@ -14,7 +14,7 @@ import { api } from "../../../Axios";
 import { useRouter } from "next/router";
 import Loader from "@/Component/loader";
 import dynamic from "next/dynamic";
-import styles from '../../common/common.module.css'
+import styles from "../../common/common.module.css";
 
 const CommonPagination = dynamic(() => import("../../common/pagination"), { ssr: false });
 const Model = dynamic(() => import("./Model"), { ssr: false });
@@ -225,12 +225,12 @@ const Hireus = () => {
                         <div className="seticondiv">
                           <div>
                             <Tooltip title="Edit">
-                              <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
+                              <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-eye fs-17`} onClick={() => handleedit(e)} />
                             </Tooltip>
                           </div>
                           <div>
                             <Tooltip title="Remove">
-                              <i aria-hidden="true" className={`setdeleteincon fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
+                              <i aria-hidden="true" className={`${styles.seteditincon} fa fa-trash ml-1 fs-17`} onClick={() => handledelete(e._id)} />
                             </Tooltip>
                           </div>
                         </div>

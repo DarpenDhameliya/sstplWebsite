@@ -155,7 +155,7 @@ const DynemicLogo = () => {
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", rowperpage);
     api
-      .post("logo/logo_list", formData,{
+      .post("logo/logo_list_server", formData,{
         headers: {
           Authorization: localStorage.getItem("ssAdmin"),
         },
@@ -253,7 +253,7 @@ const DynemicLogo = () => {
         <div className={`sstpl-visible ${loading === false ? "active" : ""}`}>
           <div className={styles.setpageheading}>
             <Typography variant="h4" gutterBottom className={styles.setheading}>
-              Festval Details
+              Festival Details
             </Typography>
           </div>
           <Grid container spacing={2}>

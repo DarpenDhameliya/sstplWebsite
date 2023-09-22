@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import Loader from "@/Component/loader";
 import dynamic from "next/dynamic";
 import styles from "../../common/common.module.css";
-
+const CareerinqModel = dynamic(() => import("./CareerinqModel"), { ssr: false });
 const CommonPagination = dynamic(() => import("../../common/pagination"), { ssr: false });
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -43,6 +43,9 @@ const Career = () => {
   const [page, setPage] = useState("1");
   const [rowperpage, setRowperpage] = useState("10");
   const [count, setCount] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const [viewData, setViewData] = useState([]);
 
   const [dbDeleteerr, setDbDeleteerr] = useState("");
   const [dberror, setDberror] = useState("");
@@ -115,6 +118,11 @@ const Career = () => {
       });
   };
 
+  const handleedit = (data) => {
+    setOpen(true);
+    setViewData(data);
+  };
+
   const handlesetRowperpageChange = (e) => {
     const onpage = e.target.value;
     setRowperpage(e.target.value);
@@ -155,15 +163,8 @@ const Career = () => {
                   <TableCell align="center" className={styles.tableth}>
                     Apply For
                   </TableCell>
-                  <TableCell align="center" className={styles.tableth}>
-                    Ip Address
-                  </TableCell>
-                  <TableCell align="center" className={styles.tableth}>
-                    Operater
-                  </TableCell>
-                  <TableCell align="center" className={styles.tableth}>
-                    Browser & version
-                  </TableCell>
+
+
                   <TableCell align="center" className={styles.tableth}>
                     view Resume
                   </TableCell>
@@ -195,24 +196,26 @@ const Career = () => {
                         <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           {e.apply_for}
                         </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
-                          {e.ip}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
-                          {e.mobile === true ? "Mobile" : "Desktop"}
-                        </StyledTableCell>
-                        <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
-                          {e.browsernm_browsever}
-                        </StyledTableCell>
+
                         <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
                           <Button variant="contained" className="setloginbutton" onClick={() => downloadPdf(e.resumedownload)}>
                             Resume
                           </Button>
                         </StyledTableCell>
                         <StyledTableCell align="center" component="th" scope="row" className={styles.tabletd}>
-                          <Tooltip title="Remove">
+
+                          <div className="seticondiv">
+                            <div>
+                              <Tooltip title="Edit">
+                                <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-eye fs-17`} onClick={() => handleedit(e)} />
+                              </Tooltip>
+                            </div>
+                            <div>
+                            <Tooltip title="Remove">
                             <i className="fa fa-trash" aria-hidden="true" onClick={() => handledelete(e)} />
                           </Tooltip>
+                            </div>
+                          </div>
                         </StyledTableCell>
                       </StyledTableRow>
                     );
@@ -224,6 +227,7 @@ const Career = () => {
           </TableContainer>
         </Paper>
       </div>
+      <CareerinqModel open={open} handleClose={handleClose} viewData={viewData} />
     </Container>
   );
 };

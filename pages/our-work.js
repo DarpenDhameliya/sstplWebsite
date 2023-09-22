@@ -21,7 +21,7 @@ export default ourwork;
 export const getServerSideProps = async () => {
   try {
     const initialPortfolioList = await Metaapicall();
-    const initialPortfolioData = await PortfolioListApiCall(); 
+    const initialPortfolioData = await PortfolioListApiCall();
     return {
       props: {
         initialPortfolioList,

@@ -48,7 +48,11 @@ const AboutValueList = () => {
 
   const fetchHiredata = () => {
     api
-      .get("aboutvalue/aboutvalue_list")
+      .get("aboutvalue/aboutvalue_list_server",{
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         setCareerList(result.data.result);
         setLoading(false);

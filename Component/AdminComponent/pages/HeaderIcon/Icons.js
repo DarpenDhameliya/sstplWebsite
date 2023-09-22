@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
-import axios ,{ api } from "@/Component/Axios";
+import axios, { api } from "@/Component/Axios";
 import Loader from "@/Component/loader";
-import styles from '../../common/common.module.css'
+import styles from "../../common/common.module.css";
+import { useRouter } from "next/router";
 
 const Icons = () => {
   const [fields, setFields] = useState([]);
@@ -17,10 +18,10 @@ const Icons = () => {
   const [addError, setAddError] = useState("");
   const [updtaeError, setUpdtaeError] = useState("");
   const [loading, setLoading] = useState(true);
-
+const router = useRouter();
   // Function to handle adding a new field
   const addField = () => {
-    setFields([...fields, {icon: "", link: "", class:""}]);
+    setFields([...fields, { icon: "", link: "", class: "" }]);
   };
 
   const removeField = (index) => {
@@ -36,7 +37,11 @@ const Icons = () => {
   };
   const fetchHiredata = () => {
     axios
-      .get("icon/icon_list", )
+      .get("icon/icon_list_server", {
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         setLoading(false);
         if (result.data.result[0].data.length === 0) {
@@ -120,19 +125,19 @@ const Icons = () => {
           </div>
 
           <Paper className={styles.setProductpaper} elevation={5}>
-            <div className='setlistfiltericon'>
+            <div className="setlistfiltericon">
               <Avatar className={`setavtarback mb-3 ml-3`} onClick={addField} variant="rounded">
-                <i className="fa fa-plus" style={{color:'black' , fontSize:"23px"}}  aria-hidden="true" />
+                <i className="fa fa-plus" style={{ color: "black", fontSize: "23px" }} aria-hidden="true" />
               </Avatar>
             </div>
             {addError && <Typography className={styles.setProductpaper}>{addError} </Typography>}
             {updtaeError && <Typography className={styles.setProductpaper}>{updtaeError} </Typography>}
             {fields.map((field, index) => (
               <div key={index} className="d-flex align-items-center justify-content-around">
-                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "25%"}} placeholder="icon name" className={`$'settextfield' mt-1 mb-1`} multiline InputLabelProps={{shrink: false}} value={field.icon} onChange={(e) => handleChange(index, "icon", e.target.value)} />
-                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "50%"}} placeholder="Link" className={`$'settextfield' mt-1 mb-1 ml-2`} multiline InputLabelProps={{shrink: false}} value={field.link} onChange={(e) => handleChange(index, "link", e.target.value)} />
-                <TextField id="outlined-basic" size="small" variant="outlined" style={{width: "15%"}} placeholder="class" className={`$'settextfield' mt-1 mb-1 ml-2`} multiline InputLabelProps={{shrink: false}} value={field.class} onChange={(e) => handleChange(index, "class", e.target.value)} />
-                <i aria-hidden="true" className={` fa fa-trash`}  onClick={() => removeField(index)} />
+                <TextField id="outlined-basic" size="small" variant="outlined" style={{ width: "25%" }} placeholder="icon name" className={`$'settextfield' mt-1 mb-1`} multiline InputLabelProps={{ shrink: false }} value={field.icon} onChange={(e) => handleChange(index, "icon", e.target.value)} />
+                <TextField id="outlined-basic" size="small" variant="outlined" style={{ width: "50%" }} placeholder="Link" className={`$'settextfield' mt-1 mb-1 ml-2`} multiline InputLabelProps={{ shrink: false }} value={field.link} onChange={(e) => handleChange(index, "link", e.target.value)} />
+                <TextField id="outlined-basic" size="small" variant="outlined" style={{ width: "15%" }} placeholder="class" className={`$'settextfield' mt-1 mb-1 ml-2`} multiline InputLabelProps={{ shrink: false }} value={field.class} onChange={(e) => handleChange(index, "class", e.target.value)} />
+                <i aria-hidden="true" className={` fa fa-trash`} onClick={() => removeField(index)} />
               </div>
             ))}
 

@@ -6,7 +6,7 @@ export const Metaapicall = async () => {
     const initialPortfolioList = response.data.result;
     return initialPortfolioList;
   } catch (error) {
-    return error.response; 
+    return error.response;
   }
 };
 
@@ -16,7 +16,7 @@ export const PortfolioListApiCall = async () => {
     const initialPortfolioListdata = response.data.result;
     return initialPortfolioListdata;
   } catch (error) {
-    throw error; 
+    throw error;
   }
 }
 
@@ -27,7 +27,7 @@ export const AboutapiCall = async () => {
     const initialAboutapiCall = response.data.result;
     return initialAboutapiCall;
   } catch (error) {
-    return error.response.data; 
+    return error.response.data;
   }
 }
 
@@ -47,6 +47,6 @@ export const CareerapiCall = async () => {
     const initialcareerapiCall = response.data.result;
     return initialcareerapiCall;
   } catch (error) {
-    return error.response.data; 
+    return error.response.data;
   }
 }

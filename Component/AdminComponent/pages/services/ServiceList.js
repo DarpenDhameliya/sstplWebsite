@@ -49,7 +49,7 @@ const ServiceList = () => {
 
   const fetchHiredata = () => {
     api
-      .get("service/service_list",{
+      .get("service/service_list_server",{
         headers: {
           Authorization: localStorage.getItem("ssAdmin"),
         },

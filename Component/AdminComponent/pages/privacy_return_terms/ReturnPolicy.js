@@ -29,7 +29,11 @@ const ReturnPolicy = () => {
 
   const fetchHiredata = () => {
     api
-      .get("return/return_list")
+      .get("return/return_list_server",{
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         if (result.data.result.length === 0) {
           setAdddata(true);

@@ -31,7 +31,11 @@ const Privacy = () => {
 
   const fetchHiredata = () => {
     axios
-      .get("privacy/privacy_list")
+      .get("privacy/privacy_list_server",{
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         if (result.data.result.length === 0) {
           setAdddata(true);

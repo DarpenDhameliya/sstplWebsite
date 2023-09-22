@@ -34,7 +34,7 @@ const AboutList = () => {
   //firstfetchdata
   const fetchHiredata = () => {
     api
-      .get("about/about_list", {
+      .get("about/about_list_server", {
         headers: {
           Authorization: localStorage.getItem("ssAdmin"),
         },

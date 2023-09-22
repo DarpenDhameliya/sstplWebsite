@@ -29,7 +29,11 @@ const Terms_condition = () => {
 
   const fetchHiredata = () => {
     api
-      .get("terms/terms_list")
+      .get("terms/terms_list_server",{
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         if (result.data.result.length === 0) {
           setAdddata(true);

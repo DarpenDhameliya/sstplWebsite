@@ -61,7 +61,11 @@ const MetaList = () => {
   const router = useRouter();
   const fetchHiredata = () => {
     api
-      .get("meta/meta_list")
+      .get("meta/meta_list_server",{
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         setLoading(false);
         seMetaList(result.data.result);

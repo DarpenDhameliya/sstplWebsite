@@ -206,7 +206,7 @@ const Contact_us = () => {
                           <div className="seticondiv">
                             <div>
                               <Tooltip title="Edit">
-                                <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-pencil fs-17`} onClick={() => handleedit(e)} />
+                                <i aria-hidden="true" className={` ${styles.seteditincon} fa fa-eye fs-17`} onClick={() => handleedit(e)} />
                               </Tooltip>
                             </div>
                             <div>

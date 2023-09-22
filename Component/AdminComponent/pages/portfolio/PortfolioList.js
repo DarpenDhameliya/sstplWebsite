@@ -57,7 +57,11 @@ const PortfolioList = () => {
     formData.append("pageNumber", pagenumber);
     formData.append("page_size", rowperpage);
     api
-      .post("portfolio/portfolio_list", formData)
+      .post("portfolio/portfolio_list_server", formData,{
+        headers: {
+          Authorization: localStorage.getItem("ssAdmin"),
+        },
+      })
       .then((result) => {
         setLoading(false);
         setCount(result.data.totalPages);
